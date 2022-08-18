@@ -1,12 +1,15 @@
-@import "~bootstrap/scss/bootstrap";
-@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
-@import "~bootstrap-icons/font/bootstrap-icons";
-@import "./fontawesome/fontawesome.scss";
-@import "./fontawesome/brands.scss";
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
 
-@import "user_variables";
-@import "default";
-@import "footer";
-p {
-    background-color: $background;
-}
+// Variables
+@import 'variables';
+@import 'footer';
+@import 'default';
+
+// Bootstrap
+@import 'bootstrap/scss/bootstrap';
+
+// Fontawesome
+@import "./fontawesome/fontawesome.scss";
+@import "./fontawesome/solid.scss";
+@import "./fontawesome/brands.scss";
