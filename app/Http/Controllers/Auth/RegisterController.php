@@ -95,7 +95,6 @@ class RegisterController extends Controller
 
         // Generate the QR image. This is the image the user will scan with their app
      // to set up two factor authentication
-     dump($registration_data);
         $QR_Image = $google2fa->getQRCodeInline(
             config('app.name'),
             $registration_data['email'],
