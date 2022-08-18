@@ -10,14 +10,13 @@
     <title>Dedikam</title>
     <!-- Fonts -->
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/fonts/ionicons.min.css') }}" rel="stylesheet">
-    <script>@vite(['resources/scss/app.scss'])</script>
-    
+    {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/fonts/ionicons.min.css') }}" rel="stylesheet"> --}}
+    @vite(['resources/js/app.js'])
+
 </head>
 
 <body>
-    <x-header/>
     {{-- <div id="app">
         <header class="fixed-top">
             <nav
@@ -72,7 +71,7 @@
                                     <div class="dropdown-menu"><a class="dropdown-item" href="{{route('profile')}}">@lang('Mon compte')</a><a
                                             class="dropdown-item" href="{{ route('member_accesses.index') }}">@lang('Mes accès')</a><a class="dropdown-item" href="{{route('myorders')}}">@lang('Mes commandes')</a>
                                             <a class="dropdown-item" href="#">@lang('Ouvrir un ticket')</a>
-                                        @if(Auth::user()->user_type=="admin")
+                                        @if (Auth::user()->user_type == 'admin')
                                         <div class="dropdown-divider"></div>
                                         <span class="dropdown-header">Admin</span>
                                         <a class="dropdown-item" href="{{ route('orders.index') }}">Gestion des commandes</a>
@@ -116,8 +115,11 @@
     </div>
     <script src="{{ mix('js/app.js') }}"></script>
     @stack('scripts') --}}
-    <h1>Todo</h1>
-    <x-footer/>
+    <div id="app">
+        <x-header />
+        <h1>Todo</h1>
+        <x-footer />
+    </div>
 </body>
 
 </html>
