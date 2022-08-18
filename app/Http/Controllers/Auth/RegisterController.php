@@ -89,8 +89,7 @@ class RegisterController extends Controller
 
         // Add the secret key to the registration data
         $registration_data["google2fa_secret"] = $google2fa->generateSecretKey();
-// dump($request->session()->all());
-// $s = $request->session();
+
         // Save the registration data to the user session for just the next request
         session()->flash('registration_data', $registration_data);
 
