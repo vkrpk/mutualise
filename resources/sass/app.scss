@@ -1,12 +1,12 @@
 @import "~bootstrap/scss/bootstrap";
-@import "variables";
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import "~bootstrap-icons/font/bootstrap-icons";
+@import "./fontawesome/fontawesome.scss";
+@import "./fontawesome/brands.scss";
 
-
-
+@import "user_variables";
+@import "default";
+@import "footer";
 p {
     background-color: $background;
-}
-
-#app {
-    
 }
