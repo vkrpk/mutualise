@@ -1,12 +1,30 @@
-import { defineConfig } from "vite";
-import laravel from "laravel-vite-plugin";
-import path from "path";
+import { defineConfig } from 'vite';
+import laravel from 'laravel-vite-plugin';
 
 export default defineConfig({
-    plugins: [laravel(["resources/js/app.js"])],
-    resolve: {
-        alias: {
-            "~bootstrap": path.resolve(__dirname, "node_modules/bootstrap"),
-        },
+    plugins: [
+        laravel({
+            input: [
+                'resources/sass/app.scss',
+                'resources/js/app.js',
+            ],
+            refresh: true,
+        }),
+    ],
+    build: {
+        rollupOptions: {
+            output: {
+                assetFileNames: (assetInfo) => {
+                    let extType = assetInfo.name.split('.')[1];
+                    if (/woff|woff2|ttf/.test(extType)) {
+                        extType = "fonts";
+                    }
+                    return `${extType}/[name]-[hash][extname]`;
+                },
+                // chunkFileNames: "static/js/[name]-[hash].js",
+                // entryFileNames: "static/js/[name]-[hash].js",
+            }
+        }
     }
+
 });
