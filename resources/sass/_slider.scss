@@ -1,15 +1,9 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto);
 
-.range-slider-container .min-max {
-    display: flex;
-    justify-content: space-between;
-    color: #93989a;
-}
-
 .range-slider-container input[type=range] {
     -webkit-appearance: none;
     padding: 0 !important;
-    width: 100%;
+    width: 80%;
     margin: 8.5px 0;
     background: linear-gradient(to right, #d5d9da 0%, #d5d9da 100%);
     transition: background 450ms ease-in;
