@@ -54,7 +54,8 @@
                 <div class="row pt-2 offer_content pb-2">
                     <div class="col">
                         <div class="row">
-                            <div class="col"><span>Votre niveau de disponibilité<br><br>Toutes vos données fragmentées
+                            <div class="col">
+                                <span>Votre niveau de disponibilité<br><br>Toutes vos données fragmentées
                                     puis
                                     copiées et réparties sur différents serveurs et Datacenter selon le niveau de
                                     disponibilité choisi. <a class="text-secondary"
@@ -62,7 +63,7 @@
                                         plus</a></span>
 
                                 <div class="row row-cols-2 row-cols-lg-4">
-                                    <div class="col">
+                                    <div class="col hover offre selected">
                                         <div class="row" style="height: 2rem;">
                                             <div class="col offre_n1 offer_hf activated">
                                                 <div></div>
@@ -100,7 +101,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col">
+                                    <div class="col hover offre">
                                         <div class="row" style="height: 2rem;">
                                             <div class="col offre_n2 offer_hf">
                                                 <div></div>
@@ -145,7 +146,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col">
+                                    <div class="col hover offre">
                                         <div class="row" style="height: 2rem;">
                                             <div class="col offre_n3 offer_hf">
                                                 <div></div>
@@ -197,7 +198,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col">
+                                    <div class="col hover offre">
                                         <div class="row" style="height: 2rem;">
                                             <div class="col offre_n4 offer_hf">
                                                 <div></div>
@@ -267,9 +268,10 @@
                             <div class="col d-none d-md-grid col-md-1"></div>
                             <div class="col align-self-center col-12 col-md-11">
                                 <div class="row range-slider-container align-items-center" style="margin-top: 70px;">
-                                    <div class="col col-2"><span>Espace disque : <span id="taille_output">10 Go</span></span></div>
+                                    <div class="col col-2"><span>Espace disque : <span id="taille_output">10
+                                                Go</span></span></div>
                                     {{-- insert range here --}}
-                                    
+
                                     <input type="range" class="rs-range" name="taille" id="taille" min="10"
                                         max="5000" step="10" value="10">
                                 </div>
@@ -420,7 +422,16 @@
                     }, false)
                 })
 
+            const offres = document.querySelectorAll('.offre');
 
+            offres.forEach(offre => offre.addEventListener('click', function(){
+                offres.forEach(offre => offre.classList.remove('selected'))
+                if(!this.classList.contains('selected')){
+                    this.classList.add('selected')                    
+                } else {
+                    this.classList.remove('selected')
+                }
+            }))
 
             // $(".slider").slider({
             //     min: 10,
@@ -496,106 +507,106 @@
                 }
             }
 
-            $('.offre_n1').click(() => {
-                $('.espace').show();
-                $("#recap_level").html("BASIQUE");
-                $("#form_level").val("BAS");
-                $("#form_expire").val('{{ $enddate1y->format('Y-m-d') }}');
-                $(".offre_n1").addClass('activated');
-                $(".offre_n1 .offer-choice").addClass('activated');
-                $(".offre_n2").removeClass('activated');
-                $(".offre_n2 .offer-choice").removeClass('activated');
-                $(".offre_n3").removeClass('activated');
-                $(".offre_n3 .offer-choice").removeClass('activated');
-                $(".offre_n4").removeClass('activated');
-                $(".offre_n4 .offer-choice").removeClass('activated');
-                $('#check_free_account').prop("checked", false);
-                $('#form_free_account').val(0);
-                $('#recap_duration').html('pour 1 an jusqu\'au');
-                $('#recap_duration').show();
-                $('#recap_enddate').html('{{ $enddate1y->format('d/m/Y') }}');
-                $('#recap_amount_Y').show();
-                $('#recap_amount_free').hide();
-                $('#recap_diskspace_go').html($(".slider").slider("value") + "Go");
-                calcAmount();
-            })
-            $('.offre_n2').click(() => {
-                $('.espace').show();
-                $("#recap_level").html("STANDARD");
-                $("#form_level").val("STD");
-                $("#form_expire").val('{{ $enddate1y->format('Y-m-d') }}');
-                $(".offre_n2").addClass('activated');
-                $(".offre_n2 .offer-choice").addClass('activated');
-                $(".offre_n1").removeClass('activated');
-                $(".offre_n1 .offer-choice").removeClass('activated');
-                $(".offre_n3").removeClass('activated');
-                $(".offre_n3 .offer-choice").removeClass('activated');
-                $(".offre_n4").removeClass('activated');
-                $(".offre_n4 .offer-choice").removeClass('activated');
-                $('#check_free_account').prop("checked", false);
-                $('#form_free_account').val(0);
-                $('#recap_duration').html('pour 1 an jusqu\'au');
-                $('#recap_duration').show();
-                $('#recap_enddate').html('{{ $enddate1y->format('d/m/Y') }}');
-                $('#recap_amount_Y').show();
-                $('#recap_amount_free').hide();
-                $('#recap_diskspace_go').html($(".slider").slider("value") + "Go");
-                calcAmount();
-            })
-            $('.offre_n3').click(() => {
-                $('.espace').show();
-                $("#recap_level").html("ENTREPRISE");
-                $("#form_level").val("ENT");
-                $("#form_expire").val('{{ $enddate1y->format('Y-m-d') }}');
-                $(".offre_n3").addClass('activated');
-                $(".offre_n3 .offer-choice").addClass('activated');
-                $(".offre_n4").removeClass('activated');
-                $(".offre_n4 .offer-choice").removeClass('activated');
-                $(".offre_n2").removeClass('activated');
-                $(".offre_n2 .offer-choice").removeClass('activated');
-                $(".offre_n1").removeClass('activated');
-                $(".offre_n1 .offer-choice").removeClass('activated');
-                $('#check_free_account').prop("checked", false);
-                $('#form_free_account').val(0);
-                $('#recap_duration').html('pour 1 an jusqu\'au');
-                $('#recap_duration').show();
-                $('#recap_enddate').html('{{ $enddate1y->format('d/m/Y') }}');
-                $('#recap_amount_Y').show();
-                $('#recap_amount_free').hide();
-                $('#recap_diskspace_go').html($(".slider").slider("value") + "Go");
-                calcAmount();
-            })
-            $('.offre_n4').click(() => {
-                $("#recap_level").html("DEDIÉ");
-                $("#form_level").val("DED");
-                $("#form_expire").val('{{ $enddate1y->format('Y-m-d') }}');
-                $(".offre_n4").addClass('activated');
-                $(".offre_n4 .offer-choice").addClass('activated');
-                $(".offre_n3").removeClass('activated');
-                $(".offre_n3 .offer-choice").removeClass('activated');
-                $(".offre_n2").removeClass('activated');
-                $(".offre_n2 .offer-choice").removeClass('activated');
-                $(".offre_n1").removeClass('activated');
-                $(".offre_n1 .offer-choice").removeClass('activated');
-                $('#check_free_account').prop("checked", false);
-                $('#form_free_account').val(0);
-                $('#recap_duration').html('pour 1 an jusqu\'au');
-                $('#recap_duration').show();
-                $('#recap_enddate').html('{{ $enddate1y->format('d/m/Y') }}');
-                $('#recap_amount_Y').show();
-                $('#recap_amount_free').hide();
-                // $('.espace').hide();
-                $('#recap_amount_Y').html('330 €');
-                $('#recap_amount_M').html('30 €');
-                //$('#price_M').html('<span id="recap_amount_M" class="fs-1 text-primary fw-bolder">30 €</span><span class="ms-2">par mois</span>');
-                $('#price_M').show();
-                $('#price_or').show();
-                $('#recap_diskspace_go').html('Illimité');
-                $('#recap_diskspace_gio').html('');
+            // $('.offre_n1').click(() => {
+            //     $('.espace').show();
+            //     $("#recap_level").html("BASIQUE");
+            //     $("#form_level").val("BAS");
+            //     $("#form_expire").val('{{ $enddate1y->format('Y-m-d') }}');
+            //     $(".offre_n1").addClass('activated');
+            //     $(".offre_n1 .offer-choice").addClass('activated');
+            //     $(".offre_n2").removeClass('activated');
+            //     $(".offre_n2 .offer-choice").removeClass('activated');
+            //     $(".offre_n3").removeClass('activated');
+            //     $(".offre_n3 .offer-choice").removeClass('activated');
+            //     $(".offre_n4").removeClass('activated');
+            //     $(".offre_n4 .offer-choice").removeClass('activated');
+            //     $('#check_free_account').prop("checked", false);
+            //     $('#form_free_account').val(0);
+            //     $('#recap_duration').html('pour 1 an jusqu\'au');
+            //     $('#recap_duration').show();
+            //     $('#recap_enddate').html('{{ $enddate1y->format('d/m/Y') }}');
+            //     $('#recap_amount_Y').show();
+            //     $('#recap_amount_free').hide();
+            //     $('#recap_diskspace_go').html($(".slider").slider("value") + "Go");
+            //     calcAmount();
+            // })
+            // $('.offre_n2').click(() => {
+            //     $('.espace').show();
+            //     $("#recap_level").html("STANDARD");
+            //     $("#form_level").val("STD");
+            //     $("#form_expire").val('{{ $enddate1y->format('Y-m-d') }}');
+            //     $(".offre_n2").addClass('activated');
+            //     $(".offre_n2 .offer-choice").addClass('activated');
+            //     $(".offre_n1").removeClass('activated');
+            //     $(".offre_n1 .offer-choice").removeClass('activated');
+            //     $(".offre_n3").removeClass('activated');
+            //     $(".offre_n3 .offer-choice").removeClass('activated');
+            //     $(".offre_n4").removeClass('activated');
+            //     $(".offre_n4 .offer-choice").removeClass('activated');
+            //     $('#check_free_account').prop("checked", false);
+            //     $('#form_free_account').val(0);
+            //     $('#recap_duration').html('pour 1 an jusqu\'au');
+            //     $('#recap_duration').show();
+            //     $('#recap_enddate').html('{{ $enddate1y->format('d/m/Y') }}');
+            //     $('#recap_amount_Y').show();
+            //     $('#recap_amount_free').hide();
+            //     $('#recap_diskspace_go').html($(".slider").slider("value") + "Go");
+            //     calcAmount();
+            // })
+            // $('.offre_n3').click(() => {
+            //     $('.espace').show();
+            //     $("#recap_level").html("ENTREPRISE");
+            //     $("#form_level").val("ENT");
+            //     $("#form_expire").val('{{ $enddate1y->format('Y-m-d') }}');
+            //     $(".offre_n3").addClass('activated');
+            //     $(".offre_n3 .offer-choice").addClass('activated');
+            //     $(".offre_n4").removeClass('activated');
+            //     $(".offre_n4 .offer-choice").removeClass('activated');
+            //     $(".offre_n2").removeClass('activated');
+            //     $(".offre_n2 .offer-choice").removeClass('activated');
+            //     $(".offre_n1").removeClass('activated');
+            //     $(".offre_n1 .offer-choice").removeClass('activated');
+            //     $('#check_free_account').prop("checked", false);
+            //     $('#form_free_account').val(0);
+            //     $('#recap_duration').html('pour 1 an jusqu\'au');
+            //     $('#recap_duration').show();
+            //     $('#recap_enddate').html('{{ $enddate1y->format('d/m/Y') }}');
+            //     $('#recap_amount_Y').show();
+            //     $('#recap_amount_free').hide();
+            //     $('#recap_diskspace_go').html($(".slider").slider("value") + "Go");
+            //     calcAmount();
+            // })
+            // $('.offre_n4').click(() => {
+            //     $("#recap_level").html("DEDIÉ");
+            //     $("#form_level").val("DED");
+            //     $("#form_expire").val('{{ $enddate1y->format('Y-m-d') }}');
+            //     $(".offre_n4").addClass('activated');
+            //     $(".offre_n4 .offer-choice").addClass('activated');
+            //     $(".offre_n3").removeClass('activated');
+            //     $(".offre_n3 .offer-choice").removeClass('activated');
+            //     $(".offre_n2").removeClass('activated');
+            //     $(".offre_n2 .offer-choice").removeClass('activated');
+            //     $(".offre_n1").removeClass('activated');
+            //     $(".offre_n1 .offer-choice").removeClass('activated');
+            //     $('#check_free_account').prop("checked", false);
+            //     $('#form_free_account').val(0);
+            //     $('#recap_duration').html('pour 1 an jusqu\'au');
+            //     $('#recap_duration').show();
+            //     $('#recap_enddate').html('{{ $enddate1y->format('d/m/Y') }}');
+            //     $('#recap_amount_Y').show();
+            //     $('#recap_amount_free').hide();
+            //     // $('.espace').hide();
+            //     $('#recap_amount_Y').html('330 €');
+            //     $('#recap_amount_M').html('30 €');
+            //     //$('#price_M').html('<span id="recap_amount_M" class="fs-1 text-primary fw-bolder">30 €</span><span class="ms-2">par mois</span>');
+            //     $('#price_M').show();
+            //     $('#price_or').show();
+            //     $('#recap_diskspace_go').html('Illimité');
+            //     $('#recap_diskspace_gio').html('');
 
 
-                //calcAmount();
-            })
+            //     //calcAmount();
+            // })
 
             $('#check_free_account').click(() => {
                 $('.offre_n1').click();
