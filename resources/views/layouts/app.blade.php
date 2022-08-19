@@ -22,11 +22,11 @@
 
     <x-header />
 
-    <div class="mt-4">
+    <div class="mt-4 container">
         @yield('content')
     </div>
     <x-footer />
-
+    @stack('scripts')
 </body>
 
 </html>
