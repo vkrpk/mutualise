@@ -26,3 +26,8 @@ Route::middleware(['2fa'])->group(function () {
     return redirect(route('home'));
     })->name('2fa');
     });
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});
