@@ -266,7 +266,7 @@
                         <div class="row">
                             <div class="col d-none d-md-grid col-md-1"></div>
                             <div class="col align-self-center col-12 col-md-11">
-                                <div class="row range-slider-container" style="margin-top: 70px;">
+                                <div class="row range-slider-container align-items-center" style="margin-top: 70px;">
                                     <div class="col col-2"><span>Espace disque : <span id="taille_output">10 Go</span></span></div>
                                     {{-- insert range here --}}
                                     
