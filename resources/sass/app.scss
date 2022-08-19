@@ -3,6 +3,13 @@
 
 // Variables
 @import 'variables';
+@import 'footer';
+@import 'default';
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
+
+// Fontawesome
+@import "./fontawesome/fontawesome.scss";
+@import "./fontawesome/solid.scss";
+@import "./fontawesome/brands.scss";
