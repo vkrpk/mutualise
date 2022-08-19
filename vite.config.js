@@ -11,5 +11,20 @@ export default defineConfig({
             refresh: true,
         }),
     ],
-    
+    build: {
+        rollupOptions: {
+            output: {
+                assetFileNames: (assetInfo) => {
+                    let extType = assetInfo.name.split('.')[1];
+                    if (/woff|woff2|ttf/.test(extType)) {
+                        extType = "fonts";
+                    }
+                    return `${extType}/[name]-[hash][extname]`;
+                },
+                // chunkFileNames: "static/js/[name]-[hash].js",
+                // entryFileNames: "static/js/[name]-[hash].js",
+            }
+        }
+    }
+
 });
