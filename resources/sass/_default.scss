@@ -25,3 +25,17 @@ body {
 .text-dedikam {
   color: #74ba58 !important;
 }
+
+.btn {
+  color: white !important;
+}
+
+.btn-primary {
+  background-color: $primary;
+  border-color: $primary;
+}
+
+.btn-secondary {
+  background-color: $secondary;
+  border-color: $secondary;
+}
