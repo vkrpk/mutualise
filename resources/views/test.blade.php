@@ -242,6 +242,13 @@
                                 </div> --}}
                                     <div class="col comparison">
                                         <table>
+                                            {{-- <colgroup>
+                                                <col>
+                                                <col class="selected">
+                                                <col>
+                                                <col>
+                                                <col>
+                                            </colgroup> --}}
                                             <thead>
                                                 <tr class="price-header">
                                                     <th class="tl tl2" valign="bottom"></th>
