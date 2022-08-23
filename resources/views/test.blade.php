@@ -621,9 +621,16 @@
             }
 
             function getSelected(column) {
-                column.forEach(element => element.classList.add('selected'));
-                column[0].classList.add('selected-top')
-                column[(column.length - 1)].classList.add('selected-bottom')
+                if (column === col_4) {
+                    console.log(column);
+                    column.forEach(element => element.classList.add('selected', 'selected-bottom'));
+                    column[0].classList.add('selected-top')
+                    column[0].classList.remove('selected-bottom')
+                } else {
+                    column.forEach(element => element.classList.add('selected'));
+                    column[0].classList.add('selected-top')
+                    column[(column.length - 1)].classList.add('selected-bottom')
+                }
             }
 
             // offres.forEach(offre => offre.addEventListener('click', function() {
