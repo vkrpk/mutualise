@@ -252,19 +252,19 @@
                                             <thead>
                                                 <tr class="price-header">
                                                     <th class="tl tl2" valign="bottom"></th>
-                                                    <th class="qbse qbse-first">
+                                                    <th class="qbse qbse-first col-n1">
                                                         <h3> BASIQUE </h3>
                                                         <p>Données regroupées sur 1 serveur</p>
                                                     </th>
-                                                    <th class="qbse qbse-second">
+                                                    <th class="qbse qbse-second col-n2">
                                                         <h3> STANDARD </h3>
                                                         <p>Données réparties sur 2 serveurs</p>
                                                     </th>
-                                                    <th class="qbse qbse-third">
+                                                    <th class="qbse qbse-third col-n3">
                                                         <h3> ENTREPRISE </h3>
                                                         <p>Données réparties sur 3 serveurs et 2 datacenters</p>
                                                     </th>
-                                                    <th class="qbse qbse-last">
+                                                    <th class="qbse qbse-last col-n4">
                                                         <h3> DÉDIÉ </h3>
                                                         <p>Données réparties sur 3 serveurs et 2 datacenters</p>
                                                     </th>
@@ -274,7 +274,7 @@
                                                 <tr>
                                                     <td></td>
                                                     <td colspan="3">Pydio</td>
-                                                    <td rowspan="20" id="dedicated-small">
+                                                    <td rowspan="20" id="dedicated-small" class="col-n4">
                                                         <div class="form-check d-flex justify-content-center">
                                                             <input class="form-check-input me-2" type="radio"
                                                                 id="dedicated-check" name="form_ded_option"
@@ -292,10 +292,13 @@
                                                 </tr>
                                                 <tr>
                                                     <td>Pydio</td>
-                                                    <td class="checked"><i class="fa-solid fa-check"></i></td>
-                                                    <td class="checked"><i class="fa-solid fa-check"></i></td>
-                                                    <td class="checked"><i class="fa-solid fa-check"></i></td>
-                                                    <td rowspan="11" id="dedicated">
+                                                    <td class="checked selectable col-n1"><i class="fa-solid fa-check"></i>
+                                                    </td>
+                                                    <td class="checked selectable col-n2"><i class="fa-solid fa-check"></i>
+                                                    </td>
+                                                    <td class="checked selectable col-n3"><i class="fa-solid fa-check"></i>
+                                                    </td>
+                                                    <td rowspan="11" id="dedicated" class="col-n4">
                                                         <div class="form-check d-flex justify-content-center">
                                                             <input class="form-check-input me-2" type="radio"
                                                                 id="dedicated-check" name="form_ded_option"
@@ -317,9 +320,9 @@
                                                 </tr>
                                                 <tr>
                                                     <td>NextCloud</td>
-                                                    <td class="checked"><i class="fa-solid fa-check"></i></td>
-                                                    <td class="checked"><i class="fa-solid fa-check"></i></td>
-                                                    <td class="checked"><i class="fa-solid fa-check"></i></td>
+                                                    <td class="checked col-n1"><i class="fa-solid fa-check"></i></td>
+                                                    <td class="checked col-n2"><i class="fa-solid fa-check"></i></td>
+                                                    <td class="checked col-n3"><i class="fa-solid fa-check"></i></td>
 
                                                 </tr>
                                                 <tr>
@@ -328,9 +331,9 @@
                                                 </tr>
                                                 <tr>
                                                     <td>SSH</td>
-                                                    <td><i class="fa-solid fa-xmark"></i></td>
-                                                    <td class="checked"><i class="fa-solid fa-check"></i></td>
-                                                    <td class="checked"><i class="fa-solid fa-check"></i></td>
+                                                    <td class="col-n1"><i class="fa-solid fa-xmark"></i></td>
+                                                    <td class="checked col-n2"><i class="fa-solid fa-check"></i></td>
+                                                    <td class="checked col-n3"><i class="fa-solid fa-check"></i></td>
 
                                                 </tr>
                                                 <tr>
@@ -339,9 +342,9 @@
                                                 </tr>
                                                 <tr>
                                                     <td>RSYNC sur SSH</td>
-                                                    <td><i class="fa-solid fa-xmark"></i></td>
-                                                    <td class="checked"><i class="fa-solid fa-check"></i></td>
-                                                    <td class="checked"><i class="fa-solid fa-check"></i></td>
+                                                    <td class="col-n1"><i class="fa-solid fa-xmark"></i></td>
+                                                    <td class="checked col-n2"><i class="fa-solid fa-check"></i></td>
+                                                    <td class="checked col-n3"><i class="fa-solid fa-check"></i></td>
 
                                                 </tr>
                                                 <tr>
@@ -350,9 +353,9 @@
                                                 </tr>
                                                 <tr>
                                                     <td>SFTP</td>
-                                                    <td><i class="fa-solid fa-xmark"></i></td>
-                                                    <td class="checked"><i class="fa-solid fa-check"></i></td>
-                                                    <td class="checked"><i class="fa-solid fa-check"></i></td>
+                                                    <td class="col-n1"><i class="fa-solid fa-xmark"></i></td>
+                                                    <td class="checked col-n2"><i class="fa-solid fa-check"></i></td>
+                                                    <td class="checked col-n3"><i class="fa-solid fa-check"></i></td>
 
                                                 </tr>
                                                 <tr>
@@ -361,9 +364,9 @@
                                                 </tr>
                                                 <tr>
                                                     <td>FTPS/FTP</td>
-                                                    <td><i class="fa-solid fa-xmark"></i></td>
-                                                    <td class="checked"><i class="fa-solid fa-check"></i></td>
-                                                    <td class="checked"><i class="fa-solid fa-check"></i></td>
+                                                    <td class="col-n1"><i class="fa-solid fa-xmark"></i></td>
+                                                    <td class="checked col-n2"><i class="fa-solid fa-check"></i></td>
+                                                    <td class="checked col-n3"><i class="fa-solid fa-check"></i></td>
 
                                                 </tr>
                                                 <tr>
@@ -372,9 +375,9 @@
                                                 </tr>
                                                 <tr>
                                                     <td>iSCSI</td>
-                                                    <td><i class="fa-solid fa-xmark"></i></td>
-                                                    <td><i class="fa-solid fa-xmark"></i></td>
-                                                    <td class="checked"><i class="fa-solid fa-check"></i></td>
+                                                    <td class="col-n1"><i class="fa-solid fa-xmark"></i></td>
+                                                    <td class="col-n2"><i class="fa-solid fa-xmark"></i></td>
+                                                    <td class="checked col-n3"><i class="fa-solid fa-check"></i></td>
 
                                                 </tr>
                                                 <tr>
@@ -383,9 +386,9 @@
                                                 </tr>
                                                 <tr>
                                                     <td>CIFS</td>
-                                                    <td><i class="fa-solid fa-xmark"></i></td>
-                                                    <td><i class="fa-solid fa-xmark"></i></td>
-                                                    <td class="checked"><i class="fa-solid fa-check"></i></td>
+                                                    <td class="col-n1"><i class="fa-solid fa-xmark"></i></td>
+                                                    <td class="col-n2"><i class="fa-solid fa-xmark"></i></td>
+                                                    <td class="checked col-n3"><i class="fa-solid fa-check"></i></td>
 
                                                 </tr>
                                                 <tr>
@@ -394,9 +397,9 @@
                                                 </tr>
                                                 <tr>
                                                     <td>WEBDAV</td>
-                                                    <td><i class="fa-solid fa-xmark"></i></td>
-                                                    <td><i class="fa-solid fa-xmark"></i></td>
-                                                    <td class="checked"><i class="fa-solid fa-check"></i></td>
+                                                    <td class="col-n1"><i class="fa-solid fa-xmark"></i></td>
+                                                    <td class="col-n2"><i class="fa-solid fa-xmark"></i></td>
+                                                    <td class="checked col-n3"><i class="fa-solid fa-check"></i></td>
 
                                                 </tr>
                                                 <tr>
@@ -405,9 +408,9 @@
                                                 </tr>
                                                 <tr>
                                                     <td>SI</td>
-                                                    <td><i class="fa-solid fa-xmark"></i></td>
-                                                    <td><i class="fa-solid fa-xmark"></i></td>
-                                                    <td class="checked"><i class="fa-solid fa-check"></i></td>
+                                                    <td class="col-n1"><i class="fa-solid fa-xmark"></i></td>
+                                                    <td class="col-n2"><i class="fa-solid fa-xmark"></i></td>
+                                                    <td class="checked col-n3"><i class="fa-solid fa-check"></i></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -596,19 +599,32 @@
                     }, false)
                 })
 
-            const offers = document.querySelectorAll('.offer');
-            const button_offer = document.querySelectorAll('.button-offer')
+            const col_1 = document.querySelectorAll('.col-n1');
+            const col_2 = document.querySelectorAll('.col-n2');
+            const col_3 = document.querySelectorAll('.col-n3');
+            const col_4 = document.querySelectorAll('.col-n4');
+            const col_collection = [col_1, col_2, col_3, col_4];
 
-            offers.forEach(offer => offer.addEventListener('click', function() {
-                console.log('click on column')
-            }))
+            col_collection.forEach(
+                column => column.forEach(
+                    element => element.addEventListener('click',
+                        function() {
+                            getUnselected(col_collection);
+                            getSelected(column);
+                        })))
 
-            button_offer.forEach(bouton => bouton.addEventListener('click', function(e) {
-                e.preventDefault()
-                console.log(this.parentNode);
-                console.log(offres);
-                console.log(button_offer);
-            }))
+            function getUnselected(col_collection) {
+                col_collection.forEach(
+                    column => column.forEach(
+                        element => element.classList.remove('selected',
+                            'selected-top', 'selected-bottom')));
+            }
+
+            function getSelected(column) {
+                column.forEach(element => element.classList.add('selected'));
+                column[0].classList.add('selected-top')
+                column[(column.length - 1)].classList.add('selected-bottom')
+            }
 
             // offres.forEach(offre => offre.addEventListener('click', function() {
             //     offres.forEach(offre => offre.classList.remove('selected'))

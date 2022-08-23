@@ -209,10 +209,8 @@ a.n-button {
 
 .comparison .qbse {
     font-weight: 400;
-    border-left: 0;
+    border: none;
     font-size: 1.1em;
-    border-right: 0 none;
-    border-top: 1px solid #CCC;
 }
 
 .table-price {
@@ -224,7 +222,6 @@ a.n-button {
 .qbse-first {
     background: #556b78;
     opacity: .60;
-    border-left: 1px solid #ccc !important;
 }
 
 .qbse-second {
@@ -238,7 +235,6 @@ a.n-button {
 
 .qbse-last {
     background: #3cbc10;
-    border-right : 1px solid #ccc !important;
 }
 
 #dedicated {

@@ -55,9 +55,29 @@ body {
   transform: scale(1.25);
 }
 
-.selected {
-  border: 3px solid $secondary;
+.selectable {
+  cursor: pointer;
 }
+
+/* stuff */
+
+.selected {
+  border-left: 3px solid $secondary !important;
+  border-right: 3px solid $secondary !important;
+}
+.selected-top {
+  border-top: 3px solid $secondary !important;
+}
+.selected-bottom {
+  border-bottom: 3px solid $secondary !important;
+}
+
+// @media (max-width:767px) {
+//   .selected {
+//       border-top: none !important;
+//       border-bottom: none !important; 
+//   }
+// }
 
 .content {
   flex-grow: 1;
