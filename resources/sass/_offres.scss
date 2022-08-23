@@ -1,23 +1,8 @@
-.custom-switch:checked {
-    background-color: var(--bs-primary);
-    border-color: var(--bs-primary);
-}
-
-.custom-switch {
-    background-color: var(--bs-secondary);
-    border-color: var(--bs-secondary);
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
-}
-
 .compare-heading {
     font-size: 18px;
     font-weight: 700 !important;
     border-bottom: 0 !important;
     padding-top: 10px !important;
-}
-
-.price-btns {
-    border-top: 1px solid #d4e3ed;
 }
 
 .pricing-table tfoot td.free {
@@ -99,8 +84,9 @@
 .comparison table {
     width: 100%;
     border-collapse: collapse;
-    // border-spacing: 0;
+    border-spacing: 0;
     table-layout: fixed;
+    
 }
 
 td.package-btn {
@@ -111,9 +97,10 @@ td.package-btn {
 
 .comparison td,
 .comparison th {
-    border-right: 1px solid #d4e3ed;
+    border: none;
     empty-cells: show;
     padding: 15px 20px;
+    transition: .3s;    
 }
 
 .package-btn.pack-4,
@@ -144,17 +131,13 @@ a.n-button {
     display: none;
 }
 
-.comparison .compare-row {
-    background: #e9f0f5;
-}
-
 .comparison .checked {
     background: #fff1e5;
 }
 
-.comparison .checked i{
-    color: $secondary !important;
-}
+// .comparison .checked i {
+//     color: $secondary !important;
+// }
 
 .comparison .tickblue {
     color: #0078C1;
@@ -167,19 +150,19 @@ a.n-button {
 .comparison th {
     font-weight: 400;
     padding: 0;
-    border-bottom: 1px solid #CCC;
+    border-bottom: 3px solid #fff;
 }
 
 .comparison tr td {
-    border: 1px solid #d4e3ed;
+    border: none;
 }
 
 .comparison tr td:first-child {
     text-align: left;
     border-left: none;
     border-top: none;
-    border-bottom: 1px solid #d4e3ed;
-    background: $body-bg;
+    border-bottom: 2px solid #fff;
+    background: darken(#f8fafc, 7%);
 }
 
 .comparison tr:last-child td:first-child {
@@ -203,8 +186,31 @@ a.n-button {
     text-align: left;
 }
 
-.comparison td i{
+.comparison td.checked.selected i,
+.comparison td.selected i {
+    color: #fff;
+}
+
+.comparison td.checked i {
+    color: $secondary;
+}
+
+.comparison td i {
     color: #ddd;
+}
+
+.comparison th.selected,
+.comparison td.selected.checked,
+.comparison td.selected.col-n4 {
+    background-color: $secondary  !important;
+}
+
+.comparison td.selected.col-n4 {
+    color: #fff;
+}
+
+.comparison td.selected {
+    background-color: $secondary-light;
 }
 
 .price-options-desc {
@@ -221,6 +227,7 @@ a.n-button {
     font-weight: 400;
     border: none;
     font-size: 1.1em;
+    border-bottom: 2px solid #fff;
 }
 
 .table-price {
@@ -230,21 +237,19 @@ a.n-button {
 }
 
 .qbse-first {
-    background: #556b78;
-    opacity: .60;
+    background: $secondary-light;
 }
 
 .qbse-second {
-    background: $secondary;
-    opacity: .75;
+    background: $secondary-light;
 }
 
 .qbse-third {
-    background: $secondary;
+    background: $secondary-light;
 }
 
 .qbse-last {
-    background: #3cbc10;
+    background: $secondary-light;
 }
 
 #dedicated {
@@ -312,8 +317,8 @@ a.n-button {
 }
 
 .pricing.headline.text-center {
-    
-    margin-top: 6rem;
+
+    margin-top: 2rem;
 }
 
 tbody tr {
@@ -338,7 +343,7 @@ tbody tr {
 }
 
 .pricing-sub-headline.text-center {
-    color: #a1aeb5;
+    // color: #a1aeb5;
     font-weight: 300;
     font-size: 18px;
     font-family: Roboto, sans-serif;
