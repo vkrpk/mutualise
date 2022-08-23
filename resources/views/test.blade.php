@@ -20,42 +20,45 @@
     @endphp
 
 @section('content')
-    <form action="{{ url('member_accesses') }}" class="needs-validation" method="POST" novalidate>@csrf
-        <div class="row">
-            <div class="col px-sm-0">
-                <div class="alert alert-primary mt-4 mb-2 fs-2 fw-bolder" role="alert"><span>Ajouter un accès</span>
+    <div class="mt-4 container">
+        <form action="{{ url('member_accesses') }}" class="needs-validation" method="POST" novalidate>@csrf
+            <div class="row">
+                <div class="col px-sm-0">
+                    <div class="alert alert-primary mt-4 mb-2 fs-2 fw-bolder" role="alert"><span>Ajouter un accès</span>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="card border-secondary">
-                    <div class="card-body d-flex flex-column align-middle">
-                        <h4 class="card-title align-self-center">Offre d'essai : 10 Go gratuits</h4>
-                        <p class="card-text align-self-center">Testez toutes les fonctionnalités Dedikam gratuitement
-                            pendant 30 jours.<br>Vous pouvez commander jusqu'à 4 accès gratuits. Il vous en reste
-                            {{ $nbfreeaccount }}.</p>
-                        <div class="form-check align-self-center"><input id="check_free_account" class="form-check-input"
-                                type="checkbox" id="formCheck-1" {{ $nbfreeaccount == 0 ? 'disabled' : '' }}><label
-                                class="form-check-label" for="formCheck-1">Profiter de l'offre</label>
+            <div class="row">
+                <div class="col">
+                    <div class="card border-secondary">
+                        <div class="card-body d-flex flex-column align-middle">
+                            <h4 class="card-title align-self-center">Offre d'essai : 10 Go gratuits</h4>
+                            <p class="card-text align-self-center">Testez toutes les fonctionnalités Dedikam gratuitement
+                                pendant 30 jours.<br>Vous pouvez commander jusqu'à 4 accès gratuits. Il vous en reste
+                                {{ $nbfreeaccount }}.</p>
+                            <div class="form-check align-self-center"><input id="check_free_account"
+                                    class="form-check-input" type="checkbox" id="formCheck-1"
+                                    {{ $nbfreeaccount == 0 ? 'disabled' : '' }}><label class="form-check-label"
+                                    for="formCheck-1">Profiter de l'offre</label>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row mt-4">
-            <div class="col">
-                <div class="row pt-2 offer_content pb-2">
-                    <div class="col">
-                        <div class="row">
-                            <div class="col">
-                                <h1 class="pricing headline text-center" style="font-family: Roboto, sans-serif;">Choisissez
-                                    votre formule</h1>
-                                <h3 class="pricing-sub-headline text-center">Toutes vos données fragmentées, copiées et
-                                    réparties sur différents serveurs et Datacenters selon le niveau de disponibilité
-                                    choisi. <a class="text-secondary" href="https://www.dedikam.com/lexique/#niveaux"
-                                        target="_blank">En savoir plus</a></h3>
-                                {{-- <div class="row row-cols-2 row-cols-lg-4">
+            <div class="row mt-4">
+                <div class="col">
+                    <div class="row pt-2 offer_content pb-2">
+                        <div class="col">
+                            <div class="row">
+                                <div class="col">
+                                    <h1 class="pricing headline text-center" style="font-family: Roboto, sans-serif;">
+                                        Choisissez
+                                        votre formule</h1>
+                                    <h3 class="pricing-sub-headline text-center">Toutes vos données fragmentées, copiées et
+                                        réparties sur différents serveurs et Datacenters selon le niveau de disponibilité
+                                        choisi. <a class="text-secondary" href="https://www.dedikam.com/lexique/#niveaux"
+                                            target="_blank">En savoir plus</a></h3>
+                                    {{-- <div class="row row-cols-2 row-cols-lg-4">
                                     <div class="col hover offre selected">
                                         <div class="row" style="height: 2rem;">
                                             <div class="col offre_n1 offer_hf activated">
@@ -237,202 +240,170 @@
                                         </div>
                                     </div>
                                 </div> --}}
-                                <div class="col comparison">
-                                    <table>
-                                        <thead>
-                                            <tr class="price-header">
-                                                <th class="tl tl2" valign="bottom"></th>
-                                                <th class="qbse qbse-first">
-                                                    <h3> BASIQUE </h3>
-                                                    <p>Données regroupées sur 1 serveur</p>
-                                                </th>
-                                                <th class="qbse qbse-second">
-                                                    <h3> STANDARD </h3>
-                                                    <p>Données réparties sur 2 serveurs</p>
-                                                </th>
-                                                <th class="qbse qbse-third">
-                                                    <h3> ENTREPRISE </h3>
-                                                    <p>Données réparties sur 3 serveurs et 2 datacenters</p>
-                                                </th>
-                                                <th class="qbse qbse-last">
-                                                    <h3> DÉDIÉ </h3>
-                                                    <p>Données réparties sur 3 serveurs et 2 datacenters</p>
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td></td>
-                                                <td colspan="3">Pydio</td>
-                                                <td rowspan="20" id="dedicated-small">
-                                                    <div class="form-check d-flex justify-content-center">
-                                                        <input class="form-check-input me-2" type="radio" id="dedicated-check"
-                                                            name="form_ded_option" value="nextcloud" checked>
-                                                        <label class="form-check-label" for="dedicated-check">Nextcloud</label>
-                                                    </div>
-                                                    <div class="form-check d-flex justify-content-center">
-                                                        <input class="form-check-input me-2" type="radio" id="dedicated-check"
-                                                            name="form_ded_option" value="pydio">
-                                                        <label class="form-check-label" for="dedicated-check">Pydio</label>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Pydio</td>
-                                                <td class="checked"><i class="fa-solid fa-check"></i></td>
-                                                <td class="checked"><i class="fa-solid fa-check"></i></td>
-                                                <td class="checked"><i class="fa-solid fa-check"></i></td>
-                                                <td rowspan="11" id="dedicated">
-                                                    <div class="form-check d-flex justify-content-center">
-                                                        <input class="form-check-input me-2" type="radio" id="dedicated-check"
-                                                            name="form_ded_option" value="nextcloud" checked>
-                                                        <label class="form-check-label" for="fdedicated-check">Nextcloud</label>
-                                                    </div>
-                                                    <div class="form-check d-flex justify-content-center">
-                                                        <input class="form-check-input me-2" type="radio" id="dedicated-check"
-                                                            name="form_ded_option" value="pydio">
-                                                        <label class="form-check-label" for="dedicated-check">Pydio</label>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td colspan="3">NextCloud</td>
-                                            </tr>
-                                            <tr>
-                                                <td>NextCloud</td>
-                                                <td class="checked"><i class="fa-solid fa-check"></i></td>
-                                                <td class="checked"><i class="fa-solid fa-check"></i></td>
-                                                <td class="checked"><i class="fa-solid fa-check"></i></td>
+                                    <div class="col comparison">
+                                        <table>
+                                            <thead>
+                                                <tr class="price-header">
+                                                    <th class="tl tl2" valign="bottom"></th>
+                                                    <th class="qbse qbse-first">
+                                                        <h3> BASIQUE </h3>
+                                                        <p>Données regroupées sur 1 serveur</p>
+                                                    </th>
+                                                    <th class="qbse qbse-second">
+                                                        <h3> STANDARD </h3>
+                                                        <p>Données réparties sur 2 serveurs</p>
+                                                    </th>
+                                                    <th class="qbse qbse-third">
+                                                        <h3> ENTREPRISE </h3>
+                                                        <p>Données réparties sur 3 serveurs et 2 datacenters</p>
+                                                    </th>
+                                                    <th class="qbse qbse-last">
+                                                        <h3> DÉDIÉ </h3>
+                                                        <p>Données réparties sur 3 serveurs et 2 datacenters</p>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td></td>
+                                                    <td colspan="3">Pydio</td>
+                                                    <td rowspan="20" id="dedicated-small">
+                                                        <div class="form-check d-flex justify-content-center">
+                                                            <input class="form-check-input me-2" type="radio"
+                                                                id="dedicated-check" name="form_ded_option"
+                                                                value="nextcloud" checked>
+                                                            <label class="form-check-label"
+                                                                for="dedicated-check">Nextcloud</label>
+                                                        </div>
+                                                        <div class="form-check d-flex justify-content-center">
+                                                            <input class="form-check-input me-2" type="radio"
+                                                                id="dedicated-check" name="form_ded_option" value="pydio">
+                                                            <label class="form-check-label"
+                                                                for="dedicated-check">Pydio</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Pydio</td>
+                                                    <td class="checked"><i class="fa-solid fa-check"></i></td>
+                                                    <td class="checked"><i class="fa-solid fa-check"></i></td>
+                                                    <td class="checked"><i class="fa-solid fa-check"></i></td>
+                                                    <td rowspan="11" id="dedicated">
+                                                        <div class="form-check d-flex justify-content-center">
+                                                            <input class="form-check-input me-2" type="radio"
+                                                                id="dedicated-check" name="form_ded_option"
+                                                                value="nextcloud" checked>
+                                                            <label class="form-check-label"
+                                                                for="fdedicated-check">Nextcloud</label>
+                                                        </div>
+                                                        <div class="form-check d-flex justify-content-center">
+                                                            <input class="form-check-input me-2" type="radio"
+                                                                id="dedicated-check" name="form_ded_option" value="pydio">
+                                                            <label class="form-check-label"
+                                                                for="dedicated-check">Pydio</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td colspan="3">NextCloud</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>NextCloud</td>
+                                                    <td class="checked"><i class="fa-solid fa-check"></i></td>
+                                                    <td class="checked"><i class="fa-solid fa-check"></i></td>
+                                                    <td class="checked"><i class="fa-solid fa-check"></i></td>
 
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td colspan="3">SSH</td>
-                                            </tr>
-                                            <tr>
-                                                <td>SSH</td>
-                                                <td><i class="fa-solid fa-xmark"></i></td>
-                                                <td class="checked"><i class="fa-solid fa-check"></i></td>
-                                                <td class="checked"><i class="fa-solid fa-check"></i></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td colspan="3">SSH</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>SSH</td>
+                                                    <td><i class="fa-solid fa-xmark"></i></td>
+                                                    <td class="checked"><i class="fa-solid fa-check"></i></td>
+                                                    <td class="checked"><i class="fa-solid fa-check"></i></td>
 
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td colspan="3">RSYNC sur SSH</td>
-                                            </tr>
-                                            <tr>
-                                                <td>RSYNC sur SSH</td>
-                                                <td><i class="fa-solid fa-xmark"></i></td>
-                                                <td class="checked"><i class="fa-solid fa-check"></i></td>
-                                                <td class="checked"><i class="fa-solid fa-check"></i></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td colspan="3">RSYNC sur SSH</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>RSYNC sur SSH</td>
+                                                    <td><i class="fa-solid fa-xmark"></i></td>
+                                                    <td class="checked"><i class="fa-solid fa-check"></i></td>
+                                                    <td class="checked"><i class="fa-solid fa-check"></i></td>
 
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td colspan="3">SFTP</td>
-                                            </tr>
-                                            <tr>
-                                                <td>SFTP</td>
-                                                <td><i class="fa-solid fa-xmark"></i></td>
-                                                <td class="checked"><i class="fa-solid fa-check"></i></td>
-                                                <td class="checked"><i class="fa-solid fa-check"></i></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td colspan="3">SFTP</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>SFTP</td>
+                                                    <td><i class="fa-solid fa-xmark"></i></td>
+                                                    <td class="checked"><i class="fa-solid fa-check"></i></td>
+                                                    <td class="checked"><i class="fa-solid fa-check"></i></td>
 
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td colspan="3">FTPS/FTP</td>
-                                            </tr>
-                                            <tr>
-                                                <td>FTPS/FTP</td>
-                                                <td><i class="fa-solid fa-xmark"></i></td>
-                                                <td class="checked"><i class="fa-solid fa-check"></i></td>
-                                                <td class="checked"><i class="fa-solid fa-check"></i></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td colspan="3">FTPS/FTP</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>FTPS/FTP</td>
+                                                    <td><i class="fa-solid fa-xmark"></i></td>
+                                                    <td class="checked"><i class="fa-solid fa-check"></i></td>
+                                                    <td class="checked"><i class="fa-solid fa-check"></i></td>
 
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td colspan="3">iSCSI</td>
-                                            </tr>
-                                            <tr>
-                                                <td>iSCSI</td>
-                                                <td><i class="fa-solid fa-xmark"></i></td>
-                                                <td><i class="fa-solid fa-xmark"></i></td>
-                                                <td class="checked"><i class="fa-solid fa-check"></i></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td colspan="3">iSCSI</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>iSCSI</td>
+                                                    <td><i class="fa-solid fa-xmark"></i></td>
+                                                    <td><i class="fa-solid fa-xmark"></i></td>
+                                                    <td class="checked"><i class="fa-solid fa-check"></i></td>
 
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td colspan="3">CIFS</td>
-                                            </tr>
-                                            <tr>
-                                                <td>CIFS</td>
-                                                <td><i class="fa-solid fa-xmark"></i></td>
-                                                <td><i class="fa-solid fa-xmark"></i></td>
-                                                <td class="checked"><i class="fa-solid fa-check"></i></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td colspan="3">CIFS</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>CIFS</td>
+                                                    <td><i class="fa-solid fa-xmark"></i></td>
+                                                    <td><i class="fa-solid fa-xmark"></i></td>
+                                                    <td class="checked"><i class="fa-solid fa-check"></i></td>
 
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td colspan="3">WEBDAV</td>
-                                            </tr>
-                                            <tr>
-                                                <td>WEBDAV</td>
-                                                <td><i class="fa-solid fa-xmark"></i></td>
-                                                <td><i class="fa-solid fa-xmark"></i></td>
-                                                <td class="checked"><i class="fa-solid fa-check"></i></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td colspan="3">WEBDAV</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>WEBDAV</td>
+                                                    <td><i class="fa-solid fa-xmark"></i></td>
+                                                    <td><i class="fa-solid fa-xmark"></i></td>
+                                                    <td class="checked"><i class="fa-solid fa-check"></i></td>
 
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td colspan="3">SI</td>
-                                            </tr>
-                                            <tr>
-                                                <td>SI</td>
-                                                <td><i class="fa-solid fa-xmark"></i></td>
-                                                <td><i class="fa-solid fa-xmark"></i></td>
-                                                <td class="checked"><i class="fa-solid fa-check"></i></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-4 espace">
-            <div class="col">
-                <div class="row">
-                    <div class="col d-flex flex-nowrap">
-                        <!--<span class="offer_legend1">2</span>-->
-                        <span class="offer_legend2 align-self-center">Choisissez votre espace disque en déplaçant le
-                            curseur orange vers la droite<br></span>
-                    </div>
-                </div>
-                <div class="row pt-2 offer_content">
-                    <div class="col">
-                        <div class="row">
-                            <div class="col"><span>Tarif affiché en bas de page</span></div>
-                        </div>
-                        <div class="row">
-                            <div class="col d-none d-md-grid col-md-1"></div>
-                            <div class="col align-self-center col-12 col-md-11">
-                                <div class="row range-slider-container align-items-center" style="margin-top: 70px;">
-                                    <div class="col col-2"><span>Espace disque : <span id="taille_output">10
-                                                Go</span></span></div>
-                                    {{-- insert range here --}}
-
-                                    <input type="range" class="rs-range" name="taille" id="taille" min="10"
-                                        max="5000" step="10" value="10">
-                                </div>
-                                <div class="row mt-2">
-                                    <div class="col d-none d-md-grid col-md-2"></div>
-                                    <div class="col text-center"><span>Trafic illimité - Bande passante : 500 Mbit/s à
-                                            1Gbit/s<br>Au dessus de 5000Go, veuillez nous&nbsp;<a class="text-secondary"
-                                                href="https://www.dedikam.com/contact/"
-                                                target="_blank">contacter</a>.<br><br></span>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td colspan="3">SI</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>SI</td>
+                                                    <td><i class="fa-solid fa-xmark"></i></td>
+                                                    <td><i class="fa-solid fa-xmark"></i></td>
+                                                    <td class="checked"><i class="fa-solid fa-check"></i></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
@@ -440,106 +411,150 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row mt-4">
-            <div class="col">
-                <div class="row">
-                    <div class="col d-flex flex-nowrap">
-                        <!--<span class="offer_legend1">3</span>-->
-                        <span class="offer_legend2 align-self-center">Choisissez un nom pour l'accès<br></span>
+            <div class="row mt-4 espace">
+                <div class="col">
+                    <div class="row">
+                        <div class="col d-flex flex-nowrap">
+                            <!--<span class="offer_legend1">2</span>-->
+                            <span class="offer_legend2 align-self-center">Choisissez votre espace disque en déplaçant le
+                                curseur orange vers la droite<br></span>
+                        </div>
                     </div>
-                </div>
-                <div class="row pt-2 offer_content pb-2">
-                    <div class="col">
-                        <div class="form-floating">
-                            <input type="text" name="form_access_name" data-bs-toggle="tooltip" data-bss-tooltip=""
-                                data-bs-placement="right" id="access_name"
-                                class="form-control  @error('form_access_name') is-invalid @enderror"
-                                @error('form_access_name') autofocus @enderror placeholder="Nom de l'accès" required
-                                style="width: 20rem;" title="Donnée obligatoire" maxlength="40"
-                                value="{{ old('form_access_name') }}"
-                                aria-describedby="validationform_access_nameFeedback">
-                            <label class="form-label" for="access_name">Nom de l'accès<sup><i class="bi bi-asterisk ms-1"
-                                        style="font-size: 8px;color: red;margin-top: -14px;"></i></sup></label>
-                            <div class="invalid-feedback">
-                                Le nom de l'accès est obligatoire
+                    <div class="row pt-2 offer_content">
+                        <div class="col">
+                            <div class="row">
+                                <div class="col"><span>Tarif affiché en bas de page</span></div>
+                            </div>
+                            <div class="row">
+                                <div class="col d-none d-md-grid col-md-1"></div>
+                                <div class="col align-self-center col-12 col-md-11">
+                                    <div class="row range-slider-container align-items-center" style="margin-top: 70px;">
+                                        <div class="col col-2"><span>Espace disque : <span id="taille_output">10
+                                                    Go</span></span></div>
+                                        {{-- insert range here --}}
+
+                                        <input type="range" class="rs-range" name="taille" id="taille"
+                                            min="10" max="5000" step="10" value="10">
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col d-none d-md-grid col-md-2"></div>
+                                        <div class="col text-center"><span>Trafic illimité - Bande passante : 500 Mbit/s à
+                                                1Gbit/s<br>Au dessus de 5000Go, veuillez nous&nbsp;<a
+                                                    class="text-secondary" href="https://www.dedikam.com/contact/"
+                                                    target="_blank">contacter</a>.<br><br></span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row mt-4">
-            <div class="col">
-                <div class="row">
-                    <div class="col d-flex flex-nowrap">
-                        <!--<span class="offer_legend1">4</span>-->
-                        <span class="offer_legend2 align-self-center">Récapitulatif de votre commande<br></span>
+            <div class="row mt-4">
+                <div class="col">
+                    <div class="row">
+                        <div class="col d-flex flex-nowrap">
+                            <!--<span class="offer_legend1">3</span>-->
+                            <span class="offer_legend2 align-self-center">Choisissez un nom pour l'accès<br></span>
+                        </div>
                     </div>
-                </div>
-                <div class="row pt-2 offer_content pb-2">
-                    <div class="col d-table">
-                        <div class="table-responsive my-3" style="max-width: 50rem;margin-left: auto;margin-right: auto">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr class="text-center bg-light">
-                                        <th>Formule</th>
-                                        <th>Espace disque</th>
-                                        <th>Total</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="text-center">
-                                        <td style="vertical-align:middle">
-                                            <div><span id="recap_level" class="fs-2 fw-bolder">BASIC</span></div>
-                                        </td>
-                                        <td style="vertical-align:middle">
-                                            <div class="d-flex flex-column"><span id="recap_diskspace_go"
-                                                    class="fs-2 fw-bold">10 Go</span><span id="recap_diskspace_gio">( 9.31
-                                                    Gio )</span></div>
-                                        </td>
-                                        <td style="vertical-align:middle">
-                                            <div class="d-flex flex-column align-items-start">
-                                                <div id="price_Y" class="ms-5 d-flex flex-wrap"><span
-                                                        id="recap_amount_Y" class="fs-1 text-primary fw-bolder">2
-                                                        €</span><span id="recap_amount_free"
-                                                        class="fs-1 text-primary fw-bolder" style="display: none;">gratuit
-                                                        pour 30 jours</span><span id="recap_duration"
-                                                        class="ms-2 me-1 text-align-buttom d-flex align-items-end">pour 1
-                                                        an
-                                                        jusqu'au</span><span id="recap_enddate"
-                                                        class="d-flex align-items-end">01/06/2022</span>
-                                                </div>
-                                                <div id="price_or" class="ms-5" style="display: none;"><span
-                                                        class="fs-3 text-secondary fw-bolder">ou</span></div>
-                                                <div id="price_M" class="ms-5" style="display: none;"><span
-                                                        id="recap_amount_M" class="fs-1 text-primary fw-bolder">2
-                                                        €</span><span class="ms-2">par mois</span></div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                    <div class="row pt-2 offer_content pb-2">
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" name="form_access_name" data-bs-toggle="tooltip"
+                                    data-bss-tooltip="" data-bs-placement="right" id="access_name"
+                                    class="form-control  @error('form_access_name') is-invalid @enderror"
+                                    @error('form_access_name') autofocus @enderror placeholder="Nom de l'accès" required
+                                    style="width: 20rem;" title="Donnée obligatoire" maxlength="40"
+                                    value="{{ old('form_access_name') }}"
+                                    aria-describedby="validationform_access_nameFeedback">
+                                <label class="form-label" for="access_name">Nom de l'accès<sup><i
+                                            class="bi bi-asterisk ms-1"
+                                            style="font-size: 8px;color: red;margin-top: -14px;"></i></sup></label>
+                                <div class="invalid-feedback">
+                                    Le nom de l'accès est obligatoire
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row mt-4">
-            <div class="col">
-                <input type="hidden" id="form_level" name="form_level" value="BAS">
-                <input type="hidden" id="form_free_account" name="form_free_account" value="0">
-                <input type="hidden" id="form_diskspace" name="form_diskspace" value="10">
-                <input type="hidden" id="form_expire" name="form_expire" value="">
-                <button class="btn btn-lg fs-3 btn-primary" type="submit"><i class="bi bi-cart-plus-fill"></i>
-                    Ajouter au panier
-                </button>
+            <div class="row mt-4">
+                <div class="col">
+                    <div class="row">
+                        <div class="col d-flex flex-nowrap">
+                            <!--<span class="offer_legend1">4</span>-->
+                            <span class="offer_legend2 align-self-center">Récapitulatif de votre commande<br></span>
+                        </div>
+                    </div>
+                    <div class="row pt-2 offer_content pb-2">
+                        <div class="col d-table">
+                            <div class="table-responsive my-3"
+                                style="max-width: 50rem;margin-left: auto;margin-right: auto">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr class="text-center bg-light">
+                                            <th>Formule</th>
+                                            <th>Espace disque</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="text-center">
+                                            <td style="vertical-align:middle">
+                                                <div><span id="recap_level" class="fs-2 fw-bolder">BASIC</span></div>
+                                            </td>
+                                            <td style="vertical-align:middle">
+                                                <div class="d-flex flex-column"><span id="recap_diskspace_go"
+                                                        class="fs-2 fw-bold">10 Go</span><span id="recap_diskspace_gio">(
+                                                        9.31
+                                                        Gio )</span></div>
+                                            </td>
+                                            <td style="vertical-align:middle">
+                                                <div class="d-flex flex-column align-items-start">
+                                                    <div id="price_Y" class="ms-5 d-flex flex-wrap"><span
+                                                            id="recap_amount_Y" class="fs-1 text-primary fw-bolder">2
+                                                            €</span><span id="recap_amount_free"
+                                                            class="fs-1 text-primary fw-bolder"
+                                                            style="display: none;">gratuit
+                                                            pour 30 jours</span><span id="recap_duration"
+                                                            class="ms-2 me-1 text-align-buttom d-flex align-items-end">pour
+                                                            1
+                                                            an
+                                                            jusqu'au</span><span id="recap_enddate"
+                                                            class="d-flex align-items-end">01/06/2022</span>
+                                                    </div>
+                                                    <div id="price_or" class="ms-5" style="display: none;"><span
+                                                            class="fs-3 text-secondary fw-bolder">ou</span></div>
+                                                    <div id="price_M" class="ms-5" style="display: none;"><span
+                                                            id="recap_amount_M" class="fs-1 text-primary fw-bolder">2
+                                                            €</span><span class="ms-2">par mois</span></div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </form>
-    @env('local')
-    <!-- member-access.create -->
-    @endenv
+            <div class="row mt-4">
+                <div class="col">
+                    <input type="hidden" id="form_level" name="form_level" value="BAS">
+                    <input type="hidden" id="form_free_account" name="form_free_account" value="0">
+                    <input type="hidden" id="form_diskspace" name="form_diskspace" value="10">
+                    <input type="hidden" id="form_expire" name="form_expire" value="">
+                    <button class="btn btn-lg fs-3 btn-primary" type="submit"><i class="bi bi-cart-plus-fill"></i>
+                        Ajouter au panier
+                    </button>
+                </div>
+            </div>
+        </form>
+        @env('local')
+        <!-- member-access.create -->
+        @endenv
+    </div>
 @endsection
 
 @push('scripts')
