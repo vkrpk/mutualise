@@ -42,6 +42,13 @@
     color: #ff5406;
 }
 
+// @media (max-width:767px) {
+//     .comparison {
+//         width: 90vw;
+//         margin-right: -500px;
+//     }
+// }
+
 @media (max-width:767px) {
     .comparison .row {
         background: #FFF;
@@ -84,12 +91,15 @@
     text-align: center;
     padding: 10px;
     color: #6e808a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .comparison table {
     width: 100%;
     border-collapse: collapse;
-    border-spacing: 0;
+    // border-spacing: 0;
     table-layout: fixed;
 }
 
@@ -303,7 +313,7 @@ a.n-button {
 
 .pricing.headline.text-center {
     
-    margin-top: 48px;
+    margin-top: 6rem;
 }
 
 tbody tr {
