@@ -51,7 +51,7 @@
                         <div class="col">
                             <div class="row">
                                 <div class="col">
-                                    <h1 class="pricing headline text-center" style="font-family: Roboto, sans-serif;">
+                                    <h1 class="pricing headline text-center mb-4" style="font-family: Roboto, sans-serif;">
                                         Choisissez
                                         votre formule</h1>
                                     <h3 class="pricing-sub-headline text-center">Toutes vos données fragmentées, copiées et
@@ -622,7 +622,6 @@
 
             function getSelected(column) {
                 if (column === col_4) {
-                    console.log(column);
                     column.forEach(element => element.classList.add('selected', 'selected-bottom'));
                     column[0].classList.add('selected-top')
                     column[0].classList.remove('selected-bottom')
