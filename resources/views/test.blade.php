@@ -424,37 +424,31 @@
             <div class="row mt-4 espace">
                 <div class="col">
                     <div class="row">
-                        <div class="col d-flex flex-nowrap">
+                        <div class="col d-flex flex-nowrap justify-content-center flex-column">
                             <!--<span class="offer_legend1">2</span>-->
-                            <span class="offer_legend2 align-self-center">Choisissez votre espace disque en déplaçant le
-                                curseur orange vers la droite<br></span>
+                            <p class="align-self-center">Choisissez votre espace disque en déplaçant le
+                                curseur orange vers la droite</p>
+                            <p class="align-self-center">Tarif affiché en bas de page</p>
                         </div>
                     </div>
                     <div class="row pt-2 offer_content">
                         <div class="col">
-                            <div class="row">
-                                <div class="col"><span>Tarif affiché en bas de page</span></div>
-                            </div>
-                            <div class="row">
+                            <div class="col">
                                 <div class="col d-none d-md-grid col-md-1"></div>
-                                <div class="col align-self-center col-12 col-md-11">
-                                    <div class="row range-slider-container align-items-center" style="margin-top: 70px;">
+                                <div class="col align-self-center m-4">
+                                    <div class="row range-slider-container align-items-center">
                                         <div class="col col-2"><span>Espace disque : <span id="taille_output">10
                                                     Go</span></span></div>
-                                        {{-- insert range here --}}
 
-                                        <input type="range" class="rs-range" name="taille" id="taille"
+                                        <input type="range" class="rs-range flex-grow-1" name="taille" id="taille"
                                             min="10" max="5000" step="10" value="10">
                                     </div>
-                                    <div class="row mt-2">
-                                        <div class="col d-none d-md-grid col-md-2"></div>
-                                        <div class="col text-center"><span>Trafic illimité - Bande passante : 500 Mbit/s à
-                                                1Gbit/s<br>Au dessus de 5000Go, veuillez nous&nbsp;<a
-                                                    class="text-secondary" href="https://www.dedikam.com/contact/"
-                                                    target="_blank">contacter</a>.<br><br></span>
-                                        </div>
-                                    </div>
                                 </div>
+                            </div>
+                            <div class="col text-center"><span>Trafic illimité - Bande passante : 500 Mbit/s à
+                                    1Gbit/s<br>Au dessus de 5000Go, veuillez nous&nbsp;<a class="text-secondary"
+                                        href="https://www.dedikam.com/contact/"
+                                        target="_blank">contacter</a>.<br><br></span>
                             </div>
                         </div>
                     </div>

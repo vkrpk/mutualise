@@ -32,13 +32,13 @@ body {
 }
 
 .btn-secondary {
-  background-color: $secondary;
-  border-color: $secondary;
+  background-color: $secondary-light;
+  border-color: $secondary-light;
 }
 
 .form-check-input:checked {
-  background-color: $secondary !important;
-  border-color: $secondary !important;
+  background-color: $secondary-light !important;
+  border-color: $secondary-light !important;
 }
 
 /* Custom */
@@ -58,26 +58,6 @@ body {
 .selectable {
   cursor: pointer;
 }
-
-/* stuff */
-
-.selected {
-  border-left: 3px solid $secondary !important;
-  border-right: 3px solid $secondary !important;
-}
-.selected-top {
-  border-top: 3px solid $secondary !important;
-}
-.selected-bottom {
-  border-bottom: 3px solid $secondary !important;
-}
-
-// @media (max-width:767px) {
-//   .selected {
-//       border-top: none !important;
-//       border-bottom: none !important; 
-//   }
-// }
 
 .content {
   flex-grow: 1;
