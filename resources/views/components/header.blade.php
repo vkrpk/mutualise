@@ -1,4 +1,4 @@
-<header class="">
+<header>
     <nav class="navbar navbar-light navbar-expand-md navigation-clean-button navbar-fixed-top bg-dedikam text-dedikam">
         <div class="container"><a class="navbar-brand" href="https://dedispace.dedikam.com/"><img
                     src="../../images/logo.png"></a>
