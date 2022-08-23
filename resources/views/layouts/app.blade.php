@@ -23,11 +23,11 @@
 <body>
 
     <x-header />
-  
+    <div>
         @yield('content')
-
+    </div>
     <x-footer />
-    
+
     @stack('scripts')
 </body>
 
