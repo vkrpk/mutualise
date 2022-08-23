@@ -16,3 +16,5 @@ import "./bootstrap.js";
 //     '../fonts/**',
 // ]);
 // import.meta.glob("../images/**");
+
+// import.meta.glob(["./../images/**"]);
