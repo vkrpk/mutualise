@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="d-flex flex-column" style="position: relative;background: url(&quot;assets/img/service-sauvegarde-stockage-owncloud.jpeg&quot;) center / cover no-repeat, rgba(20,30,40,0);display: flex;opacity: 1;min-height: 200px;color: var(--bs-light);text-align: center;padding: 0;line-height: 100%;margin-top: 0;margin-right: auto;margin-left: auto;z-index: 2;">
+<div class="d-flex flex-column" style="position: relative;background: url('{{ Vite::asset("resources/images/service-sauvegarde-stockage-owncloud.jpeg") }}') center / cover no-repeat, rgba(20,30,40,0);display: flex;opacity: 1;min-height: 200px;color: var(--bs-light);text-align: center;padding: 0;line-height: 100%;margin-top: 0;margin-right: auto;margin-left: auto;z-index: 2;">
     <div class="d-flex flex-column justify-content-around" style="max-width: 700px;margin-left: auto;margin-right: auto;padding-bottom: 40px;display: flex;">
         <h1 style="text-align: center;font-weight: bold;padding-right: 30px;padding-left: 30px;margin-top: 30px;">SAUVEGARDE ET PARTAGE DE DONNÉES EN LIGNE<br></h1>
         <h4 class="text-center" style="--bs-body-font-weight: normal;margin-bottom: 20px;--bs-body-bg: #590cd7;"><br> PLATEFORME COLLABORATIVE - ESPACE DE TRAVAIL NUMERIQUE<br><br></h4>
         <div class="container">
-            <div class="row" style="background: url(&quot;assets/img/Data-Center.jpg&quot;);">
+            <div class="row" style="background: url('{{ Vite::asset("resources/images/Data-Center.jpg") }}');">
                 <div class="col-md-6" style="height: 120px;">
                     <h5 style="margin-top: 15px;">Services mutualisés<br></h5><button class="btn btn-primary" type="button" style="background: var(--bs-secondary);color: rgb(255,255,255);border-style: none;border-right-style: none;margin: 10px 0;font-weight: bold;">DECOUVRIR</button>
                 </div>
@@ -31,13 +31,13 @@
     </div>
     <div class="container d-flex justify-content-center" style="border-radius: 108px;border-bottom-left-radius: 31px;border-bottom-right-radius: 22px;border-right-width: 9px;padding-right: 0;margin: auto;margin-right: auto;margin-left: auto;padding-left: 0;">
         <div class="row gx-5 gy-5 d-flex d-lg-flex d-xl-flex justify-content-evenly flex-md-row align-items-md-start flex-lg-row align-items-lg-center flex-xl-row align-items-xl-center flex-xxl-row align-items-xxl-start" style="border-radius: 10px;border-bottom-right-radius: 37;border-bottom-left-radius: 32px;border-right-width: 22px;border-bottom-width: 0px;margin-bottom: 0;padding-bottom: 0;width: 100%;margin-top: 0;margin-left: 0;margin-right: 0;">
-            <div class="col-md-6 col-xl-6" style="border-radius: -9px;border-top-left-radius: 0px;border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;border-width: 6px;border-right-width: 26px;border-right-color: var(--bs-dark);border-bottom-width: 6px;padding-right: 0;padding-left: 0;margin-right: 0;box-shadow: 20px 20px 10px 0px rgba(0,0,0,0.5);max-width: 440px;margin-top: 0;">
+            <div class="col-md-6 col-xl-6" style="border-radius: -9px;border-top-left-radius: 0px;border-bottom-right-radius: 20px;border-bottom-left-radius: 20px;border-width: 6px;border-right-width: 26px;border-right-color: var(--bs-dark);border-bottom-width: 6px;padding-right: 0;padding-left: 0;margin-right: 0;box-shadow: 20px 20px 10px 0px rgba(0,0,0,0.5);max-width: 440px;margin-top: 0;">
                 <h4 style="background: var(--bs-primary);line-height: 11.9px;border-radius: 10px;border-bottom-right-radius: 0;border-bottom-left-radius: 0;font-weight: bold;margin-bottom: 0;height: 71px;border-top-right-radius: 20px;border-top-left-radius: 20px;"><br><br> <br> Outils collaboratifs <br> <br><br></h4>
-                <div style="z-index: 10;background-color: white;color: var(--bs-dark);"><img src="assets/img/Nextcloud_Logo.svg">
+                <div style="z-index: 10;background-color: white;color: var(--bs-dark);"><img src="{{ Vite::asset('resources/images/nextcloud.png') }}">
                     <h6 style="color: var(--bs-dark);font-weight: bold;font-size: 11.4px;margin-bottom: 0;">NextCloud 24<br></h6>
                     <p style="margin-bottom: 0;padding-bottom: 40px;border-bottom-right-radius: 0px;"><br>Nextcloud est un logiciel libre offrant une plateforme de partage de <br>documents avancés qui vous offre un contrôle total sur vos paramètres de<br> partage de fichiers. Il se présente comme une alternative à Google <br>docs.<br></p>
                 </div>
-                <div style="z-index: 10;color: var(--bs-dark);border-radius: 10px;border-bottom-left-radius: 20px;border-bottom-right-radius: 20px;border-width: 7px;background: var(--bs-white);border-top-right-radius: 0;border-top-left-radius: 0;"><img src="assets/img/pydio.png">
+                <div style="z-index: 10;color: var(--bs-dark);border-radius: 10px;border-bottom-left-radius: 20px;border-bottom-right-radius: 20px;border-width: 7px;background: var(--bs-white);border-top-right-radius: 0;border-top-left-radius: 0;"><img src="{{ Vite::asset('resources/images/pydio.png') }}">
                     <h6 style="color: var(--bs-dark);font-weight: bold;font-size: 11.4px;margin-bottom: 0;">Pydio 8</h6>
                     <p style="padding-bottom: 20px;border-radius: 255px;border-bottom-right-radius: 32;border-bottom-left-radius: 25;border-width: 0;border-right-width: 49px;margin: 0;"><br>Pydio est un logiciel libre offrant une plateforme de services de <br>stockage et de partage de fichiers. Il se présente également comme une <br>alternative à Dropbox.<br></p>
                 </div>
@@ -185,7 +185,7 @@
         </div>
     </div>
 </div>
-<div class="d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center" style="position: relative;background: url(&quot;assets/img/service-fichier-owncloud2.jpg&quot;) center / cover no-repeat;width: 100%;height: 750px;">
+<div class="d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center" style="position: relative;background: url('{{ Vite::asset("resources/images/service-fichier-owncloud2.jpg") }}') center / cover no-repeat;width: 100%;height: 750px;">
     <div class="d-xl-flex flex-column align-items-xl-center" style="text-align: center;border-radius: 20px;max-width: 816px;/*margin-right: auto;*//*margin-left: auto;*/border: 2px solid var(--bs-secondary);/*margin-bottom: 40px;*/padding: 20px;position: relative;padding-right: 20px;z-index: 2;width: 80%;">
         <h2 id="h3" style="line-height: 69.56px;color: rgb(255,255,255);font-weight: bold;">Déjà 14 années d'expérience dans la sauvegarde en ligne<br></h2>
         <p class="fs-5" style="line-height: 29.04px;color: rgb(255,255,255);padding: 10px 0;">Identifiez vos besoins en matière de sauvegarde ou de partage de données et si besoin, <br>Contactez- nous par mail ou par téléphone pour vous assister et vous proposer la solution la plus adaptée à vos attentes.<br></p><button class="btn btn-primary btn-lg" type="button" style="background: var(--bs-secondary);color: rgb(255,255,255);font-weight: bold;">Demande d'informations</button>
