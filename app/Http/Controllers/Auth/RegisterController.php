@@ -94,7 +94,7 @@ class RegisterController extends Controller
         session()->flash('registration_data', $registration_data);
 
         // Generate the QR image. This is the image the user will scan with their app
-     // to set up two factor authentication
+        // to set up two factor authentication
         $QR_Image = $google2fa->getQRCodeInline(
             config('app.name'),
             $registration_data['email'],

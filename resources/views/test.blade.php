@@ -45,24 +45,17 @@
         </div>
         <div class="row mt-4">
             <div class="col">
-                <div class="row">
-                    <div class="col d-flex flex-nowrap">
-                        <!--<span class="offer_legend1">1</span>-->
-                        <span class="offer_legend2 align-self-center">Choisissez votre formule<br></span>
-                    </div>
-                </div>
                 <div class="row pt-2 offer_content pb-2">
                     <div class="col">
                         <div class="row">
                             <div class="col">
-                                <span>Votre niveau de disponibilité<br><br>Toutes vos données fragmentées
-                                    puis
-                                    copiées et réparties sur différents serveurs et Datacenter selon le niveau de
-                                    disponibilité choisi. <a class="text-secondary"
-                                        href="https://www.dedikam.com/lexique/#niveaux" target="_blank">En savoir
-                                        plus</a></span>
-
-                                <div class="row row-cols-2 row-cols-lg-4">
+                                <h1 class="pricing headline text-center" style="font-family: Roboto, sans-serif;">Choisissez
+                                    votre formule</h1>
+                                <h3 class="pricing-sub-headline text-center">Toutes vos données fragmentées, copiées et
+                                    réparties sur différents serveurs et Datacenters selon le niveau de disponibilité
+                                    choisi. <a class="text-secondary" href="https://www.dedikam.com/lexique/#niveaux"
+                                        target="_blank">En savoir plus</a></h3>
+                                {{-- <div class="row row-cols-2 row-cols-lg-4">
                                     <div class="col hover offre selected">
                                         <div class="row" style="height: 2rem;">
                                             <div class="col offre_n1 offer_hf activated">
@@ -243,6 +236,173 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div> --}}
+                                <div class="col comparison">
+                                    <table>
+                                        <colgroup>
+                                            <col>
+                                            <col class="offer">
+                                            <col class="offer selected">
+                                            <col class="offer">
+                                            <col class="offer">
+                                        </colgroup>
+                                        <thead>
+                                            <tr class="price-header">
+                                                <th class="tl tl2" valign="bottom"></th>
+                                                <th class="qbse qbse-first">
+                                                    <h3> BASIQUE </h3>
+                                                    <p>Données regroupées sur 1 serveur</p>
+                                                </th>
+                                                <th class="qbse qbse-second">
+                                                    <h3> STANDARD </h3>
+                                                    <p>Données réparties sur 2 serveurs</p>
+                                                </th>
+                                                <th class="qbse qbse-third">
+                                                    <h3> ENTREPRISE </h3>
+                                                    <p>Données réparties sur 3 serveurs et 2 datacenters</p>
+                                                </th>
+                                                <th class="qbse qbse-last">
+                                                    <h3> DÉDIÉ </h3>
+                                                    <p>Données réparties sur 3 serveurs et 2 datacenters</p>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td></td>
+                                                <td colspan="3">Pydio</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Pydio</td>
+                                                <td class="checked"><i class="fa-solid fa-check"></i></td>
+                                                <td class="checked"><i class="fa-solid fa-check"></i></td>
+                                                <td class="checked"><i class="fa-solid fa-check"></i></td>
+                                                <td rowspan="11">
+                                                    <div class="form-check d-flex justify-content-center">
+                                                        <input class="form-check-input me-2" type="radio" id="formCheck-2"
+                                                            name="form_ded_option" value="nextcloud" checked>
+                                                        <label class="form-check-label" for="formCheck-2">Nextcloud</label>
+                                                    </div>
+                                                    <div class="form-check d-flex justify-content-center">
+                                                        <input class="form-check-input me-2" type="radio" id="formCheck-2"
+                                                            name="form_ded_option" value="pydio">
+                                                        <label class="form-check-label" for="formCheck-2">Pydio</label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td colspan="3">NextCloud</td>
+                                            </tr>
+                                            <tr>
+                                                <td>NextCloud</td>
+                                                <td class="checked"><i class="fa-solid fa-check"></i></td>
+                                                <td class="checked"><i class="fa-solid fa-check"></i></td>
+                                                <td class="checked"><i class="fa-solid fa-check"></i></td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td colspan="3">SSH</td>
+                                            </tr>
+                                            <tr>
+                                                <td>SSH</td>
+                                                <td><i class="fa-solid fa-xmark"></i></td>
+                                                <td class="checked"><i class="fa-solid fa-check"></i></td>
+                                                <td class="checked"><i class="fa-solid fa-check"></i></td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td colspan="3">RSYNC sur SSH</td>
+                                            </tr>
+                                            <tr>
+                                                <td>RSYNC sur SSH</td>
+                                                <td><i class="fa-solid fa-xmark"></i></td>
+                                                <td class="checked"><i class="fa-solid fa-check"></i></td>
+                                                <td class="checked"><i class="fa-solid fa-check"></i></td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td colspan="3">SFTP</td>
+                                            </tr>
+                                            <tr>
+                                                <td>SFTP</td>
+                                                <td><i class="fa-solid fa-xmark"></i></td>
+                                                <td class="checked"><i class="fa-solid fa-check"></i></td>
+                                                <td class="checked"><i class="fa-solid fa-check"></i></td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td colspan="3">FTPS/FTP</td>
+                                            </tr>
+                                            <tr>
+                                                <td>FTPS/FTP</td>
+                                                <td><i class="fa-solid fa-xmark"></i></td>
+                                                <td class="checked"><i class="fa-solid fa-check"></i></td>
+                                                <td class="checked"><i class="fa-solid fa-check"></i></td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td colspan="3">iSCSI</td>
+                                            </tr>
+                                            <tr>
+                                                <td>iSCSI</td>
+                                                <td><i class="fa-solid fa-xmark"></i></td>
+                                                <td><i class="fa-solid fa-xmark"></i></td>
+                                                <td class="checked"><i class="fa-solid fa-check"></i></td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td colspan="3">CIFS</td>
+                                            </tr>
+                                            <tr>
+                                                <td>CIFS</td>
+                                                <td><i class="fa-solid fa-xmark"></i></td>
+                                                <td><i class="fa-solid fa-xmark"></i></td>
+                                                <td class="checked"><i class="fa-solid fa-check"></i></td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td colspan="3">WEBDAV</td>
+                                            </tr>
+                                            <tr>
+                                                <td>WEBDAV</td>
+                                                <td><i class="fa-solid fa-xmark"></i></td>
+                                                <td><i class="fa-solid fa-xmark"></i></td>
+                                                <td class="checked"><i class="fa-solid fa-check"></i></td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td colspan="3">SI</td>
+                                            </tr>
+                                            <tr>
+                                                <td>SI</td>
+                                                <td><i class="fa-solid fa-xmark"></i></td>
+                                                <td><i class="fa-solid fa-xmark"></i></td>
+                                                <td class="checked"><i class="fa-solid fa-check"></i></td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td class="options"></td>
+                                                <td class="package-btn pack-1"><a href="#"
+                                                        class="n-button n-button-grey button-offer">Choisir</a></td>
+                                                <td class="package-btn pack-2"><a href="#"
+                                                        class="n-button n-button-blue button-offer">Choisir</a></td>
+                                                <td class="package-btn pack-3"><a href="#"
+                                                        class="n-button n-button-purple button-offer">Choisir</a></td>
+                                                <td class="package-btn pack-4"><a href="#"
+                                                        class="n-button n-button-green button-offer">Choisir</a></td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -422,12 +582,32 @@
                     }, false)
                 })
 
-            const offres = document.querySelectorAll('.offre');
+            const offres = document.querySelectorAll('.offer');
+            const button_offer = document.querySelectorAll('.button-offer')
 
-            offres.forEach(offre => offre.addEventListener('click', function(){
+            const correspondance = {}
+
+            for (let i = 0; i < offres.length; i++) {
+                correspondance[offres[i]] = button_offer[i]
+            }
+
+            window.addEventListener('click', function() {
+                console.log(offres);
+                console.log(button_offer);
+                console.log(correspondance);
+            })
+
+            button_offer.forEach(bouton => bouton.addEventListener('click', function(e) {
+                e.preventDefault()
+                console.log(this.parentNode);
+                console.log(offres);
+                console.log(button_offer);
+            }))
+
+            offres.forEach(offre => offre.addEventListener('click', function() {
                 offres.forEach(offre => offre.classList.remove('selected'))
-                if(!this.classList.contains('selected')){
-                    this.classList.add('selected')                    
+                if (!this.classList.contains('selected')) {
+                    this.classList.add('selected')
                 } else {
                     this.classList.remove('selected')
                 }
