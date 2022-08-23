@@ -241,11 +241,23 @@ a.n-button {
     border-right : 1px solid #ccc !important;
 }
 
+#dedicated {
+    display: table-cell;
+}
+
 @media (max-width:767px) {
 
     .comparison td:first-child,
-    .comparison th:first-child {
+    .comparison th:first-child,
+    #dedicated {
         display: none;
+    }
+}
+
+@media (max-width:767px) {
+    #dedicated-small {
+        display: table-cell;
+        background: #fff;
     }
 }
 

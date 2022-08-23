@@ -239,13 +239,6 @@
                                 </div> --}}
                                 <div class="col comparison">
                                     <table>
-                                        <colgroup>
-                                            <col>
-                                            <col class="offer">
-                                            <col class="offer selected">
-                                            <col class="offer">
-                                            <col class="offer">
-                                        </colgroup>
                                         <thead>
                                             <tr class="price-header">
                                                 <th class="tl tl2" valign="bottom"></th>
@@ -271,22 +264,34 @@
                                             <tr>
                                                 <td></td>
                                                 <td colspan="3">Pydio</td>
+                                                <td rowspan="20" id="dedicated-small">
+                                                    <div class="form-check d-flex justify-content-center">
+                                                        <input class="form-check-input me-2" type="radio" id="dedicated-check"
+                                                            name="form_ded_option" value="nextcloud" checked>
+                                                        <label class="form-check-label" for="dedicated-check">Nextcloud</label>
+                                                    </div>
+                                                    <div class="form-check d-flex justify-content-center">
+                                                        <input class="form-check-input me-2" type="radio" id="dedicated-check"
+                                                            name="form_ded_option" value="pydio">
+                                                        <label class="form-check-label" for="dedicated-check">Pydio</label>
+                                                    </div>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>Pydio</td>
                                                 <td class="checked"><i class="fa-solid fa-check"></i></td>
                                                 <td class="checked"><i class="fa-solid fa-check"></i></td>
                                                 <td class="checked"><i class="fa-solid fa-check"></i></td>
-                                                <td rowspan="11">
+                                                <td rowspan="11" id="dedicated">
                                                     <div class="form-check d-flex justify-content-center">
-                                                        <input class="form-check-input me-2" type="radio" id="formCheck-2"
+                                                        <input class="form-check-input me-2" type="radio" id="dedicated-check"
                                                             name="form_ded_option" value="nextcloud" checked>
-                                                        <label class="form-check-label" for="formCheck-2">Nextcloud</label>
+                                                        <label class="form-check-label" for="fdedicated-check">Nextcloud</label>
                                                     </div>
                                                     <div class="form-check d-flex justify-content-center">
-                                                        <input class="form-check-input me-2" type="radio" id="formCheck-2"
+                                                        <input class="form-check-input me-2" type="radio" id="dedicated-check"
                                                             name="form_ded_option" value="pydio">
-                                                        <label class="form-check-label" for="formCheck-2">Pydio</label>
+                                                        <label class="form-check-label" for="dedicated-check">Pydio</label>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -389,19 +394,6 @@
                                                 <td class="checked"><i class="fa-solid fa-check"></i></td>
                                             </tr>
                                         </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <td class="options"></td>
-                                                <td class="package-btn pack-1"><a href="#"
-                                                        class="n-button n-button-grey button-offer">Choisir</a></td>
-                                                <td class="package-btn pack-2"><a href="#"
-                                                        class="n-button n-button-blue button-offer">Choisir</a></td>
-                                                <td class="package-btn pack-3"><a href="#"
-                                                        class="n-button n-button-purple button-offer">Choisir</a></td>
-                                                <td class="package-btn pack-4"><a href="#"
-                                                        class="n-button n-button-green button-offer">Choisir</a></td>
-                                            </tr>
-                                        </tfoot>
                                     </table>
                                 </div>
                             </div>
@@ -582,20 +574,12 @@
                     }, false)
                 })
 
-            const offres = document.querySelectorAll('.offer');
+            const offers = document.querySelectorAll('.offer');
             const button_offer = document.querySelectorAll('.button-offer')
 
-            const correspondance = {}
-
-            for (let i = 0; i < offres.length; i++) {
-                correspondance[offres[i]] = button_offer[i]
-            }
-
-            window.addEventListener('click', function() {
-                console.log(offres);
-                console.log(button_offer);
-                console.log(correspondance);
-            })
+            offers.forEach(offer => offer.addEventListener('click', function() {
+                console.log('click on column')
+            }))
 
             button_offer.forEach(bouton => bouton.addEventListener('click', function(e) {
                 e.preventDefault()
@@ -604,14 +588,14 @@
                 console.log(button_offer);
             }))
 
-            offres.forEach(offre => offre.addEventListener('click', function() {
-                offres.forEach(offre => offre.classList.remove('selected'))
-                if (!this.classList.contains('selected')) {
-                    this.classList.add('selected')
-                } else {
-                    this.classList.remove('selected')
-                }
-            }))
+            // offres.forEach(offre => offre.addEventListener('click', function() {
+            //     offres.forEach(offre => offre.classList.remove('selected'))
+            //     if (!this.classList.contains('selected')) {
+            //         this.classList.add('selected')
+            //     } else {
+            //         this.classList.remove('selected')
+            //     }
+            // }))
 
             // $(".slider").slider({
             //     min: 10,
