@@ -28,4 +28,9 @@ Route::middleware(['2fa'])->group(function () {
     })->name('2fa');
 });
 
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});
+
 Route::get('/test', [TestController::class, 'test'])->name('test');
