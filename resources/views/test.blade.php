@@ -20,7 +20,7 @@
     @endphp
 
 @section('content')
-    <div class="mt-4 container">
+    <div class="my-4 container">
         <form action="{{ url('member_accesses') }}" class="needs-validation" method="POST" novalidate>@csrf
             <div class="row">
                 <div class="col px-sm-0">
