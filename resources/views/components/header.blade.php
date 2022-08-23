@@ -14,7 +14,7 @@
                     </li>
                     <li class="nav-item dropdown"><a class="dropdown-toggle nav-link text-dedikam" aria-expanded="false" data-bs-toggle="dropdown" href="#">dedikam</a>
                         <div class="dropdown-menu"><a class="dropdown-item" href="#">Mon compte</a><a class="dropdown-item" href="#">Mes accès</a><a class="dropdown-item" href="#">Ouvrir un ticket</a>
-                            <div class="dropdown-divider"></div><a class="dropdown-item" href="#">De déconnecter</a>
+                            <div class="dropdown-divider"></div><a class="dropdown-item" href="#">Se déconnecter</a>
                         </div>
                     </li>
                     <li class="nav-item d-flex flex-fill"><a class="nav-link btn btn-primary text-white font-weight-bold d-block px-2">Se connecter</a></li>
