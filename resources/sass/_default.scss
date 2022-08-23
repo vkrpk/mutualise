@@ -18,17 +18,12 @@ body {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-.bg-dedikam {
-  background-color: #141e28;
-}
-
-.text-dedikam {
-  color: #74ba58 !important;
-}
+/* Bootstrap override */
 
 .btn {
   color: white !important;
 }
+
 
 .btn-primary {
   background-color: $primary;
@@ -40,10 +35,25 @@ body {
   border-color: $secondary;
 }
 
+.form-check-input:checked {
+  background-color: $secondary !important;
+  border-color: $secondary !important;
+}
+
+/* Custom */
+
+.bg-dedikam {
+  background-color: #141e28;
+}
+
+.text-dedikam {
+  color: #74ba58 !important;
+}
+
 .hover:hover {
   transform: scale(1.25);
 }
 
 .selected {
-  background-color: $primary;
+  border: 3px solid $secondary;
 }
