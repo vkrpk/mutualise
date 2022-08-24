@@ -6,7 +6,7 @@
         <h1 style="text-align: center;font-weight: bold;padding-right: 30px;padding-left: 30px;margin-top: 30px;">SAUVEGARDE ET PARTAGE DE DONNÉES EN LIGNE<br /></h1>
         <h4 class="text-center" style="--bs-body-font-weight: normal;margin-bottom: 20px;--bs-body-bg: #590cd7;"><br /> PLATEFORME COLLABORATIVE - ESPACE DE TRAVAIL NUMERIQUE<br /><br /></h4>
         <div class="container">
-            <div class="row" style="background: url('Data-Center.jpg');">
+            <div class="row" style="background: url('{{ Vite::asset("resources/images/Data-Center.jpg") }}') center / cover no-repeat;">
                 <div class="col-md-6" style="height: 120px;">
                     <h5 style="margin-top: 15px;">Services mutualisés<br /></h5><button class="btn btn-primary" type="button" style="background: var(--bs-secondary);color: rgb(255,255,255);border-style: none;border-right-style: none;margin: 10px 0;font-weight: bold;">DECOUVRIR</button>
                 </div>
