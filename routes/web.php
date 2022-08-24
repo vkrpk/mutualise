@@ -25,7 +25,11 @@ Route::group(['prefix' => 'admin'], function () {
 });
 
 
-Route::get('/profil', [App\Http\Controllers\Auth\ProfilViewController::class, 'index'],)->name('profilView');
+Route::get('/profil', [App\Http\Controllers\Auth\ProfilViewController::class, 'index'])->name('profilIndex');
+Route::get('/billing', [App\Http\Controllers\Auth\ProfilViewController::class, 'billing'])->name('profilBilling');
+Route::get('/security', [App\Http\Controllers\Auth\ProfilViewController::class, 'security'])->name('profilSecurity');
+Route::get('/notifications', [App\Http\Controllers\Auth\ProfilViewController::class, 'notifications'])->name('profilNotifications');
+
 Route::get('/test', [TestController::class, 'test'])->name('test');
 
 Route::group(['prefix'=>'2fa'], function(){
@@ -44,3 +48,7 @@ Route::group(['prefix'=>'2fa'], function(){
 Route::get('/test_middleware', function () {
     return "2FA middleware work!";
 })->middleware(['auth', '2fa']);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

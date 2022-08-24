@@ -17,7 +17,10 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    @vite(['resources/js/app.js'])
+
+    @yield('css')
+
 </head>
 
 <body>
@@ -30,5 +33,5 @@
 
     @stack('scripts')
 </body>
-
+{{-- <script src="{{ Vite::asset('public/build/app.js') }}"></script> --}}
 </html>
