@@ -58,9 +58,4 @@ class User extends \TCG\Voyager\Models\User
     {
         return decrypt($value);
     }
-
-    public function loginSecurity()
-    {
-        return $this->hasOne(LoginSecurity::class);
-    }
 }
