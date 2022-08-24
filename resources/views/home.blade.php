@@ -2,22 +2,22 @@
 
 @section('content')
 <div class="d-flex flex-column" style="position: relative;background: url('{{ Vite::asset("resources/images/service-sauvegarde-stockage-owncloud.jpeg") }}') center / cover no-repeat, rgba(20,30,40,0);display: flex;opacity: 1;min-height: 200px;color: var(--bs-light);text-align: center;padding: 0;line-height: 100%;margin-top: 0;margin-right: auto;margin-left: auto;z-index: 2;">
-    <div class="d-flex flex-column justify-content-around" style="max-width: 700px;margin-left: auto;margin-right: auto;padding-bottom: 40px;display: flex;">
-        <h1 style="text-align: center;font-weight: bold;padding-right: 30px;padding-left: 30px;margin-top: 30px;">SAUVEGARDE ET PARTAGE DE DONNÉES EN LIGNE<br></h1>
-        <h4 class="text-center" style="--bs-body-font-weight: normal;margin-bottom: 20px;--bs-body-bg: #590cd7;"><br> PLATEFORME COLLABORATIVE - ESPACE DE TRAVAIL NUMERIQUE<br><br></h4>
+    <div class="d-flex flex-column justify-content-around" style="max-width: 700px;margin-left: auto;margin-right: auto;padding-bottom: 40px;display: flex;position: relative;">
+        <h1 style="text-align: center;font-weight: bold;padding-right: 30px;padding-left: 30px;margin-top: 30px;">SAUVEGARDE ET PARTAGE DE DONNÉES EN LIGNE<br /></h1>
+        <h4 class="text-center" style="--bs-body-font-weight: normal;margin-bottom: 20px;--bs-body-bg: #590cd7;"><br /> PLATEFORME COLLABORATIVE - ESPACE DE TRAVAIL NUMERIQUE<br /><br /></h4>
         <div class="container">
-            <div class="row" style="background: url('{{ Vite::asset("resources/images/Data-Center.jpg") }}');">
+            <div class="row" style="background: url('{{ Vite::asset("resources/images/Data-Center.jpg") }}') center / cover no-repeat;">
                 <div class="col-md-6" style="height: 120px;">
-                    <h5 style="margin-top: 15px;">Services mutualisés<br></h5><button class="btn btn-primary" type="button" style="background: var(--bs-secondary);color: rgb(255,255,255);border-style: none;border-right-style: none;margin: 10px 0;font-weight: bold;">DECOUVRIR</button>
+                    <h5 style="margin-top: 15px;">Services mutualisés<br /></h5><button class="btn btn-primary" type="button" style="background: var(--bs-secondary);color: rgb(255,255,255);border-style: none;border-right-style: none;margin: 10px 0;font-weight: bold;">DECOUVRIR</button>
                 </div>
                 <div class="col-md-6" style="height: 120px;">
-                    <h5 style="margin-top: 15px;">Services dédiés<br></h5><button class="btn btn-primary" type="button" style="background: var(--bs-secondary);color: rgb(255,255,255);border-style: none;border-right-style: none;margin: 10px 0;font-weight: bold;">DECOUVRIR</button>
+                    <h5 style="margin-top: 15px;">Services dédiés<br /></h5><button class="btn btn-primary" type="button" style="background: var(--bs-secondary);color: rgb(255,255,255);border-style: none;border-right-style: none;margin: 10px 0;font-weight: bold;">DECOUVRIR</button>
                 </div>
             </div>
         </div>
-        <h4 class="text-center" style="letter-spacing: 0px;width: auto;height: auto;margin-top: 30px;margin-bottom: 30px;">DediKam est une association, indépendante sans publicité, totalement transparente et non lucrative. Nous offrons divers outils collaboratifs pour tout type d’utilisateurs, du particulier au professionnel<br></h4>
-        <h4 class="text-uppercase text-center" data-bss-hover-animate="pulse" style="height: auto;display: inline-block;text-align: center;line-height: 2px;color: var(--bs-secondary);font-weight: bold;text-decoration: underline;letter-spacing: 2px;margin-top: 15px;margin-bottom: 15px;"><br><a href="https://www.dedikam.com/qui-sommes-nous/"> </a><br> <br> <br> <br>Qui sommes nous ?<br></h4>
-        <div id="content" style="position: absolute;background: #141e28;display: block;opacity: 0.58;max-height: 600px;min-height: 200px;color: var(--bs-light);top: 0;z-index: -1;height: 100%;width: 100%;max-width: 900px;"></div>
+        <h4 class="text-center" style="letter-spacing: 0px;width: auto;height: auto;margin-top: 30px;margin-bottom: 30px;">DediKam est une association, indépendante sans publicité, totalement transparente et non lucrative. Nous offrons divers outils collaboratifs pour tout type d’utilisateurs, du particulier au professionnel<br /></h4>
+        <h4 class="text-uppercase text-center" style="height: auto;display: block;text-align: center;line-height: 2px;color: var(--bs-secondary);font-weight: bold;text-decoration: underline;letter-spacing: 2px;margin-top: 15px;margin-bottom: 15px;"><br /><a href="https://www.dedikam.com/qui-sommes-nous/"> </a><br /><br /><br /><br />Qui sommes nous ?<br /></h4>
+        <div id="content" style="position: absolute;background: #141e28;display: block;opacity: 0.58;min-height: 200px;color: var(--bs-light);top: 0;z-index: -1;height: 100%;width: 100%;max-width: 900px;"></div>
     </div>
 </div>
 <div style="/*background: var(--bs-secondary);*/text-align: center;position: relative;padding-bottom: 40px;height: auto;background-image: linear-gradient(180deg, #fe7e20 0%, #74ba58 100%);--bs-primary: #74ba58;--bs-primary-rgb: 116,186,88;--bs-secondary: #fe7e20;--bs-secondary-rgb: 254,126,32;">
