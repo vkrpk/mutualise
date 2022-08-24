@@ -33,4 +33,12 @@ Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
 
+
+Route::get('/2fa/enable', 'Google2FAController@enableTwoFactor');
+Route::get('/2fa/disable', 'Google2FAController@disableTwoFactor');
+Route::get('/2fa/validate', 'AuthAuthController@getValidateToken');
+Route::post('/2fa/validate', ['middleware' => 'throttle:5', 'uses' => 'AuthAuthController@postValidateToken']);
+
+Route::get('/profil', [App\Http\Controllers\Auth\ProfilViewController::class, 'index'],)->name('profilView');
 Route::get('/test', [TestController::class, 'test'])->name('test');
+
