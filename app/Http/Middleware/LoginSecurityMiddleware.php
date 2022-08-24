@@ -25,3 +25,4 @@ class LoginSecurityMiddleware
         return $authenticator->makeRequestOneTimePasswordResponse();
     }
 }
+

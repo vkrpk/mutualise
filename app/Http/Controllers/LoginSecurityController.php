@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\LoginSecurity;
 use Auth;
 use Hash;
+use App\LoginSecurity;
 use Illuminate\Http\Request;
+use App\Models\LoginSecurity as login;
 
 class LoginSecurityController extends Controller
 {
@@ -55,7 +56,7 @@ class LoginSecurityController extends Controller
         $google2fa = (new \PragmaRX\Google2FAQRCode\Google2FA());
 
         // Add the secret key to the registration data
-        $login_security = LoginSecurity::firstOrNew(array('user_id' => $user->id));
+        $login_security = login::firstOrNew(array('user_id' => $user->id));
         $login_security->user_id = $user->id;
         $login_security->google2fa_enable = 0;
         $login_security->google2fa_secret = $google2fa->generateSecretKey();
