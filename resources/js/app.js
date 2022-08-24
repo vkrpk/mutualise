@@ -1,6 +1,7 @@
 // Import our custom CSS
-import "../css/bootstrap.min.css";
 import "../sass/app.scss";
+import "../css/bootstrap.min.css";
+import "../css/app.css";
 import "../css/home.css";
 import "../css/Footer-Basic.css";
 import "../css/dh-header-cover-image-button.css";
