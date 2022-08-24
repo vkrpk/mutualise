@@ -6,20 +6,59 @@
 
 body {
     margin: 0;
+    display: flex;
+    flex-flow: column;
+    min-height: 100vh;
     font-family: var(--bs-font-sans-serif);
     font-size: 0.9rem;
     font-weight: 400;
     line-height: 1.6;
     color: #212529;
-    background-color: #f8fafc;
+    // background-color: #f8fafc;
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
+
+/* Bootstrap override */
+
+.btn {
+  color: white !important;
+}
+
+
+.btn-primary {
+  background-color: $primary;
+  border-color: $primary;
+}
+
+.btn-secondary {
+  background-color: $secondary-light;
+  border-color: $secondary-light;
+}
+
+.form-check-input:checked {
+  background-color: $secondary-light !important;
+  border-color: $secondary-light !important;
+}
+
+/* Custom */
 
 .bg-dedikam {
     background-color: #141e28;
 }
 
 .text-dedikam {
-    color: #74ba58 !important;
+  color: #74ba58 !important;
+}
+
+.hover:hover {
+  transform: scale(1.25);
+}
+
+.selectable {
+  cursor: pointer;
+}
+
+.content {
+  flex-grow: 1;
 }

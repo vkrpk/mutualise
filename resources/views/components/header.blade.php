@@ -18,7 +18,10 @@
                     @else
                         {{-- dedikam --}}
                         <li class="nav-item"><a class="nav-link active text-dedikam" href="#">← Retour</a></li>
+
                         <li class="nav-item"><a href="{{route('profilView')}}">Profil</a></li>
+                        <li class="nav-item"></li>
+
                         <li class="nav-item"></li>
                         <li class="nav-item"></li>
                         <li class="nav-item"><a class="nav-link text-dedikam" href="#">Services</a></li>

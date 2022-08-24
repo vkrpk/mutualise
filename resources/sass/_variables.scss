@@ -9,3 +9,5 @@ $line-height-base: 1.6;
 //
 $primary: #74ba58;
 $secondary: #fe7e20;
+
+$secondary-light: lighten($secondary, 20%);
