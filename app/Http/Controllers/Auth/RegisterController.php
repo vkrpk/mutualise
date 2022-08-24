@@ -25,8 +25,8 @@ class RegisterController extends Controller
 
     use RegistersUsers {
         // We are doing this so the predefined register method does not clash with the one we just defined.
-          register as registration;
-      }
+        register as registration;
+    }
 
     /**
      * Where to redirect users after registration.
@@ -106,11 +106,11 @@ class RegisterController extends Controller
     }
 
     public function completeRegistration(Request $request)
-      {
-          // add the session data back to the request input
-          $request->merge(session('registration_data'));
+    {
+        // add the session data back to the request input
+        $request->merge(session('registration_data'));
 
-          // Call the default laravel authentication
-          return $this->registration($request);
-      }
+        // Call the default laravel authentication
+        return $this->registration($request);
+    }
 }

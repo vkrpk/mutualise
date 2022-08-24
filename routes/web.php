@@ -34,3 +34,20 @@ Route::group(['prefix' => 'admin'], function () {
 });
 
 Route::get('/test', [TestController::class, 'test'])->name('test');
+
+Route::group(['prefix' => '2fa'], function () {
+    Route::get('/', '\App\Http\Controllers\LoginSecurityController@show2faForm');
+    Route::post('/generateSecret', '\App\Http\Controllers\LoginSecurityController@generate2faSecret')->name('generate2faSecret');
+    Route::post('/enable2fa', '\App\Http\Controllers\LoginSecurityController@enable2fa')->name('enable2fa');
+    Route::post('/disable2fa', '\App\Http\Controllers\LoginSecurityController@disable2fa')->name('disable2fa');
+
+    // 2fa middleware
+    Route::post('/2faVerify', function () {
+        return redirect(URL()->previous());
+    })->name('2faVerify')->middleware('2fa');
+});
+
+// test middleware
+Route::get('/test_middleware', function () {
+    return "2FA middleware work!";
+})->middleware(['auth', '2fa']);

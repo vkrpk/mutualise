@@ -46,11 +46,16 @@ class User extends \TCG\Voyager\Models\User
 
     public function setGoogle2faSecretAttribute($value)
     {
-         $this->attributes['google2fa_secret'] = encrypt($value);
+        $this->attributes['google2fa_secret'] = encrypt($value);
     }
 
     public function getGoogle2faSecretAttribute($value)
     {
         return decrypt($value);
+    }
+
+    public function loginSecurity()
+    {
+        return $this->hasOne(LoginSecurity::class);
     }
 }
