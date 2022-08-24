@@ -33,13 +33,20 @@ Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
 
+
+Route::get('/2fa/enable', 'Google2FAController@enableTwoFactor');
+Route::get('/2fa/disable', 'Google2FAController@disableTwoFactor');
+Route::get('/2fa/validate', 'AuthAuthController@getValidateToken');
+Route::post('/2fa/validate', ['middleware' => 'throttle:5', 'uses' => 'AuthAuthController@postValidateToken']);
+
+Route::get('/profil', [App\Http\Controllers\Auth\ProfilViewController::class, 'index'],)->name('profilView');
 Route::get('/test', [TestController::class, 'test'])->name('test');
 
-Route::group(['prefix' => '2fa'], function () {
-    Route::get('/', '\App\Http\Controllers\LoginSecurityController@show2faForm');
-    Route::post('/generateSecret', '\App\Http\Controllers\LoginSecurityController@generate2faSecret')->name('generate2faSecret');
-    Route::post('/enable2fa', '\App\Http\Controllers\LoginSecurityController@enable2fa')->name('enable2fa');
-    Route::post('/disable2fa', '\App\Http\Controllers\LoginSecurityController@disable2fa')->name('disable2fa');
+Route::group(['prefix'=>'2fa'], function(){
+    Route::get('/','App\Http\Controllers\LoginSecurityController@show2faForm');
+    Route::post('/generateSecret','App\Http\Controllers\LoginSecurityController@generate2faSecret')->name('generate2faSecret');
+    Route::post('/enable2fa','App\Http\Controllers\LoginSecurityController@enable2fa')->name('enable2fa');
+    Route::post('/disable2fa','App\Http\Controllers\LoginSecurityController@disable2fa')->name('disable2fa');
 
     // 2fa middleware
     Route::post('/2faVerify', function () {
