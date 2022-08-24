@@ -21,7 +21,6 @@ class User extends \TCG\Voyager\Models\User
         'name',
         'email',
         'password',
-        'google2fa_secret'
     ];
 
     /**
@@ -32,7 +31,6 @@ class User extends \TCG\Voyager\Models\User
     protected $hidden = [
         'password',
         'remember_token',
-        'google2fa_secret'
     ];
 
     /**
@@ -49,13 +47,4 @@ class User extends \TCG\Voyager\Models\User
     return $this->hasOne(LoginSecurity::class);
     }
 
-    public function setGoogle2faSecretAttribute($value)
-    {
-         $this->attributes['google2fa_secret'] = encrypt($value);
-    }
-
-    public function getGoogle2faSecretAttribute($value)
-    {
-        return decrypt($value);
-    }
 }

@@ -19,7 +19,6 @@ Route::redirect('/', '/login', 301);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/complete-registration', [App\Http\Controllers\Auth\RegisterController::class, 'completeRegistration'])->name('complete-registration');
 
 Route::middleware(['2fa'])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'],)->name('home');
