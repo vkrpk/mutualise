@@ -7,13 +7,20 @@ use Illuminate\View\Component;
 class navbar extends Component
 {
     /**
+     * Route
+     * 
+     * @var string
+     */
+    public $route;
+
+    /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($route)
     {
-        //
+        $this->route = $route;
     }
 
     /**
