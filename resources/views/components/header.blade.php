@@ -3,10 +3,10 @@
         <div class="container">
             <a class="navbar-brand" href="{{ route('home') }}"><img
                     src="{{ Vite::asset('resources/images/logo.png') }}"></a>
-                    <button data-bs-toggle="collapse"
-                class="navbar-toggler" data-bs-target="#navcol-1">
+            <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
                 <div id="nav-icon"><span></span><span></span><span></span></div>
             </button>
+            <p>{{ Voyager::routes() }}</p>
             <div class="collapse navbar-collapse justify-content-end" id="navcol-1">
                 <ul class="navbar-nav">
                     @guest
@@ -23,7 +23,8 @@
                         @endif
                     @else
                         {{-- dedikam --}}
-                        <li class="nav-item"><a class="nav-link active text-dedikam" href="{{ request()->headers->get('referer') }}">← Retour</a></li>
+                        <li class="nav-item"><a class="nav-link active text-dedikam"
+                                href="{{ request()->headers->get('referer') }}">← Retour</a></li>
 
                         <li class="nav-item"></li>
 
@@ -39,9 +40,16 @@
                         </li>
                         <li class="nav-item dropdown"><a class="dropdown-toggle nav-link text-dedikam" aria-expanded="false"
                                 data-bs-toggle="dropdown" href="#">{{ Auth::user()->name }}</a>
-                            <div class="dropdown-menu"><a class="dropdown-item" href="{{ route('profilIndex') }}">Mon compte</a><a
-                                    class="dropdown-item" href="#">Mes accès</a><a class="dropdown-item"
-                                    href="#">Ouvrir un ticket</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="{{ route('profilIndex') }}">Mon
+                                    compte</a><a class="dropdown-item" href="#">Mes accès</a>
+                                <a class="dropdown-item" href="#">Ouvrir un ticket</a>
+                                @if (Auth::user()->role_id === 1)
+                                    <div class="dropdown-divider"></div>
+                                    <span class="dropdown-header">Admin</span>
+                                    <a class="dropdown-item" href="{{ url('admin') }}">Voyager : index</a>
+                                    <a class="dropdown-item" href="{{ url('admin/users') }}">Voyager : users</a>
+                                @endif
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
