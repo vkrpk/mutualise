@@ -20,7 +20,7 @@
 
                         Enter the pin from Google Authenticator app:<br/><br/>
                         <form class="form-horizontal" action="{{ route('2faVerify') }}" method="POST">
-                            {{ csrf_field() }}
+                            @csrf
                             <div class="form-group{{ $errors->has('one_time_password-code') ? ' has-error' : '' }}">
                                 <label for="one_time_password" class="control-label">One Time Password</label>
                                 <input id="one_time_password" name="one_time_password" class="form-control col-md-4"  type="text" required/>

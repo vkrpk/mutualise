@@ -21,7 +21,7 @@
 
                         @if($data['user']->loginSecurity == null)
                             <form class="form-horizontal" method="POST" action="{{ route('generate2faSecret') }}">
-                                {{ csrf_field() }}
+                                @csrf
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary">
                                         Generate Secret Key to Enable 2FA
@@ -30,11 +30,11 @@
                             </form>
                         @elseif(!$data['user']->loginSecurity->google2fa_enable)
                             1. Scan this QR code with your Google Authenticator App. Alternatively, you can use the code: <code>{{ $data['secret'] }}</code><br/>
-                            <img src="{{$data['google2fa_url'] }}" alt="">
-                            <br/><br/>
+                            <div>{!! $data['google2fa_url'] !!}</div>
+                            <br/>
                             2. Enter the pin from Google Authenticator app:<br/><br/>
                             <form class="form-horizontal" method="POST" action="{{ route('enable2fa') }}">
-                                {{ csrf_field() }}
+                                @csrf
                                 <div class="form-group{{ $errors->has('verify-code') ? ' has-error' : '' }}">
                                     <label for="secret" class="control-label">Authenticator Code</label>
                                     <input id="secret" type="password" class="form-control col-md-4" name="secret" required>
@@ -54,7 +54,7 @@
                             </div>
                             <p>If you are looking to disable Two Factor Authentication. Please confirm your password and Click Disable 2FA Button.</p>
                             <form class="form-horizontal" method="POST" action="{{ route('disable2fa') }}">
-                                {{ csrf_field() }}
+                                @csrf
                                 <div class="form-group{{ $errors->has('current-password') ? ' has-error' : '' }}">
                                     <label for="change-password" class="control-label">Current Password</label>
                                         <input id="current-password" type="password" class="form-control col-md-4" name="current-password" required>
