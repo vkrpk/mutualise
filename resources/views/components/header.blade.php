@@ -25,7 +25,6 @@
                         {{-- dedikam --}}
                         <li class="nav-item"><a class="nav-link active text-dedikam" href="#">← Retour</a></li>
 
-                        <li class="nav-item"><a href="{{ route('profilView') }}">Profil</a></li>
                         <li class="nav-item"></li>
 
                         <li class="nav-item"></li>
@@ -40,7 +39,7 @@
                         </li>
                         <li class="nav-item dropdown"><a class="dropdown-toggle nav-link text-dedikam" aria-expanded="false"
                                 data-bs-toggle="dropdown" href="#">{{ Auth::user()->name }}</a>
-                            <div class="dropdown-menu"><a class="dropdown-item" href="#">Mon compte</a><a
+                            <div class="dropdown-menu"><a class="dropdown-item" href="{{ route('profilIndex') }}">Mon compte</a><a
                                     class="dropdown-item" href="#">Mes accès</a><a class="dropdown-item"
                                     href="#">Ouvrir un ticket</a>
                                 <div class="dropdown-divider"></div>

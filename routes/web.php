@@ -49,6 +49,3 @@ Route::get('/test_middleware', function () {
     return "2FA middleware work!";
 })->middleware(['auth', '2fa']);
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

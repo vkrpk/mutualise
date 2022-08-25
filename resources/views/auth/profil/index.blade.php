@@ -7,7 +7,7 @@
 @section('content')
     <div class="container-xl px-4 mt-4">
         <!-- Account page navigation-->
-        <x-navbar />
+        <x-navbar :route="$route"/>
         <hr class="mt-0 mb-4">
         <div class="row">
             <div class="col-xl-4">
@@ -36,7 +36,7 @@
                                 <label class="small mb-1" for="inputUsername">Username (how your name will appear to other
                                     users on the site)</label>
                                 <input class="form-control" id="inputUsername" type="text"
-                                    placeholder="Enter your username" value="username">
+                                    placeholder="Enter your username" value="{{ $user->name }}">
                             </div>
                             <!-- Form Row-->
                             <div class="row gx-3 mb-3">
@@ -44,13 +44,13 @@
                                 <div class="col-md-6">
                                     <label class="small mb-1" for="inputFirstName">First name</label>
                                     <input class="form-control" id="inputFirstName" type="text"
-                                        placeholder="Enter your first name" value="Valerie">
+                                        placeholder="Enter your first name" value="">
                                 </div>
                                 <!-- Form Group (last name)-->
                                 <div class="col-md-6">
                                     <label class="small mb-1" for="inputLastName">Last name</label>
                                     <input class="form-control" id="inputLastName" type="text"
-                                        placeholder="Enter your last name" value="Luna">
+                                        placeholder="Enter your last name" value="">
                                 </div>
                             </div>
                             <!-- Form Row        -->
@@ -59,20 +59,20 @@
                                 <div class="col-md-6">
                                     <label class="small mb-1" for="inputOrgName">Organization name</label>
                                     <input class="form-control" id="inputOrgName" type="text"
-                                        placeholder="Enter your organization name" value="Start Bootstrap">
+                                        placeholder="Enter your organization name" value="">
                                 </div>
                                 <!-- Form Group (location)-->
                                 <div class="col-md-6">
                                     <label class="small mb-1" for="inputLocation">Location</label>
                                     <input class="form-control" id="inputLocation" type="text"
-                                        placeholder="Enter your location" value="San Francisco, CA">
+                                        placeholder="Enter your location" value="">
                                 </div>
                             </div>
                             <!-- Form Group (email address)-->
                             <div class="mb-3">
                                 <label class="small mb-1" for="inputEmailAddress">Email address</label>
                                 <input class="form-control" id="inputEmailAddress" type="email"
-                                    placeholder="Enter your email address" value="name@example.com">
+                                    placeholder="Enter your email address" value="{{$user->email}}">
                             </div>
                             <!-- Form Row-->
                             <div class="row gx-3 mb-3">
@@ -80,13 +80,13 @@
                                 <div class="col-md-6">
                                     <label class="small mb-1" for="inputPhone">Phone number</label>
                                     <input class="form-control" id="inputPhone" type="tel"
-                                        placeholder="Enter your phone number" value="555-123-4567">
+                                        placeholder="Enter your phone number" value="">
                                 </div>
                                 <!-- Form Group (birthday)-->
                                 <div class="col-md-6">
                                     <label class="small mb-1" for="inputBirthday">Birthday</label>
                                     <input class="form-control" id="inputBirthday" type="text" name="birthday"
-                                        placeholder="Enter your birthday" value="06/10/1988">
+                                        placeholder="Enter your birthday" value="">
                                 </div>
                             </div>
                             <!-- Save changes button-->

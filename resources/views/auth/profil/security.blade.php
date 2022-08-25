@@ -7,7 +7,7 @@
 @section('content')
     <div class="container-xl px-4 mt-4">
         <!-- Account page navigation-->
-        <x-navbar/>
+        <x-navbar :route="$route"/>
         <hr class="mt-0 mb-4">
         <div class="row">
             <div class="col-lg-8">
