@@ -1,7 +1,7 @@
 <header>
     <nav class="navbar navbar-light navbar-expand-md navigation-clean-button navbar-fixed-top bg-dedikam text-dedikam">
         <div class="container">
-            <a class="navbar-brand" href="https://dedispace.dedikam.com/"><img
+            <a class="navbar-brand" href="{{ route('home') }}"><img
                     src="{{ Vite::asset('resources/images/logo.png') }}"></a>
                     <button data-bs-toggle="collapse"
                 class="navbar-toggler" data-bs-target="#navcol-1">
@@ -23,7 +23,7 @@
                         @endif
                     @else
                         {{-- dedikam --}}
-                        <li class="nav-item"><a class="nav-link active text-dedikam" href="#">← Retour</a></li>
+                        <li class="nav-item"><a class="nav-link active text-dedikam" href="{{ request()->headers->get('referer') }}">← Retour</a></li>
 
                         <li class="nav-item"></li>
 
