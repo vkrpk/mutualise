@@ -1,0 +1,41 @@
+.checkbox {
+    display: none;
+}
+
+.label {
+    display: inline-block;
+    height: 30px;
+    width: 50px;
+    background: gray;
+    position: relative;
+    transition: all 0.3s;
+    border-radius: 60px;
+    cursor: pointer;
+}
+
+.label::after {
+    content: "";
+    height: 20px;
+    width: 20px;
+    background: white;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    transition: all 0.3s;
+    border-radius: 50%;
+}
+
+.checkbox:checked+.label::after {
+    transform: translateX(20px);
+}
+
+.checkbox:checked+label {
+    background: green;
+}
+
+@media (min-width: 768px) and (max-width: 825px) {
+    label {
+      font-size: .8rem !important;
+    }
+  }
+  
