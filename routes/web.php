@@ -20,8 +20,7 @@ Route::redirect('/', '/home', 301);
 Auth::routes();
 Route::post('logout', 'App\Http\Controllers\Auth\LoginController@logout')->name('logout')->withoutMiddleware('2fa');
 
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->withoutMiddleware('auth');
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();

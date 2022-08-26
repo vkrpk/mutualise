@@ -7,7 +7,7 @@
 @section('content')
     <div class="container-xl px-4 mt-4">
         <!-- Account page navigation-->
-        <x-navbar :route="$route"/>
+        <x-navbar :route="$route" />
         <hr class="mt-0 mb-4">
         <div class="row">
             <div class="col-xl-4">
@@ -35,8 +35,8 @@
                             <div class="mb-3">
                                 <label class="small mb-1" for="inputUsername">Username (how your name will appear to other
                                     users on the site)</label>
-                                <input class="form-control" id="inputUsername" type="text"
-                                    placeholder="Enter your username" value="{{ $user->name }}">
+                                <input class="form-control" id="inputUsername" type="text" value=""
+                                    placeholder="{{ $user->name }}">
                             </div>
                             <!-- Form Row-->
                             <div class="row gx-3 mb-3">
@@ -71,8 +71,8 @@
                             <!-- Form Group (email address)-->
                             <div class="mb-3">
                                 <label class="small mb-1" for="inputEmailAddress">Email address</label>
-                                <input class="form-control" id="inputEmailAddress" type="email"
-                                    placeholder="Enter your email address" value="{{$user->email}}">
+                                <input class="form-control" id="inputEmailAddress" type="email" value=""
+                                    placeholder="{{ $user->email }}">
                             </div>
                             <!-- Form Row-->
                             <div class="row gx-3 mb-3">
