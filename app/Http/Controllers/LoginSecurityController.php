@@ -98,9 +98,6 @@ class LoginSecurityController extends Controller
             'current-password' => 'required',
         ]);
         $userId = Auth::user()->id;
-        // $user->loginSecurity->delete();
-        // $user->loginSecurity->google2fa_enable = 0;
-        // $user->loginSecurity->save();
         login::where('user_id', $userId)->delete();
         return redirect('/2fa')->with('success',"2FA is now disabled.");
     }
