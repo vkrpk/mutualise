@@ -15,34 +15,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::redirect('/', '/login', 301);
+Route::redirect('/', '/home', 301);
 
 Auth::routes();
+Route::post('logout', 'App\Http\Controllers\Auth\LoginController@logout')->name('logout')->withoutMiddleware('2fa');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('2fa');
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
 
 
-// Route::group(['middleware' => 'auth'], function () {
-//     Route::group(['prefix' => 'profil'], function () {
-//         Route::get('/index', [App\Http\Controllers\Auth\ProfilViewController::class, 'index'])->name('profilIndex');
-//         Route::get('/billing', [App\Http\Controllers\Auth\ProfilViewController::class, 'billing'])->name('profilBilling');
-//         Route::get('/security', [App\Http\Controllers\Auth\ProfilViewController::class, 'security'])->name('profilSecurity');
-//         Route::get('/notifications', [App\Http\Controllers\Auth\ProfilViewController::class, 'notifications'])->name('profilNotifications');
-//     });
-// });
-
-Route::middleware(['auth', '2fa'])->group(function () {
-    Route::prefix('profil')->group(function () {
-        Route::controller(ProfilViewController::class)->group(function () {
-            Route::get('/index', 'index')->name('profilIndex');
-            Route::get('/billing', 'billing')->name('profilBilling');
-            Route::get('/security', 'security')->name('profilSecurity');
-            Route::get('/notifications', 'notifications')->name('profilNotifications');
-        });
+Route::prefix('profil')->group(function () {
+    Route::controller(ProfilViewController::class)->group(function () {
+        Route::get('/index', 'index')->name('profilIndex');
+        Route::get('/billing', 'billing')->name('profilBilling');
+        Route::get('/security', 'security')->name('profilSecurity');
+        Route::get('/notifications', 'notifications')->name('profilNotifications');
     });
 });
 

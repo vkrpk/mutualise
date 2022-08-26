@@ -51,7 +51,7 @@
                                     <a class="dropdown-item" href="{{ url('admin/users') }}">Voyager : users</a>
                                 @endif
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                <a class="dropdown-item" href="#"
                                     onclick="event.preventDefault();
                                          document.getElementById('logout-form').submit();">
                                     Se déconnecter

@@ -7,7 +7,7 @@
 @section('content')
     <div class="container-xl px-4 mt-4">
         <!-- Account page navigation-->
-        <x-navbar :route="$route"/>
+        <x-navbar :route="$data['route']"/>
         <hr class="mt-0 mb-4">
         <div class="row">
             <div class="col-lg-8">
@@ -84,7 +84,7 @@
             </div>
             <div class="col-lg-4">
                 <!-- Two factor authentication card-->
-                <div class="card mb-4">
+                {{-- <div class="card mb-4">
                     <div class="card-header">Two-Factor Authentication</div>
                     <div class="card-body">
                         <p>Add another level of security to your account by enabling two-factor authentication. We will send
@@ -106,7 +106,8 @@
                             </div>
                         </form>
                     </div>
-                </div>
+                </div> --}}
+                <x-two-f-a-settings :data="$data"/>
                 <!-- Delete account card-->
                 <div class="card mb-4">
                     <div class="card-header">Delete Account</div>
