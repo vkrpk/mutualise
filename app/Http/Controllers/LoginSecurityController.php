@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
+// use Auth;
 use Hash;
 use App\LoginSecurity;
 use Illuminate\Http\Request;
 use App\Models\LoginSecurity as login;
+use Illuminate\Support\Facades\Auth;
 
 class LoginSecurityController extends Controller
 {
@@ -96,9 +97,11 @@ class LoginSecurityController extends Controller
         $validatedData = $request->validate([
             'current-password' => 'required',
         ]);
-        $user = Auth::user();
-        $user->loginSecurity->google2fa_enable = 0;
-        $user->loginSecurity->save();
+        $userId = Auth::user()->id;
+        // $user->loginSecurity->delete();
+        // $user->loginSecurity->google2fa_enable = 0;
+        // $user->loginSecurity->save();
+        login::where('user_id', $userId)->delete();
         return redirect('/2fa')->with('success',"2FA is now disabled.");
     }
 }
