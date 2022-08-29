@@ -51,12 +51,12 @@ class RegisterController extends Controller
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
-    {       
+    {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'is_2Fa_enabled' => ['required', 'string']
+            'is_2Fa_enabled' => ['required', 'string', "in:on,off"]
         ]);
     }
 
@@ -83,14 +83,14 @@ class RegisterController extends Controller
      */
     public function register(Request $request)
     {
-        
+
         if(!isset($request->all()['is_2Fa_enabled'])){
             $request->request->set('is_2Fa_enabled', 'off');
-        }      
-                
+        }
+
         $this->validator($request->all())->validate();
-        
-        event(new Registered($user = $this->create($request->all())));        
+
+        event(new Registered($user = $this->create($request->all())));
 
         $this->guard()->login($user);
 
