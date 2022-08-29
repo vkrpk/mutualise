@@ -1,21 +1,19 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito%27');
+@import url("https://fonts.googleapis.com/css?family=Nunito%27");
 
 // Variables
-@import 'variables';
-@import 'footer';
-@import 'default';
-@import 'slider';
-@import 'offres';
-@import 'toggle-button';
-@import 'navbar';
-
+@import "variables";
+@import "footer";
+@import "default";
+@import "slider";
+@import "pricingTable";
+@import "toggle-button";
+@import "navbar";
 
 // Bootstrap
-@import 'bootstrap/scss/bootstrap';
+@import "bootstrap/scss/bootstrap";
 
 // Fontawesome
 @import "./fontawesome/fontawesome.scss";
 @import "./fontawesome/solid.scss";
 @import "./fontawesome/brands.scss";
-
