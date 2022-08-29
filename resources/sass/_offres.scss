@@ -74,7 +74,7 @@
     margin: 0 auto;
     font: 15px/1.4 Roboto, sans-serif;
     text-align: center;
-    padding: 10px;
+    // padding: 10px;
     color: #6e808a;
     display: flex;
     align-items: center;
@@ -86,7 +86,7 @@
     border-collapse: collapse;
     border-spacing: 0;
     table-layout: fixed;
-    
+
 }
 
 td.package-btn {
@@ -100,7 +100,7 @@ td.package-btn {
     border: none;
     empty-cells: show;
     padding: 15px 20px;
-    transition: .3s;    
+    transition: .3s;
 }
 
 .package-btn.pack-4,
@@ -301,6 +301,11 @@ a.n-button {
     .comparison .qbse {
         font-size: 12px;
         padding: 10px 5px;
+
+        writing-mode: vertical-rl;
+        transform: scale(-1);
+        // text-orientation: sideways-left;
+
     }
 }
 
