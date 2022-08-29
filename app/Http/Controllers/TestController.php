@@ -34,7 +34,7 @@ class TestController extends Controller
             $option = 'nextcloud';
         }
 
-        return view('test', [
+        return view('orders.test', [
             'user' => $user,
             'nbfreeaccount' => $nbfree,
             'enddate1y' => $enddate1y,

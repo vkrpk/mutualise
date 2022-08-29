@@ -34,4 +34,5 @@
     @stack('scripts')
 </body>
 {{-- <script src="{{ Vite::asset('public/build/app.js') }}"></script> --}}
+
 </html>
