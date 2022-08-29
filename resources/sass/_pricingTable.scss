@@ -2,22 +2,85 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    gap: 0px 0px;
+    gap: 0px 2px;
     grid-auto-flow: row;
+    justify-items: center;
+    align-items: center;
     grid-template-areas:
-        ". Basique Standard Entreprise Dedie"
+        "blank Basique Standard Entreprise Dedie"
         "Pydio AA AB AC AD"
-        "Seafile BA BB BC BD"
-        "Nextcloud CA CB CC CD"
-        "ssh DA DB DC DD"
-        "RSYNC EA EB EC ED"
-        "SFTP FA FB FC FD"
-        "FTPSFTP GA GB GC GD"
-        "ISCSI HA HB HC HD"
-        "CIFS IA IB IC ID"
-        "Webdav JA JB JC JD"
-        "SI KA KB KC KD";
-    width: 320px;
+        "Seafile BA BB BC AD"
+        "Nextcloud CA CB CC AD"
+        "ssh DA DB DC AD"
+        "RSYNC EA EB EC AD"
+        "SFTP FA FB FC AD"
+        "FTPSFTP GA GB GC AD"
+        "ISCSI HA HB HC AD"
+        "CIFS IA IB IC AD"
+        "Webdav JA JB JC AD"
+        "SI KA KB KC AD";
+    background-color: black;
+    border: 2px solid black;
+}
+
+.pricingHeader {
+    background-color: #feb986 !important;
+}
+
+.pricingReference {
+    background: darken(#f8fafc, 7%) !important;
+}
+
+.pricingTable div i {
+    color: #ddd;
+}
+
+.check i {
+    color: $secondary !important;
+}
+
+.check {
+    background-color: #fff1e5 !important;
+}
+
+.pricingTable > div {
+    background-color: white;
+}
+.pricingTable div {
+    text-align: center;
+    width: 100%;
+    padding: 16px 0 !important;
+}
+
+@media (max-width: 576px) {
+    .pricingTable div {
+        padding: 8px 0 !important;
+    }
+}
+
+.pricingTable .selected label,
+.pricingTable .selected i {
+    color: #fff !important;
+}
+
+.pricingTable .selected.check,
+.pricingTable .selected.AD {
+    background-color: $secondary !important;
+}
+
+.pricingTable .selected {
+    background-color: $secondary-light !important;
+}
+
+.col1,
+.col2,
+.col3,
+.col4 {
+    cursor: pointer;
+}
+
+.AD label {
+    cursor: pointer !important;
 }
 
 .Pydio {
@@ -42,6 +105,11 @@
 
 .Dedie {
     grid-area: Dedie;
+}
+
+.blank {
+    grid-area: blank;
+    height: 100%;
 }
 
 .Nextcloud {
@@ -92,10 +160,6 @@
     grid-area: AC;
 }
 
-.AD {
-    grid-area: AD;
-}
-
 .BA {
     grid-area: BA;
 }
@@ -106,10 +170,6 @@
 
 .BC {
     grid-area: BC;
-}
-
-.BD {
-    grid-area: BD;
 }
 
 .CA {
@@ -124,10 +184,6 @@
     grid-area: CC;
 }
 
-.CD {
-    grid-area: CD;
-}
-
 .DA {
     grid-area: DA;
 }
@@ -138,10 +194,6 @@
 
 .DC {
     grid-area: DC;
-}
-
-.DD {
-    grid-area: DD;
 }
 
 .EA {
@@ -156,10 +208,6 @@
     grid-area: EC;
 }
 
-.ED {
-    grid-area: ED;
-}
-
 .FA {
     grid-area: FA;
 }
@@ -170,10 +218,6 @@
 
 .FC {
     grid-area: FC;
-}
-
-.FD {
-    grid-area: FD;
 }
 
 .GA {
@@ -188,10 +232,6 @@
     grid-area: GC;
 }
 
-.GD {
-    grid-area: GD;
-}
-
 .HA {
     grid-area: HA;
 }
@@ -202,10 +242,6 @@
 
 .HC {
     grid-area: HC;
-}
-
-.HD {
-    grid-area: HD;
 }
 
 .IA {
@@ -220,10 +256,6 @@
     grid-area: IC;
 }
 
-.ID {
-    grid-area: ID;
-}
-
 .JA {
     grid-area: JA;
 }
@@ -234,10 +266,6 @@
 
 .JC {
     grid-area: JC;
-}
-
-.JD {
-    grid-area: JD;
 }
 
 .KA {
@@ -252,6 +280,28 @@
     grid-area: KC;
 }
 
-.KD {
-    grid-area: KD;
+.AD {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "ADA"
+        "ADB"
+        "ADC";
+    grid-area: AD;
+    height: 100%;
+}
+
+.ADA {
+    grid-area: ADA;
+}
+
+.ADB {
+    grid-area: ADB;
+}
+
+.ADC {
+    grid-area: ADC;
 }

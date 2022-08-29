@@ -14,7 +14,6 @@
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts -->
     @vite(['resources/js/app.js'])
@@ -33,6 +32,5 @@
 
     @stack('scripts')
 </body>
-{{-- <script src="{{ Vite::asset('public/build/app.js') }}"></script> --}}
 
 </html>

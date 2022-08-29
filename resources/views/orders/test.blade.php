@@ -17,7 +17,7 @@
     }
 @endphp
 
-<div class="my-4 container">
+<div class="my-4 container-sm overflow-hidden p-0">
     <div class="alert alert-primary mt-4 mb-2 fs-2 fw-bolder" role="alert">
         <span>Ajouter un accès</span>
     </div>
@@ -33,7 +33,7 @@
         <a class="text-secondary" href="https://www.dedikam.com/lexique/#niveaux" target="_blank">En savoir plus</a>
     </h3>
     <div class="comparison">
-        @include('orders.form.table')
+        @include('orders.form.pricingTable')
     </div>
     <div class="row mt-4 espace">
         <div class="col">
