@@ -361,7 +361,7 @@
                     <input type="hidden" id="form_free_account" name="form_free_account" value="0">
                     <input type="hidden" id="form_diskspace" name="form_diskspace" value="10">
                     <input type="hidden" id="form_expire" name="form_expire" value="">
-                    <button class="btn btn-lg fs-3 btn-primary" type="submit"><i class="bi bi-cart-plus-fill"></i>
+                    <button class="btn btn-lg fs-3 btn-primary" type="submit"><i class="fa-solid fa-cart-shopping"></i>
                         Ajouter au panier
                     </button>
                 </div>
