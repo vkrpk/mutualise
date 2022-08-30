@@ -14,7 +14,7 @@ body {
     font-weight: 400;
     line-height: 1.6;
     color: #212529;
-    // background-color: #f8fafc;
+    background-color: lighten(#c9fbff, 9%) !important;
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
@@ -22,23 +22,12 @@ body {
 /* Bootstrap override */
 
 .btn {
-  color: white !important;
-}
-
-
-.btn-primary {
-  background-color: $primary;
-  border-color: $primary;
-}
-
-.btn-secondary {
-  background-color: $secondary-light;
-  border-color: $secondary-light;
+    color: white !important;
 }
 
 .form-check-input:checked {
-  background-color: $secondary-light !important;
-  border-color: $secondary-light !important;
+    background-color: $secondary-light !important;
+    border-color: $secondary-light !important;
 }
 
 /* Custom */
@@ -48,19 +37,19 @@ body {
 }
 
 .text-dedikam {
-  color: #74ba58 !important;
+    color: #74ba58 !important;
 }
 
 .hover:hover {
-  transform: scale(1.25);
+    transform: scale(1.25);
 }
 
 .selectable {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .content {
-  flex-grow: 1;
+    flex-grow: 1;
 }
 
 /* Media query */
