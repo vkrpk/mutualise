@@ -21,6 +21,7 @@
         "SI col1 col2 col3 col4";
     background-color: black;
     border: 2px solid black;
+    font-size: 24px !important;
 }
 
 .colContainer {
@@ -92,14 +93,17 @@
 }
 
 .col4 div {
-    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 33%;
 }
 
 .pricingHeader,
 .pricingReference,
 .colContainer div,
 .blank {
-    padding: 16px 0;
+    // padding: 8px 0;
 }
 
 .pricingHeader {
@@ -110,7 +114,7 @@
     background: darken(#f8fafc, 7%) !important;
 }
 
-.pricingTable div i {
+.pricingTable a i {
     color: #ddd;
 }
 
@@ -122,7 +126,7 @@
     background-color: #fff1e5 !important;
 }
 
-.pricingTable > div {
+.pricingTable > a {
     background-color: white;
 }
 .pricingTable div {
@@ -130,12 +134,17 @@
     width: 100%;
 }
 
-@media (max-width: 576px) {
+@media (max-width: 767px) {
+    .pricingTable {
+        font-size: 12px !important;
+    }
     .pricingHeader,
     .pricingReference,
     .colContainer div,
+    .colContainer div i,
     .blank {
-        padding: 8px 0 !important;
+        line-height: 30px;
+        height: 30px;
     }
 }
 
@@ -162,6 +171,7 @@
 
 .col4 label {
     cursor: pointer !important;
+    margin-left: 8px;
 }
 
 .Pydio {
@@ -191,6 +201,7 @@
 .blank {
     grid-area: blank;
     height: 100%;
+    background-color: white !important;
 }
 
 .Nextcloud {
@@ -237,6 +248,7 @@
 }
 .AC {
     grid-area: AC;
+    white-space: nowrap;
 }
 .AD {
     grid-area: AD;

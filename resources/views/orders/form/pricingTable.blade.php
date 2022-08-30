@@ -15,10 +15,19 @@
     <div class="CIFS pricingReference">CIFS</div>
     <div class="Webdav pricingReference">Webdav</div>
     <div class="SI pricingReference">SI</div>
-    <div class="colContainer col1">
-        <div class="AA check"><i class="fa-solid fa-check"></i></div>
-        <div class="AB check"><i class="fa-solid fa-check"></i></div>
-        <div class="AC check"><i class="fa-solid fa-check"></i></div>
+    <a tabindex="0" class="colContainer col1 popover-dismiss d-block w-100" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Répartition des données" data-bs-content="1 serveur" data-bs-placement="right">
+        <div class="AA check">
+            <input type="radio" name="basiqueChoice" id="basiqueChoice" value="pydio">
+            <label for="basiqueChoice">Pydio</label>
+        </div>
+        <div class="AB check">
+            <input type="radio" name="basiqueChoice" id="basiqueChoice" value="seafile">
+            <label for="basiqueChoice">Seafile</label>
+        </div>
+        <div class="AC check">
+            <input type="radio" name="basiqueChoice" id="basiqueChoice" value="nextcloud">
+            <label for="basiqueChoice">Nextcloud</label>
+        </div>
         <div class="AD"><i class="fa-solid fa-xmark"></i></div>
         <div class="AE"><i class="fa-solid fa-xmark"></i></div>
         <div class="AF"><i class="fa-solid fa-xmark"></i></div>
@@ -27,8 +36,8 @@
         <div class="AI"><i class="fa-solid fa-xmark"></i></div>
         <div class="AJ"><i class="fa-solid fa-xmark"></i></div>
         <div class="AK"><i class="fa-solid fa-xmark"></i></div>
-    </div>
-    <div class="colContainer col2">
+    </a>
+    <a tabindex="1" class="colContainer col2 popover-dismiss d-block w-100" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Répartition des données" data-bs-content="2 serveurs" data-bs-placement="right">
         <div class="BA check"><i class="fa-solid fa-check"></i></div>
         <div class="BB check"><i class="fa-solid fa-check"></i></div>
         <div class="BC check"><i class="fa-solid fa-check"></i></div>
@@ -40,8 +49,8 @@
         <div class="BI"><i class="fa-solid fa-xmark"></i></div>
         <div class="BJ"><i class="fa-solid fa-xmark"></i></div>
         <div class="BK"><i class="fa-solid fa-xmark"></i></div>
-    </div>
-    <div class="colContainer col3">
+    </a>
+    <a tabindex="2" class="colContainer col3 popover-dismiss d-block w-100" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Répartition des données" data-bs-content="3 serveurs et 2 datacenters" data-bs-placement="left">
         <div class="CA check"><i class="fa-solid fa-check"></i></div>
         <div class="CB check"><i class="fa-solid fa-check"></i></div>
         <div class="CC check"><i class="fa-solid fa-check"></i></div>
@@ -53,8 +62,8 @@
         <div class="CI check"><i class="fa-solid fa-check"></i></div>
         <div class="CJ check"><i class="fa-solid fa-check"></i></div>
         <div class="CK check"><i class="fa-solid fa-check"></i></div>
-    </div>
-    <div class="colContainer col4" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="3 serveurs et 2 datacenters">
+    </a>
+    <a tabindex="3" class="colContainer col4 popover-dismiss d-block w-100" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Répartition des données" data-bs-content="3 serveurs et 2 datacenters" data-bs-placement="left">
       <div class="DA">
           <input type="radio" name="dedicatedChoice" id="dedicatedChoice" value="pydio">
           <label for="dedicatedChoice">Pydio</label>
@@ -67,19 +76,16 @@
           <input type="radio" name="dedicatedChoice" id="dedicatedChoice" value="nextcloud">
           <label for="dedicatedChoice">Nextcloud</label>
       </div>
-    </div>
+    </a>
   </div>
-
-  <button type="button" class="btn btn-secondary" >
-    Popover on bottom
-  </button>
 
 <script defer>
     const col_1 = document.querySelectorAll('.col1');
     const col_2 = document.querySelectorAll('.col2');
     const col_3 = document.querySelectorAll('.col3');
     const col_4 = document.querySelectorAll('.col4');
-    const inputs = document.querySelectorAll('input[id="dedicatedChoice"]')
+    const inputsDedicated = document.querySelectorAll('input[id="dedicatedChoice"]')
+    const inputsBasique = document.querySelectorAll('input[id="basiqueChoice"]')
     const col_collection = [col_1, col_2, col_3, col_4];
 
     col_collection.forEach(
@@ -99,12 +105,15 @@
 
     function getSelected(column) {
         column.forEach(element => element.classList.add('selected'));
-        if(column == col_1 || column == col_2 || column == col_3) {
-            inputs.forEach(
+        if(column != col_4) {
+            inputsDedicated.forEach(
+                input => input.checked = false
+            )
+        }
+        if(column != col_1) {
+            inputsBasique.forEach(
                 input => input.checked = false
             )
         }
     }
-
-
 </script>
