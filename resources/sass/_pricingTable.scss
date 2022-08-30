@@ -8,19 +8,98 @@
     align-items: center;
     grid-template-areas:
         "blank Basique Standard Entreprise Dedie"
-        "Pydio AA AB AC AD"
-        "Seafile BA BB BC AD"
-        "Nextcloud CA CB CC AD"
-        "ssh DA DB DC AD"
-        "RSYNC EA EB EC AD"
-        "SFTP FA FB FC AD"
-        "FTPSFTP GA GB GC AD"
-        "ISCSI HA HB HC AD"
-        "CIFS IA IB IC AD"
-        "Webdav JA JB JC AD"
-        "SI KA KB KC AD";
+        "Pydio col1 col2 col3 col4"
+        "Seafile col1 col2 col3 col4"
+        "Nextcloud col1 col2 col3 col4"
+        "ssh col1 col2 col3 col4"
+        "RSYNC col1 col2 col3 col4"
+        "SFTP col1 col2 col3 col4"
+        "FTPSFTP col1 col2 col3 col4"
+        "ISCSI col1 col2 col3 col4"
+        "CIFS col1 col2 col3 col4"
+        "Webdav col1 col2 col3 col4"
+        "SI col1 col2 col3 col4";
     background-color: black;
     border: 2px solid black;
+}
+
+.colContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    height: 100%;
+}
+
+.col1 {
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-areas:
+        "AA"
+        "AB"
+        "AC"
+        "AD"
+        "AE"
+        "AF"
+        "AG"
+        "AH"
+        "AI"
+        "AJ"
+        "AK";
+    grid-area: col1;
+}
+
+.col2 {
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-areas:
+        "BA"
+        "BB"
+        "BC"
+        "BD"
+        "BE"
+        "BF"
+        "BG"
+        "BH"
+        "BI"
+        "BJ"
+        "BK";
+    grid-area: col2;
+}
+
+.col3 {
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-areas:
+        "CA"
+        "CB"
+        "CC"
+        "CD"
+        "CE"
+        "CF"
+        "CG"
+        "CH"
+        "CI"
+        "CJ"
+        "CK";
+    grid-area: col3;
+}
+
+.col4 {
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas:
+        "DA"
+        "DB"
+        "DC";
+    grid-area: col4;
+}
+
+.col4 div {
+    margin: auto;
+}
+
+.pricingHeader,
+.pricingReference,
+.colContainer div,
+.blank {
+    padding: 16px 0;
 }
 
 .pricingHeader {
@@ -49,11 +128,13 @@
 .pricingTable div {
     text-align: center;
     width: 100%;
-    padding: 16px 0 !important;
 }
 
 @media (max-width: 576px) {
-    .pricingTable div {
+    .pricingHeader,
+    .pricingReference,
+    .colContainer div,
+    .blank {
         padding: 8px 0 !important;
     }
 }
@@ -63,12 +144,12 @@
     color: #fff !important;
 }
 
-.pricingTable .selected.check,
-.pricingTable .selected.AD {
+.colContainer.selected .check,
+.colContainer.selected.col4 {
     background-color: $secondary !important;
 }
 
-.pricingTable .selected {
+.colContainer.selected:not(.col4) > :not(.check) {
     background-color: $secondary-light !important;
 }
 
@@ -79,7 +160,7 @@
     cursor: pointer;
 }
 
-.AD label {
+.col4 label {
     cursor: pointer !important;
 }
 
@@ -151,157 +232,111 @@
 .AA {
     grid-area: AA;
 }
-
 .AB {
     grid-area: AB;
 }
-
 .AC {
     grid-area: AC;
+}
+.AD {
+    grid-area: AD;
+}
+.AE {
+    grid-area: AE;
+}
+.AF {
+    grid-area: AF;
+}
+.AG {
+    grid-area: AG;
+}
+.AH {
+    grid-area: AH;
+}
+.AI {
+    grid-area: AI;
+}
+.AJ {
+    grid-area: AJ;
+}
+.AK {
+    grid-area: AK;
 }
 
 .BA {
     grid-area: BA;
 }
-
 .BB {
     grid-area: BB;
 }
-
 .BC {
     grid-area: BC;
+}
+.BD {
+    grid-area: BD;
+}
+.BE {
+    grid-area: BE;
+}
+.BF {
+    grid-area: BF;
+}
+.BG {
+    grid-area: BG;
+}
+.BH {
+    grid-area: BH;
+}
+.BI {
+    grid-area: BI;
+}
+.BJ {
+    grid-area: BJ;
+}
+.BK {
+    grid-area: BK;
 }
 
 .CA {
     grid-area: CA;
 }
-
 .CB {
     grid-area: CB;
 }
-
 .CC {
     grid-area: CC;
+}
+.CD {
+    grid-area: CD;
+}
+.CE {
+    grid-area: CE;
+}
+.CF {
+    grid-area: CF;
+}
+.CG {
+    grid-area: CG;
+}
+.CH {
+    grid-area: CH;
+}
+.CI {
+    grid-area: CI;
+}
+.CJ {
+    grid-area: CJ;
+}
+.CK {
+    grid-area: CK;
 }
 
 .DA {
     grid-area: DA;
 }
-
 .DB {
     grid-area: DB;
 }
-
 .DC {
     grid-area: DC;
-}
-
-.EA {
-    grid-area: EA;
-}
-
-.EB {
-    grid-area: EB;
-}
-
-.EC {
-    grid-area: EC;
-}
-
-.FA {
-    grid-area: FA;
-}
-
-.FB {
-    grid-area: FB;
-}
-
-.FC {
-    grid-area: FC;
-}
-
-.GA {
-    grid-area: GA;
-}
-
-.GB {
-    grid-area: GB;
-}
-
-.GC {
-    grid-area: GC;
-}
-
-.HA {
-    grid-area: HA;
-}
-
-.HB {
-    grid-area: HB;
-}
-
-.HC {
-    grid-area: HC;
-}
-
-.IA {
-    grid-area: IA;
-}
-
-.IB {
-    grid-area: IB;
-}
-
-.IC {
-    grid-area: IC;
-}
-
-.JA {
-    grid-area: JA;
-}
-
-.JB {
-    grid-area: JB;
-}
-
-.JC {
-    grid-area: JC;
-}
-
-.KA {
-    grid-area: KA;
-}
-
-.KB {
-    grid-area: KB;
-}
-
-.KC {
-    grid-area: KC;
-}
-
-.AD {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    gap: 0px 0px;
-    grid-auto-flow: row;
-    grid-template-areas:
-        "ADA"
-        "ADB"
-        "ADC";
-    grid-area: AD;
-    height: 100%;
-}
-
-.ADA {
-    grid-area: ADA;
-}
-
-.ADB {
-    grid-area: ADB;
-}
-
-.ADC {
-    grid-area: ADC;
 }
