@@ -1,4 +1,5 @@
 <div class="pricingTable">
+    <div class="blank"></div>
     <div class="Basique pricingHeader col1">Basique</div>
     <div class="Standard pricingHeader col2">Standard</div>
     <div class="Entreprise pricingHeader col3">Entreprise</div>
@@ -14,50 +15,55 @@
     <div class="CIFS pricingReference">CIFS</div>
     <div class="Webdav pricingReference">Webdav</div>
     <div class="SI pricingReference">SI</div>
-    <div class="blank"></div>
-    <div class="AA check col1"><i class="fa-solid fa-check"></i></div>
-    <div class="AB check col2"><i class="fa-solid fa-check"></i></div>
-    <div class="AC check col3"><i class="fa-solid fa-check"></i></div>
-    <div class="BA check col1"><i class="fa-solid fa-check"></i></div>
-    <div class="BB check col2"><i class="fa-solid fa-check"></i></div>
-    <div class="BC check col3"><i class="fa-solid fa-check"></i></div>
-    <div class="CA check col1"><i class="fa-solid fa-check"></i></div>
-    <div class="CB check col2"><i class="fa-solid fa-check"></i></div>
-    <div class="CC check col3"><i class="fa-solid fa-check"></i></div>
-    <div class="DA col1"><i class="fa-solid fa-xmark"></i></div>
-    <div class="DB check col2"><i class="fa-solid fa-check"></i></div>
-    <div class="DC check col3"><i class="fa-solid fa-check"></i></div>
-    <div class="EA col1"><i class="fa-solid fa-xmark"></i></div>
-    <div class="EB check col2"><i class="fa-solid fa-check"></i></div>
-    <div class="EC check col3"><i class="fa-solid fa-check"></i></div>
-    <div class="FA col1"><i class="fa-solid fa-xmark"></i></div>
-    <div class="FB check col2"><i class="fa-solid fa-check"></i></div>
-    <div class="FC check col3"><i class="fa-solid fa-check"></i></div>
-    <div class="GA col1"><i class="fa-solid fa-xmark"></i></div>
-    <div class="GB check col2"><i class="fa-solid fa-check"></i></div>
-    <div class="GC check col3"><i class="fa-solid fa-check"></i></div>
-    <div class="HA col1"><i class="fa-solid fa-xmark"></i></div>
-    <div class="HB col2"><i class="fa-solid fa-xmark"></i></div>
-    <div class="HC check col3"><i class="fa-solid fa-check"></i></div>
-    <div class="IA col1"><i class="fa-solid fa-xmark"></i></div>
-    <div class="IB col2"><i class="fa-solid fa-xmark"></i></div>
-    <div class="IC check col3"><i class="fa-solid fa-check"></i></div>
-    <div class="JA col1"><i class="fa-solid fa-xmark"></i></div>
-    <div class="JB col2"><i class="fa-solid fa-xmark"></i></div>
-    <div class="JC check col3"><i class="fa-solid fa-check"></i></div>
-    <div class="KA col1"><i class="fa-solid fa-xmark"></i></div>
-    <div class="KB col2"><i class="fa-solid fa-xmark"></i></div>
-    <div class="KC check col3"><i class="fa-solid fa-check"></i></div>
-    <div class="AD col4" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="3 serveurs et 2 datacenters">
-      <div class="ADA">
+    <div class="colContainer col1">
+        <div class="AA check"><i class="fa-solid fa-check"></i></div>
+        <div class="AB check"><i class="fa-solid fa-check"></i></div>
+        <div class="AC check"><i class="fa-solid fa-check"></i></div>
+        <div class="AD"><i class="fa-solid fa-xmark"></i></div>
+        <div class="AE"><i class="fa-solid fa-xmark"></i></div>
+        <div class="AF"><i class="fa-solid fa-xmark"></i></div>
+        <div class="AG"><i class="fa-solid fa-xmark"></i></div>
+        <div class="AH"><i class="fa-solid fa-xmark"></i></div>
+        <div class="AI"><i class="fa-solid fa-xmark"></i></div>
+        <div class="AJ"><i class="fa-solid fa-xmark"></i></div>
+        <div class="AK"><i class="fa-solid fa-xmark"></i></div>
+    </div>
+    <div class="colContainer col2">
+        <div class="BA check"><i class="fa-solid fa-check"></i></div>
+        <div class="BB check"><i class="fa-solid fa-check"></i></div>
+        <div class="BC check"><i class="fa-solid fa-check"></i></div>
+        <div class="BD check"><i class="fa-solid fa-check"></i></div>
+        <div class="BE check"><i class="fa-solid fa-check"></i></div>
+        <div class="BF check"><i class="fa-solid fa-check"></i></div>
+        <div class="BG check"><i class="fa-solid fa-check"></i></div>
+        <div class="BH"><i class="fa-solid fa-xmark"></i></div>
+        <div class="BI"><i class="fa-solid fa-xmark"></i></div>
+        <div class="BJ"><i class="fa-solid fa-xmark"></i></div>
+        <div class="BK"><i class="fa-solid fa-xmark"></i></div>
+    </div>
+    <div class="colContainer col3">
+        <div class="CA check"><i class="fa-solid fa-check"></i></div>
+        <div class="CB check"><i class="fa-solid fa-check"></i></div>
+        <div class="CC check"><i class="fa-solid fa-check"></i></div>
+        <div class="CD check"><i class="fa-solid fa-check"></i></div>
+        <div class="CE check"><i class="fa-solid fa-check"></i></div>
+        <div class="CF check"><i class="fa-solid fa-check"></i></div>
+        <div class="CG check"><i class="fa-solid fa-check"></i></div>
+        <div class="CH check"><i class="fa-solid fa-check"></i></div>
+        <div class="CI check"><i class="fa-solid fa-check"></i></div>
+        <div class="CJ check"><i class="fa-solid fa-check"></i></div>
+        <div class="CK check"><i class="fa-solid fa-check"></i></div>
+    </div>
+    <div class="colContainer col4" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="3 serveurs et 2 datacenters">
+      <div class="DA">
           <input type="radio" name="dedicatedChoice" id="dedicatedChoice" value="pydio">
           <label for="dedicatedChoice">Pydio</label>
       </div>
-      <div class="ADB">
+      <div class="DB">
           <input type="radio" name="dedicatedChoice" id="dedicatedChoice" value="seafile">
           <label for="dedicatedChoice">Seafile</label>
       </div>
-      <div class="ADC">
+      <div class="DC">
           <input type="radio" name="dedicatedChoice" id="dedicatedChoice" value="nextcloud">
           <label for="dedicatedChoice">Nextcloud</label>
       </div>
