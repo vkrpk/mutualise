@@ -11,6 +11,7 @@ use Illuminate\Auth\Events\Registered;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use TimeHunter\LaravelGoogleReCaptchaV3\Validations\GoogleReCaptchaV3ValidationRule;
 
 class RegisterController extends Controller
 {
@@ -56,9 +57,12 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'is_2Fa_enabled' => ['required', 'string', "in:on,off"]
+            'is_2Fa_enabled' => ['required', 'string', "in:on,off"],
+            // 'g-recaptcha-response' => [new GoogleReCaptchaV3ValidationRule('register')]
         ]);
     }
+
+
 
     /**
      * Create a new user instance after a valid registration.
@@ -83,10 +87,26 @@ class RegisterController extends Controller
      */
     public function register(Request $request)
     {
+        // $request->request->set('g-recaptcha-response', 'Je suis un hacker');
 
-        if(!isset($request->all()['is_2Fa_enabled'])){
+        $rule = [
+            'g-recaptcha-response' => [new GoogleReCaptchaV3ValidationRule('register')]
+        ];
+
+        $validator = \Illuminate\Support\Facades\Validator::make($request->toArray(), $rule)->errors();
+
+        // dd($validator);
+
+        if (!empty($validator->toArray())) {
+            return redirect($request->headers->get('referer'));            
+        } 
+
+        if (!isset($request->all()['is_2Fa_enabled'])) {
             $request->request->set('is_2Fa_enabled', 'off');
         }
+
+
+        $request->request->set('g-recaptcha-response', 'truc');
 
         $this->validator($request->all())->validate();
 
@@ -94,13 +114,14 @@ class RegisterController extends Controller
 
         $this->guard()->login($user);
 
-        if($request->request->get('is_2Fa_enabled') === 'on'){
+        if ($request->request->get('is_2Fa_enabled') === 'on') {
             return redirect('/2fa');
         }
 
         if ($response = $this->registered($request, $user)) {
             return $response;
         }
+
 
         return $request->wantsJson()
             ? new JsonResponse([], 201)

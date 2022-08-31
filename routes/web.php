@@ -1,8 +1,11 @@
 <?php
 
-use App\Http\Controllers\Auth\ProfilViewController;
-use App\Http\Controllers\TestController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TestController;
+use App\Http\Controllers\Auth\ProfilViewController;
+use TimeHunter\LaravelGoogleReCaptchaV3\Validations\GoogleReCaptchaV3ValidationRule;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +22,7 @@ Route::redirect('/', '/home', 301);
 
 Auth::routes();
 Route::post('logout', 'App\Http\Controllers\Auth\LoginController@logout')->name('logout')->withoutMiddleware('2fa');
+Route::post('inscription', 'App\Http\Controllers\Auth\RegisterController@register')->name('inscription');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->withoutMiddleware('auth');
 
