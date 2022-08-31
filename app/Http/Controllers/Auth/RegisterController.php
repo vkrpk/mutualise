@@ -87,7 +87,15 @@ class RegisterController extends Controller
      */
     public function register(Request $request)
     {
-        // $request->request->set('g-recaptcha-response', 'Je suis un hacker');
+        $rule = [
+            'g-recaptcha-response' => [new GoogleReCaptchaV3ValidationRule('contact_us_action')]
+        ];
+
+        $validator = \Illuminate\Support\Facades\Validator::make($request->toArray(),$rule)->errors();
+
+        if(!empty($validator->toArray())){
+            return redirect($request->headers->get('referer'));
+        }
 
         $rule = [
             'g-recaptcha-response' => [new GoogleReCaptchaV3ValidationRule('register')]

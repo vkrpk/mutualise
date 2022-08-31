@@ -109,15 +109,15 @@ return [
     */
     'setting' => [
         [
-            'action' => 'register',
+            'action' => 'contact_us',
             'threshold' => 0.2,
-            'score_comparison' => true,
+            'score_comparison' => false,
         ],
         [
             'action' => 'signup',
             'threshold' => 0.2,
             'score_comparison' => true
-        ]
+        ],
     ],
 
     /*
@@ -127,7 +127,9 @@ return [
     | Type: array
     | Define a list of ip that you want to skip
     */
-    'skip_ips' => [],
+    'skip_ips' => [
+
+    ],
     /*
     |--------------------------------------------------------------------------
     | Options
@@ -135,7 +137,9 @@ return [
     | Custom option field for your request setting, which will be used for RequestClientInterface
     |
     */
-    'options' => [],
+    'options' => [
+
+    ],
     /*
     |--------------------------------------------------------------------------
     | API JS Url

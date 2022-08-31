@@ -1,8 +1,6 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\Auth\ProfilViewController;
 use TimeHunter\LaravelGoogleReCaptchaV3\Validations\GoogleReCaptchaV3ValidationRule;
@@ -59,4 +57,8 @@ Route::get('/test_middleware', function () {
     return "2FA middleware work!";
 })->middleware(['auth', '2fa']);
 
+<<<<<<< HEAD
 Route::get('/amount', 'App\Services\CalculAmountController@calculAmount')->name('calculAmount');
+=======
+Route::get('/amount', 'App\Services\CalculAmountController@calculAmount')->name('calculAmount');
+

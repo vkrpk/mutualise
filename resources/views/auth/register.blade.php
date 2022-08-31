@@ -81,10 +81,12 @@
                                 </div>
                             </div>
 
+
                             <div class="row mb-0">
                                 {!! GoogleReCaptchaV3::renderField('contact_us_id', 'register') !!}
                                 <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
+                                    {!!  GoogleReCaptchaV3::renderField('contact_us_id','contact_us_action') !!}
+                                    <button type="submit" class="btn btn-primary mt-3">
                                         {{ __('Register') }}
                                     </button>
                                 </div>
@@ -95,4 +97,5 @@
             </div>
         </div>
     </div>
+
 @endsection
