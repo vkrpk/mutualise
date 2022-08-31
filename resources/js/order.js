@@ -6,55 +6,6 @@ window.onload = function () {
     const output = document.getElementById("taille_output");
     output.innerHTML = slider.value + " Go";
     let percent = (slider.value / 5000) * 100;
-    const inputCheckFreeAccount = document.getElementById("check_free_account");
-    let selectedOffer = document.querySelector(".selected");
-    const col_1 = document.querySelectorAll(".col1");
-    const col_2 = document.querySelectorAll(".col2");
-    const col_3 = document.querySelectorAll(".col3");
-    const col_4 = document.querySelectorAll(".col4");
-    const inputsDedicated = document.querySelectorAll(
-        'input[id="dedicatedChoice"]'
-    );
-    const inputsBasique = document.querySelectorAll(
-        'input[id="basiqueChoice"]'
-    );
-    const col_collection = [col_1, col_2, col_3, col_4];
-
-    const checkFreeAccount = function () {
-        if (inputCheckFreeAccount.checked) {
-            col_collection.forEach((column) =>
-                column.forEach((element) =>
-                    element.removeEventListener(
-                        "click",
-                        activateColumn(column),
-                        true
-                    )
-                )
-            );
-            slider.parentElement.previousElementSibling.classList.add("d-none");
-            slider.parentElement.classList.add("d-none");
-            getUnselected();
-            getSelected(col_1);
-            // getAmount(10, 1);
-            slider.value = 10;
-            calculAmount();
-        } else {
-            slider.parentElement.previousElementSibling.classList.remove(
-                "d-none"
-            );
-            slider.parentElement.classList.remove("d-none");
-            col_collection.forEach((column) =>
-                column.forEach((element) => {
-                    element.addEventListener(
-                        "click",
-                        activateColumn(column),
-                        true
-                    );
-                    console.log(column);
-                })
-            );
-        }
-    };
 
     const getAmount = function calcAmount(value, offer) {
         return fetch(`/amount?size=${value}&offer=${offer}`)
@@ -90,9 +41,9 @@ window.onload = function () {
                 ? ""
                 : priceM.classList.toggle("d-none");
         }
-        selectedOffer = document.querySelector(".selected");
-        // console.log(selectedOffer);
-        getAmount(sliderValue, selectedOffer.getAttribute("offer"));
+        const selectedOffer = document.querySelector(".selected");
+        let price = getAmount(sliderValue, selectedOffer.getAttribute("offer"));
+        return;
     };
 
     const changeInputColor = function () {
@@ -121,19 +72,29 @@ window.onload = function () {
     slider.addEventListener("input", changeInputColor);
     slider.addEventListener("input", onFinishTyping);
 
+    const col_1 = document.querySelectorAll(".col1");
+    const col_2 = document.querySelectorAll(".col2");
+    const col_3 = document.querySelectorAll(".col3");
+    const col_4 = document.querySelectorAll(".col4");
+    const inputsDedicated = document.querySelectorAll(
+        'input[id="dedicatedChoice"]'
+    );
+    const inputsBasique = document.querySelectorAll(
+        'input[id="basiqueChoice"]'
+    );
+    const col_collection = [col_1, col_2, col_3, col_4];
+
     col_collection.forEach((column) =>
         column.forEach((element) =>
-            element.addEventListener("click", activateColumn(column), true)
+            element.addEventListener("click", function () {
+                onFinishTyping();
+                getUnselected(col_collection);
+                getSelected(column);
+            })
         )
     );
 
-    function activateColumn(column) {
-        onFinishTyping();
-        getUnselected();
-        getSelected(column);
-    }
-
-    function getUnselected() {
+    function getUnselected(col_collection) {
         col_collection.forEach((column) =>
             column.forEach((element) => element.classList.remove("selected"))
         );
@@ -148,7 +109,6 @@ window.onload = function () {
             inputsBasique.forEach((input) => (input.checked = false));
         }
     }
-    inputCheckFreeAccount.addEventListener("change", checkFreeAccount);
 
     // slider.addEventListener(
     //     "input",
