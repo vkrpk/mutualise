@@ -1,9 +1,5 @@
 <div class="pricingTable">
     <div class="blank"></div>
-    <div class="Basique pricingHeader col1" offer="1">Basique</div>
-    <div class="Standard pricingHeader col2" offer="2">Standard</div>
-    <div class="Entreprise pricingHeader col3" offer="3">Entreprise</div>
-    <div class="Dedie pricingHeader col4" offer="4">Dédié</div>
     <div class="Pydio pricingReference">Pydio</div>
     <div class="Seafile pricingReference">Seafile</div>
     <div class="Nextcloud pricingReference">Nextcloud</div>
@@ -15,7 +11,10 @@
     <div class="CIFS pricingReference">CIFS</div>
     <div class="Webdav pricingReference">Webdav</div>
     <div class="SI pricingReference">SI</div>
-    <a tabindex="0" offer="1" class="colContainer col1 popover-dismiss d-block w-100 selected" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Répartition des données" data-bs-content="1 serveur" data-bs-placement="right">
+    <a tabindex="0" offer="1" class="colContainer col1 popover-dismiss d-block w-100 selected" role="button"
+        data-bs-toggle="popover" data-bs-trigger="focus" title="Répartition des données" data-bs-content="1 serveur"
+        data-bs-placement="right">
+        <div class="Basique pricingHeader" offer="1">Basique</div>
         <div class="AA check">
             <input type="radio" name="basiqueChoice" id="basiqueChoice" value="pydio">
             <label for="basiqueChoice">Pydio</label>
@@ -37,7 +36,9 @@
         <div class="AJ"><i class="fa-solid fa-xmark"></i></div>
         <div class="AK"><i class="fa-solid fa-xmark"></i></div>
     </a>
-    <a tabindex="1" class="colContainer col2 popover-dismiss d-block w-100" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Répartition des données" data-bs-content="2 serveurs" data-bs-placement="right">
+    <a tabindex="1" class="colContainer col2 popover-dismiss d-block w-100" role="button" data-bs-toggle="popover"
+        data-bs-trigger="focus" title="Répartition des données" data-bs-content="2 serveurs" data-bs-placement="right">
+        <div class="Standard pricingHeader" offer="2">Standard</div>
         <div class="BA check"><i class="fa-solid fa-check"></i></div>
         <div class="BB check"><i class="fa-solid fa-check"></i></div>
         <div class="BC check"><i class="fa-solid fa-check"></i></div>
@@ -50,7 +51,11 @@
         <div class="BJ"><i class="fa-solid fa-xmark"></i></div>
         <div class="BK"><i class="fa-solid fa-xmark"></i></div>
     </a>
-    <a tabindex="2" class="colContainer col3 popover-dismiss d-block w-100" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Répartition des données" data-bs-content="3 serveurs et 2 datacenters" data-bs-placement="left">
+    <a tabindex="2" class="colContainer col3 popover-dismiss d-block w-100" role="button" data-bs-toggle="popover"
+        data-bs-trigger="focus" title="Répartition des données" data-bs-content="3 serveurs et 2 datacenters"
+        data-bs-placement="left">
+        <div class="Entreprise pricingHeader" offer="3">Entreprise</div>
+
         <div class="CA check"><i class="fa-solid fa-check"></i></div>
         <div class="CB check"><i class="fa-solid fa-check"></i></div>
         <div class="CC check"><i class="fa-solid fa-check"></i></div>
@@ -63,18 +68,22 @@
         <div class="CJ check"><i class="fa-solid fa-check"></i></div>
         <div class="CK check"><i class="fa-solid fa-check"></i></div>
     </a>
-    <a tabindex="3" class="colContainer col4 popover-dismiss d-block w-100" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Répartition des données" data-bs-content="3 serveurs et 2 datacenters" data-bs-placement="left">
-      <div class="DA">
-          <input type="radio" name="dedicatedChoice" id="dedicatedChoice" value="pydio">
-          <label for="dedicatedChoice">Pydio</label>
-      </div>
-      <div class="DB">
-          <input type="radio" name="dedicatedChoice" id="dedicatedChoice" value="seafile">
-          <label for="dedicatedChoice">Seafile</label>
-      </div>
-      <div class="DC">
-          <input type="radio" name="dedicatedChoice" id="dedicatedChoice" value="nextcloud">
-          <label for="dedicatedChoice">Nextcloud</label>
-      </div>
+    <a tabindex="3" class="colContainer col4 popover-dismiss d-block w-100" role="button"
+        data-bs-toggle="popover" data-bs-trigger="focus" title="Répartition des données"
+        data-bs-content="3 serveurs et 2 datacenters" data-bs-placement="left">
+        <div class="Dedie pricingHeader" offer="4">Dédié</div>
+
+        <div class="DA">
+            <input type="radio" name="dedicatedChoice" id="dedicatedChoice" value="pydio">
+            <label for="dedicatedChoice">Pydio</label>
+        </div>
+        <div class="DB">
+            <input type="radio" name="dedicatedChoice" id="dedicatedChoice" value="seafile">
+            <label for="dedicatedChoice">Seafile</label>
+        </div>
+        <div class="DC">
+            <input type="radio" name="dedicatedChoice" id="dedicatedChoice" value="nextcloud">
+            <label for="dedicatedChoice">Nextcloud</label>
+        </div>
     </a>
-  </div>
+</div>

@@ -19,81 +19,82 @@ window.onload = function () {
         'input[id="basiqueChoice"]'
     );
     const col_collection = [col_1, col_2, col_3, col_4];
+    console.log("initial selected offer : ", typeof (selectedOffer));
 
-    const checkFreeAccount = function () {
-        if (inputCheckFreeAccount.checked) {
-            col_collection.forEach((column) =>
-                column.forEach((element) =>
-                    element.removeEventListener(
-                        "click",
-                        activateColumn(column),
-                        true
-                    )
-                )
-            );
-            slider.parentElement.previousElementSibling.classList.add("d-none");
-            slider.parentElement.classList.add("d-none");
-            getUnselected();
-            getSelected(col_1);
-            // getAmount(10, 1);
-            slider.value = 10;
-            calculAmount();
-        } else {
-            slider.parentElement.previousElementSibling.classList.remove(
-                "d-none"
-            );
-            slider.parentElement.classList.remove("d-none");
-            col_collection.forEach((column) =>
-                column.forEach((element) => {
-                    element.addEventListener(
-                        "click",
-                        activateColumn(column),
-                        true
-                    );
-                    console.log(column);
-                })
-            );
-        }
-    };
+    // const checkFreeAccount = function () {
+    //     if (inputCheckFreeAccount.checked) {
+    //         col_collection.forEach((column) =>
+    //             column.forEach((element) =>
+    //                 element.removeEventListener(
+    //                     "click",
+    //                     activateColumn(column),
+    //                     true
+    //                 )
+    //             )
+    //         );
+    //         slider.parentElement.previousElementSibling.classList.add("d-none");
+    //         slider.parentElement.classList.add("d-none");
+    //         getUnselected();
+    //         getSelected(col_1);
+    //         // getAmount(10, 1);
+    //         slider.value = 10;
+    //         calculAmount();
+    //     } else {
+    //         slider.parentElement.previousElementSibling.classList.remove(
+    //             "d-none"
+    //         );
+    //         slider.parentElement.classList.remove("d-none");
+    //         col_collection.forEach((column) =>
+    //             column.forEach((element) => {
+    //                 element.addEventListener(
+    //                     "click",
+    //                     activateColumn(column),
+    //                     true
+    //                 );
+    //                 console.log(column);
+    //             })
+    //         );
+    //     }
+    // };
 
-    const getAmount = function calcAmount(value, offer) {
-        return fetch(`/amount?size=${value}&offer=${offer}`)
-            .then(function (response) {
-                return response.json();
-            })
-            .then((response) => {
-                let recap = document.getElementById("recap_amount_Y");
-                recap.innerHTML = Math.round(100 * response.Y) / 100 + " €";
-                let recapPerMonth = document.getElementById("recap_amount_M");
-                recapPerMonth.innerHTML =
-                    Math.round(100 * response.M) / 100 + " €";
-            });
-    };
+    // const getAmount = function calcAmount(value, offer) {
+    //     return fetch(`/amount?size=${value}&offer=${offer}`)
+    //         .then(function (response) {
+    //             return response.json();
+    //         })
+    //         .then((response) => {
+    //             let recap = document.getElementById("recap_amount_Y");
+    //             recap.innerHTML = Math.round(100 * response.Y) / 100 + " €";
+    //             let recapPerMonth = document.getElementById("recap_amount_M");
+    //             recapPerMonth.innerHTML =
+    //                 Math.round(100 * response.M) / 100 + " €";
+    //         });
+    // };
 
-    const calculAmount = function () {
-        output.innerHTML = slider.value + " Go";
-        let sliderValue = slider.value;
-        let priceOr = document.getElementById("price_or");
-        let priceM = document.getElementById("price_M");
-        if (sliderValue >= 170) {
-            priceOr.classList.contains("d-none")
-                ? priceOr.classList.toggle("d-none")
-                : "";
-            priceM.classList.contains("d-none")
-                ? priceM.classList.toggle("d-none")
-                : "";
-        } else {
-            priceOr.classList.contains("d-none")
-                ? ""
-                : priceOr.classList.toggle("d-none");
-            priceM.classList.contains("d-none")
-                ? ""
-                : priceM.classList.toggle("d-none");
-        }
-        selectedOffer = document.querySelector(".selected");
-        // console.log(selectedOffer);
-        getAmount(sliderValue, selectedOffer.getAttribute("offer"));
-    };
+    // const calculAmount = function () {
+    //     output.innerHTML = slider.value + " Go";
+    //     let sliderValue = slider.value;
+    //     let priceOr = document.getElementById("price_or");
+    //     let priceM = document.getElementById("price_M");
+    //     if (sliderValue >= 170) {
+    //         priceOr.classList.contains("d-none")
+    //             ? priceOr.classList.toggle("d-none")
+    //             : "";
+    //         priceM.classList.contains("d-none")
+    //             ? priceM.classList.toggle("d-none")
+    //             : "";
+    //     } else {
+    //         priceOr.classList.contains("d-none")
+    //             ? ""
+    //             : priceOr.classList.toggle("d-none");
+    //         priceM.classList.contains("d-none")
+    //             ? ""
+    //             : priceM.classList.toggle("d-none");
+    //     }
+    //     selectedOffer = document.querySelector(".selected");
+    //     // console.log(selectedOffer);
+    //     getAmount(sliderValue, selectedOffer.getAttribute("offer"));
+    // };
 
     const changeInputColor = function () {
         percent = Math.round((slider.value / 5000) * 100);
@@ -106,31 +107,43 @@ window.onload = function () {
         return;
     };
 
-    const debounce = function (fn, d) {
-        let timer;
-        return function () {
-            clearTimeout(timer);
-            timer = setTimeout(() => {
-                calculAmount.apply();
-            }, d);
-        };
-    };
+    // const debounce = function (fn, d) {
+    //     let timer;
+    //     return function () {
+    //         clearTimeout(timer);
+    //         timer = setTimeout(() => {
+    //             calculAmount.apply();
+    //         }, d);
+    //     };
+    // };
 
-    const onFinishTyping = debounce(calculAmount, 300);
+    // const onFinishTyping = debounce(calculAmount, 300);
 
-    slider.addEventListener("input", changeInputColor);
-    slider.addEventListener("input", onFinishTyping);
+    // slider.addEventListener("input", changeInputColor);
+    // slider.addEventListener("input", onFinishTyping);
+
+    // col_collection.forEach((column) =>
+    //     column.forEach((element) => {
+    //         element.addEventListener("click", activateColumn, true)
+    //     })
+    // );
+
+    console.log(col_1);
+    console.log(col_2);
+    console.log(col_3);
+    console.log(col_4);
 
     col_collection.forEach((column) =>
-        column.forEach((element) =>
-            element.addEventListener("click", activateColumn(column), true)
-        )
+        console.log(column)
+        // column.addEventListener("click", activateColumn, true)
     );
 
-    function activateColumn(column) {
-        onFinishTyping();
+
+    function activateColumn(e) {
+        // onFinishTyping();
         getUnselected();
-        getSelected(column);
+        console.log(e.target.parentNode);
+        // col_collection.includes(e.target.parentNode) ? getSelected(e.target.parentNode) : null;
     }
 
     function getUnselected() {
@@ -140,7 +153,11 @@ window.onload = function () {
     }
 
     function getSelected(column) {
-        column.forEach((element) => element.classList.add("selected"));
+        console.log(column.children);
+        for (let child of column.children) {
+            console.log("element", child);
+            column.classList.add("selected")
+        }
         if (column != col_4) {
             inputsDedicated.forEach((input) => (input.checked = false));
         }
@@ -148,18 +165,8 @@ window.onload = function () {
             inputsBasique.forEach((input) => (input.checked = false));
         }
     }
-    inputCheckFreeAccount.addEventListener("change", checkFreeAccount);
 
-    // slider.addEventListener(
-    //     "input",
-    //     setTimeout(() => {
-    //         const timeoutId = calculAmount();
-    //     }, 1000)
-    // );
-
-    // return () => {
-    //     clearTimeout(timeoutId);
-    // };
+    // inputCheckFreeAccount.addEventListener("change", checkFreeAccount);
 
     /* sliders sorcery */
 
