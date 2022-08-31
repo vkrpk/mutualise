@@ -13,6 +13,7 @@ import * as bootstrap from "bootstrap";
 import "./dedikam";
 import "./bootstrap.js";
 import "./bs-init.js";
+import "./order";
 
 // import.meta.glob([
 //     '../images/**',

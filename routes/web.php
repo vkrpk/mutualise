@@ -54,3 +54,5 @@ Route::group(['prefix' => '2fa'], function () {
 Route::get('/test_middleware', function () {
     return "2FA middleware work!";
 })->middleware(['auth', '2fa']);
+
+Route::get('/amount', 'App\Services\CalculAmountController@calculAmount')->name('calculAmount');
