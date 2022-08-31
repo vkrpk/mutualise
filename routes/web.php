@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\Auth\ProfilViewController;
-use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TestController;
+use App\Http\Controllers\Auth\ProfilViewController;
+use TimeHunter\LaravelGoogleReCaptchaV3\Validations\GoogleReCaptchaV3ValidationRule;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,3 +57,4 @@ Route::get('/test_middleware', function () {
 })->middleware(['auth', '2fa']);
 
 Route::get('/amount', 'App\Services\CalculAmountController@calculAmount')->name('calculAmount');
+
