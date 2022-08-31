@@ -11,6 +11,7 @@ use Illuminate\Auth\Events\Registered;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use TimeHunter\LaravelGoogleReCaptchaV3\Validations\GoogleReCaptchaV3ValidationRule;
 
 class RegisterController extends Controller
 {
@@ -83,6 +84,15 @@ class RegisterController extends Controller
      */
     public function register(Request $request)
     {
+        $rule = [
+            'g-recaptcha-response' => [new GoogleReCaptchaV3ValidationRule('contact_us_action')]
+        ];
+
+        $validator = \Illuminate\Support\Facades\Validator::make($request->toArray(),$rule)->errors();
+
+        if(!empty($validator->toArray())){
+            return redirect($request->headers->get('referer'));
+        }
 
         if(!isset($request->all()['is_2Fa_enabled'])){
             $request->request->set('is_2Fa_enabled', 'off');
