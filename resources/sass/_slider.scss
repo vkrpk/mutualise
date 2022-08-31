@@ -91,3 +91,9 @@
     cursor: pointer;
     height: 8px;
 }
+
+@media (min-width: 768px) {
+    .range-slider-container span {
+        font-size: 14.4px !important;
+    }
+}

@@ -1,9 +1,9 @@
 <div class="pricingTable">
     <div class="blank"></div>
-    <div class="Basique pricingHeader col1">Basique</div>
-    <div class="Standard pricingHeader col2">Standard</div>
-    <div class="Entreprise pricingHeader col3">Entreprise</div>
-    <div class="Dedie pricingHeader col4">Dédié</div>
+    <div class="Basique pricingHeader col1" offer="1">Basique</div>
+    <div class="Standard pricingHeader col2" offer="2">Standard</div>
+    <div class="Entreprise pricingHeader col3" offer="3">Entreprise</div>
+    <div class="Dedie pricingHeader col4" offer="4">Dédié</div>
     <div class="Pydio pricingReference">Pydio</div>
     <div class="Seafile pricingReference">Seafile</div>
     <div class="Nextcloud pricingReference">Nextcloud</div>
@@ -15,7 +15,7 @@
     <div class="CIFS pricingReference">CIFS</div>
     <div class="Webdav pricingReference">Webdav</div>
     <div class="SI pricingReference">SI</div>
-    <a tabindex="0" class="colContainer col1 popover-dismiss d-block w-100" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Répartition des données" data-bs-content="1 serveur" data-bs-placement="right">
+    <a tabindex="0" offer="1" class="colContainer col1 popover-dismiss d-block w-100 selected" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Répartition des données" data-bs-content="1 serveur" data-bs-placement="right">
         <div class="AA check">
             <input type="radio" name="basiqueChoice" id="basiqueChoice" value="pydio">
             <label for="basiqueChoice">Pydio</label>
@@ -78,42 +78,3 @@
       </div>
     </a>
   </div>
-
-<script defer>
-    const col_1 = document.querySelectorAll('.col1');
-    const col_2 = document.querySelectorAll('.col2');
-    const col_3 = document.querySelectorAll('.col3');
-    const col_4 = document.querySelectorAll('.col4');
-    const inputsDedicated = document.querySelectorAll('input[id="dedicatedChoice"]')
-    const inputsBasique = document.querySelectorAll('input[id="basiqueChoice"]')
-    const col_collection = [col_1, col_2, col_3, col_4];
-
-    col_collection.forEach(
-        column => column.forEach(
-            element => element.addEventListener('click',
-                function() {
-                    getUnselected(col_collection);
-                    getSelected(column);
-                })))
-
-    function getUnselected(col_collection) {
-        col_collection.forEach(
-            column => column.forEach(
-                element => element.classList.remove('selected',
-                    )));
-    }
-
-    function getSelected(column) {
-        column.forEach(element => element.classList.add('selected'));
-        if(column != col_4) {
-            inputsDedicated.forEach(
-                input => input.checked = false
-            )
-        }
-        if(column != col_1) {
-            inputsBasique.forEach(
-                input => input.checked = false
-            )
-        }
-    }
-</script>
