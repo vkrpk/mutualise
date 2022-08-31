@@ -26,7 +26,7 @@
                 {{-- INPUT --}}
                 @include('orders.form.boxFreeTrial')
                 {{-- INPUT --}}
-            </div>
+                </div>
         </div>
         <h1 class="pricing headline text-secondary" style="font-family: Roboto, sans-serif;">Choisissez votre formule</h1>
         <h3 class="pricing-sub-headline">Toutes vos données fragmentées, copiées et réparties sur différents serveurs et Datacenters selon le niveau de disponibilité choisi.
@@ -49,8 +49,6 @@
                 </span>
             </div>
         </div>
-
-
         <div class="offer_content mt-0">
             <div class="d-table">
                 <span class="offer_legend2 align-self-center">Récapitulatif de votre commande</span>
