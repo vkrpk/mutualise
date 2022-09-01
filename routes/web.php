@@ -31,6 +31,7 @@ Route::group(['prefix' => 'admin'], function () {
 
 Route::prefix('profil')->group(function () {
     Route::post('/change-password', 'App\Http\Controllers\Profil\ChangePasswordController@reset')->name('changePassword');
+    Route::post('/remove/{id}', 'App\Http\Controllers\Profil\RemoveAccountController@remove')->name('removeUserAccount');
     Route::controller(ProfilViewController::class)->group(function () {
         Route::get('/index', 'index')->name('profilIndex');
         Route::get('/billing', 'billing')->name('profilBilling');
