@@ -1,4 +1,4 @@
-<footer class="footer-basic mt-auto py-1 bg-dedikam text-dedikam fixed-bottom position-static">
+<footer class="footer-basic mt-auto py-1 bg-dedikam text-dedikam fixed-bottom position-relative">
     <div class="social"></div>
     <ul class="list-inline">
         <li class="list-inline-item"><a href="https://www.dedikam.com/contact/">Contact</a></li>
