@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\Auth\ProfilViewController;
-use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TestController;
+use App\Http\Controllers\Auth\ProfilViewController;
+use TimeHunter\LaravelGoogleReCaptchaV3\Validations\GoogleReCaptchaV3ValidationRule;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::redirect('/', '/home', 301);
 
 Auth::routes();
+Auth::routes(['verify' => true]);
 Route::post('logout', 'App\Http\Controllers\Auth\LoginController@logout')->name('logout')->withoutMiddleware('2fa');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->withoutMiddleware('auth');
@@ -28,6 +30,7 @@ Route::group(['prefix' => 'admin'], function () {
 
 
 Route::prefix('profil')->group(function () {
+    Route::post('/change-password', 'App\Http\Controllers\Profil\ChangePasswordController@reset')->name('changePassword');
     Route::controller(ProfilViewController::class)->group(function () {
         Route::get('/index', 'index')->name('profilIndex');
         Route::get('/billing', 'billing')->name('profilBilling');
@@ -54,3 +57,6 @@ Route::group(['prefix' => '2fa'], function () {
 Route::get('/test_middleware', function () {
     return "2FA middleware work!";
 })->middleware(['auth', '2fa']);
+
+Route::get('/amount', 'App\Services\CalculAmountController@calculAmount')->name('calculAmount');
+

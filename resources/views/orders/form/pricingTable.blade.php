@@ -1,61 +1,80 @@
 <div class="pricingTable">
-    <div class="Pydio"></div>
-    <div class="Seafile"></div>
-    <div class="Basique"></div>
-    <div class="Standard"></div>
-    <div class="Entreprise"></div>
-    <div class="Dedie"></div>
-    <div class="Nextcloud"></div>
-    <div class="ssh"></div>
-    <div class="RSYNC"></div>
-    <div class="SFTP"></div>
-    <div class="FTPSFTP"></div>
-    <div class="ISCSI"></div>
-    <div class="CIFS"></div>
-    <div class="Webdav"></div>
-    <div class="SI"></div>
-    <div class="AA"></div>
-    <div class="AB"></div>
-    <div class="AC"></div>
-    <div class="AD"></div>
-    <div class="BA"></div>
-    <div class="BB"></div>
-    <div class="BC"></div>
-    <div class="BD"></div>
-    <div class="CA"></div>
-    <div class="CB"></div>
-    <div class="CC"></div>
-    <div class="CD"></div>
-    <div class="DA"></div>
-    <div class="DB"></div>
-    <div class="DC"></div>
-    <div class="DD"></div>
-    <div class="EA"></div>
-    <div class="EB"></div>
-    <div class="EC"></div>
-    <div class="ED"></div>
-    <div class="FA"></div>
-    <div class="FB"></div>
-    <div class="FC"></div>
-    <div class="FD"></div>
-    <div class="GA"></div>
-    <div class="GB"></div>
-    <div class="GC"></div>
-    <div class="GD"></div>
-    <div class="HA"></div>
-    <div class="HB"></div>
-    <div class="HC"></div>
-    <div class="HD"></div>
-    <div class="IA"></div>
-    <div class="IB"></div>
-    <div class="IC"></div>
-    <div class="ID"></div>
-    <div class="JA"></div>
-    <div class="JB"></div>
-    <div class="JC"></div>
-    <div class="JD"></div>
-    <div class="KA"></div>
-    <div class="KB"></div>
-    <div class="KC"></div>
-    <div class="KD"></div>
+    <div class="blank"></div>
+    <div class="Basique pricingHeader col1" offer="1">Basique</div>
+    <div class="Standard pricingHeader col2" offer="2">Standard</div>
+    <div class="Entreprise pricingHeader col3" offer="3">Entreprise</div>
+    <div class="Dedie pricingHeader col4" offer="4">Dédié</div>
+    <div class="Pydio pricingReference">Pydio</div>
+    <div class="Seafile pricingReference">Seafile</div>
+    <div class="Nextcloud pricingReference">Nextcloud</div>
+    <div class="ssh pricingReference">SSH</div>
+    <div class="RSYNC pricingReference">RSYNC</div>
+    <div class="SFTP pricingReference">SFTP</div>
+    <div class="FTPSFTP pricingReference">FTP/SFTP</div>
+    <div class="ISCSI pricingReference">ISCSI</div>
+    <div class="CIFS pricingReference">CIFS</div>
+    <div class="Webdav pricingReference">Webdav</div>
+    <div class="SI pricingReference">SI</div>
+    <a tabindex="0" offer="1" class="colContainer col1 popover-dismiss d-block w-100 selected" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Répartition des données" data-bs-content="1 serveur" data-bs-placement="right">
+        <div class="AA check">
+            <input type="radio" name="basiqueChoice" id="basiqueChoice" value="pydio">
+            <label for="basiqueChoice">Pydio</label>
+        </div>
+        <div class="AB check">
+            <input type="radio" name="basiqueChoice" id="basiqueChoice" value="seafile">
+            <label for="basiqueChoice">Seafile</label>
+        </div>
+        <div class="AC check">
+            <input type="radio" name="basiqueChoice" id="basiqueChoice" value="nextcloud">
+            <label for="basiqueChoice">Nextcloud</label>
+        </div>
+        <div class="AD"><i class="fa-solid fa-xmark"></i></div>
+        <div class="AE"><i class="fa-solid fa-xmark"></i></div>
+        <div class="AF"><i class="fa-solid fa-xmark"></i></div>
+        <div class="AG"><i class="fa-solid fa-xmark"></i></div>
+        <div class="AH"><i class="fa-solid fa-xmark"></i></div>
+        <div class="AI"><i class="fa-solid fa-xmark"></i></div>
+        <div class="AJ"><i class="fa-solid fa-xmark"></i></div>
+        <div class="AK"><i class="fa-solid fa-xmark"></i></div>
+    </a>
+    <a tabindex="1" class="colContainer col2 popover-dismiss d-block w-100" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Répartition des données" data-bs-content="2 serveurs" data-bs-placement="right">
+        <div class="BA check"><i class="fa-solid fa-check"></i></div>
+        <div class="BB check"><i class="fa-solid fa-check"></i></div>
+        <div class="BC check"><i class="fa-solid fa-check"></i></div>
+        <div class="BD check"><i class="fa-solid fa-check"></i></div>
+        <div class="BE check"><i class="fa-solid fa-check"></i></div>
+        <div class="BF check"><i class="fa-solid fa-check"></i></div>
+        <div class="BG check"><i class="fa-solid fa-check"></i></div>
+        <div class="BH"><i class="fa-solid fa-xmark"></i></div>
+        <div class="BI"><i class="fa-solid fa-xmark"></i></div>
+        <div class="BJ"><i class="fa-solid fa-xmark"></i></div>
+        <div class="BK"><i class="fa-solid fa-xmark"></i></div>
+    </a>
+    <a tabindex="2" class="colContainer col3 popover-dismiss d-block w-100" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Répartition des données" data-bs-content="3 serveurs et 2 datacenters" data-bs-placement="left">
+        <div class="CA check"><i class="fa-solid fa-check"></i></div>
+        <div class="CB check"><i class="fa-solid fa-check"></i></div>
+        <div class="CC check"><i class="fa-solid fa-check"></i></div>
+        <div class="CD check"><i class="fa-solid fa-check"></i></div>
+        <div class="CE check"><i class="fa-solid fa-check"></i></div>
+        <div class="CF check"><i class="fa-solid fa-check"></i></div>
+        <div class="CG check"><i class="fa-solid fa-check"></i></div>
+        <div class="CH check"><i class="fa-solid fa-check"></i></div>
+        <div class="CI check"><i class="fa-solid fa-check"></i></div>
+        <div class="CJ check"><i class="fa-solid fa-check"></i></div>
+        <div class="CK check"><i class="fa-solid fa-check"></i></div>
+    </a>
+    <a tabindex="3" class="colContainer col4 popover-dismiss d-block w-100" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Répartition des données" data-bs-content="3 serveurs et 2 datacenters" data-bs-placement="left">
+      <div class="DA">
+          <input type="radio" name="dedicatedChoice" id="dedicatedChoice" value="pydio">
+          <label for="dedicatedChoice">Pydio</label>
+      </div>
+      <div class="DB">
+          <input type="radio" name="dedicatedChoice" id="dedicatedChoice" value="seafile">
+          <label for="dedicatedChoice">Seafile</label>
+      </div>
+      <div class="DC">
+          <input type="radio" name="dedicatedChoice" id="dedicatedChoice" value="nextcloud">
+          <label for="dedicatedChoice">Nextcloud</label>
+      </div>
+    </a>
   </div>

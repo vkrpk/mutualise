@@ -13,28 +13,44 @@
             <div class="col-lg-8">
                 <!-- Change password card-->
                 <div class="card mb-4">
-                    <div class="card-header">Change Password</div>
+                    <div class="card-header">Changer votre mot de passe</div>
                     <div class="card-body">
-                        <form>
+                        <form method="POST" action="{{ route('changePassword') }}">
+                            @csrf
+                            @if (session('status'))
+                                <div class="alert alert-success" role="alert">
+                                    {{ session('status') }}
+                                </div>
+                            @elseif (session('error'))
+                                <div class="alert alert-danger" role="alert">
+                                    {{ session('error') }}
+                                </div>
+                            @endif
                             <!-- Form Group (current password)-->
                             <div class="mb-3">
-                                <label class="small mb-1" for="currentPassword">Current Password</label>
-                                <input class="form-control" id="currentPassword" type="password"
-                                    placeholder="Enter current password">
+                                <label class="small mb-1" for="oldPasswordInput">Mot de passe actuel</label>
+                                <input class="form-control @error('old_password') is-invalid @enderror" id="oldPasswordInput" type="password"
+                                    placeholder="Mot de passe actuel" name="old_password">
+                                @error('old_password')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <!-- Form Group (new password)-->
                             <div class="mb-3">
-                                <label class="small mb-1" for="newPassword">New Password</label>
-                                <input class="form-control" id="newPassword" type="password"
-                                    placeholder="Enter new password">
+                                <label class="small mb-1" for="newPasswordInput">Nouveau mot de passe</label>
+                                <input class="form-control @error('new_password') is-invalid @enderror" id="newPasswordInput" type="password"
+                                    placeholder="Nouveau mot de passe" name="new_password">
+                                @error('new_password')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <!-- Form Group (confirm password)-->
                             <div class="mb-3">
-                                <label class="small mb-1" for="confirmPassword">Confirm Password</label>
-                                <input class="form-control" id="confirmPassword" type="password"
-                                    placeholder="Confirm new password">
+                                <label class="small mb-1" for="confirmNewPasswordInput">Confirmer le mot de passe</label>
+                                <input class="form-control" id="confirmNewPasswordInput" type="password"
+                                    placeholder="Confirmer le mot de passe" name="new_password_confirmation">
                             </div>
-                            <button class="btn btn-primary" type="button">Save</button>
+                            <button class="btn btn-primary" type="submit">Sauvegarder</button>
                         </form>
                     </div>
                 </div>
