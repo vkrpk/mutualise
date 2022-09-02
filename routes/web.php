@@ -18,7 +18,7 @@ use TimeHunter\LaravelGoogleReCaptchaV3\Validations\GoogleReCaptchaV3ValidationR
 
 Route::redirect('/', '/home', 301);
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 Route::post('logout', 'App\Http\Controllers\Auth\LoginController@logout')->name('logout')->withoutMiddleware('2fa');
 Route::post('inscription', 'App\Http\Controllers\Auth\RegisterController@register')->name('inscription');
 
@@ -29,7 +29,10 @@ Route::group(['prefix' => 'admin'], function () {
 });
 
 
-Route::prefix('profil')->group(function () {
+Route::prefix('profil')->middleware('auth')->group(function () {
+    Route::post('/change-password', 'App\Http\Controllers\Profil\ChangePasswordController@reset')->name('changePassword');
+    Route::post('/remove/{id}', 'App\Http\Controllers\Profil\RemoveAccountController@remove')->name('removeUserAccount');
+    Route::post('/index/store', 'App\Http\Controllers\Profil\StoreInfosController@store')->name('storeInfos');
     Route::controller(ProfilViewController::class)->group(function () {
         Route::get('/index', 'index')->name('profilIndex');
         Route::get('/billing', 'billing')->name('profilBilling');
