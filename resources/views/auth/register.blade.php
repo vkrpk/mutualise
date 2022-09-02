@@ -83,7 +83,7 @@
 
 
                             <div class="row mb-0">
-                                {!! GoogleReCaptchaV3::renderField('contact_us_id', 'register') !!}
+                                {!! GoogleReCaptchaV3::renderField('register_id', 'register') !!}
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary mt-3" id="captcha-button">
                                         {{ __('Register') }}
@@ -102,13 +102,13 @@
 
     <script>
         document.getElementById('captcha-button').addEventListener('click', function(e) {
-            console.log('je passe');
+            // console.log('je passe');
             e.preventDefault();
             fetch({{ route('register') }}, {
                 method: "POST", 
-                body: 'g-recaptcha-response': getReCaptchaV3Response('contact_us_ajax_id')
+                body: 'g-recaptcha-response': getReCaptchaV3Response('register_id')
             }).then(function (data) {
-                refreshReCaptchaV3('contact_us_id', 'register')
+                refreshReCaptchaV3('register_id', 'register')
             })
         })
     </script>    
