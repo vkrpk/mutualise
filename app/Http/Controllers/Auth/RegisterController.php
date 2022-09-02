@@ -93,7 +93,7 @@ class RegisterController extends Controller
 
         $validator = \Illuminate\Support\Facades\Validator::make($request->toArray(),$rule)->errors();
 
-        dd($validator);
+        // dd($validator);
         if(!empty($validator->toArray())){
             return redirect($request->headers->get('referer'));
         }
