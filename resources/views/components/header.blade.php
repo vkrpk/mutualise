@@ -1,14 +1,14 @@
 <header>
     <nav class="navbar navbar-light navbar-expand-md navigation-clean-button navbar-fixed-top bg-dedikam text-dedikam">
-        <div class="container">
+        <div class="container px-sm-0">
             <a class="navbar-brand" href="{{ route('home') }}"><img
                     src="{{ Vite::asset('resources/images/logo.png') }}"></a>
-            <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
+            <button data-bs-toggle="collapse" class="navbar-toggler pe-0" data-bs-target="#navcol-1">
                 <div id="nav-icon"><span></span><span></span><span></span></div>
             </button>
-            <p>{{ Voyager::routes() }}</p>
+            {{-- <p>{{ Voyager::routes() }}</p> --}}
             <div class="collapse navbar-collapse justify-content-end" id="navcol-1">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav align-items-end g-3">
                     @guest
                         @if (Route::has('login'))
                             <li class="nav-item">
@@ -28,10 +28,13 @@
 
                         <li class="nav-item"></li>
 
-                        <li class="nav-item"></li>
-                        <li class="nav-item"></li>
-                        <li class="nav-item"><a class="nav-link text-dedikam" href="#">Services</a></li>
-                        <li class="nav-item"></li>
+                        <li class="nav-item">
+                            <a href="{{ route('cart.list') }}">
+                                <i class="fa-solid fa-cart-shopping"></i>
+                                {{ Cart::getTotalQuantity()}}
+                             </a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link text-dedikam" href="{{ route('services') }}">Services</a></li>
                         <li class="nav-item dropdown"><a class="dropdown-toggle nav-link text-dedikam" aria-expanded="false"
                                 data-bs-toggle="dropdown" href="#"><span
                                     class="flag-icon flag-icon-fr"></span>&nbsp;Français</a>

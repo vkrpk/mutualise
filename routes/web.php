@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TestController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\OfferController;
 use App\Http\Controllers\Auth\ProfilViewController;
 use TimeHunter\LaravelGoogleReCaptchaV3\Validations\GoogleReCaptchaV3ValidationRule;
 
@@ -41,7 +42,7 @@ Route::prefix('profil')->middleware('auth')->group(function () {
     });
 });
 
-Route::get('/test', [TestController::class, 'test'])->name('test');
+Route::get('/services', [OfferController::class, 'services'])->name('services');
 
 Route::group(['prefix' => '2fa'], function () {
     Route::get('/', 'App\Http\Controllers\LoginSecurityController@show2faForm');
@@ -62,3 +63,8 @@ Route::get('/test_middleware', function () {
 
 Route::get('/amount', 'App\Services\CalculAmountController@calculAmount')->name('calculAmount');
 
+Route::get('cart', [CartController::class, 'cartList'])->name('cart.list');
+Route::post('cart', [CartController::class, 'addToCart'])->name('cart.store');
+Route::post('update-cart', [CartController::class, 'updateCart'])->name('cart.update');
+Route::post('remove', [CartController::class, 'removeCart'])->name('cart.remove');
+Route::post('clear', [CartController::class, 'clearAllCart'])->name('cart.clear');
