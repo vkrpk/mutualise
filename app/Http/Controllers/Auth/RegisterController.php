@@ -88,26 +88,15 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         $rule = [
-            'g-recaptcha-response' => [new GoogleReCaptchaV3ValidationRule('contact_us_action')]
+            'g-recaptcha-response' => [new GoogleReCaptchaV3ValidationRule('register')]
         ];
 
         $validator = \Illuminate\Support\Facades\Validator::make($request->toArray(),$rule)->errors();
 
+        dd($validator);
         if(!empty($validator->toArray())){
             return redirect($request->headers->get('referer'));
         }
-
-        $rule = [
-            'g-recaptcha-response' => [new GoogleReCaptchaV3ValidationRule('register')]
-        ];
-
-        $validator = \Illuminate\Support\Facades\Validator::make($request->toArray(), $rule)->errors();
-
-        // dd($validator);
-
-        if (!empty($validator->toArray())) {
-            return redirect($request->headers->get('referer'));            
-        } 
 
         if (!isset($request->all()['is_2Fa_enabled'])) {
             $request->request->set('is_2Fa_enabled', 'off');

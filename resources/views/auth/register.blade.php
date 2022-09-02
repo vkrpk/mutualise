@@ -85,8 +85,7 @@
                             <div class="row mb-0">
                                 {!! GoogleReCaptchaV3::renderField('contact_us_id', 'register') !!}
                                 <div class="col-md-6 offset-md-4">
-                                    {!!  GoogleReCaptchaV3::renderField('contact_us_id','contact_us_action') !!}
-                                    <button type="submit" class="btn btn-primary mt-3">
+                                    <button type="submit" class="btn btn-primary mt-3" id="captcha-button">
                                         {{ __('Register') }}
                                     </button>
                                 </div>
@@ -97,5 +96,52 @@
             </div>
         </div>
     </div>
-
 @endsection
+
+@push('scripts')
+
+    <script>
+        document.getElementById('captcha-button').addEventListener('click', function(e) {
+            console.log('je passe');
+            e.preventDefault();
+            fetch({{ route('register') }}, {
+                method: "POST", 
+                body: 'g-recaptcha-response': getReCaptchaV3Response('contact_us_ajax_id')
+            }).then(function (data) {
+                refreshReCaptchaV3('contact_us_id', 'register')
+            })
+        })
+    </script>    
+@endpush
+
+    {{-- $("#test").click(function (e) {
+    console.log('11');
+    e.preventDefault();
+    $.ajax({
+    type: 'POST',
+    url: '/verify',
+    data: {
+    'g-recaptcha-response': getReCaptchaV3Response('contact_us_ajax_id')
+    },
+    success: function (data) {
+    refreshReCaptchaV3('contact_us_ajax_id', 'contact_us_action');
+    },
+    error: function (err) {
+    refreshReCaptchaV3('contact_us_ajax_id', 'contact_us_action');
+    }
+    });
+
+    (async () => {
+    const rawResponse = await fetch('https://httpbin.org/post', {
+    method: 'POST',
+    headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({a: 1, b: 'Textual content'})
+    });
+    const content = await rawResponse.json();
+
+    console.log(content);
+    })();
+    }); --}}

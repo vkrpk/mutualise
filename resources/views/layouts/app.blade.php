@@ -38,8 +38,8 @@
         @yield('content')
     </div>
     <x-footer />
-
     @stack('scripts')
 </body>
-{!!  GoogleReCaptchaV3::init() !!}
+{!! GoogleReCaptchaV3::init() !!}
+
 </html>
