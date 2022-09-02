@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class TestController extends Controller
+class OfferController extends Controller
 {
-    public function test()
+    public function services()
     {
         $cart = session()->get('cart');
         if ($cart) {
@@ -21,24 +23,20 @@ class TestController extends Controller
             $diskspace = 10;
             $access_name = '';
         }
-        $user = "Bob";
-        $nbfree = 4;
-        $nbfree = $nbfree < 0 ? 0 : $nbfree;
-        $enddate1y = Carbon::now();
-        $enddate1y->addYears(1);
-        $enddate30d = Carbon::now();
-        $enddate30d->addDays(30);
+        if(Auth::user()){
+            $userId = auth()->user()->id;
+            $user = User::where('id', $userId)->first();
+            $nbfree = 4 - $user->nb_free_account;
+        }
         if ($cart && array_key_exists('options', $cart)) {
             $option = in_array('nextcloud', $cart['options']) ? 'nextcloud' : 'pydio';
         } else {
             $option = 'nextcloud';
         }
 
-        return view('orders.test', [
-            'user' => $user,
-            'nbfreeaccount' => $nbfree,
-            'enddate1y' => $enddate1y,
-            'enddate30d' => $enddate30d,
+        return view('orders.offer', [
+            'user' => $user ?? '',
+            'nbfreeaccount' => $nbfree ?? '',
             'level' => $level,
             'free_account' => $free_account,
             'diskspace' => $diskspace,
