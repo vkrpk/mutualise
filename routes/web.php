@@ -18,6 +18,7 @@ use TimeHunter\LaravelGoogleReCaptchaV3\Validations\GoogleReCaptchaV3ValidationR
 
 Route::redirect('/', '/home', 301);
 
+Auth::routes();
 Auth::routes(['verify' => true]);
 Route::post('logout', 'App\Http\Controllers\Auth\LoginController@logout')->name('logout')->withoutMiddleware('2fa');
 
