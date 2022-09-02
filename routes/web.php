@@ -60,8 +60,5 @@ Route::get('/test_middleware', function () {
     return "2FA middleware work!";
 })->middleware(['auth', '2fa']);
 
-<<<<<<< HEAD
-Route::get('/amount', 'App\Services\CalculAmountController@calculAmount')->name('calculAmount');
-=======
 Route::get('/amount', 'App\Services\CalculAmountController@calculAmount')->name('calculAmount');
 
