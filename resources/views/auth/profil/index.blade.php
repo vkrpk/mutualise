@@ -30,69 +30,110 @@
                 <div class="card mb-4">
                     <div class="card-header">Account Details</div>
                     <div class="card-body">
-                        <form>
+                        <form method="POST" action="{{ route('storeInfos') }}">
+                            @csrf
                             <!-- Form Group (username)-->
-                            <div class="mb-3">
-                                <label class="small mb-1" for="inputUsername">Username (how your name will appear to other
-                                    users on the site)</label>
-                                <input class="form-control" id="inputUsername" type="text" value=""
-                                    placeholder="{{ $user->name }}">
+                            <div class="row gx-3 mb-3">
+                                <!-- Form Group (first name)-->
+                                <div class="col-md-6">
+                                    <label class="small mb-1" for="label">Libellé de l'adresse<sup><i class="fa-solid fa-asterisk" style="font-size: 8px;color: red;margin-top: -14px;"></i></sup></label>
+                                    <input class="form-control" id="label" type="text" value="{{ old('label') ? old('label') : $address->label }}"
+                                        placeholder="" name="label">
+                                    @error('label')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <!-- Form Group (last name)-->
+                                <div class="col-md-6">
+                                    <label class="small mb-1" for="email">Courriel de connexion</label>
+                                    <input class="form-control" id="email" type="text"
+                                        placeholder="" value="{{ old('email') ? old('email') : $address->email }}" name="email">
+                                </div>
                             </div>
                             <!-- Form Row-->
                             <div class="row gx-3 mb-3">
                                 <!-- Form Group (first name)-->
                                 <div class="col-md-6">
-                                    <label class="small mb-1" for="inputFirstName">First name</label>
-                                    <input class="form-control" id="inputFirstName" type="text"
-                                        placeholder="Enter your first name" value="">
+                                    <label class="small mb-1" for="first_name">Prénom</label>
+                                    <input class="form-control" id="first_name" type="text"
+                                        placeholder="" value="{{ old('first_name') ? old('first_name') : $address->first_name }}" name="first_name">
                                 </div>
                                 <!-- Form Group (last name)-->
                                 <div class="col-md-6">
-                                    <label class="small mb-1" for="inputLastName">Last name</label>
-                                    <input class="form-control" id="inputLastName" type="text"
-                                        placeholder="Enter your last name" value="">
+                                    <label class="small mb-1" for="last_name">Nom</label>
+                                    <input class="form-control" id="last_name" type="text"
+                                        placeholder="" value="{{ old('last_name') ? old('last_name') : $address->last_name }}" name="last_name">
                                 </div>
                             </div>
-                            <!-- Form Row        -->
                             <div class="row gx-3 mb-3">
-                                <!-- Form Group (organization name)-->
+                                <!-- Form Group (first name)-->
                                 <div class="col-md-6">
-                                    <label class="small mb-1" for="inputOrgName">Organization name</label>
-                                    <input class="form-control" id="inputOrgName" type="text"
-                                        placeholder="Enter your organization name" value="">
+                                    <label class="small mb-1" for="address1">Adresse<sup><i class="fa-solid fa-asterisk" style="font-size: 8px;color: red;margin-top: -14px;"></i></sup></label>
+                                    <input class="form-control" id="address1" type="text"
+                                        placeholder="" value="{{ old('address1') ? old('address1') : $address->address1 }}" name="address1">
+                                    @error('address1')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
-                                <!-- Form Group (location)-->
+                                <!-- Form Group (last name)-->
                                 <div class="col-md-6">
-                                    <label class="small mb-1" for="inputLocation">Location</label>
-                                    <input class="form-control" id="inputLocation" type="text"
-                                        placeholder="Enter your location" value="">
+                                    <label class="small mb-1" for="address2">Complément d'adresse</label>
+                                    <input class="form-control" id="address2" type="text"
+                                        placeholder="" value="{{ old('address2') ? old('address2') : $address->address2 }}" name="address2">
                                 </div>
                             </div>
-                            <!-- Form Group (email address)-->
-                            <div class="mb-3">
-                                <label class="small mb-1" for="inputEmailAddress">Email address</label>
-                                <input class="form-control" id="inputEmailAddress" type="email" value=""
-                                    placeholder="{{ $user->email }}">
-                            </div>
-                            <!-- Form Row-->
                             <div class="row gx-3 mb-3">
-                                <!-- Form Group (phone number)-->
+                                <!-- Form Group (first name)-->
                                 <div class="col-md-6">
-                                    <label class="small mb-1" for="inputPhone">Phone number</label>
-                                    <input class="form-control" id="inputPhone" type="tel"
-                                        placeholder="Enter your phone number" value="">
+                                    <label class="small mb-1" for="postal_code">Code postal<sup><i class="fa-solid fa-asterisk" style="font-size: 8px;color: red;margin-top: -14px;"></i></sup></label>
+                                    <input class="form-control" id="postal_code" type="text"
+                                        placeholder="" value="{{ old('postal_code') ? old('postal_code') : $address->postal_code }}" name="postal_code">
+                                    @error('postal_code')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
-                                <!-- Form Group (birthday)-->
+                                <!-- Form Group (last name)-->
                                 <div class="col-md-6">
-                                    <label class="small mb-1" for="inputBirthday">Birthday</label>
-                                    <input class="form-control" id="inputBirthday" type="text" name="birthday"
-                                        placeholder="Enter your birthday" value="">
+                                    <label class="small mb-1" for="city">Ville<sup><i class="fa-solid fa-asterisk" style="font-size: 8px;color: red;margin-top: -14px;"></i></sup></label>
+                                    <input class="form-control" id="city" type="text"
+                                        placeholder="" value="{{ old('city') ? old('city') : $address->city }}" name="city">
+                                    @error('city')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="row gx-3 mb-3">
+                                <!-- Form Group (first name)-->
+                                <div class="col-md-6">
+                                    <label class="small mb-1" for="state">État/Province</label>
+                                    <input class="form-control" id="state" type="text"
+                                        placeholder="" value="{{ old('state') ? old('state') : $address->state }}" name="state">
+                                </div>
+                                <!-- Form Group (last name)-->
+                                <div class="col-md-6">
+                                    <label class="small mb-1" for="country">Pays</label>
+                                    <input class="form-control" id="country" type="text"
+                                        placeholder="" value="{{ old('country') ? old('country') : $address->country }}" name="country">
+                                </div>
+                            </div>
+                            <div class="row gx-3 mb-3">
+                                <!-- Form Group (first name)-->
+                                <div class="col-md-6">
+                                    <label class="small mb-1" for="phone_number">Numéro de téléphone</label>
+                                    <input class="form-control" id="phone_number" type="text"
+                                        placeholder="" value="{{ old('phone_number') ? old('phone_number') : $address->phone_number }}" name="phone_number">
+                                </div>
+                                <!-- Form Group (last name)-->
+                                <div class="col-md-6">
+                                    <label class="small mb-1" for="organization">Organisation</label>
+                                    <input class="form-control" id="organization" type="text"
+                                        placeholder="" value="{{ old('organization') ? old('organization') : $address->organization }}" name="organization">
                                 </div>
                             </div>
                             <!-- Save changes button-->
-                            <button class="btn btn-primary" type="button">Save changes</button>
+                            <button class="btn btn-primary" type="submit">Sauvegarder</button>
                         </form>
-                    </div>
+                    </div
                 </div>
             </div>
         </div>
