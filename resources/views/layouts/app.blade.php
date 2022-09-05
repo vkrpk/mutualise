@@ -14,7 +14,6 @@
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts -->
     @vite(['resources/js/app.js'])
@@ -26,6 +25,15 @@
 <body>
 
     <x-header />
+    @if (session('status'))
+        <div class="alert alert-success" role="alert">
+            {{ session('status') }}
+        </div>
+    @elseif (session('error'))
+        <div class="alert alert-danger" role="alert">
+            {{ session('error') }}
+        </div>
+    @endif
     <div>
         @yield('content')
     </div>
@@ -33,5 +41,5 @@
 
     @stack('scripts')
 </body>
-{{-- <script src="{{ Vite::asset('public/build/app.js') }}"></script> --}}
+{!!  GoogleReCaptchaV3::init() !!}
 </html>

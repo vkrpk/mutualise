@@ -1,0 +1,355 @@
+.pricingTable {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 0px 2px;
+    grid-auto-flow: row;
+    justify-items: center;
+    align-items: center;
+    grid-template-areas:
+        "blank Basique Standard Entreprise Dedie"
+        "Pydio col1 col2 col3 col4"
+        "Seafile col1 col2 col3 col4"
+        "Nextcloud col1 col2 col3 col4"
+        "ssh col1 col2 col3 col4"
+        "RSYNC col1 col2 col3 col4"
+        "SFTP col1 col2 col3 col4"
+        "FTPSFTP col1 col2 col3 col4"
+        "ISCSI col1 col2 col3 col4"
+        "CIFS col1 col2 col3 col4"
+        "Webdav col1 col2 col3 col4"
+        "SI col1 col2 col3 col4";
+    background-color: black;
+    border: 2px solid black;
+    font-size: 24px !important;
+}
+
+.colContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    height: 100%;
+}
+
+.col1 {
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-areas:
+        "AA"
+        "AB"
+        "AC"
+        "AD"
+        "AE"
+        "AF"
+        "AG"
+        "AH"
+        "AI"
+        "AJ"
+        "AK";
+    grid-area: col1;
+}
+
+.col2 {
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-areas:
+        "BA"
+        "BB"
+        "BC"
+        "BD"
+        "BE"
+        "BF"
+        "BG"
+        "BH"
+        "BI"
+        "BJ"
+        "BK";
+    grid-area: col2;
+}
+
+.col3 {
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-areas:
+        "CA"
+        "CB"
+        "CC"
+        "CD"
+        "CE"
+        "CF"
+        "CG"
+        "CH"
+        "CI"
+        "CJ"
+        "CK";
+    grid-area: col3;
+}
+
+.col4 {
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas:
+        "DA"
+        "DB"
+        "DC";
+    grid-area: col4;
+}
+
+.col4 div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 33%;
+}
+
+.pricingHeader,
+.pricingReference,
+.colContainer div,
+.blank {
+    // padding: 8px 0;
+}
+
+.pricingHeader {
+    background-color: #feb986 !important;
+}
+
+.pricingReference {
+    background: darken(#f8fafc, 7%) !important;
+}
+
+.pricingTable a i {
+    color: #ddd;
+}
+
+.check i {
+    color: $secondary !important;
+}
+
+.check {
+    background-color: #fff1e5 !important;
+}
+
+.pricingTable > a {
+    background-color: white;
+}
+.pricingTable div {
+    text-align: center;
+    width: 100%;
+}
+
+@media (max-width: 767px) {
+    .pricingTable {
+        font-size: 12px !important;
+    }
+    .pricingHeader,
+    .pricingReference,
+    .colContainer div,
+    .colContainer div i,
+    .blank {
+        line-height: 30px;
+        height: 30px;
+    }
+}
+
+.pricingTable .selected label,
+.pricingTable .selected i {
+    color: #fff !important;
+}
+
+.colContainer.selected .check,
+.colContainer.selected.col4 {
+    background-color: $secondary !important;
+}
+
+.colContainer.selected:not(.col4) > :not(.check) {
+    background-color: $secondary-light !important;
+}
+
+.col1,
+.col2,
+.col3,
+.col4 {
+    cursor: pointer;
+}
+
+.col4 label,
+.col1 label {
+    cursor: pointer !important;
+    margin-left: 8px;
+}
+
+.Pydio {
+    grid-area: Pydio;
+}
+
+.Seafile {
+    grid-area: Seafile;
+}
+
+.Basique {
+    grid-area: Basique;
+}
+
+.Standard {
+    grid-area: Standard;
+}
+
+.Entreprise {
+    grid-area: Entreprise;
+}
+
+.Dedie {
+    grid-area: Dedie;
+}
+
+.blank {
+    grid-area: blank;
+    height: 100%;
+    background-color: white !important;
+}
+
+.Nextcloud {
+    grid-area: Nextcloud;
+}
+
+.ssh {
+    grid-area: ssh;
+}
+
+.RSYNC {
+    grid-area: RSYNC;
+}
+
+.SFTP {
+    grid-area: SFTP;
+}
+
+.FTPSFTP {
+    grid-area: FTPSFTP;
+}
+
+.ISCSI {
+    grid-area: ISCSI;
+}
+
+.CIFS {
+    grid-area: CIFS;
+}
+
+.Webdav {
+    grid-area: Webdav;
+}
+
+.SI {
+    grid-area: SI;
+}
+
+.AA {
+    grid-area: AA;
+}
+.AB {
+    grid-area: AB;
+}
+.AC {
+    grid-area: AC;
+    white-space: nowrap;
+}
+.AD {
+    grid-area: AD;
+}
+.AE {
+    grid-area: AE;
+}
+.AF {
+    grid-area: AF;
+}
+.AG {
+    grid-area: AG;
+}
+.AH {
+    grid-area: AH;
+}
+.AI {
+    grid-area: AI;
+}
+.AJ {
+    grid-area: AJ;
+}
+.AK {
+    grid-area: AK;
+}
+
+.BA {
+    grid-area: BA;
+}
+.BB {
+    grid-area: BB;
+}
+.BC {
+    grid-area: BC;
+}
+.BD {
+    grid-area: BD;
+}
+.BE {
+    grid-area: BE;
+}
+.BF {
+    grid-area: BF;
+}
+.BG {
+    grid-area: BG;
+}
+.BH {
+    grid-area: BH;
+}
+.BI {
+    grid-area: BI;
+}
+.BJ {
+    grid-area: BJ;
+}
+.BK {
+    grid-area: BK;
+}
+
+.CA {
+    grid-area: CA;
+}
+.CB {
+    grid-area: CB;
+}
+.CC {
+    grid-area: CC;
+}
+.CD {
+    grid-area: CD;
+}
+.CE {
+    grid-area: CE;
+}
+.CF {
+    grid-area: CF;
+}
+.CG {
+    grid-area: CG;
+}
+.CH {
+    grid-area: CH;
+}
+.CI {
+    grid-area: CI;
+}
+.CJ {
+    grid-area: CJ;
+}
+.CK {
+    grid-area: CK;
+}
+
+.DA {
+    grid-area: DA;
+}
+.DB {
+    grid-area: DB;
+}
+.DC {
+    grid-area: DC;
+}
