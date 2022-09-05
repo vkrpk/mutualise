@@ -96,52 +96,28 @@
             </div>
         </div>
     </div>
+
+
+    {!! GoogleReCaptchaV3::init() !!}
+    <script custom="hello">
+        setTimeout(() => {
+            let href = "{{ route('register') }}";
+            let request = new Request(href, {
+                method: 'POST',
+                headers: new Headers({
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                }),
+                body: {
+                    'g-recaptcha-response': getReCaptchaV3Response('register_id')
+                }
+            });
+            console.log('smth happenend');
+            fetch(request)
+                .then((data) => console.log(data))
+                .then((data) =>  refreshRecaptchaV3('register_id', 'register'))
+                .catch((error) => console.log(error))
+        }, 5 * 1000);
+    </script>
+
+
 @endsection
-
-@push('scripts')
-
-    <script>
-        document.getElementById('captcha-button').addEventListener('click', function(e) {
-            // console.log('je passe');
-            e.preventDefault();
-            fetch({{ route('register') }}, {
-                method: "POST", 
-                body: 'g-recaptcha-response': getReCaptchaV3Response('register_id')
-            }).then(function (data) {
-                refreshReCaptchaV3('register_id', 'register')
-            })
-        })
-    </script>    
-@endpush
-
-    {{-- $("#test").click(function (e) {
-    console.log('11');
-    e.preventDefault();
-    $.ajax({
-    type: 'POST',
-    url: '/verify',
-    data: {
-    'g-recaptcha-response': getReCaptchaV3Response('contact_us_ajax_id')
-    },
-    success: function (data) {
-    refreshReCaptchaV3('contact_us_ajax_id', 'contact_us_action');
-    },
-    error: function (err) {
-    refreshReCaptchaV3('contact_us_ajax_id', 'contact_us_action');
-    }
-    });
-
-    (async () => {
-    const rawResponse = await fetch('https://httpbin.org/post', {
-    method: 'POST',
-    headers: {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({a: 1, b: 'Textual content'})
-    });
-    const content = await rawResponse.json();
-
-    console.log(content);
-    })();
-    }); --}}

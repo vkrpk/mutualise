@@ -23,7 +23,6 @@
 </head>
 
 <body>
-
     <x-header />
     @if (session('status'))
         <div class="alert alert-success" role="alert">
@@ -40,6 +39,5 @@
     <x-footer />
     @stack('scripts')
 </body>
-{!! GoogleReCaptchaV3::init() !!}
 
 </html>
