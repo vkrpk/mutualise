@@ -13,6 +13,7 @@ import * as bootstrap from "bootstrap";
 import "./dedikam";
 import "./bootstrap.js";
 import "./bs-init.js";
+import "./order";
 
 // import.meta.glob([
 //     '../images/**',
@@ -20,3 +21,15 @@ import "./bs-init.js";
 // ]);
 
 import.meta.glob(["../images/**"]);
+var popoverTriggerList = [].slice.call(
+    document.querySelectorAll('[data-bs-toggle="popover"]')
+);
+var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+    return new bootstrap.Popover(popoverTriggerEl);
+});
+var popover = new bootstrap.Popover(
+    document.querySelector(".popover-dismiss"),
+    {
+        trigger: "focus",
+    }
+);
