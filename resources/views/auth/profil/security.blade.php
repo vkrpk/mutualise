@@ -17,15 +17,6 @@
                     <div class="card-body">
                         <form method="POST" action="{{ route('changePassword') }}">
                             @csrf
-                            @if (session('status'))
-                                <div class="alert alert-success" role="alert">
-                                    {{ session('status') }}
-                                </div>
-                            @elseif (session('error'))
-                                <div class="alert alert-danger" role="alert">
-                                    {{ session('error') }}
-                                </div>
-                            @endif
                             <!-- Form Group (current password)-->
                             <div class="mb-3">
                                 <label class="small mb-1" for="oldPasswordInput">Mot de passe actuel</label>
@@ -67,13 +58,13 @@
                         <form>
                             <div class="form-check">
                                 <input class="form-check-input" id="radioUsage1" type="radio" name="radioUsage"
-                                    checked="">
+                                checked="">
                                 <label class="form-check-label" for="radioUsage1">Yes, share data and crash reports with app
                                     developers</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" id="radioUsage2" type="radio" name="radioUsage">
                                 <label class="form-check-label" for="radioUsage2">No, limit my data sharing with app
+                                <input class="form-check-input" id="radioUsage2" type="radio" name="radioUsage">
                                     developers</label>
                             </div>
                         </form>
@@ -82,6 +73,44 @@
             </div>
             <div class="col-lg-4">
                 <x-two-f-a-settings :data="$data"/>
+                <div class="card mb-4">
+                    <div class="card-header">Changer mon adresse email</div>
+                    <div class="card-body">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="buttonForOpenModal">
+                            Changer mon adresse email
+                        </button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="staticBackdrop" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">Changer d'adresse email</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Veuillez renseigner votre mot de passe.</p>
+                                    <p>Pour effectuer le changement, veuillez cliquer sur le lien présent dans le mail envoyé à la nouvelle adresse.</p>
+                                    <form id="changeEmailForm">
+                                        <div class="mb-3">
+                                            @csrf
+                                            <label class="small mb-1 @error('password') is-invalid @enderror" for="passwordConfirmation">Mot de passe actuel</label>
+                                            <input class="form-control" type="password" name="password" id="passwordConfirmation">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="small mb-1" for="emailChange">Ma nouvelle adresse email</label>
+                                            <input class="form-control" type="text" name="email" id="emailChange">
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fermez</button>
+                                    <button form="changeEmailForm" type="submit" class="btn btn-primary" id="submitButtonEmailChangeForm">Envoyez</button>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="card mb-4">
                     <div class="card-header">Supprimer mon compte</div>
                     <div class="card-body">
@@ -96,3 +125,112 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+@parent
+<script type="text/javascript" defer>
+    window.onload = function() {
+        let href = "{{ route('user.email-change') }}";
+        let form = document.getElementById("changeEmailForm")
+        let button = document.getElementById("submitButtonEmailChangeForm")
+        var myModal = new bootstrap.Modal("#staticBackdrop");
+        const inputErrorPasswordConfirmation = document.getElementById("passwordConfirmation")
+        const inputErrorEmail = document.getElementById("emailChange")
+
+        form.addEventListener("submit", function (event) {
+            event.preventDefault()
+            let request =  {
+                method: 'POST',
+                body: JSON.stringify({
+                    password: document.getElementById("passwordConfirmation").value,
+                    email: document.getElementById("emailChange").value
+                }),
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                    'Content-Type': "application/json"
+                }
+            }
+            fetch(href, request)
+                .then((response) => response.json())
+                .then((response) => {
+                    const cleanErrorMessages = function() {
+                        if(inputErrorPasswordConfirmation.nextElementSibling != null) {
+                            inputErrorPasswordConfirmation.nextElementSibling.remove()
+                        }
+                        if(inputErrorEmail.nextElementSibling != null) {
+                            inputErrorEmail.nextElementSibling.remove()
+                        }
+                    }
+
+                    if (response.passwordAndEmail === true) {
+                        cleanErrorMessages()
+                        myModal.hide()
+                    } else {
+                        const addErrorMessage = function(array, input) {
+                            array.forEach(error => {
+                                let spanError = document.createElement('span')
+                                spanError.innerHTML = `${error}`
+                                spanError.classList.add('text-danger')
+                                input.insertAdjacentElement('afterend', spanError)
+                            });
+                        }
+
+                        cleanErrorMessages()
+
+                        // if(response.passwordCheckNotValid === true) {
+                        //     let spanError = document.createElement('span')
+                        //     spanError.innerHTML = 'Le mot de passe ne correspond pas'
+                        //     spanError.classList.add('text-danger')
+                        //     inputErrorPasswordConfirmation.insertAdjacentElement('afterend', spanError)
+                        // }
+
+                        if(response.email){
+                            addErrorMessage(response.email, inputErrorEmail)
+                        }
+                        if(response.password){
+                            addErrorMessage(response.password, inputErrorPasswordConfirmation)
+                        }
+                        if(response.passwordCheckNotValid){
+                            addErrorMessage(response.passwordCheckNotValid, inputErrorPasswordConfirmation)
+                        }
+                    }
+                })
+                .catch((error) => {
+                    alert(error)
+                })
+            })
+        }
+    </script>
+@endpush
+        {{-- // $.ajaxSetup({
+            //     headers: {
+                //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                //     }
+                // });
+                // $(".btn-submit").click(function(e){
+                    //     e.preventDefault();
+                    //     var title = $("#titleID").val();
+                    //     var body = $("#bodyID").val();
+    //     $.ajax({
+        //        type:'POST',
+        //        url:"",
+        //        data:{title:title, body:body},
+        //        success:function(data){
+            //             if($.isEmptyObject(data.error)){
+    //                 alert(data.success);
+    //                 location.reload();
+    //             }else{
+    //                 printErrorMsg(data.error);
+    //             }
+    //        }
+    //     });
+    // });
+    // function printErrorMsg (msg) {
+        //     $(".print-error-msg").find("ul").html('');
+        //     $(".print-error-msg").css('display','block');
+        //     $.each( msg, function( key, value ) {
+            //         $(".print-error-msg").find("ul").append('<li>'+value+'</li>');
+            //     });
+            // } --}}
+
+

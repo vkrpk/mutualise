@@ -15,7 +15,6 @@ class StoreInfosController extends Controller {
             'address1' => ['required', 'string', 'max:255'],
             'postal_code' => ['required', 'string', 'max:10'],
             'city' => ['required', 'string', 'max:100'],
-            'email' => ['string', 'max:255', 'nullable'],
             'first_name' => ['string', 'max:60', 'nullable'],
             'last_name' => ['string', 'max:60', 'nullable'],
             'organization' => ['string', 'max:100', 'nullable'],
@@ -48,7 +47,6 @@ class StoreInfosController extends Controller {
         $address->state = $data['state'];
         $address->country = $data['country'];
         $address->phone_number = $data['phone_number'];
-        $user->email = $data['email'];
         $address->save();
         return back()->with("status", "Informations enregistrés !");
     }

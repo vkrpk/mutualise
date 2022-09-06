@@ -8,11 +8,17 @@ import "../css/dh-header-cover-image-button.css";
 // import "../css/profil/billing.css";
 // import "../css/profil/common.css";
 // Import all of Bootstrap's JS
-import * as bootstrap from "bootstrap";
+import "./bootstrap";
+// import * as bootstrap from "bootstrap";
+import { Popover } from "bootstrap";
+import { Modal } from "bootstrap";
 
 import "./dedikam";
-import "./bootstrap.js";
+// import "./bootstrap.js";
 import "./bs-init.js";
+// myModal = new Modal("#staticBackdrop");
+
+// import "./confirmPasswordAndChangeEmail";
 
 // import.meta.glob([
 //     '../images/**',
@@ -20,15 +26,3 @@ import "./bs-init.js";
 // ]);
 
 import.meta.glob(["../images/**"]);
-var popoverTriggerList = [].slice.call(
-    document.querySelectorAll('[data-bs-toggle="popover"]')
-);
-var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-    return new bootstrap.Popover(popoverTriggerEl);
-});
-var popover = new bootstrap.Popover(
-    document.querySelector(".popover-dismiss"),
-    {
-        trigger: "focus",
-    }
-);
