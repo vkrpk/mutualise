@@ -23,6 +23,7 @@ Route::redirect('/', '/home', 301);
 Auth::routes();
 Auth::routes(['verify' => true]);
 Route::post('logout', 'App\Http\Controllers\Auth\LoginController@logout')->name('logout')->withoutMiddleware('2fa');
+Route::post('inscription', 'App\Http\Controllers\Auth\RegisterController@register')->name('inscription');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->withoutMiddleware('auth');
 
@@ -72,4 +73,3 @@ Route::post('clear', [CartController::class, 'clearAllCart'])->name('cart.clear'
 
 Route::get('profil/security/email-change-verify', 'App\Http\Controllers\Profil\ChangeEmailController@verify')->name('user.email-change-verify');
 Route::post('profil/security/email-change', 'App\Http\Controllers\Profil\ChangeEmailController@change')->name('user.email-change');
-

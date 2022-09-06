@@ -83,9 +83,9 @@
 
 
                             <div class="row mb-0">
+                                {!! GoogleReCaptchaV3::renderField('register_id', 'register') !!}
                                 <div class="col-md-6 offset-md-4">
-                                    {!!  GoogleReCaptchaV3::renderField('contact_us_id','contact_us_action') !!}
-                                    <button type="submit" class="btn btn-primary mt-3">
+                                    <button type="submit" class="btn btn-primary mt-3" id="captcha-button">
                                         {{ __('Register') }}
                                     </button>
                                 </div>
@@ -97,4 +97,16 @@
         </div>
     </div>
 
-@endsection
+
+
+    @endsection
+    
+    @push('scripts')
+        <script>
+            window.onload = function() {
+                setInterval(function() {
+                    refreshReCaptchaV3('register_id', 'register');
+                }, 119000);
+            }
+        </script>
+    @endpush

@@ -24,7 +24,6 @@
 </head>
 
 <body>
-
     <x-header />
     @if (session('status'))
         <div class="alert alert-success" role="alert">
@@ -39,10 +38,8 @@
         @yield('content')
     </div>
     <x-footer />
-
-    @stack('scripts')
-    {{-- @stack('popoverScript') --}}
-
+    
 </body>
-{!!  GoogleReCaptchaV3::init() !!}
+{!! GoogleReCaptchaV3::init() !!}
+@stack('scripts')
 </html>

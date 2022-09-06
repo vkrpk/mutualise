@@ -57,9 +57,12 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'is_2Fa_enabled' => ['required', 'string', "in:on,off"]
+            'is_2Fa_enabled' => ['required', 'string', "in:on,off"],
+            'g-recaptcha-response' => [new GoogleReCaptchaV3ValidationRule('register')]
         ]);
     }
+
+
 
     /**
      * Create a new user instance after a valid registration.
@@ -84,33 +87,24 @@ class RegisterController extends Controller
      */
     public function register(Request $request)
     {
-        $rule = [
-            'g-recaptcha-response' => [new GoogleReCaptchaV3ValidationRule('contact_us_action')]
-        ];
-
-        $validator = \Illuminate\Support\Facades\Validator::make($request->toArray(),$rule)->errors();
-
-        if(!empty($validator->toArray())){
-            return redirect($request->headers->get('referer'));
-        }
-
-        if(!isset($request->all()['is_2Fa_enabled'])){
+        if (!isset($request->all()['is_2Fa_enabled'])) {
             $request->request->set('is_2Fa_enabled', 'off');
         }
-
+        
         $this->validator($request->all())->validate();
 
         event(new Registered($user = $this->create($request->all())));
 
         $this->guard()->login($user);
 
-        if($request->request->get('is_2Fa_enabled') === 'on'){
+        if ($request->request->get('is_2Fa_enabled') === 'on') {
             return redirect('/2fa');
         }
 
         if ($response = $this->registered($request, $user)) {
             return $response;
         }
+
 
         return $request->wantsJson()
             ? new JsonResponse([], 201)
