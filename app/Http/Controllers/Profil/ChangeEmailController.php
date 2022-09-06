@@ -91,7 +91,6 @@ class ChangeEmailController extends Controller {
         ]);
 
         // And finally return the view telling the change has been done
-        // return response()->view('user.email.change-complete');
         return redirect()->route('profilSecurity')->with('status', 'Votre changement d\'email a bien été pris en compte !');
     }
 }
