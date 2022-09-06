@@ -17,15 +17,6 @@
                     <div class="card-body">
                         <form method="POST" action="{{ route('changePassword') }}">
                             @csrf
-                            @if (session('status'))
-                                <div class="alert alert-success" role="alert">
-                                    {{ session('status') }}
-                                </div>
-                            @elseif (session('error'))
-                                <div class="alert alert-danger" role="alert">
-                                    {{ session('error') }}
-                                </div>
-                            @endif
                             <!-- Form Group (current password)-->
                             <div class="mb-3">
                                 <label class="small mb-1" for="oldPasswordInput">Mot de passe actuel</label>
@@ -67,13 +58,13 @@
                         <form>
                             <div class="form-check">
                                 <input class="form-check-input" id="radioUsage1" type="radio" name="radioUsage"
-                                    checked="">
+                                checked="">
                                 <label class="form-check-label" for="radioUsage1">Yes, share data and crash reports with app
                                     developers</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" id="radioUsage2" type="radio" name="radioUsage">
                                 <label class="form-check-label" for="radioUsage2">No, limit my data sharing with app
+                                <input class="form-check-input" id="radioUsage2" type="radio" name="radioUsage">
                                     developers</label>
                             </div>
                         </form>
@@ -83,16 +74,182 @@
             <div class="col-lg-4">
                 <x-two-f-a-settings :data="$data"/>
                 <div class="card mb-4">
+                    <div class="card-header">Changer mon adresse email</div>
+                    <div class="card-body">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="buttonForOpenModal">
+                            Changer mon adresse email
+                        </button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="staticBackdrop" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="staticBackdropLabel">Changer d'adresse email</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Veuillez renseigner votre mot de passe.</p>
+                                        <p>Pour effectuer le changement, veuillez cliquer sur le lien présent dans le mail envoyé à la nouvelle adresse.</p>
+                                        <form id="changeEmailForm">
+                                            <div class="mb-3">
+                                                @csrf
+                                                <label class="small mb-1 for="passwordConfirmation">Mot de passe actuel</label>
+                                                <input class="form-control" type="password" name="password" id="passwordConfirmation">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="small mb-1" for="emailChange">Ma nouvelle adresse email</label>
+                                                <input class="form-control" type="text" name="email" id="emailChange">
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fermez</button>
+                                        <button form="changeEmailForm" type="submit" class="btn btn-primary">Envoyez</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-4">
                     <div class="card-header">Supprimer mon compte</div>
                     <div class="card-body">
-                        <p>Supprimer votre compte est une action permanenete et irréversible. Si vous êtes sur de vouloir supprimer votre compte, sélectionnez le bouton ci-dessous.</p>
-                        <form action="{{ route('removeUserAccount', ['id' => $data['user']->id] )}}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ?');">
-                            @csrf
-                            <button class="btn btn-danger-soft text-danger" type="submit">Je comprends, supprimer mon compte</button>
-                        </form>
+                        <button type="button" class="btn btn-danger-soft text-danger" data-bs-toggle="modal" data-bs-target="#modalDeleteAccount" id="buttonForOpenModal">
+                            Supprimer mon compte
+                        </button>
+                        <div class="modal fade" id="modalDeleteAccount" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalDeleteAccountLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modalDeleteAccountLabel">Supprimer mon compte</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Supprimer votre compte est une action permanenete et irréversible. Si vous êtes sur de vouloir supprimer votre compte, sélectionnez le bouton ci-dessous.</p>
+                                        <form id="formDeleteAccount">
+                                            @csrf
+                                            <div class="mb-3">
+                                                <label class="small mb-1 for="passwordConfirmation">Mot de passe actuel</label>
+                                                <input class="form-control" type="password" name="password" id="passwordConfirmationDeleteAccount">
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fermez</button>
+                                        <button form="formDeleteAccount" class="btn btn-primary" type="submit">Je comprends, supprimer mon compte</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 @endsection
+
+@push('scripts')
+@parent
+<script type="text/javascript" defer>
+window.onload = function() {
+    let formEmailChange = document.getElementById("changeEmailForm")
+    let formDeleteAccount = document.getElementById("formDeleteAccount")
+    var modalChangeEmail = new bootstrap.Modal("#staticBackdrop");
+    var modalDeleteAccount = new bootstrap.Modal("#modalDeleteAccount");
+    const inputErrorPasswordConfirmation = document.getElementById("passwordConfirmation")
+    const inputErrorEmail = document.getElementById("emailChange")
+    const inputErrorPasswordConfirmationDeleteAccount= document.getElementById("passwordConfirmationDeleteAccount")
+    const addErrorMessage = function(array, input) {
+        array.forEach(error => {
+            let spanError = document.createElement('span')
+            spanError.innerHTML = `${error}`
+            spanError.classList.add('text-danger')
+            input.insertAdjacentElement('afterend', spanError)
+        });
+    }
+
+
+    formEmailChange.addEventListener("submit", function (event) {
+        event.preventDefault()
+        let request =  {
+            method: 'POST',
+            body: JSON.stringify({
+                password: document.getElementById("passwordConfirmation").value,
+                email: document.getElementById("emailChange").value
+            }),
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                'Content-Type': "application/json"
+            }
+        }
+        fetch("{{ route('user.email-change') }}", request)
+            .then((response) => response.json())
+            .then((response) => {
+                const cleanErrorMessages = function() {
+                    if(inputErrorPasswordConfirmation.nextElementSibling != null) {
+                        inputErrorPasswordConfirmation.nextElementSibling.remove()
+                    }
+                    if(inputErrorEmail.nextElementSibling != null) {
+                        inputErrorEmail.nextElementSibling.remove()
+                    }
+                }
+                if (response.passwordAndEmail === true) {
+                    cleanErrorMessages()
+                    modalChangeEmail.hide()
+                } else {
+                    cleanErrorMessages()
+
+                    if(response.email){
+                        addErrorMessage(response.email, inputErrorEmail)
+                    }
+                    if(response.password){
+                        addErrorMessage(response.password, inputErrorPasswordConfirmation)
+                    }
+                }
+            })
+            .catch((error) => {
+                alert(error)
+            })
+    })
+
+    formDeleteAccount.addEventListener("submit", function (event) {
+        event.preventDefault()
+        let request =  {
+            method: 'POST',
+            body: JSON.stringify({
+                password: document.getElementById("passwordConfirmationDeleteAccount").value,
+            }),
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                'Content-Type': "application/json"
+            }
+        }
+        fetch("{{ route('removeUserAccount') }}", request)
+            .then((response) => response.json())
+            .then((response) => {
+                const cleanErrorMessages = function() {
+                    if(inputErrorPasswordConfirmationDeleteAccount.nextElementSibling != null) {
+                        inputErrorPasswordConfirmationDeleteAccount.nextElementSibling.remove()
+                    }
+                }
+                if (response.password === true) {
+                    cleanErrorMessages()
+                    modalDeleteAccount.hide()
+                    window.location.replace("{{ route('home') }}")
+                } else {
+                    cleanErrorMessages()
+
+                    if(response.password){
+                        addErrorMessage(response.password, inputErrorPasswordConfirmationDeleteAccount)
+                    }
+                }
+            })
+            .catch((error) => {
+                alert(error)
+            })
+    })
+}
+</script>
+@endpush
+
+

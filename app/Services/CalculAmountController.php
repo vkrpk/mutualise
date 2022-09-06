@@ -4,11 +4,20 @@ namespace App\Services;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class CalculAmountController extends Controller {
+use function App\View\Components\__construct;
 
-    public static function calculAmount(Request $request)  {
-        $offer = $request->query('offer', 1);
-        $size = $request->query('size', 10);
+class CalculAmountController extends Controller {
+    private $request;
+
+    public function __construct(?Request $request = null) {
+        if($request){
+            $this->request = $request;
+        }
+    }
+
+    public function calculAmount(int $offer = null, int $size = null)  {
+        $offer = (!empty($offer)) ? $offer : $this->request->query('offer', 1);
+        $size = (!empty($size)) ? $size : $this->request->query('size', 10);
 
         if ($offer == 1) {
             $amount['M'] = 37.4;
