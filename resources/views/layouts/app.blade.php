@@ -38,9 +38,8 @@
         @yield('content')
     </div>
     <x-footer />
-    @stack('scripts')
-    {{-- @stack('popoverScript') --}}
-
+    
 </body>
-
+{!! GoogleReCaptchaV3::init() !!}
+@stack('scripts')
 </html>

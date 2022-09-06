@@ -58,7 +58,7 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'is_2Fa_enabled' => ['required', 'string', "in:on,off"],
-            // 'g-recaptcha-response' => [new GoogleReCaptchaV3ValidationRule('register')]
+            'g-recaptcha-response' => [new GoogleReCaptchaV3ValidationRule('register')]
         ]);
     }
 
@@ -87,24 +87,10 @@ class RegisterController extends Controller
      */
     public function register(Request $request)
     {
-        $rule = [
-            'g-recaptcha-response' => [new GoogleReCaptchaV3ValidationRule('register')]
-        ];
-
-        $validator = \Illuminate\Support\Facades\Validator::make($request->toArray(),$rule)->errors();
-
-        // dd($validator);     
-        if(!empty($validator->toArray())){
-            return redirect($request->headers->get('referer'));
-        }
-
         if (!isset($request->all()['is_2Fa_enabled'])) {
             $request->request->set('is_2Fa_enabled', 'off');
         }
-
-
-        $request->request->set('g-recaptcha-response', 'truc');
-
+        
         $this->validator($request->all())->validate();
 
         event(new Registered($user = $this->create($request->all())));

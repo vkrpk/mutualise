@@ -98,26 +98,15 @@
     </div>
 
 
-    {!! GoogleReCaptchaV3::init() !!}
-    <script custom="hello">
-        setTimeout(() => {
-            let href = "{{ route('register') }}";
-            let request = new Request(href, {
-                method: 'POST',
-                headers: new Headers({
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                }),
-                body: {
-                    'g-recaptcha-response': getReCaptchaV3Response('register_id')
-                }
-            });
-            console.log('smth happenend');
-            fetch(request)
-                .then((data) => console.log(data))
-                .then((data) =>  refreshRecaptchaV3('register_id', 'register'))
-                .catch((error) => console.log(error))
-        }, 5 * 1000);
-    </script>
 
-
-@endsection
+    @endsection
+    
+    @push('scripts')
+        <script>
+            window.onload = function() {
+                setInterval(function() {
+                    refreshReCaptchaV3('register_id', 'register');
+                }, 119000);
+            }
+        </script>
+    @endpush
