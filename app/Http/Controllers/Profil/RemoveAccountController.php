@@ -1,15 +1,30 @@
 <?php
 namespace App\Http\Controllers\Profil;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
-class RemoveAccountController extends Controller{
+class RemoveAccountController extends Controller {
 
-    public function remove(int $id) {
-        $users = User::findOrFail($id);
+    public function remove(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'password' => 'required|current_password'
+        ], [
+            'required' => 'Champ requis',
+            'current_password' => 'Le mot de passe ne correspond pas'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
+        $users = User::findOrFail(Auth::id());
 
         $users->delete();
-        return redirect()->route('home');
+
+        return response()->json(['password' => true]);
     }
 }

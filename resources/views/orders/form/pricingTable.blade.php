@@ -37,7 +37,7 @@
         <div class="AJ"><i class="fa-solid fa-xmark"></i></div>
         <div class="AK"><i class="fa-solid fa-xmark"></i></div>
     </a>
-    <a tabindex="1" class="colContainer col2 popover-dismiss d-block w-100" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Répartition des données" data-bs-content="2 serveurs" data-bs-placement="right">
+    <a tabindex="1" offer="2" class="colContainer col2 popover-dismiss d-block w-100" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Répartition des données" data-bs-content="2 serveurs" data-bs-placement="right">
         <div class="BA check"><i class="fa-solid fa-check"></i></div>
         <div class="BB check"><i class="fa-solid fa-check"></i></div>
         <div class="BC check"><i class="fa-solid fa-check"></i></div>
@@ -50,7 +50,7 @@
         <div class="BJ"><i class="fa-solid fa-xmark"></i></div>
         <div class="BK"><i class="fa-solid fa-xmark"></i></div>
     </a>
-    <a tabindex="2" class="colContainer col3 popover-dismiss d-block w-100" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Répartition des données" data-bs-content="3 serveurs et 2 datacenters" data-bs-placement="left">
+    <a tabindex="2" offer="3" class="colContainer col3 popover-dismiss d-block w-100" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Répartition des données" data-bs-content="3 serveurs et 2 datacenters" data-bs-placement="left">
         <div class="CA check"><i class="fa-solid fa-check"></i></div>
         <div class="CB check"><i class="fa-solid fa-check"></i></div>
         <div class="CC check"><i class="fa-solid fa-check"></i></div>
@@ -63,7 +63,7 @@
         <div class="CJ check"><i class="fa-solid fa-check"></i></div>
         <div class="CK check"><i class="fa-solid fa-check"></i></div>
     </a>
-    <a tabindex="3" class="colContainer col4 popover-dismiss d-block w-100" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Répartition des données" data-bs-content="3 serveurs et 2 datacenters" data-bs-placement="left">
+    <a tabindex="3" offer="4" class="colContainer col4 popover-dismiss d-block w-100" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Répartition des données" data-bs-content="3 serveurs et 2 datacenters" data-bs-placement="left">
       <div class="DA">
           <input type="radio" name="dedicatedChoice" id="dedicatedChoice" value="pydio">
           <label for="dedicatedChoice">Pydio</label>

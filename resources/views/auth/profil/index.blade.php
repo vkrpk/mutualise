@@ -43,12 +43,13 @@
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                <!-- Form Group (last name)-->
                                 <div class="col-md-6">
-                                    <label class="small mb-1" for="email">Courriel de connexion</label>
-                                    <input class="form-control" id="email" type="text"
-                                        placeholder="" value="{{ old('email') ? old('email') : $address->email ?? '' }}" name="email">
+                                    <label class="small mb-1" for="organization">Organisation</label>
+                                    <input class="form-control" id="organization" type="text"
+                                        placeholder="" value="{{ old('organization') ? old('organization') : $address->organization ?? '' }}" name="organization">
                                 </div>
+                                <!-- Form Group (last name)-->
+
                             </div>
                             <!-- Form Row-->
                             <div class="row gx-3 mb-3">
@@ -124,11 +125,7 @@
                                         placeholder="" value="{{ old('phone_number') ? old('phone_number') : $address->phone_number ?? '' }}" name="phone_number">
                                 </div>
                                 <!-- Form Group (last name)-->
-                                <div class="col-md-6">
-                                    <label class="small mb-1" for="organization">Organisation</label>
-                                    <input class="form-control" id="organization" type="text"
-                                        placeholder="" value="{{ old('organization') ? old('organization') : $address->organization ?? '' }}" name="organization">
-                                </div>
+
                             </div>
                             <!-- Save changes button-->
                             <button class="btn btn-primary" type="submit">Sauvegarder</button>
