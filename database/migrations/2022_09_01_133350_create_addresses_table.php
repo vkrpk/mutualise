@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('country')->nullable(true);
             $table->string('phone_number')->nullable(true);
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
         });
     }
 

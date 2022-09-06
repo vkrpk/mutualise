@@ -17,6 +17,7 @@
 
     <!-- Scripts -->
     @vite(['resources/js/app.js'])
+    {{-- @stack('modalJs') --}}
 
     @yield('css')
 
@@ -38,6 +39,8 @@
     </div>
     <x-footer />
     @stack('scripts')
+    {{-- @stack('popoverScript') --}}
+
 </body>
 
 </html>
