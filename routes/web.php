@@ -33,7 +33,7 @@ Route::group(['prefix' => 'admin'], function () {
 
 Route::prefix('profil')->middleware('auth')->group(function () {
     Route::post('/change-password', 'App\Http\Controllers\Profil\ChangePasswordController@reset')->name('changePassword');
-    Route::post('/remove/{id}', 'App\Http\Controllers\Profil\RemoveAccountController@remove')->name('removeUserAccount');
+    Route::post('/remove-account', 'App\Http\Controllers\Profil\RemoveAccountController@remove')->name('removeUserAccount');
     Route::post('/index/store', 'App\Http\Controllers\Profil\StoreInfosController@store')->name('storeInfos');
     Route::controller(ProfilViewController::class)->group(function () {
         Route::get('/index', 'index')->name('profilIndex');
@@ -44,7 +44,6 @@ Route::prefix('profil')->middleware('auth')->group(function () {
 });
 
 Route::get('/services', [OfferController::class, 'services'])->name('services');
-Route::post('/changeEmail', [ComparePasswordAndChangeEmailController::class, 'comparePasswordAndChangeEmail'])->name('comparePasswordAndChangeEmail');
 
 Route::group(['prefix' => '2fa'], function () {
     Route::get('/', 'App\Http\Controllers\LoginSecurityController@show2faForm');
@@ -72,5 +71,5 @@ Route::post('remove', [CartController::class, 'removeCart'])->name('cart.remove'
 Route::post('clear', [CartController::class, 'clearAllCart'])->name('cart.clear');
 
 Route::get('profil/security/email-change-verify', 'App\Http\Controllers\Profil\ChangeEmailController@verify')->name('user.email-change-verify');
-// Route::get('profil/security/email-change-verify', 'App\Http\Controllers\Profil\ChangeEmailController@verifyView')->name('user.email-change-verify');
 Route::post('profil/security/email-change', 'App\Http\Controllers\Profil\ChangeEmailController@change')->name('user.email-change');
+
