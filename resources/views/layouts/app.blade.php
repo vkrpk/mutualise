@@ -17,6 +17,7 @@
 
     <!-- Scripts -->
     @vite(['resources/js/app.js'])
+    {{-- @stack('modalJs') --}}
 
     @yield('css')
 
@@ -40,6 +41,8 @@
     <x-footer />
 
     @stack('scripts')
+    {{-- @stack('popoverScript') --}}
+
 </body>
 {!!  GoogleReCaptchaV3::init() !!}
 </html>
