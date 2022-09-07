@@ -15,11 +15,11 @@ class CalculAmountController extends Controller {
         }
     }
 
-    public function calculAmount(int $offer = null, int $size = null)  {
-        $offer = (!empty($offer)) ? $offer : $this->request->query('offer', 1);
+    public function calculAmount(string $offer = null, int $size = null)  {
+        $offer = (!empty($offer)) ? $offer : $this->request->query('offer', 'basique');
         $size = (!empty($size)) ? $size : $this->request->query('size', 10);
 
-        if ($offer == 1) {
+        if ($offer == 'basique') {
             $amount['M'] = 37.4;
 
             if ($size <= 100) {
@@ -42,7 +42,7 @@ class CalculAmountController extends Controller {
                 $amount['M'] = $size * 0.0133;
             }
 
-        } elseif ($offer == 2) {
+        } elseif ($offer == 'standard') {
 
             $amount['M'] = 64.6;
 
@@ -66,7 +66,7 @@ class CalculAmountController extends Controller {
                 $amount['M'] = $size * 0.02666;
             }
 
-        } elseif ($offer == 3) {
+        } elseif ($offer == 'entreprise') {
 
             $amount['M'] = 98.6;
 
@@ -91,14 +91,23 @@ class CalculAmountController extends Controller {
             }
 
 
-        } elseif ($offer == 4) {
+        } elseif ($offer == 'dédié') {
             $amount['Y'] = 330;
             $amount['M'] = 30;
         }
 
+        $amount = array_map(function($v){
+        $v = round($v, 2);
+        return $v;
+
+        }, $amount);
+        // dd($amount);
         return $amount;
 
     }
 
-
+    public function roundAmount($v) {
+        $v = number_format($v, 2);
+        return $v;
+    }
 }
