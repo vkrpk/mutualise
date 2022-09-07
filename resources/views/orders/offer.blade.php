@@ -101,23 +101,6 @@ break;
                 </div>
             </div>
         </div>
-        {{-- <span class="offer_legend2 align-self-left">Choisissez un nom pour l'accès<br></span>
-        <div class="form-floating offer_content pb-2 mt-0">
-            <input type="text" name="form_access_name" data-bs-toggle="tooltip" data-bss-tooltip=""
-                data-bs-placement="right" id="access_name"
-                class="form-control @error('form_access_name') is-invalid @enderror" form="formOrder"
-                @error('form_access_name') autofocus @enderror placeholder="Nom de l'accès" required
-                style="width: 20rem;" title="Donnée obligatoire" maxlength="40" value="{{ old('form_access_name') }}"
-                aria-describedby="validationform_access_nameFeedback">
-            <label class="form-label" for="access_name">Nom de l'accès
-                <sup>
-                    <i class="fa-solid fa-asterisk" style="font-size: 8px;color: red;margin-top: -14px;"></i>
-                </sup>
-            </label>
-            <div class="invalid-feedback">
-                Le nom de l'accès est obligatoire
-            </div>
-        </div> --}}
         @include('orders.form.formButton')
     </div>
 </div>
@@ -129,8 +112,6 @@ break;
 @push('scripts')
 <script>
     window.onload = function () {
-    "use strict";
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
     let forms = document.querySelectorAll(".needs-validation");
     const slider = document.getElementById("taille");
     const output = document.getElementById("taille_output");
@@ -138,7 +119,7 @@ break;
     let percent = (slider.value / 5000) * 100;
     const inputHiddenOfferFormOrder = document.getElementById("form_level");
 
-    const getAmount = function calcAmount(value, offer) {
+    const getAmount = function(value, offer) {
         return fetch(`/amount?size=${value}&offer=${offer}`)
             .then(function (response) {
                 return response.json();
@@ -177,6 +158,7 @@ break;
             : priceM.classList.toggle("d-none");
         }
         const selectedOffer = document.querySelector(".selected");
+        console.log(selectedOffer);
         let price = getAmount(sliderValue, selectedOffer.getAttribute("offer"));
         return;
     };
@@ -246,51 +228,38 @@ break;
             inputsBasique.forEach((input) => (input.checked = false));
         }
     }
-    const cartLevelFormOrder = {!! Cart::getContent()->first()->attributes->form_level ?? "'null'"!!};
+    const cartLevelFormOrder = "{!! Cart::getContent()->first()->attributes->form_level ?? 'null'!!}";
     if(cartLevelFormOrder != 'null'){
         getUnselected()
         getSelected(document.querySelectorAll(".col" + cartLevelFormOrder))
     }
-    // slider.addEventListener(
-        //     "input",
-        //     setTimeout(() => {
-            //         const timeoutId = calculAmount();
-            //     }, 1000)
-            // );
 
-            // return () => {
-                //     clearTimeout(timeoutId);
-                // };
-
-                /* sliders sorcery */
-
-                // Loop over them and prevent submission
-                Array.prototype.slice.call(forms).forEach(function (form) {
-                    form.addEventListener(
-                        "submit",
-                        function (event) {
-                            if (!form.checkValidity()) {
-                                event.preventDefault();
-                                event.stopPropagation();
-                            }
-
-                            form.classList.add("was-validated");
-                        },
-                        false
-                        );
-                    });
-        var popoverTriggerList = [].slice.call(
-            document.querySelectorAll('[data-bs-toggle="popover"]')
+    Array.prototype.slice.call(forms).forEach(function (form) {
+        form.addEventListener(
+            "submit",
+            function (event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add("was-validated");
+            },
+            false
         );
-        var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-            return new bootstrap.Popover(popoverTriggerEl);
-        });
-        var popover = new bootstrap.Popover(
-            document.querySelector(".popover-dismiss"),
-            {
-                trigger: "focus",
-            }
-        );
-    };
+    });
+// Popover bootstrap
+var popoverTriggerList = [].slice.call(
+    document.querySelectorAll('[data-bs-toggle="popover"]')
+);
+var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+    return new bootstrap.Popover(popoverTriggerEl);
+});
+var popover = new bootstrap.Popover(
+    document.querySelector(".popover-dismiss"),
+    {
+        trigger: "focus",
+    }
+);
+};
 </script>
 @endpush

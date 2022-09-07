@@ -33,7 +33,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = '/email/verify';
 
     /**
      * Create a new controller instance.
@@ -90,7 +90,7 @@ class RegisterController extends Controller
         if (!isset($request->all()['is_2Fa_enabled'])) {
             $request->request->set('is_2Fa_enabled', 'off');
         }
-        
+
         $this->validator($request->all())->validate();
 
         event(new Registered($user = $this->create($request->all())));
