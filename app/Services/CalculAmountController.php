@@ -99,11 +99,8 @@ class CalculAmountController extends Controller {
         $amount = array_map(function($v){
         $v = round($v, 2);
         return $v;
-
         }, $amount);
-        // dd($amount);
         return $amount;
-
     }
 
     public function roundAmount($v) {
