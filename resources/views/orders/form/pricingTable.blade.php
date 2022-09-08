@@ -1,9 +1,9 @@
 <div class="pricingTable">
     <div class="blank"></div>
-    <div class="Basique pricingHeader col1" offer="basique">Basique</div>
-    <div class="Standard pricingHeader col2" offer="standard">Standard</div>
-    <div class="Entreprise pricingHeader col3" offer="entreprise">Entreprise</div>
-    <div class="Dedie pricingHeader col4" offer="dédié">Dédié</div>
+    <a class="Basique pricingHeader w-100 col1 text-center" offer="basique">Basique</a>
+    <a class="Standard pricingHeader w-100 col2 text-center" offer="standard">Standard</a>
+    <a class="Entreprise pricingHeader w-100 col3 text-center" offer="entreprise">Entreprise</a>
+    <a class="Dedie pricingHeader w-100 col4 text-center" offer="dédié">Dédié</a>
     <div class="Pydio pricingReference">Pydio</div>
     <div class="Seafile pricingReference">Seafile</div>
     <div class="Nextcloud pricingReference">Nextcloud</div>
@@ -15,18 +15,18 @@
     <div class="CIFS pricingReference">CIFS</div>
     <div class="Webdav pricingReference">Webdav</div>
     <div class="SI pricingReference">SI</div>
-    <a tabindex="0" offer="basique" class="colContainer col1 popover-dismiss d-block w-100 selected" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Répartition des données" data-bs-content="1 serveur" data-bs-placement="right">
+    <a tabindex="0" offer="basique" class="colContainer col1 popover-dismiss d-block w-100 selected" role="button" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-title="Répartition des données" data-bs-content="1 serveur" data-bs-placement="right">
         <div class="AA check">
-            <input type="radio" name="basiqueChoice" id="basiqueChoice" value="pydio">
-            <label for="basiqueChoice">Pydio</label>
+            <input type="radio" name="buttonsRadioForOffer" id="pydioOfferBasique" value="pydioOfferBasique" form="formAddToCart" checked>
+            <label for="pydioOfferBasique">Pydio</label>
         </div>
         <div class="AB check">
-            <input type="radio" name="basiqueChoice" id="basiqueChoice" value="seafile">
-            <label for="basiqueChoice">Seafile</label>
+            <input type="radio" name="buttonsRadioForOffer" id="seafileOfferBasique" value="seafileOfferBasique" form="formAddToCart">
+            <label for="seafileOfferBasique">Seafile</label>
         </div>
         <div class="AC check">
-            <input type="radio" name="basiqueChoice" id="basiqueChoice" value="nextcloud">
-            <label for="basiqueChoice">Nextcloud</label>
+            <input type="radio" name="buttonsRadioForOffer" id="nextcloudOfferBasique" value="nextcloudOfferBasique" form="formAddToCart">
+            <label for="nextcloudOfferBasique">Nextcloud</label>
         </div>
         <div class="AD"><i class="fa-solid fa-xmark"></i></div>
         <div class="AE"><i class="fa-solid fa-xmark"></i></div>
@@ -37,7 +37,7 @@
         <div class="AJ"><i class="fa-solid fa-xmark"></i></div>
         <div class="AK"><i class="fa-solid fa-xmark"></i></div>
     </a>
-    <a tabindex="1" offer="standard" class="colContainer col2 popover-dismiss d-block w-100" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Répartition des données" data-bs-content="2 serveurs" data-bs-placement="right">
+    <a tabindex="1" offer="standard" class="colContainer col2 popover-dismiss d-block w-100" role="button" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-title="Répartition des données" data-bs-content="2 serveurs" data-bs-placement="right">
         <div class="BA check"><i class="fa-solid fa-check"></i></div>
         <div class="BB check"><i class="fa-solid fa-check"></i></div>
         <div class="BC check"><i class="fa-solid fa-check"></i></div>
@@ -50,7 +50,7 @@
         <div class="BJ"><i class="fa-solid fa-xmark"></i></div>
         <div class="BK"><i class="fa-solid fa-xmark"></i></div>
     </a>
-    <a tabindex="2" offer="entreprise" class="colContainer col3 popover-dismiss d-block w-100" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Répartition des données" data-bs-content="3 serveurs et 2 datacenters" data-bs-placement="left">
+    <a tabindex="2" offer="entreprise" class="colContainer col3 popover-dismiss d-block w-100" role="button" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-title="Répartition des données" data-bs-content="3 serveurs et 2 datacenters" data-bs-placement="left">
         <div class="CA check"><i class="fa-solid fa-check"></i></div>
         <div class="CB check"><i class="fa-solid fa-check"></i></div>
         <div class="CC check"><i class="fa-solid fa-check"></i></div>
@@ -63,18 +63,18 @@
         <div class="CJ check"><i class="fa-solid fa-check"></i></div>
         <div class="CK check"><i class="fa-solid fa-check"></i></div>
     </a>
-    <a tabindex="3" offer="dédié" class="colContainer col4 popover-dismiss d-block w-100" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Répartition des données" data-bs-content="3 serveurs et 2 datacenters" data-bs-placement="left">
+    <a tabindex="3" offer="dédié" class="colContainer col4 popover-dismiss d-block w-100" role="button" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-title="Répartition des données" data-bs-content="3 serveurs et 2 datacenters" data-bs-placement="left">
       <div class="DA">
-          <input type="radio" name="dedicatedChoice" id="dedicatedChoice" value="pydio">
-          <label for="dedicatedChoice">Pydio</label>
+          <input type="radio" name="buttonsRadioForOffer" id="pydioOfferDedicated" value="pydioOfferDedicated" form="formAddToCart">
+          <label for="pydioOfferDedicated">Pydio</label>
       </div>
       <div class="DB">
-          <input type="radio" name="dedicatedChoice" id="dedicatedChoice" value="seafile">
-          <label for="dedicatedChoice">Seafile</label>
+          <input type="radio" name="buttonsRadioForOffer" id="seafileOfferDedicated" value="seafileOfferDedicated" form="formAddToCart">
+          <label for="seafileOfferDedicated">Seafile</label>
       </div>
       <div class="DC">
-          <input type="radio" name="dedicatedChoice" id="dedicatedChoice" value="nextcloud">
-          <label for="dedicatedChoice">Nextcloud</label>
+          <input type="radio" name="buttonsRadioForOffer" id="nextcloudOfferDedicated" value="nextcloudOfferDedicated" form="formAddToCart">
+          <label for="nextcloudOfferDedicated">Nextcloud</label>
       </div>
     </a>
   </div>

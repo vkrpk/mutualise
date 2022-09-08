@@ -24,6 +24,7 @@ class CartController extends Controller
 
     public function addToCart(Request $request)
     {
+        // dd($request->all());
         $price = (new CalculAmountController())->calculAmount($request->form_level, $request->form_diskspace);
         /**
          * @var App\Models\User
@@ -39,7 +40,8 @@ class CartController extends Controller
                 'form_level' => $request->form_level,
                 'form_diskspace' => $request->form_diskspace,
                 'priceMonthly' => $price['M'],
-                'coupon' => false
+                'coupon' => false,
+                'buttonsRadioForOffer' => $request->buttonsRadioForOffer ?? '',
             )
         ]);
         session()->flash('success', 'La commande a bien été ajoutée à votre panier !');
