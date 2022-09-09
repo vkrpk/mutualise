@@ -13,7 +13,6 @@ class CartController extends Controller
     public function cartList()
     {
         $cartItems = \Cart::getContent();
-        // dd($cartItems);
         return view('cart.list', compact('cartItems'));
     }
 
@@ -25,19 +24,24 @@ class CartController extends Controller
 
     public function addToCart(Request $request)
     {
+        // dd($request->all());
         $price = (new CalculAmountController())->calculAmount($request->form_level, $request->form_diskspace);
         /**
          * @var App\Models\User
          */
         $user = User::where('id', Auth::id())->first();
+        \Cart::clear();
         \Cart::add([
             'id' => Carbon::now()->timestamp,
-            'name' => 'name',
+            'name' => $user->name,
             'price' => $price['Y'],
             'quantity' => 1,
             'attributes' => array(
                 'form_level' => $request->form_level,
                 'form_diskspace' => $request->form_diskspace,
+                'priceMonthly' => $price['M'],
+                'coupon' => false,
+                'buttonsRadioForOffer' => $request->buttonsRadioForOffer ?? '',
             )
         ]);
         session()->flash('success', 'La commande a bien été ajoutée à votre panier !');

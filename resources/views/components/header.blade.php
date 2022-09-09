@@ -9,6 +9,7 @@
             {{-- <p>{{ Voyager::routes() }}</p> --}}
             <div class="collapse navbar-collapse justify-content-end" id="navcol-1">
                 <ul class="navbar-nav align-items-end g-3">
+                    <li class="nav-item"><a class="nav-link text-dedikam" href="{{ route('services') }}">Services</a></li>
                     @guest
                         @if (Route::has('login'))
                             <li class="nav-item">
@@ -34,7 +35,6 @@
                                 {{ Cart::getTotalQuantity()}}
                              </a>
                         </li>
-                        <li class="nav-item"><a class="nav-link text-dedikam" href="{{ route('services') }}">Services</a></li>
                         <li class="nav-item dropdown"><a class="dropdown-toggle nav-link text-dedikam" aria-expanded="false"
                                 data-bs-toggle="dropdown" href="#"><span
                                     class="flag-icon flag-icon-fr"></span>&nbsp;Français</a>
