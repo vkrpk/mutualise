@@ -129,7 +129,7 @@
                                         <form id="formDeleteAccount">
                                             @csrf
                                             <div class="mb-3">
-                                                <label class="small mb-1 for="passwordConfirmation">Mot de passe actuel</label>
+                                                <label class="small mb-1" for="passwordConfirmationDeleteAccount">Mot de passe actuel</label>
                                                 <input class="form-control" type="password" name="password" id="passwordConfirmationDeleteAccount">
                                             </div>
                                         </form>

@@ -7,7 +7,7 @@
     justify-items: center;
     align-items: center;
     grid-template-areas:
-        "blank col1 col2 col3 col4"
+        "blank Basique Standard Entreprise Dedie"
         "Pydio col1 col2 col3 col4"
         "Seafile col1 col2 col3 col4"
         "Nextcloud col1 col2 col3 col4"
@@ -33,9 +33,8 @@
 }
 
 .col1 {
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-template-areas:
-        "Basique"
         "AA"
         "AB"
         "AC"
@@ -51,9 +50,8 @@
 }
 
 .col2 {
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-template-areas:
-        "Standard"
         "BA"
         "BB"
         "BC"
@@ -69,9 +67,8 @@
 }
 
 .col3 {
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-template-areas:
-        "Entreprise"
         "CA"
         "CB"
         "CC"
@@ -87,9 +84,8 @@
 }
 
 .col4 {
-    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
     grid-template-areas:
-        "Dedie"
         "DA"
         "DB"
         "DC";
@@ -100,14 +96,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    // height: 33%;
+    height: 33%;
 }
-
-.col4 .pricingHeader {
-    height: 1fr;
-}
-
-.col4
 
 .pricingHeader,
 .pricingReference,
@@ -129,17 +119,16 @@
 }
 
 .check i {
-    color: $secondary  !important;
+    color: $secondary !important;
 }
 
 .check {
     background-color: #fff1e5 !important;
 }
 
-.pricingTable>a {
+.pricingTable > a {
     background-color: white;
 }
-
 .pricingTable div {
     text-align: center;
     width: 100%;
@@ -149,7 +138,6 @@
     .pricingTable {
         font-size: 12px !important;
     }
-
     .pricingHeader,
     .pricingReference,
     .colContainer div,
@@ -160,6 +148,13 @@
     }
 }
 
+@media (max-width: 576px) {
+    #recapLevel,
+    #recapDiskspace * {
+        font-size: 12px !important;
+    }
+}
+
 .pricingTable .selected label,
 .pricingTable .selected i {
     color: #fff !important;
@@ -167,11 +162,11 @@
 
 .colContainer.selected .check,
 .colContainer.selected.col4 {
-    background-color: $secondary  !important;
+    background-color: $secondary !important;
 }
 
-.colContainer.selected:not(.col4)> :not(.check) {
-    background-color: $secondary-light  !important;
+.colContainer.selected:not(.col4) > :not(.check) {
+    background-color: $secondary-light !important;
 }
 
 .col1,
@@ -256,44 +251,34 @@
 .AA {
     grid-area: AA;
 }
-
 .AB {
     grid-area: AB;
 }
-
 .AC {
     grid-area: AC;
     white-space: nowrap;
 }
-
 .AD {
     grid-area: AD;
 }
-
 .AE {
     grid-area: AE;
 }
-
 .AF {
     grid-area: AF;
 }
-
 .AG {
     grid-area: AG;
 }
-
 .AH {
     grid-area: AH;
 }
-
 .AI {
     grid-area: AI;
 }
-
 .AJ {
     grid-area: AJ;
 }
-
 .AK {
     grid-area: AK;
 }
@@ -301,43 +286,33 @@
 .BA {
     grid-area: BA;
 }
-
 .BB {
     grid-area: BB;
 }
-
 .BC {
     grid-area: BC;
 }
-
 .BD {
     grid-area: BD;
 }
-
 .BE {
     grid-area: BE;
 }
-
 .BF {
     grid-area: BF;
 }
-
 .BG {
     grid-area: BG;
 }
-
 .BH {
     grid-area: BH;
 }
-
 .BI {
     grid-area: BI;
 }
-
 .BJ {
     grid-area: BJ;
 }
-
 .BK {
     grid-area: BK;
 }
@@ -345,43 +320,33 @@
 .CA {
     grid-area: CA;
 }
-
 .CB {
     grid-area: CB;
 }
-
 .CC {
     grid-area: CC;
 }
-
 .CD {
     grid-area: CD;
 }
-
 .CE {
     grid-area: CE;
 }
-
 .CF {
     grid-area: CF;
 }
-
 .CG {
     grid-area: CG;
 }
-
 .CH {
     grid-area: CH;
 }
-
 .CI {
     grid-area: CI;
 }
-
 .CJ {
     grid-area: CJ;
 }
-
 .CK {
     grid-area: CK;
 }
@@ -389,11 +354,9 @@
 .DA {
     grid-area: DA;
 }
-
 .DB {
     grid-area: DB;
 }
-
 .DC {
     grid-area: DC;
 }
