@@ -13,9 +13,11 @@
     @endphp
 
     <div class="container-sm overflow-hidden">
-        <div class="row text-center">
-            <div class="alert alert-primary fs-3 fw-bolder" role="alert">
-                <span>Panier</span>
+        <div class="row text-center my-4">
+            <div class="col-md-12 px-sm-0 ">
+                <div class="alert alert-primary fs-3 fw-bolder mb-0" role="alert">
+                    <span>Panier</span>
+                </div>
             </div>
         </div>
         @if (Cart::isEmpty())
@@ -40,7 +42,7 @@
                                 <div class="row my-1">
                                     <div class="col ps-1 pe-0">
                                         <span class="fst-italic"><i class="fa-solid fa-circle-arrow-right bg-white text-secondary me-2"></i>Espace disque :</span>
-                                        <span>{{ $cartItem->attributes->form_diskspace }} Go</span>
+                                        <span>{{ $cartItem->attributes->form_level === 'dédié' ? 'Illimité' : $cartItem->attributes->form_diskspace . ' Go' }}</span>
                                     </div>
                                 </div>
                                 <div class="row my-1 px-1">
@@ -94,9 +96,9 @@
                             </div>
                         </div>
                     </div>
-                    @if ($cartItem->attributes->form_diskspace >= 800)
+                    @if ($cartItem->attributes->form_diskspace >= 170)
                         <div class="card mb-2">
-                            <div class="alert alert-secondary fw-bolder mb-1" role="alert"><span>Proposition 1 : abonnement mensuel</span></div>
+                            <div class="alert alert-secondary fw-bolder mb-1" role="alert"><span>Proposition 2 : abonnement mensuel</span></div>
                             <div class="card-body">
                                 <div class="row border-bottom justify-content-evenly">
                                     <div class="text-end p-1">

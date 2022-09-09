@@ -12,12 +12,12 @@
                 {{-- INPUT --}}
             </div>
         </div>
-        <h1 class="pricing headline text-secondary" style="font-family: Roboto, sans-serif;">Choisissez votre formule
-        </h1>
-        <h3 class="pricing-sub-headline">Toutes vos données fragmentées, copiées et réparties sur différents serveurs et
+        <p class="pricing headline text-secondary fs-1" style="font-family: Roboto, sans-serif;">Choisissez votre formule
+        </p>
+        <p class="pricing-sub-headline fs-4">Toutes vos données fragmentées, copiées et réparties sur différents serveurs et
             Datacenters selon le niveau de disponibilité choisi.
             <a class="text-primary" href="https://www.dedikam.com/lexique/#niveaux" target="_blank">En savoir plus</a>
-        </h3>
+        </p>
     </div>
     {{-- TABLEAU COMPARATIF --}}
     <div class="comparison mb-4">
@@ -45,37 +45,37 @@
                 <div class="table-responsive" style="max-width: 50rem;margin-left: auto;margin-right: auto">
                     <table class="table table-bordered">
                         <thead>
-                            <tr class="text-center bg-light">
+                            <tr class="text-center bg-light" style="vertical-align:middle">
                                 <th>Formule</th>
                                 <th>Espace disque</th>
                                 <th>Total</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="text-center">
+                            <tr class="text-center" id="recapDiskspace">
                                 <td style="vertical-align:middle">
-                                    <div><span id="recapLevel" class="fs-2 fw-bolder">Basique</span></div>
+                                    <div><span id="recapLevel" class="fs-3 fw-bolder">Basique</span></div>
                                 </td>
                                 <td style="vertical-align:middle">
-                                    <div class="d-flex flex-column">
-                                        <span id="recapDiskspaceGo" class="fs-2 fw-bold">10 Go</span>
+                                    <div class="d-flex flex-column" >
+                                        <span id="recapDiskspaceGo" class="fs-3 fw-bold">10 Go</span>
                                         <span id="recapDiskspaceGio">(9.31 Gio )</span>
                                     </div>
                                 </td>
-                                <td style="vertical-align:middle">
-                                    <div class="d-flex flex-column align-items-start">
-                                        <div id="price_Y" class="ms-5">
-                                            <span id="textPricePerYear" class="fs-1 text-primary fw-bolder">2€</span>
-                                            <span id="recap_amount_free" class="fs-1 text-primary fw-bolder"
+                                <td style="vertical-align:middle" class="fs-5">
+                                    <div class="d-flex flex-column align-items-center justify-content-center">
+                                        <div id="price_Y">
+                                            <span id="textPricePerYear" class="text-primary fw-bolder">2€</span>
+                                            <span id="recap_amount_free" class="text-primary fw-bolder"
                                                 style="display: none;">gratuit pour 30 jours</span>
-                                            <span id="recap_duration" class="ms-2 me-1">pour 1 an jusqu'au</span>
+                                            <span id="recap_duration">pour 1 an jusqu'au</span>
                                             <span id="recap_enddate">01/06/2022</span>
                                         </div>
-                                        <div id="boxPricePerMonth" class="ms-5 d-none">
-                                            <span class="fs-3 text-secondary fw-bolder">ou</span>
-                                            <div class="">
-                                                <span id="textPricePerMonth" class="fs-1 text-primary fw-bolder">2€</span>
-                                                <span class="ms-2">par mois</span>
+                                        <div id="boxPricePerMonth" class="d-none">
+                                            <span class="text-secondary fw-bolder">ou</span>
+                                            <div>
+                                                <span id="textPricePerMonth" class="text-primary fw-bolder">2€</span>
+                                                <span>par mois</span>
                                             </div>
                                         </div>
                                     </div>
@@ -127,8 +127,16 @@ window.onload = function () {
                     boxPricePerMonth.classList.contains("d-none") ? "" : boxPricePerMonth.classList.toggle("d-none");
                 }
                 recapLevel.innerHTML = offer.charAt(0).toUpperCase() + offer.slice(1);
-                recapDiskspaceGo.innerHTML = value + " Go";
-                recapDiskspaceGio.innerHTML = Math.round(100 * value / 1.074) / 100 + " Gio";
+                if(offer !== 'dédié') {
+                    recapDiskspaceGo.innerHTML = value + " Go";
+                    recapDiskspaceGio.innerHTML = Math.round(100 * value / 1.074) / 100 + " Gio";
+                } else if(offer === 'dédié') {
+                    recapDiskspaceGo.innerHTML = 'Illimité'
+                    recapDiskspaceGio.innerHTML = '';
+                    boxPricePerMonth.classList.contains("d-none") ? boxPricePerMonth.classList.toggle("d-none") : "";
+                    slider.value = 5000;
+                }
+
             });
     };
 
@@ -229,6 +237,6 @@ window.onload = function () {
             trigger: "focus",
         }
     );
-    };
+};
 </script>
 @endpush

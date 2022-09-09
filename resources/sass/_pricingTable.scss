@@ -148,6 +148,13 @@
     }
 }
 
+@media (max-width: 576px) {
+    #recapLevel,
+    #recapDiskspace * {
+        font-size: 12px !important;
+    }
+}
+
 .pricingTable .selected label,
 .pricingTable .selected i {
     color: #fff !important;
