@@ -1,30 +1,12 @@
-// Body
-$body-bg: #ebca98;
-
 // Typography
 $font-family-sans-serif: "Nunito", sans-serif;
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
 
-//
-$primary: #74ba58;
+$primary: rgb(116, 186, 88);
 $secondary: #fe7e20;
+$info: #141e28;
+$warning: #141e28;
 
 $secondary-light: lighten($secondary, 20%);
 $secondary-lighter: lighten($secondary, 30%);
-
-a {
-    color: inherit !important;
-    text-decoration: none !important;
-}
-:visited {
-    color: inherit !important;
-}
-
-.btn-primary {
-    color: white !important;
-}
-
-.btn-secondary {
-    color: white !important;
-}

@@ -54,10 +54,13 @@
                         <tbody>
                             <tr class="text-center" id="recapDiskspace">
                                 <td style="vertical-align:middle">
-                                    <div><span id="recapLevel" class="fs-3 fw-bolder">Basique</span></div>
+                                    <div class="d-flex flex-column align-items-center justify-content-center">
+                                        <span id="recapLevel" class="fs-3 fw-bolder">Basique</span>
+                                        <span id="recapLevelOption"></span>
+                                    </div>
                                 </td>
                                 <td style="vertical-align:middle">
-                                    <div class="d-flex flex-column" >
+                                    <div class="d-flex flex-column align-items-center justify-content-center" >
                                         <span id="recapDiskspaceGo" class="fs-3 fw-bold">10 Go</span>
                                         <span id="recapDiskspaceGio">(9.31 Gio )</span>
                                     </div>
@@ -107,6 +110,7 @@ window.onload = function () {
     const recapLevel = document.getElementById("recapLevel");
     const recapDiskspaceGo = document.getElementById("recapDiskspaceGo");
     const recapDiskspaceGio = document.getElementById("recapDiskspaceGio");
+    const recapLevelOption = document.getElementById("recapLevelOption");
     const rangeSliderContainer = document.querySelector('.range-slider-container');
     const buttonsRadioForOfferBasique = [buttonsRadioForOffer[0], buttonsRadioForOffer[1], buttonsRadioForOffer[2]];
     const buttonsRadioForOfferDedicated = [buttonsRadioForOffer[3], buttonsRadioForOffer[4], buttonsRadioForOffer[5]];
@@ -136,7 +140,15 @@ window.onload = function () {
                     boxPricePerMonth.classList.contains("d-none") ? boxPricePerMonth.classList.toggle("d-none") : "";
                     slider.value = 5000;
                 }
-
+                if( offer === "basique" || offer === "dédié") {
+                    let buttonChecked;
+                    buttonsRadioForOffer.forEach(button => {
+                        if(button.checked === true) {
+                            buttonChecked = button;
+                        }
+                    });
+                    recapLevelOption.innerHTML = buttonChecked.value.charAt(0).toUpperCase() + buttonChecked.value.split("Offer")[0].slice(1)
+                }
             });
     };
 

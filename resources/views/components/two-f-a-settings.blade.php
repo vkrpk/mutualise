@@ -20,7 +20,12 @@
                 @elseif(!$data['user']->loginSecurity->google2fa_enable)
                     1. Scan this QR code with your Google Authenticator App. Alternatively, you can use the code :
                     <code>{{ $data['secret'] }}</code><br />
-                    <div>{!! $data['google2fa_url'] !!}</div>
+                    @env('local')
+                        <div>{!! $data['google2fa_url'] !!}</div>
+                    @endenv
+                    @env('production')
+                        <img src="{{ $data['google2fa_url'] }}" alt="QR code">
+                    @endenv
                     <br />
                     2. Enter the pin from Google Authenticator app :<br />
                     <form class="form-horizontal" method="POST" action="{{ route('enable2fa') }}">
@@ -39,9 +44,6 @@
                         </button>
                     </form>
                 @elseif($data['user']->loginSecurity->google2fa_enable)
-                    <div class="alert alert-success">
-                        2FA is currently <strong>enabled</strong> on your account.
-                    </div>
                     <p>If you are looking to disable Two Factor Authentication. Please confirm your password and
                         Click Disable 2FA Button.</p>
                     <form class="form-horizontal" method="POST" action="{{ route('disable2fa') }}">
@@ -56,7 +58,7 @@
                                 </span>
                             @endif
                         </div>
-                        <button type="submit" class="btn btn-primary ">Disable 2FA</button>
+                        <button type="submit" class="btn btn-outline-danger">Disable 2FA</button>
                     </form>
                 @endif
             </div>

@@ -25,6 +25,7 @@
 
 <body>
     <x-header />
+    <div style="height: 76px; width:100%"></div>
     @if (session('status'))
         <div class="alert alert-success" role="alert">
             {{ session('status') }}
@@ -38,7 +39,7 @@
         @yield('content')
     </div>
     <x-footer />
-    
+
 </body>
 {!! GoogleReCaptchaV3::init() !!}
 @stack('scripts')

@@ -192,23 +192,4 @@
         <div id="calqueNoir" style="background: #f5f5f5;width: 100%;height: 100%;position: absolute;filter: blur(0px) brightness(0%) contrast(121%) hue-rotate(0deg) saturate(100%);background-color: #141E28;opacity: 0.50;z-index: -1;max-width: 816px;top: 50%;bottom: 50%;transform: translateY(-50%);border-radius: 20px;border-width: 0px;border-style: solid;bottom: 0;left: 0;"></div>
     </div>
 </div>
-{{--<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
-                </div>
-            </div>
-        </div>
-    </div>
-</div> --}}
 @endsection

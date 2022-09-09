@@ -17,15 +17,15 @@
                                 </ul>
                             </div>
                         @endif
-
-                        Enter the pin from Google Authenticator app:<br/><br/>
+                        <p>Enter the pin from Google Authenticator app:</p>
                         <form class="form-horizontal" action="{{ route('2faVerify') }}" method="POST">
                             @csrf
-                            <div class="form-group{{ $errors->has('one_time_password-code') ? ' has-error' : '' }}">
+                            <div class="form-group{{ $errors->has('one_time_password-code') ? ' has-error' : '' }} mb-2">
                                 <label for="one_time_password" class="control-label">One Time Password</label>
                                 <input id="one_time_password" name="one_time_password" class="form-control col-md-4"  type="text" required/>
                             </div>
                             <button class="btn btn-primary" type="submit">Authenticate</button>
+                            <a href="{{ request()->headers->get('referer') }}"><button type="button" class="btn btn-secondary">Revenir en arrière</button></a>
                         </form>
                     </div>
                 </div>
