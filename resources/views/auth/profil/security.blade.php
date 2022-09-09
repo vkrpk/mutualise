@@ -10,7 +10,7 @@
         <x-navbar :route="$data['route']"/>
         <hr class="mt-0 mb-4">
         <div class="row">
-            <div class="col-lg-8">
+            <div class="col-md-6">
                 <!-- Change password card-->
                 <div class="card mb-4">
                     <div class="card-header">Changer votre mot de passe</div>
@@ -45,34 +45,6 @@
                         </form>
                     </div>
                 </div>
-                <!-- Security preferences card-->
-                <div class="card mb-4">
-                    <div class="card-header">Security Preferences</div>
-                    <div class="card-body">
-                        <!-- Data sharing options-->
-                        <h5 class="mb-1">Data Sharing</h5>
-                        <p class="small text-muted">Sharing usage data can help us to improve our products and better serve
-                            our users as they navigation through our application. When you agree to share usage data with
-                            us, crash reports and usage analytics will be automatically sent to our development team for
-                            investigation.</p>
-                        <form>
-                            <div class="form-check">
-                                <input class="form-check-input" id="radioUsage1" type="radio" name="radioUsage"
-                                checked="">
-                                <label class="form-check-label" for="radioUsage1">Yes, share data and crash reports with app
-                                    developers</label>
-                            </div>
-                            <div class="form-check">
-                                <label class="form-check-label" for="radioUsage2">No, limit my data sharing with app
-                                <input class="form-check-input" id="radioUsage2" type="radio" name="radioUsage">
-                                    developers</label>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <x-two-f-a-settings :data="$data"/>
                 <div class="card mb-4">
                     <div class="card-header">Changer mon adresse email</div>
                     <div class="card-body">
@@ -111,10 +83,39 @@
                         </div>
                     </div>
                 </div>
+                <!-- Security preferences card-->
+                <div class="card mb-4">
+                    <div class="card-header">Security Preferences</div>
+                    <div class="card-body">
+                        <!-- Data sharing options-->
+                        <h5 class="mb-1">Data Sharing</h5>
+                        <p class="small text-muted">Sharing usage data can help us to improve our products and better serve
+                            our users as they navigation through our application. When you agree to share usage data with
+                            us, crash reports and usage analytics will be automatically sent to our development team for
+                            investigation.</p>
+                        <form>
+                            <div class="form-check">
+                                <input class="form-check-input" id="radioUsage1" type="radio" name="radioUsage"
+                                checked="">
+                                <label class="form-check-label" for="radioUsage1">Yes, share data and crash reports with app
+                                    developers</label>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label" for="radioUsage2">No, limit my data sharing with app
+                                <input class="form-check-input" id="radioUsage2" type="radio" name="radioUsage">
+                                    developers</label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <x-two-f-a-settings :data="$data"/>
+
                 <div class="card mb-4">
                     <div class="card-header">Supprimer mon compte</div>
                     <div class="card-body">
-                        <button type="button" class="btn btn-danger-soft text-danger" data-bs-toggle="modal" data-bs-target="#modalDeleteAccount" id="buttonForOpenModal">
+                        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#modalDeleteAccount" id="buttonForOpenModal">
                             Supprimer mon compte
                         </button>
                         <div class="modal fade" id="modalDeleteAccount" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalDeleteAccountLabel" aria-hidden="true">

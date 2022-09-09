@@ -79,9 +79,9 @@ class LoginSecurityController extends Controller
         if($valid){
             $user->loginSecurity->google2fa_enable = 1;
             $user->loginSecurity->save();
-            return redirect('2fa')->with('success',"2FA is enabled successfully.");
+            return redirect()->route('profilSecurity')->with('status',"2FA is enabled successfully.");
         }else{
-            return redirect('2fa')->with('error',"Invalid verification Code, Please try again.");
+            return redirect('2fa')->with('success',"Invalid verification Code, Please try again.");
         }
     }
 
@@ -99,6 +99,6 @@ class LoginSecurityController extends Controller
         ]);
         $userId = Auth::user()->id;
         login::where('user_id', $userId)->delete();
-        return redirect('/2fa')->with('success',"2FA is now disabled.");
+        return redirect()->route('profilSecurity')->with('status',"2FA is now disabled.");
     }
 }

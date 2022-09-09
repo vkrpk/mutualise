@@ -30,7 +30,6 @@ class CartController extends Controller
          * @var App\Models\User
          */
         $user = User::where('id', Auth::id())->first();
-        \Cart::clear();
         \Cart::add([
             'id' => Carbon::now()->timestamp,
             'name' => $user->name,

@@ -43,21 +43,15 @@ class Google2FAController extends Controller
             'secret' => $secret]);
     }
 
-
-
-
-
     public function disableTwoFactor(Request $request){
         $user = $request->user();
 
         $user->google2fa_secret = null;
         $user->save();
 
-        return view('2fa/disableTwoFactor');
+        // return view('2fa/disableTwoFactor');
+        return view('home');
     }
-
-
-
 
     private function generateSecret(){
         $randomBytes = random_bytes(10);
