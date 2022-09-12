@@ -25,6 +25,7 @@ Route::post('logout', 'App\Http\Controllers\Auth\LoginController@logout')->name(
 Route::post('inscription', 'App\Http\Controllers\Auth\RegisterController@register')->name('inscription');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->withoutMiddleware('auth');
+Route::get('/home2', [App\Http\Controllers\HomeController::class, 'index2'])->name('home2')->withoutMiddleware('auth');
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
