@@ -13,7 +13,8 @@
                             {{ __('A fresh verification link has been sent to your email address.') }}
                         </div>
                     @endif
-                    <p>Assurez-vous d'être toujours connecté sur votre naviguateur pendant à l'ouverture de l'email.</p>
+                    <p>Un email de confirmation vous a été envoyé à l'adresse : <u>{{ Auth::user()->email }}</u>.</p>
+                    <p>Assurez-vous d'être toujours connecté sur Dedikam sur votre naviguateur pendant à l'ouverture de l'email.</p>
                     {{ __('Before proceeding, please check your email for a verification link.') }}
                     {{ __('If you did not receive the email') }},
                     <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
