@@ -24,25 +24,36 @@ class CartController extends Controller
 
     public function addToCart(Request $request)
     {
-        // dd($request->all());
         $price = (new CalculAmountController())->calculAmount($request->form_level, $request->form_diskspace);
-        /**
-         * @var App\Models\User
-         */
-        $user = User::where('id', Auth::id())->first();
-        \Cart::add([
-            'id' => Carbon::now()->timestamp,
-            'name' => $user->name,
-            'price' => $price['Y'],
-            'quantity' => 1,
-            'attributes' => array(
-                'form_level' => $request->form_level,
-                'form_diskspace' => $request->form_diskspace,
-                'priceMonthly' => $price['M'],
-                'coupon' => false,
-                'buttonsRadioForOffer' => $request->buttonsRadioForOffer ?? '',
-            )
-        ]);
+        if($request->id) {
+            \Cart::update($request->id, [
+                'id' => $request->id,
+                'name' => $request->accessName,
+                'price' => $price['Y'],
+                'quantity' => 1,
+                'attributes' => array(
+                    'form_level' => $request->form_level,
+                    'form_diskspace' => $request->form_diskspace,
+                    'priceMonthly' => $price['M'],
+                    'coupon' => false,
+                    'buttonsRadioForOffer' => $request->buttonsRadioForOffer ?? '',
+                )
+            ]);
+        } else {
+            \Cart::add([
+                'id' => random_int(3, 5),
+                'name' => $request->accessName,
+                'price' => $price['Y'],
+                'quantity' => 1,
+                'attributes' => array(
+                    'form_level' => $request->form_level,
+                    'form_diskspace' => $request->form_diskspace,
+                    'priceMonthly' => $price['M'],
+                    'coupon' => false,
+                    'buttonsRadioForOffer' => $request->buttonsRadioForOffer ?? '',
+                )
+            ]);
+        }
         session()->flash('success', 'La commande a bien été ajoutée à votre panier !');
 
         return redirect()->route('cart.list');
