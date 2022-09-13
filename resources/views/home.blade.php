@@ -52,7 +52,7 @@
                     <div class="shadowBox col px-0 col-md-6 bg-white border-transparent rounded-4 overflow-hidden outilsWebEtCollaboratifs">
                         <p class="h4 fw-bolder py-4 bg-primary text-center mb-0">Outils web</p>
                         <div class="d-flex">
-                            <div class="d-flex flex-column px-3 align-items-center pt-2">
+                            <div class="d-flex flex-column px-3 align-items-center pt-2" id="boxForTheButtonsInOutilsWeb">
                                 <p style="width:91px"><button class="btn btn-secondary w-100">FTPS/FTP</button></p>
                                 <p style="width:91px"><button class="btn btn-secondary w-100">SSH</button></p>
                                 <p style="width:91px"><button class="btn btn-secondary w-100">ISCSI</button></p>
@@ -62,7 +62,7 @@
                                 <p style="width:91px"><button class="btn btn-secondary w-100">RSYNC</button></p>
                             </div>
                             <div class="col px-2 border-start pt-2">
-                                <p class="justify">WebDAV est un protocole de longue date qui permet à un serveur Web d’agir comme un serveur de fichiers ett de prendre en charge la création collaborative de contenu sur le Web. Bien qu’étant supplanté par des mécanismes plus modernes, il reste un outil de travail fiable rencontré dans de nombreux serveurs, clients et applications différentes.</p>
+                                <p class="justify" id="textForTheButtonsInOutilsWeb">WebDAV est un protocole de longue date qui permet à un serveur Web d’agir comme un serveur de fichiers ett de prendre en charge la création collaborative de contenu sur le Web. Bien qu’étant supplanté par des mécanismes plus modernes, il reste un outil de travail fiable rencontré dans de nombreux serveurs, clients et applications différentes.</p>
                             </div>
                         </div>
                     </div>
@@ -116,3 +116,38 @@
         </section>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        const textForTheButtonsInOutilsWeb = document.getElementById("textForTheButtonsInOutilsWeb")
+        const boxForTheButtonsInOutilsWeb = document.getElementById("boxForTheButtonsInOutilsWeb").querySelectorAll("p")
+
+        boxForTheButtonsInOutilsWeb.forEach(button => {
+            button.addEventListener("click", () => {
+                switch (button) {
+                    case boxForTheButtonsInOutilsWeb[1]:
+                        textForTheButtonsInOutilsWeb.innerHTML = "L’accès SSH vous permet d’accéder à une console SSH reliée directement à votre compte Dedikam à travers une connexion entièrement chiffrée et sécurisée. L’authentification à cette console peut se faire via un couple login/mot de passe ou via un couple clé privée/clé publique."
+                        break;
+                    case boxForTheButtonsInOutilsWeb[2]:
+                        textForTheButtonsInOutilsWeb.innerHTML = "Le disque ISCSI fonctionne et se comporte de la même manière qu’un disque local : le but de l’ISCSI est d’avoir un ou plusieurs disques durs sur son ordinateur ou son serveur et d’avoir l’illusion qu’ils sont physiquement connectés sur la carte-mère. En réalité ce sont des disques virtuels hébergés dans une infrastructure redondante, sécurisée et performante. Cela permet de pallier différentes pannes matérielles que peuvent subir une machine ou un disque dur."
+                        break;
+                    case boxForTheButtonsInOutilsWeb[3]:
+                        textForTheButtonsInOutilsWeb.innerHTML = "Le SFTP est un protocole de communication fonctionnant au-dessus de SSH pour transférer et gérer des fichiers à distance. Avec le SFTP vous pouvez uploader et downloader vos fichiers, dossiers et reprendre les transferts après interruption ou déconnexion (resume). Vous pouvez également écraser des fichiers sans changer de clé de téléchargement. Connexion chiffrée et sécurisée."
+                        break;
+                    case boxForTheButtonsInOutilsWeb[4]:
+                        textForTheButtonsInOutilsWeb.innerHTML = "L’option CIFS est un protocole TCP/IP réseau qui permet de partager des ressources et l’accès aux fichiers à distance en utilisant des millions d’ordinateurs à la fois. Les utilisateurs avec différentes plates-formes et les ordinateurs peuvent partager des fichiers sans avoir à installer de nouveaux logiciels. Avec le CIFS, les modifications apportées à un fichier sont simultanément enregistrées à la fois sur le client et côté serveur."
+                        break;
+                    case boxForTheButtonsInOutilsWeb[5]:
+                        textForTheButtonsInOutilsWeb.innerHTML = "WebDAV est un protocole de longue date qui permet à un serveur Web d’agir comme un serveur de fichiers et de prendre en charge la création collaborative de contenu sur le Web. Bien qu’étant supplanté par des mécanismes plus modernes, il reste un outil de travail fiable rencontré dans de nombreux serveurs, clients et applications différentes."
+                        break;
+                    case boxForTheButtonsInOutilsWeb[6]:
+                        textForTheButtonsInOutilsWeb.innerHTML = "Synchronise et transfert uniquement les nouveaux fichiers ou les fichiers modifiés. Rsync permet surtout d’uploader des morceaux de fichiers. C’est à dire, que si vous travaillez sur un fichier de 300 Mo mais que vous n’en changez que la fin, rsync effectuera le calcul pour envoyer que la différence. C’est donc beaucoup beaucoup plus rapide que le SFTP qui ira transférer le fichier entièrement."
+                        break;
+                    default:
+                        textForTheButtonsInOutilsWeb.innerHTML = "Le FTP/FTPS est un protocole de communication fonctionnant au-dessus de SSH pour transférer et gérer des fichiers à distance. Avec le FTP/FTPS vous pouvez uploader et downloader vos fichiers, dossiers et reprendre les transferts après interruption ou déconnexion (resume). Vous pouvez également écraser des fichiers sans changer de clé de téléchargement. Connexion chiffrée et sécurisée."
+                    break;
+                }
+            })
+        });
+    </script>
+@endpush
