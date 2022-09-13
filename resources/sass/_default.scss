@@ -62,3 +62,19 @@ a {
 .alert {
     margin-bottom: 0 !important;
 }
+
+.justify {
+    text-align: justify !important;
+}
+
+.opacityBackground {
+    backdrop-filter: brightness(70%);
+}
+
+.opacityBackgroundMoreOpace {
+    backdrop-filter: brightness(50%);
+}
+
+.shadowBox {
+    box-shadow: 20px 20px 10px 0px rgba(0, 0, 0, 0.5) !important;
+}
