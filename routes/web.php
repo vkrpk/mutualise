@@ -43,7 +43,7 @@ Route::prefix('profil')->middleware(['auth', 'verified'])->group(function () {
     });
 });
 
-Route::get('/services', [OfferController::class, 'services'])->name('services');
+Route::get('/services/{id?}', [OfferController::class, 'services'])->name('services');
 
 Route::group(['prefix' => '2fa'], function () {
     Route::get('/', 'App\Http\Controllers\LoginSecurityController@show2faForm');

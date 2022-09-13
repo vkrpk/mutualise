@@ -16,7 +16,7 @@
         </p>
         <p class="pricing-sub-headline fs-4">Toutes vos données fragmentées, copiées et réparties sur différents serveurs et
             Datacenters selon le niveau de disponibilité choisi.
-            <a class="text-primary" href="https://www.dedikam.com/lexique/#niveaux" target="_blank">En savoir plus</a>
+            <a class="text-primary" href="https://www.dedikam.com/lexique/#niveaux" target="_blank"><br>En savoir plus</a>
         </p>
     </div>
     {{-- TABLEAU COMPARATIF --}}
@@ -25,7 +25,6 @@
     </div>
     {{-- TABLEAU COMPARATIF --}}
     <div class="row mx-2 mx-sm-0 g-2 m-3">
-
         <div class="my-4 range-slider-container text-center position-relative">
             <p class="p-2 p-sm-4 rounded-3 fs-5 bg-white border text-center">Choisissez votre espace disque en déplaçant le
                 curseur orange vers la droite, tarif affiché en bas de page.</p>
@@ -55,7 +54,7 @@
                             <tr class="text-center" id="recapDiskspace">
                                 <td style="vertical-align:middle">
                                     <div class="d-flex flex-column align-items-center justify-content-center">
-                                        <span id="recapLevel" class="fs-3 fw-bolder">Basique</span>
+                                        <span id="recapLevel" class="fs-3 fw-bolder">Standard</span>
                                         <span id="recapLevelOption"></span>
                                     </div>
                                 </td>
@@ -68,7 +67,7 @@
                                 <td style="vertical-align:middle" class="fs-5">
                                     <div class="d-flex flex-column align-items-center justify-content-center">
                                         <div id="price_Y">
-                                            <span id="textPricePerYear" class="text-primary fw-bolder">2€</span>
+                                            <span id="textPricePerYear" class="text-primary fw-bolder">3.6€</span>
                                             <span id="recap_amount_free" class="text-primary fw-bolder"
                                                 style="display: none;">gratuit pour 30 jours</span>
                                             <span id="recap_duration">pour 1 an jusqu'au</span>
@@ -77,7 +76,7 @@
                                         <div id="boxPricePerMonth" class="d-none">
                                             <span class="text-secondary fw-bolder">ou</span>
                                             <div>
-                                                <span id="textPricePerMonth" class="text-primary fw-bolder">2€</span>
+                                                <span id="textPricePerMonth" class="text-primary fw-bolder"></span>
                                                 <span>par mois</span>
                                             </div>
                                         </div>
@@ -102,9 +101,9 @@ window.onload = function () {
     const inputHiddenOfferAddToCartForm = document.getElementById("form_level");
     const buttonsRadioForOffer = document.querySelectorAll('input[name="buttonsRadioForOffer"]');
     const cellsWithAttributesOffer = document.querySelectorAll("a[offer]");
-    const cartLevelOffer = "{!! Cart::getContent()->first()->attributes->form_level ?? 'null'!!}";
-    const cartValueOffer = "{!! Cart::getContent()->first()->attributes->form_diskspace ?? 'null'!!}";
-    const cartButtonsRadioForOffer = "{!! Cart::getContent()->first()->attributes->buttonsRadioForOffer ?? 'null' !!}";
+    const cartLevelOffer = "{{ $level }}";
+    const cartValueOffer = "{{ $formDiskspace }}";
+    const cartButtonsRadioForOffer = "{{ $option }}";
     let timeout = null;
     const boxPricePerMonth = document.getElementById("boxPricePerMonth");
     const recapLevel = document.getElementById("recapLevel");
@@ -148,6 +147,8 @@ window.onload = function () {
                         }
                     });
                     recapLevelOption.innerHTML = buttonChecked.value.charAt(0).toUpperCase() + buttonChecked.value.split("Offer")[0].slice(1)
+                } else {
+                    recapLevelOption.innerHTML = ''
                 }
             });
     };
@@ -231,6 +232,7 @@ window.onload = function () {
             removeSelectedClassToAllColumns();
             addSelectedClassToColumn(div);
             toggleSlider(div);
+            changeSliderColor();
             inputHiddenOfferAddToCartFormValue(div);
             calculAndDisplayOfferPrice(slider.value, document.querySelector(".selected").getAttribute("offer"));
         })

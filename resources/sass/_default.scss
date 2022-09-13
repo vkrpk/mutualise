@@ -78,3 +78,21 @@ a {
 .shadowBox {
     box-shadow: 20px 20px 10px 0px rgba(0, 0, 0, 0.5) !important;
 }
+
+.bgSecondaryLight {
+    background-color: #feb986 !important;
+}
+
+.borderRadiusTop {
+    border-radius: 0.375rem 0.375rem 0 0 !important;
+    border: 1px solid #d2d2d2;
+    border-bottom: none;
+}
+
+.borderRadiusBottom {
+    border-radius: 0 0 0.375rem 0.375rem !important;
+}
+
+.textSecondaryDarken {
+    color: $secondary-dark;
+}

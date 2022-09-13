@@ -15,9 +15,9 @@
     <div class="CIFS pricingReference">CIFS</div>
     <div class="Webdav pricingReference">Webdav</div>
     <div class="SI pricingReference">SI</div>
-    <a tabindex="0" offer="basique" class="colContainer col1 popover-dismiss d-block w-100 selected" role="button" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-title="Répartition des données" data-bs-content="1 serveur" data-bs-placement="right">
+    <a tabindex="0" offer="basique" class="colContainer col1 popover-dismiss d-block w-100" role="button" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-title="Répartition des données" data-bs-content="1 serveur" data-bs-placement="right">
         <div class="AA check">
-            <input type="radio" name="buttonsRadioForOffer" id="pydioOfferBasique" value="pydioOfferBasique" form="formAddToCart" checked>
+            <input type="radio" name="buttonsRadioForOffer" id="pydioOfferBasique" value="pydioOfferBasique" form="formAddToCart">
             <label for="pydioOfferBasique">Pydio</label>
         </div>
         <div class="AB check">
@@ -37,7 +37,7 @@
         <div class="AJ"><i class="fa-solid fa-xmark"></i></div>
         <div class="AK"><i class="fa-solid fa-xmark"></i></div>
     </a>
-    <a tabindex="1" offer="standard" class="colContainer col2 popover-dismiss d-block w-100" role="button" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-title="Répartition des données" data-bs-content="2 serveurs" data-bs-placement="right">
+    <a tabindex="1" offer="standard" class="colContainer col2 popover-dismiss d-block w-100 selected" role="button" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-title="Répartition des données" data-bs-content="2 serveurs" data-bs-placement="right">
         <div class="BA check"><i class="fa-solid fa-check"></i></div>
         <div class="BB check"><i class="fa-solid fa-check"></i></div>
         <div class="BC check"><i class="fa-solid fa-check"></i></div>
