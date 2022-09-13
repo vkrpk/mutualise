@@ -13,6 +13,7 @@ class CartController extends Controller
     public function cartList()
     {
         $cartItems = \Cart::getContent();
+        // dd($cartItems);
         return view('cart.list', compact('cartItems'));
     }
 
@@ -30,7 +31,7 @@ class CartController extends Controller
                 'id' => $request->id,
                 'name' => $request->accessName,
                 'price' => $price['Y'],
-                'quantity' => 1,
+                'quantity' => ['relative' => false, "value" => 1],
                 'attributes' => array(
                     'form_level' => $request->form_level,
                     'form_diskspace' => $request->form_diskspace,
