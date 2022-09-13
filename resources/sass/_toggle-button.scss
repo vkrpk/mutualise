@@ -25,17 +25,16 @@
     border-radius: 50%;
 }
 
-.checkbox:checked+.label::after {
+.checkbox:checked + .label::after {
     transform: translateX(20px);
 }
 
-.checkbox:checked+label {
+.checkbox:checked + label {
     background: green;
 }
 
 @media (min-width: 768px) and (max-width: 825px) {
     label {
-      font-size: .8rem !important;
+        font-size: 0.8rem !important;
     }
-  }
-  
+}
