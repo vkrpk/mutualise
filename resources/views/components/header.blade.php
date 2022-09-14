@@ -16,23 +16,23 @@
                     @if (LaravelLocalization::getCurrentLocale() === "fr")
                         <li class="nav-item dropdown">
                             <a class="dropdown-toggle nav-link text-dedikam" aria-expanded="false" data-bs-toggle="dropdown" href="#">
-                                <span><img src="{{ Vite::asset('resources/images/fr.svg') }}" alt=""></span>
+                                <span><img src="{{ Vite::asset('resources/images/fr.png') }}" alt=""></span>
                                 &nbsp;Français
                             </a>
                             <div class="dropdown-menu"><a class="dropdown-item" href="{{ LaravelLocalization::getLocalizedURL("en", null, [], true) }}">
-                                <span><img src="{{ Vite::asset('resources/images/en.svg') }}" alt=""></span>
+                                <span><img src="{{ Vite::asset('resources/images/en.png') }}" alt=""></span>
                                 &nbsp;English</a>
                             </div>
                         </li>
                     @else
                         <li class="nav-item dropdown">
                             <a class="dropdown-toggle nav-link text-dedikam" aria-expanded="false" data-bs-toggle="dropdown" href="#">
-                                <span><img src="{{ Vite::asset('resources/images/en.svg') }}" alt=""></span>
+                                <span><img src="{{ Vite::asset('resources/images/en.png') }}" alt=""></span>
                                 &nbsp;English
                             </a>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="{{ LaravelLocalization::getLocalizedURL("fr", null, [], true) }}">
-                                    <span><img src="{{ Vite::asset('resources/images/fr.svg') }}" alt=""></span>
+                                    <span><img src="{{ Vite::asset('resources/images/fr.png') }}" alt=""></span>
                                     &nbsp;Français
                                 </a>
                             </div>
