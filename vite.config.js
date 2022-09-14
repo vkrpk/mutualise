@@ -32,5 +32,6 @@ export default defineConfig({
                 // entryFileNames: "static/js/[name]-[hash].js",
             },
         },
+        assetsInlineLimit : 0
     },
 });
