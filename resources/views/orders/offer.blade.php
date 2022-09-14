@@ -30,7 +30,7 @@
                 curseur orange vers la droite, tarif affiché en bas de page.</p>
             <p class="mb-0">Espace disque : <span id="slider-output">10Go</span></p>
             <input type="range" class="rs-range flex-grow-1" name="form_diskspace" id="slider" min="10" max="5000"
-                step="10" value="{{ Cart::getContent()->first()->attributes->form_diskspace ?? 0 }}" form="formAddToCart">
+                step="10" value="{{ $formDiskspace ?? 10 }}" form="formAddToCart">
             <div class="position-absolute start-50 translate-middle-x w-100 text-nowrap" style="bottom:-16px; ">
                 <span style="font-size: 11px; opacity: 0.8">Trafic illimité - Bande passante : 500 Mbit/s à 1Gbit/s, au
                     dessus de 5 000Go, veuillez nous

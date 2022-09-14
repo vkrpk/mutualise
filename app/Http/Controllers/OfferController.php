@@ -30,10 +30,9 @@ class OfferController extends Controller
         }
 
         return view('orders.offer', [
-            'user' => $user ?? '',
             'nbfreeaccount' => $nbfree ?? '',
             'level' => $level ?? null,
-            'formDiskspace' => $formDiskspace ?? 'null',
+            'formDiskspace' => $formDiskspace ?? null,
             'option' => $option ?? 'null',
             'accessName' => $accessName ?? '',
             'id' => $id ?? '',
