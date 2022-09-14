@@ -108,10 +108,12 @@
             </div>
         </section>
         <section class="py-5 px-2" style="position: relative;background: url('{{ Vite::asset("resources/images/service-fichier-owncloud2.jpg") }}') center / cover no-repeat">
-            <div class="opacityBackgroundMoreOpace rounded-4 border border-secondary text-white text-center container py-5 px-lg-5 px-2">
-                <p class="h2 mb-4">Déjà 14 années d'expérience dans la sauvegarde en ligne</p>
-                <p class="h5 mb-4 px-lg-5 px-0">Identifiez vos besoins en matière de sauvegarde ou de partage de données et si besoin, contactez-nous par mail ou par téléphone pour vous assister et vous proposer la solution la plus adaptée à vos attentes.</p>
-                <a href="#"><button class="btn btn-secondary btn-lg">Demande d'informations</button></a>
+            <div class="container">
+                <div class="opacityBackgroundMoreOpace rounded-4 border border-secondary text-white text-center py-5 px-lg-5 px-2">
+                    <p class="h2 mb-4">Déjà 14 années d'expérience dans la sauvegarde en ligne</p>
+                    <p class="h5 mb-4 px-lg-5 px-0">Identifiez vos besoins en matière de sauvegarde ou de partage de données et si besoin, contactez-nous par mail ou par téléphone pour vous assister et vous proposer la solution la plus adaptée à vos attentes.</p>
+                    <a href="#"><button class="btn btn-secondary btn-lg">Demande d'informations</button></a>
+                </div>
             </div>
         </section>
     </div>
