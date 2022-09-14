@@ -16,9 +16,8 @@ class CalculAmountController extends Controller {
     }
 
     public function calculAmount(string $offer = null, int $size = null)  {
-        $offer = (!empty($offer)) ? $offer : $this->request->query('offer', 'basique');
+        $offer = (!empty($offer)) ? $offer : $this->request->query('offer', 'standard');
         $size = (!empty($size)) ? $size : $this->request->query('size', 10);
-
         if ($offer == 'basique') {
             $amount['M'] = 37.4;
 
