@@ -44,7 +44,11 @@
                         </div>
                         <div class="px-2">
                             <figure>
+<<<<<<< HEAD
                                 <img src="{{ Vite::asset('resources/images/pydioo.png') }}" alt="Pydio logo" style="max-width: 141px; height: auto">
+=======
+                                <img src="{{ Vite::asset('resources/images/PydioLogo250.png') }}" alt="Pydio logo" style="max-width: 141px; height: auto">
+>>>>>>> 8729cda509673a53b0b0dbf60dcaf8d55ed120bf
                             </figure>
                             <p>Pydio est un logiciel libre offrant une plateforme de services de stockage et de partage de fichiers. Il se présente également comme une alternative à Dropbox.</p>
                         </div>
