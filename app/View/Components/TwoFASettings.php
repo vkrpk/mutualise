@@ -8,7 +8,7 @@ class TwoFASettings extends Component
 {
     /**
      * data
-     * 
+     *
      * @var mixed
      */
     public $data;
@@ -30,7 +30,6 @@ class TwoFASettings extends Component
      */
     public function render()
     {
-        // dd($this->data);
         return view('components.two-f-a-settings')->with('data', $this->data);
     }
 }

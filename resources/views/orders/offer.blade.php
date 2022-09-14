@@ -192,7 +192,7 @@ window.onload = function () {
         }
     }
 
-    if(cartLevelOffer != 'null'){
+    if(cartLevelOffer){
         removeSelectedClassToAllColumns()
         calculAndDisplayOfferPrice(cartValueOffer, cartLevelOffer);
         switch (cartLevelOffer) {
