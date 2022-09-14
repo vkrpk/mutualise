@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Services\CalculAmountController;
 use Carbon\Carbon;
+use App\Models\User;
+use Darryldecode\Cart\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Services\CalculAmountController;
 
 class CartController extends Controller
 {
