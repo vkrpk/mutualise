@@ -22,7 +22,6 @@ class CartController extends Controller
         return $cartItems;
     }
 
-
     public function addToCart(Request $request)
     {
         $price = (new CalculAmountController())->calculAmount($request->form_level, $request->form_diskspace);

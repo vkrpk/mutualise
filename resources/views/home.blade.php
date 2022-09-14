@@ -9,19 +9,19 @@
                 <div class="row-cols d-flex align-items-center flex-column flex-sm-row py-sm-5" style="background: url('{{ Vite::asset("resources/images/Data-Center.jpg") }}') center / cover no-repeat; ">
                     <div class="col py-3 py-sm-0">
                         <p class="h5">Services mutualisés</p>
-                        <a href="#" class="">
+                        <a href="#sectionServicesMutualises">
                             <button class="btn btn-secondary text-uppercase fw-bolder">Découvrir</button>
                         </a>
                     </div>
                     <div class="col py-3 py-sm-0">
                         <p class="h5">Services dédiés</p>
-                        <a href="#" class="">
+                        <a href="#sectionServicesDedies">
                             <button class="btn btn-secondary text-uppercase fw-bolder">Découvrir</button>
                         </a>
                     </div>
                 </div>
                 <p class="h4">DediKam est une association, indépendante sans publicité, totalement transparente et non lucrative. Nous offrons divers outils collaboratifs pour tout type d’utilisateurs, du particulier au professionnel</p>
-                <p class="text-secondary text-uppercase fw-bolder h4"><u>Qui sommes nous ?</u></p>
+                <p id="sectionServicesMutualises" class="text-secondary text-uppercase fw-bolder h4"><u>Qui sommes nous ?</u></p>
             </div>
         </section>
         <section class="d-flex flex-column align-items-center py-5" style="background-image: linear-gradient(180deg, #fe7e20 0%, #74ba58 100%);--bs-primary: #74ba58;--bs-primary-rgb: 116,186,88;--bs-secondary: #fe7e20;--bs-secondary-rgb: 254,126,32;">
@@ -44,7 +44,7 @@
                         </div>
                         <div class="px-2">
                             <figure>
-                                <img src="{{ Vite::asset('resources/images/pydio.png') }}" alt="Pydio logo" style="max-width: 141px; height: auto">
+                                <img src="{{ Vite::asset('resources/images/pydioo.png') }}" alt="Pydio logo" style="max-width: 141px; height: auto">
                             </figure>
                             <p>Pydio est un logiciel libre offrant une plateforme de services de stockage et de partage de fichiers. Il se présente également comme une alternative à Dropbox.</p>
                         </div>
@@ -70,7 +70,7 @@
                 <div class="opacityBackground rounded-4 text-center py-3 border border-secondary mt-5 text-white px-5">
                     <p class="h3">COMMANDEZ OU TESTEZ !</p>
                     <p>Testez nos services mutualisés pendant 30 jours avec <br><strong>10 Go de stockage gratuit</strong></p>
-                    <a href="#"><button class="btn btn-secondary">Inscription</button></a>
+                    <a id="sectionServicesDedies" href="{{ route('register') }}"><button class="btn btn-secondary">Inscription</button></a>
                 </div>
             </div>
         </section>
