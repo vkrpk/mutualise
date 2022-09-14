@@ -130,9 +130,12 @@ window.onload = function () {
                     boxPricePerMonth.classList.contains("d-none") ? "" : boxPricePerMonth.classList.toggle("d-none");
                 }
                 recapLevel.innerHTML = offer.charAt(0).toUpperCase() + offer.slice(1);
+
                 if(offer !== 'dédié') {
                     recapDiskspaceGo.innerHTML = value + " Go";
                     recapDiskspaceGio.innerHTML = Math.round(100 * value / 1.074) / 100 + " Gio";
+                    slider.value = value;
+                    changeSliderColor()
                 } else if(offer === 'dédié') {
                     recapDiskspaceGo.innerHTML = 'Illimité'
                     recapDiskspaceGio.innerHTML = '';
