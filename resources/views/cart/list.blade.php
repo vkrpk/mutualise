@@ -14,6 +14,7 @@
         @if (Cart::isEmpty())
             <p>Votre panier est vide.</p>
         @else
+<<<<<<< HEAD
             @foreach (Cart::getContent() as $cartItem)
                 @php
                     if (!empty($cartItem)) {
@@ -35,6 +36,36 @@
                                                 <span class="fst-italic ms-4"><i class="fa-solid fa-circle-arrow-right bg-white text-secondary me-2"></i>Option :</span>
                                                 <span>{{ $buttonsRadioForOfferName }}</span>
                                             @endif
+=======
+            <div class="row">
+                <div class="col-md-12 px-sm-0 ">
+                    <div class="card mb-2 border-0">
+                        <div class="alert alert-secondary fw-bolder mb-1" role="alert"><span>Récapitulatif de l'offre</span></div>
+                        <div class="card-body">
+                            <div class="row justify-content-evenly">
+                                <div class="row my-1">
+                                    <div class="col ps-1 pe-0">
+                                        <span class="fst-italic"><i class="fa-solid fa-circle-arrow-right bg-white text-secondary me-2"></i>Formule choisie :</span>
+                                        <span>{{ ucfirst($cartItem->attributes->form_level) }}</span>
+                                        @if ($cartItem->attributes->buttonsRadioForOffer)
+                                            <span class="fst-italic ms-4"><i class="fa-solid fa-circle-arrow-right bg-white text-secondary me-2"></i>Option :</span>
+                                            <span>{{ $buttonsRadioForOfferName }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="row my-1">
+                                    <div class="col ps-1 pe-0">
+                                        <span class="fst-italic"><i class="fa-solid fa-circle-arrow-right bg-white text-secondary me-2"></i>Espace disque :</span>
+                                        <span>{{ $cartItem->attributes->form_level === 'dédié' ? 'Illimité' : $cartItem->attributes->form_diskspace . ' Go' }}</span>
+                                    </div>
+                                </div>
+                                <div class="row my-1 px-1">
+                                    <form action="{{ route('cart.clear') }}" method="POST" class="px-0">
+                                        @csrf
+                                        <div class="text-end">
+                                            <a href="{{ route('services') }}"><button type=button class="btn btn-primary">Changer d'offre</button></a>
+                                            <button type=submit class="btn btn-danger text-white">Vider le panier</button>
+>>>>>>> 8729cda509673a53b0b0dbf60dcaf8d55ed120bf
                                         </div>
                                     </div>
                                     <div class="row my-1">
