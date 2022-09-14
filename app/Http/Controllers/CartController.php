@@ -2,23 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
 use App\Models\User;
-use Darryldecode\Cart\Cart;
+use App\Services\CalculAmountController;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Services\CalculAmountController;
 
 class CartController extends Controller
 {
     public function cartList()
     {
-<<<<<<< HEAD
         $cartItems = \Cart::getContent();
         // dd($cartItems);
-=======
-        $cartItems = Cart::getContent();
->>>>>>> 8729cda509673a53b0b0dbf60dcaf8d55ed120bf
         return view('cart.list', compact('cartItems'));
     }
 
@@ -30,7 +25,6 @@ class CartController extends Controller
     public function addToCart(Request $request)
     {
         $price = (new CalculAmountController())->calculAmount($request->form_level, $request->form_diskspace);
-<<<<<<< HEAD
         if($request->id) {
             \Cart::update($request->id, [
                 'id' => $request->id,
@@ -60,25 +54,6 @@ class CartController extends Controller
                 )
             ]);
         }
-=======
-        /**
-         * @var App\Models\User
-         */
-        $user = User::where('id', Auth::id())->first();
-        \Cart::add([
-            'id' => Carbon::now()->timestamp,
-            'name' => "kek",
-            'price' => $price['Y'],
-            'quantity' => 1,
-            'attributes' => array(
-                'form_level' => $request->form_level,
-                'form_diskspace' => $request->form_diskspace,
-                'priceMonthly' => $price['M'],
-                'coupon' => false,
-                'buttonsRadioForOffer' => $request->buttonsRadioForOffer ?? '',
-            )
-        ]);
->>>>>>> 8729cda509673a53b0b0dbf60dcaf8d55ed120bf
         session()->flash('success', 'La commande a bien été ajoutée à votre panier !');
 
         return redirect()->route('cart.list');
