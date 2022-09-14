@@ -25,7 +25,7 @@
         @else
             <div class="row">
                 <div class="col-md-12 px-sm-0 ">
-                    <div class="card mb-2">
+                    <div class="card mb-2 border-0">
                         <div class="alert alert-secondary fw-bolder mb-1" role="alert"><span>Récapitulatif de l'offre</span></div>
                         <div class="card-body">
                             <div class="row justify-content-evenly">

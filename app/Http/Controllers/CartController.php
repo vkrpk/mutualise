@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Services\CalculAmountController;
 use Carbon\Carbon;
+use App\Models\User;
+use Darryldecode\Cart\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Services\CalculAmountController;
 
 class CartController extends Controller
 {
     public function cartList()
     {
-        $cartItems = \Cart::getContent();
+        $cartItems = Cart::getContent();
         return view('cart.list', compact('cartItems'));
     }
 
@@ -32,7 +33,7 @@ class CartController extends Controller
         $user = User::where('id', Auth::id())->first();
         \Cart::add([
             'id' => Carbon::now()->timestamp,
-            'name' => $user->name,
+            'name' => "kek",
             'price' => $price['Y'],
             'quantity' => 1,
             'attributes' => array(
