@@ -1,9 +1,7 @@
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
-
 body {
     margin: 0 !important;
     display: flex;
@@ -13,48 +11,50 @@ body {
     font-size: 0.9rem;
     font-weight: 400;
     line-height: 1.6;
-    color: #212529;
     background-color: lighten(#c9fbff, 9%) !important;
-    -webkit-text-size-adjust: 100%;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
-/* Bootstrap override */
-
-.form-check-input:checked {
-    background-color: $secondary-light !important;
-    border-color: $secondary-light !important;
-}
-
-/* Custom */
-<<<<<<< HEAD
-
-.bg-dedikam {
-    background-color: #141e28;
-=======
-
-.bg-dedikam {
-    background-color: #141e28;
-}
-
-.text-dedikam {
-    color: #74ba58 !important;
->>>>>>> 8729cda509673a53b0b0dbf60dcaf8d55ed120bf
-}
-
-.hover:hover {
-    transform: scale(1.25);
-}
-
-.selectable {
-    cursor: pointer;
 }
 
 .content {
     flex-grow: 1;
 }
 
-<<<<<<< HEAD
+header .nav-link {
+    color: $primary !important;
+}
+
+.form-check-input:checked {
+    background-color: $secondary-light !important;
+    border-color: $secondary-light !important;
+}
+
+.btn-outline-danger:hover,
+.btn-danger:hover,
+.btn-secondary,
+.btn-primary {
+    color: white !important;
+}
+
+a {
+    color: inherit !important;
+    text-decoration: none !important;
+}
+:visited {
+    color: inherit !important;
+}
+
+.navbar-toggler-icon {
+    border-color: $primary !important;
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(116,186,88, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E") !important;
+}
+
+.navbar-toggler {
+    border-color: $primary !important;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none !important;
+}
+
 .nav-link.show {
     text-align: end !important;
 }
@@ -96,6 +96,3 @@ body {
 .textSecondaryDarken {
     color: $secondary-dark;
 }
-=======
-/* Media query */
->>>>>>> 8729cda509673a53b0b0dbf60dcaf8d55ed120bf
