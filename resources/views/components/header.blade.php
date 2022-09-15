@@ -53,23 +53,12 @@
                         @endif
                     @else
                         <li class="nav-item dropdown">
-                            <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown"
-                                href="#">
-                                <span class="flag-icon flag-icon-fr"></span>&nbsp;Français
-                            </a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">
-                                    <span class="flag-icon flag-icon-gb"></span>&nbsp;English
-                                </a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
                             <a class="dropdown-toggle nav-link" aria-expanded="false"data-bs-toggle="dropdown"
                                 href="#">{{ Auth::user()->name }}</a>
                             <div class="dropdown-menu dropdown-menu-end">
-                                <a class="dropdown-item" href="{{ route('profilIndex') }}">Mon compte</a>
-                                <a class="dropdown-item" href="#">Mes accès</a>
-                                <a class="dropdown-item" href="#">Ouvrir un ticket</a>
+                                <a class="dropdown-item" href="{{ route('profilIndex') }}">{{__('Mon compte')}}</a>
+                                <a class="dropdown-item" href="#">{{__('Mes accès')}}</a>
+                                <a class="dropdown-item" href="#">{{__('Ouvrir un ticket')}}</a>
                                 @if (Auth::user()->role_id === 1)
                                     <div class="dropdown-divider"></div>
                                     <span class="dropdown-header">Admin</span>
@@ -80,7 +69,7 @@
                                 <a class="dropdown-item" href="#"
                                     onclick="event.preventDefault();
                                      document.getElementById('logout-form').submit();">
-                                    Se déconnecter
+                                    {{__('Logout')}}
                                 </a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
@@ -90,7 +79,7 @@
                         </li>
                     @endguest
                     <li class="nav-item"><a class="nav-link active" href="{{ request()->headers->get('referer') }}">←
-                            Retour</a></li>
+                            {{__('Retour')}}</a></li>
                     <li class="nav-item">
                         <a href="{{ route('cart.list') }}" class="nav-link">
                             <i class="fa-solid fa-cart-shopping"></i>
