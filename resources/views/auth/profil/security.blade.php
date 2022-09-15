@@ -110,8 +110,11 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <x-two-f-a-settings :data="$data"/>
-
+                <div class="row justify-content-md-center mb-4">
+                    <div class="col">
+                        <x-card-2fa :data="$data"/>                        
+                    </div>
+                </div>
                 <div class="card mb-4">
                     <div class="card-header">Supprimer mon compte</div>
                     <div class="card-body">
