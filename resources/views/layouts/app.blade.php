@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr">
+<html lang="{{ LaravelLocalization::getCurrentLocale() }}">
 
 <head>
     <meta charset="utf-8">
