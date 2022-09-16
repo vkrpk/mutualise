@@ -3,7 +3,7 @@
 @section('content')
     <div class="container-fluid px-0 gx-0">
         <section class="d-flex flex-column align-items-center" style="position: relative;background: url('{{ Vite::asset("resources/images/service-sauvegarde-stockage-owncloud.jpg") }}') center / cover no-repeat">
-            <div class="row text-white text-center gy-5 py-5 px-2 px-md-0 container opacityBackground">
+            <div class="row text-white text-center gy-5 py-5 px-2 px-md-0 container">
                 <p class="h1 fw-bolder px-sm-5 px-0">SAUVEGARDE ET PARTAGE DE DONNÉES EN LIGNE</p>
                 <p class="h3 px-sm-5 px-0">PLATEFORME COLLABORATIVE - ESPACE DE TRAVAIL NUMERIQUE</p>
                 <div class="row-cols d-flex align-items-center flex-column flex-sm-row py-sm-5" style="background: url('{{ Vite::asset("resources/images/Data-Center.jpg") }}') center / cover no-repeat; ">
