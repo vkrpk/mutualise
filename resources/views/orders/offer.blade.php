@@ -42,6 +42,34 @@
             <div class="d-table">
                 <span class="offer_legend2 align-self-center">Récapitulatif de votre commande</span>
                 <div class="table-responsive" style="max-width: 50rem;margin-left: auto;margin-right: auto">
+                    <table class="table table-bordered" id="tableLevelsForDedicatedOffer">
+                        {{-- <p class="p-2 p-sm-4 rounded-3 fs-5 bg-white border text-center">Choisissez votre espace disque en cliquant sur l'espace disque, tarif affiché en bas de page.</p> --}}
+                        <thead>
+                            <tr class="text-center" style="vertical-align:middle">
+                                <th></th>
+                                <th class="bg-light">500 Go</th>
+                                <th class="bg-light">1 500 Go</th>
+                                <th class="bg-light">3 000 Go</th>
+                                <th class="bg-light">5 000 Go</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="text-center">
+                                <td style="vertical-align:middle" class="bg-light fw-bolder">Tarif mensuel</td>
+                                <td class="bg-white" style="vertical-align:middle">10 €</td>
+                                <td class="bg-white" style="vertical-align:middle">20 €</td>
+                                <td class="bg-white" style="vertical-align:middle">30 €</td>
+                                <td class="bg-white" style="vertical-align:middle">40 €</td>
+                            </tr>
+                            <tr class="text-center">
+                                <td style="vertical-align:middle" class="bg-light fw-bolder">Tarif annuel</td>
+                                <td class="bg-white" style="vertical-align:middle">100 €</td>
+                                <td class="bg-white" style="vertical-align:middle">200 €</td>
+                                <td class="bg-white" style="vertical-align:middle">300 €</td>
+                                <td class="bg-white" style="vertical-align:middle">400 €</td>
+                            </tr>
+                        </tbody>
+                    </table>
                     <table class="table table-bordered">
                         <thead>
                             <tr class="text-center bg-light" style="vertical-align:middle">
@@ -59,7 +87,7 @@
                                     </div>
                                 </td>
                                 <td style="vertical-align:middle">
-                                    <div class="d-flex flex-column align-items-center justify-content-center" >
+                                    <div class="d-flex flex-column align-items-center justify-content-center">
                                         <span id="recapDiskspaceGo" class="fs-3 fw-bold">10 Go</span>
                                         <span id="recapDiskspaceGio">(9.31 Gio )</span>
                                     </div>
@@ -67,7 +95,7 @@
                                 <td style="vertical-align:middle" class="fs-5">
                                     <div class="d-flex flex-column align-items-center justify-content-center">
                                         <div id="price_Y">
-                                            <span id="textPricePerYear" class="text-primary fw-bolder">3.6€</span>
+                                            <span id="textPricePerYear" class="text-primary fw-bolder">3.6 €</span>
                                             <span id="recap_amount_free" class="text-primary fw-bolder"
                                                 style="display: none;">gratuit pour 30 jours</span>
                                             <span id="recap_duration">pour 1 an jusqu'au</span>
@@ -113,6 +141,7 @@ window.onload = function () {
     const rangeSliderContainer = document.querySelector('.range-slider-container');
     const buttonsRadioForOfferBasique = [buttonsRadioForOffer[0], buttonsRadioForOffer[1], buttonsRadioForOffer[2]];
     const buttonsRadioForOfferDedicated = [buttonsRadioForOffer[3], buttonsRadioForOffer[4], buttonsRadioForOffer[5]];
+    const tableLevelsForDedicatedOffer = document.getElementById('tableLevelsForDedicatedOffer')
 
     function calculAndDisplayOfferPrice(value, offer) {
         return fetch(`/amount?size=${value}&offer=${offer}`)
@@ -140,7 +169,7 @@ window.onload = function () {
                     recapDiskspaceGo.innerHTML = 'Illimité'
                     recapDiskspaceGio.innerHTML = '';
                     boxPricePerMonth.classList.contains("d-none") ? boxPricePerMonth.classList.toggle("d-none") : "";
-                    slider.value = 5000;
+                    tableLevelsForDedicatedOffer.classList.contains("d-none") ? boxPricePerMonth.classList.toggle("d-none") : "";
                 }
                 if( offer === "basique" || offer === "dédié") {
                     let buttonChecked;

@@ -40,7 +40,7 @@ class CartController extends Controller
             ]);
         } else {
             \Cart::add([
-                'id' => random_int(3, 5),
+                'id' => random_bytes(10),
                 'name' => $request->accessName,
                 'price' => $price['Y'],
                 'quantity' => 1,
@@ -53,6 +53,7 @@ class CartController extends Controller
                 )
             ]);
         }
+        // dd(\Cart::getContent());
         session()->flash('success', 'La commande a bien été ajoutée à votre panier !');
 
         return redirect()->route('cart.list');
