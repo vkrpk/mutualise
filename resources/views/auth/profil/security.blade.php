@@ -13,35 +13,35 @@
             <div class="col-md-6">
                 <!-- Change password card-->
                 <div class="card mb-4">
-                    <div class="card-header">Changer votre mot de passe</div>
+                    <div class="card-header">{{__("Update Password")}}</div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('changePassword') }}">
                             @csrf
                             <!-- Form Group (current password)-->
                             <div class="mb-3">
-                                <label class="small mb-1" for="oldPasswordInput">Mot de passe actuel</label>
+                                <label class="small mb-1" for="oldPasswordInput">{{__("Current Password")}}</label>
                                 <input class="form-control @error('old_password') is-invalid @enderror" id="oldPasswordInput" type="password"
-                                    placeholder="Mot de passe actuel" name="old_password">
+                                    placeholder="{{__("Current Password")}}" name="old_password">
                                 @error('old_password')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <!-- Form Group (new password)-->
                             <div class="mb-3">
-                                <label class="small mb-1" for="newPasswordInput">Nouveau mot de passe</label>
+                                <label class="small mb-1" for="newPasswordInput">{{__("New Password")}}</label>
                                 <input class="form-control @error('new_password') is-invalid @enderror" id="newPasswordInput" type="password"
-                                    placeholder="Nouveau mot de passe" name="new_password">
+                                    placeholder="{{__("New Password")}}" name="new_password">
                                 @error('new_password')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <!-- Form Group (confirm password)-->
                             <div class="mb-3">
-                                <label class="small mb-1" for="confirmNewPasswordInput">Confirmer le mot de passe</label>
+                                <label class="small mb-1" for="confirmNewPasswordInput">{{__("Confirm Password")}}</label>
                                 <input class="form-control" id="confirmNewPasswordInput" type="password"
-                                    placeholder="Confirmer le mot de passe" name="new_password_confirmation">
+                                    placeholder="{{__("Confirm Password")}}" name="new_password_confirmation">
                             </div>
-                            <button class="btn btn-primary" type="submit">Sauvegarder</button>
+                            <button class="btn btn-primary" type="submit">{{__("Save")}}</button>
                         </form>
                     </div>
                 </div>
