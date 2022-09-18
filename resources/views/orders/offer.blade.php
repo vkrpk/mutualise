@@ -38,38 +38,53 @@
                 </span>
             </div>
         </div>
+        <div class="my-4 range-slider-container text-center position-relative d-flex align-items-center flex-column d-none" id="boxInputsRadioDedicatedOffer">
+            <p class="p-2 p-sm-4 rounded-3 fs-5 bg-white border text-center w-100">Choisissez votre espace disque, tarif affiché en bas de page.</p>
+            <div class="d-flex justify-content-evenly w-100" id="inputsRadioForDedicatedOffer">
+                <div>
+                    <input type="radio" name="sizeValueForDedicatedOffer" id="dedicated500" value="500" form="formAddToCart" checked>
+                    <label for="dedicated500">500 Go</label>
+                </div>
+                <div>
+                    <input type="radio" name="sizeValueForDedicatedOffer" id="dedicated1500" value="1500" form="formAddToCart">
+                    <label for="dedicated1500">1,5 To</label>
+                </div>
+                <div>
+                    <input type="radio" name="sizeValueForDedicatedOffer" id="dedicated3000" value="3000" form="formAddToCart">
+                    <label for="dedicated3000">3 To</label>
+                </div>
+                <div>
+                    <input type="radio" name="sizeValueForDedicatedOffer" id="dedicated5000" value="5000" form="formAddToCart">
+                    <label for="dedicated5000">5 To</label>
+                </div>
+            </div>
+            <div>
+                <span style="font-size: 11px; opacity: 0.8">Trafic illimité - Bande passante : 500 Mbit/s à 1Gbit/s, au
+                    dessus de 5 000Go, veuillez nous
+                    <a class="text-primary" href="https://www.dedikam.com/contact/" target="_blank">contacter</a>.
+                </span>
+            </div>
+            <p class="mb-0 mt-3 fw-bolder">Choix du nom de domaine<sup><i class="fa-solid fa-asterisk" style="font-size: 8px;color: red;margin-top: -14px;"></i></sup></p>
+            <div class="d-flex justify-content-center" id="inputsRadioForDomainType">
+                <div class="d-flex me-4">
+                    <input class="me-2" type="radio" name="domainType" id="dedikam" value="dedikam" form="formAddToCart" checked>
+                    <label for="dedikam">*.dedikam.com</label>
+                </div>
+                <div>
+                    <input class="me-1" type="radio" name="domainType" id="private" value="private" form="formAddToCart">
+                    <label for="private">Privé</label>
+                </div>
+            </div>
+            <div class="mt-3" id="boxDomainUrlOrPrefix" style="width: 300px">
+                <label class="small mb-1 fw-bolder" for="domainUrlOrPrefix">Choix du préfixe</label><sup><i class="fa-solid fa-asterisk" style="font-size: 8px;color: red;margin-top: -14px;"></i></sup>
+                <input class="form-control" id="domainUrlOrPrefix" type="text" name="domainUrlOrPrefix" value="{{ $domainUrlOrPrefix }}" form="formAddToCart">
+                <span>Exemple : "votre_choix".dedikam.com</span>
+            </div>
+        </div>
         <div class="offer_content mt-0">
             <div class="d-table">
                 <span class="offer_legend2 align-self-center">Récapitulatif de votre commande</span>
                 <div class="table-responsive" style="max-width: 50rem;margin-left: auto;margin-right: auto">
-                    <table class="table table-bordered" id="tableLevelsForDedicatedOffer">
-                        {{-- <p class="p-2 p-sm-4 rounded-3 fs-5 bg-white border text-center">Choisissez votre espace disque en cliquant sur l'espace disque, tarif affiché en bas de page.</p> --}}
-                        <thead>
-                            <tr class="text-center" style="vertical-align:middle">
-                                <th></th>
-                                <th class="bg-light">500 Go</th>
-                                <th class="bg-light">1 500 Go</th>
-                                <th class="bg-light">3 000 Go</th>
-                                <th class="bg-light">5 000 Go</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="text-center">
-                                <td style="vertical-align:middle" class="bg-light fw-bolder">Tarif mensuel</td>
-                                <td class="bg-white" style="vertical-align:middle">10 €</td>
-                                <td class="bg-white" style="vertical-align:middle">20 €</td>
-                                <td class="bg-white" style="vertical-align:middle">30 €</td>
-                                <td class="bg-white" style="vertical-align:middle">40 €</td>
-                            </tr>
-                            <tr class="text-center">
-                                <td style="vertical-align:middle" class="bg-light fw-bolder">Tarif annuel</td>
-                                <td class="bg-white" style="vertical-align:middle">100 €</td>
-                                <td class="bg-white" style="vertical-align:middle">200 €</td>
-                                <td class="bg-white" style="vertical-align:middle">300 €</td>
-                                <td class="bg-white" style="vertical-align:middle">400 €</td>
-                            </tr>
-                        </tbody>
-                    </table>
                     <table class="table table-bordered">
                         <thead>
                             <tr class="text-center bg-light" style="vertical-align:middle">
@@ -128,10 +143,14 @@ window.onload = function () {
     const sliderOutput = document.getElementById("slider-output");
     const inputHiddenOfferAddToCartForm = document.getElementById("form_level");
     const buttonsRadioForOffer = document.querySelectorAll('input[name="buttonsRadioForOffer"]');
+    const buttonsRadioForDedicatedOffer = document.querySelectorAll('input[name="sizeValueForDedicatedOffer"]');
+    const buttonsRadioForDomainType = document.querySelectorAll('input[name="domainType"]');
     const cellsWithAttributesOffer = document.querySelectorAll("a[offer]");
     const cartLevelOffer = "{{ $level }}";
     const cartValueOffer = "{{ $formDiskspace }}";
     const cartButtonsRadioForOffer = "{{ $option }}";
+    const cartButtonsRadioForDomainType = "{{ $domainType }}";
+    const domainUrlOrPrefix = "{{ $domainUrlOrPrefix }}";
     let timeout = null;
     const boxPricePerMonth = document.getElementById("boxPricePerMonth");
     const recapLevel = document.getElementById("recapLevel");
@@ -141,7 +160,8 @@ window.onload = function () {
     const rangeSliderContainer = document.querySelector('.range-slider-container');
     const buttonsRadioForOfferBasique = [buttonsRadioForOffer[0], buttonsRadioForOffer[1], buttonsRadioForOffer[2]];
     const buttonsRadioForOfferDedicated = [buttonsRadioForOffer[3], buttonsRadioForOffer[4], buttonsRadioForOffer[5]];
-    const tableLevelsForDedicatedOffer = document.getElementById('tableLevelsForDedicatedOffer')
+    const boxInputsRadioDedicatedOffer = document.getElementById('boxInputsRadioDedicatedOffer')
+    const boxDomainUrlOrPrefix = document.getElementById("boxDomainUrlOrPrefix")
 
     function calculAndDisplayOfferPrice(value, offer) {
         return fetch(`/amount?size=${value}&offer=${offer}`)
@@ -153,23 +173,21 @@ window.onload = function () {
                 textPricePerYear.innerHTML = response.Y + " €";
                 const textPricePerMonth = document.getElementById("textPricePerMonth");
                 textPricePerMonth.innerHTML = response.M + " €";
-                if (slider.value >= 170) {
+                if (value >= 170) {
                     boxPricePerMonth.classList.contains("d-none") ? boxPricePerMonth.classList.toggle("d-none") : "";
                 } else {
                     boxPricePerMonth.classList.contains("d-none") ? "" : boxPricePerMonth.classList.toggle("d-none");
                 }
                 recapLevel.innerHTML = offer.charAt(0).toUpperCase() + offer.slice(1);
-
+                recapDiskspaceGo.innerHTML = value + " Go";
+                recapDiskspaceGio.innerHTML = Math.round(100 * value / 1.074) / 100 + " Gio";
                 if(offer !== 'dédié') {
-                    recapDiskspaceGo.innerHTML = value + " Go";
-                    recapDiskspaceGio.innerHTML = Math.round(100 * value / 1.074) / 100 + " Gio";
                     slider.value = value;
+                    boxInputsRadioDedicatedOffer.classList.contains("d-none") ? "" : boxInputsRadioDedicatedOffer.classList.add("d-none")
                     changeSliderColor()
                 } else if(offer === 'dédié') {
-                    recapDiskspaceGo.innerHTML = 'Illimité'
-                    recapDiskspaceGio.innerHTML = '';
-                    boxPricePerMonth.classList.contains("d-none") ? boxPricePerMonth.classList.toggle("d-none") : "";
-                    tableLevelsForDedicatedOffer.classList.contains("d-none") ? boxPricePerMonth.classList.toggle("d-none") : "";
+                    boxInputsRadioDedicatedOffer.classList.remove("d-none")
+                    document.querySelector("input[name='domainType']").setAttribute('required', '')
                 }
                 if( offer === "basique" || offer === "dédié") {
                     let buttonChecked;
@@ -259,6 +277,24 @@ window.onload = function () {
         }, 300);
     });
 
+    buttonsRadioForDedicatedOffer.forEach(button => {
+        button.addEventListener("input", () => {
+            calculAndDisplayOfferPrice(button.value, document.querySelector(".selected").getAttribute("offer"));
+        })
+    });
+
+    buttonsRadioForDomainType.forEach(button => {
+        button.addEventListener("input", () => {
+            if(button.value == "dedikam") {
+                boxDomainUrlOrPrefix.querySelector("span").innerHTML = 'Exemple : "votre_choix".dedikam.com'
+                boxDomainUrlOrPrefix.querySelector("label").innerHTML = "Choix de votre préfixe"
+            } else {
+                boxDomainUrlOrPrefix.querySelector("span").innerHTML = "CNAME de type : www.example.com"
+                boxDomainUrlOrPrefix.querySelector("label").innerHTML = "Nom de votre domaine privé"
+            }
+        })
+    });
+
     cellsWithAttributesOffer.forEach((div) => {
         div.addEventListener("click", function () {
             removeSelectedClassToAllColumns();
@@ -266,7 +302,11 @@ window.onload = function () {
             toggleSlider(div);
             changeSliderColor();
             inputHiddenOfferAddToCartFormValue(div);
-            calculAndDisplayOfferPrice(slider.value, document.querySelector(".selected").getAttribute("offer"));
+            if(div.getAttribute("offer") !== "dédié"){
+                calculAndDisplayOfferPrice(slider.value, document.querySelector(".selected").getAttribute("offer"));
+            } else {
+                calculAndDisplayOfferPrice(document.querySelector("input[name='sizeValueForDedicatedOffer']:checked").value, document.querySelector(".selected").getAttribute("offer"));
+            }
         })
     });
 
