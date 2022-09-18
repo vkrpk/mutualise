@@ -27,25 +27,39 @@
                             <div class="alert alert-secondary fw-bolder mb-1 rounded-0" role="alert"><span>Récapitulatif de l'offre</span></div>
                             <div class="card-body">
                                 <div class="row justify-content-evenly">
-                                    <div class="row my-1">
-                                        <div class="col ps-1 pe-0">
+                                    <div class="row">
+                                        <div class="col-12 col-sm-6 ps-1 pe-0">
                                             <span class="fst-italic"><i class="fa-solid fa-circle-arrow-right bg-white text-secondary me-2"></i>Formule choisie :</span>
                                             <span>{{ ucfirst($cartItem->attributes->form_level) }}</span>
-                                            @if ($cartItem->attributes->buttonsRadioForOffer)
-                                                <span class="fst-italic ms-4"><i class="fa-solid fa-circle-arrow-right bg-white text-secondary me-2"></i>Option :</span>
-                                                <span>{{ $buttonsRadioForOfferName }}</span>
-                                            @endif
                                         </div>
+                                        @if ($cartItem->attributes->buttonsRadioForOffer)
+                                            <div class="col-12 col-sm-6 ps-1 pe-0">
+                                                <span class="fst-italic"><i class="fa-solid fa-circle-arrow-right bg-white text-secondary me-2"></i>Option :</span>
+                                                <span>{{ $buttonsRadioForOfferName }}</span>
+                                            </div>
+                                        @endif
                                     </div>
-                                    <div class="row my-1">
+                                    <div class="row">
                                         <div class="col ps-1 pe-0">
                                             <span class="fst-italic"><i class="fa-solid fa-circle-arrow-right bg-white text-secondary me-2"></i>Espace disque :</span>
-                                            <span>{{ $cartItem->attributes->form_level === 'dédié' ? 'Illimité' : $cartItem->attributes->form_diskspace . ' Go' }}</span>
+                                            <span>{{ $cartItem->attributes->form_diskspace . ' Go' }}</span>
                                         </div>
                                     </div>
-                                    <div class="row my-1 px-1">
+                                    @if ($cartItem->attributes->domainUrlOrPrefix)
+                                        <div class="row">
+                                            <div class="col ps-1 pe-0 d-flex align-item-center">
+                                                <span class="d-flex align-items-center"><i class="fa-solid fa-circle-arrow-right bg-white text-secondary me-2"></i></span>
+                                                <div>
+                                                    <span class="fst-italic">Domaine :</span>
+                                                    <span>{{ $cartItem->attributes->domainUrlOrPrefix }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+
+                                    <div class="row px-1 mt-2">
                                         <div class="d-flex justify-content-end px-0">
-                                            <a href="{{ route('services', ["id" => $cartItem->id]) }}" class="me-2"><button type="button" class="btn btn-primary">Modifier</button></a>
+                                            <a href="{{ route('offers', ["id" => $cartItem->id]) }}" class="me-2"><button type="button" class="btn btn-primary">Modifier</button></a>
                                             <form action="{{ route('cart.remove', ["id" => $cartItem->id]) }}" method="POST">
                                                 @csrf
                                                 <div class="text-end">
@@ -142,7 +156,7 @@
                             <div class="card-body">
                                 <form>
                                     @csrf
-                                    <div class="mb-3 col-6" style="max-width: 253px">
+                                    <div class="mb-3" style="width: 270px">
                                         <label class="small mb-1" for="inputCoupon">Coupon de réduction</label>
                                         <input class="form-control" type="text" name="inputCoupon" id="inputCoupon">
                                     </div>

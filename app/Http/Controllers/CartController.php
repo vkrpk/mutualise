@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Services\CalculAmountController;
 use Carbon\Carbon;
+use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Services\CalculAmountController;
 
 class CartController extends Controller
 {
@@ -32,7 +33,9 @@ class CartController extends Controller
                 'quantity' => ['relative' => false, "value" => 1],
                 'attributes' => array(
                     'form_level' => $request->form_level,
-                    'form_diskspace' => $request->form_diskspace,
+                    'domainType' => $request->domainType,
+                    'domainUrlOrPrefix' => $request->domainType === "dedikam" ? "www." . $request->domainUrlOrPrefix . ".dedikam.com" : $request->domainUrlOrPrefix,
+                    'form_diskspace' => $request->form_level == 'dédié' ? $request->sizeValueForDedicatedOffer : $request->form_diskspace,
                     'priceMonthly' => $price['M'],
                     'coupon' => false,
                     'buttonsRadioForOffer' => $request->buttonsRadioForOffer ?? '',
@@ -40,20 +43,21 @@ class CartController extends Controller
             ]);
         } else {
             \Cart::add([
-                'id' => random_bytes(10),
+                'id' => Str::random(20),
                 'name' => $request->accessName,
                 'price' => $price['Y'],
                 'quantity' => 1,
                 'attributes' => array(
                     'form_level' => $request->form_level,
-                    'form_diskspace' => $request->form_diskspace,
+                    'domainType' => $request->domainType,
+                    'domainUrlOrPrefix' => $request->domainType === "dedikam" ? "www." . $request->domainUrlOrPrefix . ".dedikam.com" : $request->domainUrlOrPrefix,
+                    'form_diskspace' => $request->form_level == 'dédié' ? $request->sizeValueForDedicatedOffer : $request->form_diskspace,
                     'priceMonthly' => $price['M'],
                     'coupon' => false,
                     'buttonsRadioForOffer' => $request->buttonsRadioForOffer ?? '',
                 )
             ]);
         }
-        // dd(\Cart::getContent());
         session()->flash('success', 'La commande a bien été ajoutée à votre panier !');
 
         return redirect()->route('cart.list');

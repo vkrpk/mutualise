@@ -102,7 +102,7 @@
                         <p class="d-flex align-items-start col-md offset-md-2 offset-xxl-3"><span class="text-secondary me-2"><i class="fa-solid fa-circle-check"></i></span>Paiement mensuel ou annuel</p>
                     </div>
                     <div class="d-flex justify-content-center">
-                        <a href="{{ route('services') }}"><button class="btn btn-secondary">Commandez</button></a>
+                        <a href="{{ route('offers') }}"><button class="btn btn-secondary">Commandez</button></a>
                     </div>
                 </div>
             </div>
