@@ -89,10 +89,29 @@ class CalculAmountController extends Controller {
                 $amount['M'] = $size * 0.04333;
             }
 
-
         } elseif ($offer == 'dédié') {
-            $amount['Y'] = 330;
-            $amount['M'] = 30;
+            switch ($size) {
+                case 500:
+                    $amount['Y'] = 220;
+                    $amount['M'] = 20;
+                    break;
+                case 1500:
+                    $amount['Y'] = 325;
+                    $amount['M'] = 30;
+                    break;
+                case 3000:
+                    $amount['Y'] = 435;
+                    $amount['M'] = 40;
+                    break;
+                case 5000:
+                    $amount['Y'] = 485;
+                    $amount['M'] = 45;
+                    break;
+                default:
+                    $amount['Y'] = 220;
+                    $amount['M'] = 20;
+                    break;
+            }
         }
 
         $amount = array_map(function($v){

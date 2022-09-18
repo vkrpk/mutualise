@@ -1,10 +1,10 @@
 <header class="position-fixed w-100" style="z-index: 3">
     <nav class="navbar navbar-expand-lg bg-info">
         <div class="container">
-            <a class="navbar-brand" href="{{ route('home') }}">
+            <a class="navbar-brand me-0" href="{{ route('home') }}">
                 <img src="{{ Vite::asset('resources/images/logo.png') }}" alt="logo">
             </a>
-            
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -12,8 +12,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-end">
-                    <li class="nav-item"><a class="nav-link" href="{{ route('services') }}">Services</a></li>
-                   
+                    <li class="nav-item"><a class="nav-link" href="{{ route('offers') }}">Offres</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('services.index') }}">Services</a></li>
+
                     @if (LaravelLocalization::getCurrentLocale() === "fr")
                         <li class="nav-item dropdown">
                             <a class="dropdown-toggle nav-link text-dedikam" aria-expanded="false" data-bs-toggle="dropdown" href="#">
@@ -39,26 +40,23 @@
                             </div>
                         </li>
                     @endif
+                    <li class="nav-item"><a class="nav-link" href="https://www.dedikam.com">← {{__('Retour')}}</a></li>
 
                     @guest
-                        @if (Route::has('login'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                        @endif
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        </li>
 
-                        @if (Route::has('register'))
-                            <li class="nav-item">
-                                <a class="nav-link " href="{{ route('register') }}">{{ __('Register') }}</a>
-                            </li>
-                        @endif
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                        </li>
                     @else
                         <li class="nav-item dropdown">
                             <a class="dropdown-toggle nav-link" aria-expanded="false"data-bs-toggle="dropdown"
                                 href="#">{{ Auth::user()->name }}</a>
                             <div class="dropdown-menu dropdown-menu-end">
                                 <a class="dropdown-item" href="{{ route('profilIndex') }}">{{__('Mon compte')}}</a>
-                                <a class="dropdown-item" href="#">{{__('Mes accès')}}</a>
+                                <a class="dropdown-item" href="{{ route('access.index') }}">{{__('Mes accès')}}</a>
                                 <a class="dropdown-item" href="#">{{__('Ouvrir un ticket')}}</a>
                                 @if (Auth::user()->role_id === 1)
                                     <div class="dropdown-divider"></div>
@@ -76,17 +74,14 @@
                                     @csrf
                                 </form>
                             </div>
-
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('cart.list') }}" class="nav-link">
+                                <i class="fa-solid fa-cart-shopping"></i>
+                                {{ Cart::getTotalQuantity() }}
+                            </a>
                         </li>
                     @endguest
-                    <li class="nav-item"><a class="nav-link active" href="{{ request()->headers->get('referer') }}">←
-                            {{__('Retour')}}</a></li>
-                    <li class="nav-item">
-                        <a href="{{ route('cart.list') }}" class="nav-link">
-                            <i class="fa-solid fa-cart-shopping"></i>
-                            {{ Cart::getTotalQuantity() }}
-                        </a>
-                    </li>
                 </ul>
             </div>
         </div>

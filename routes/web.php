@@ -49,7 +49,7 @@ Route::group([
         });
     });
 
-    Route::get('/services/{id?}', [OfferController::class, 'services'])->name('services');
+    Route::get('/offers/{id?}', [OfferController::class, 'offers'])->name('offers');
 
     Route::group(['prefix' => '2fa'], function () {
         Route::get('/', 'App\Http\Controllers\LoginSecurityController@show2faForm');
@@ -70,18 +70,18 @@ Route::group([
 
     Route::get('/amount', 'App\Services\CalculAmountController@calculAmount')->name('calculAmount');
 
-    Route::get('cart', [CartController::class, 'cartList'])->name('cart.list');
-    Route::post('cart', [CartController::class, 'addToCart'])->name('cart.store');
-    Route::post('update-cart', [CartController::class, 'updateCart'])->name('cart.update');
-    Route::post('remove', [CartController::class, 'removeCart'])->name('cart.remove');
-    Route::post('clear', [CartController::class, 'clearAllCart'])->name('cart.clear');
+    Route::group(['middleware' => ['auth', 'verified']], function () {
+        Route::get('cart', [CartController::class, 'cartList'])->name('cart.list');
+        Route::post('cart', [CartController::class, 'addToCart'])->name('cart.store');
+        Route::post('update-cart', [CartController::class, 'updateCart'])->name('cart.update');
+        Route::post('remove', [CartController::class, 'removeCart'])->name('cart.remove');
+        Route::post('clear', [CartController::class, 'clearAllCart'])->name('cart.clear');
+        Route::get('access', function () { return view('access.index'); })->name('access.index');
+    });
+
+    Route::get('services', function () { return view('services.index'); })->name('services.index');
 
     Route::get('profil/security/email-change-verify', 'App\Http\Controllers\Profil\ChangeEmailController@verify')->name('user.email-change-verify');
     Route::post('profil/security/email-change', 'App\Http\Controllers\Profil\ChangeEmailController@change')->name('user.email-change');
 
-    /* Language */
 });
-
-
-Route::get('profil/security/email-change-verify', 'App\Http\Controllers\Profil\ChangeEmailController@verify')->name('user.email-change-verify');
-Route::post('profil/security/email-change', 'App\Http\Controllers\Profil\ChangeEmailController@change')->name('user.email-change');

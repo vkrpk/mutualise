@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class OfferController extends Controller
 {
-    public function services(int $id = null)
+    public function offers(int $id = null)
     {
         /**
          * @var Cart
@@ -21,6 +21,8 @@ class OfferController extends Controller
             $level = $cartItem->attributes->form_level;
             $formDiskspace = $cartItem->attributes->form_diskspace;
             $accessName = $cartItem->name;
+            $domainType = $cartItem->attributes->domainType;
+            $domainUrlOrPrefix = $cartItem->attributes->domainUrlOrPrefix;
             $option = $cartItem->attributes->buttonsRadioForOffer ?? '';
         }
         if(Auth::user()){
@@ -35,6 +37,8 @@ class OfferController extends Controller
             'formDiskspace' => $formDiskspace ?? null,
             'option' => $option ?? 'null',
             'accessName' => $accessName ?? '',
+            'domainType' => $domainType ?? '',
+            'domainUrlOrPrefix' => $domainUrlOrPrefix ?? '',
             'id' => $id ?? '',
         ]);
     }
