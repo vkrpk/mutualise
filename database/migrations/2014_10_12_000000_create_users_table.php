@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('avatar')->default('http://bootdey.com/img/Content/avatar/avatar1.png');
+            $table->string('avatar')->default('resources/images/users/avatars/default.png');
             $table->rememberToken();
             $table->timestamps();
         });
