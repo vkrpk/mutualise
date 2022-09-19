@@ -2,7 +2,6 @@
 
 @section('content')
 
-
     <div class="container-sm overflow-hidden">
         <div class="row text-center my-4">
             <div class="col-md-12 px-sm-0 ">
