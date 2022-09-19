@@ -46,37 +46,37 @@
                     </div>
                 </div>
                 <div class="card mb-4">
-                    <div class="card-header">Changer mon adresse email</div>
+                    <div class="card-header">{{__("Changer mon adresse email")}}</div>
                     <div class="card-body">
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="buttonForOpenModal">
-                            Changer mon adresse email
+                            {{__("Changer mon adresse email")}}
                         </button>
                         <!-- Modal -->
                         <div class="modal fade" id="staticBackdrop" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="staticBackdropLabel">Changer d'adresse email</h5>
+                                        <h5 class="modal-title" id="staticBackdropLabel">{{__("Changer mon adresse email")}}</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <p>Veuillez renseigner votre mot de passe.</p>
-                                        <p>Pour effectuer le changement, veuillez cliquer sur le lien présent dans le mail envoyé à la nouvelle adresse.</p>
+                                        <p>{{__("Please confirm your password before continuing.")}}</p>
+                                        <p>{{__("Pour effectuer le changement, veuillez cliquer sur le lien présent dans le mail envoyé à la nouvelle adresse.")}}</p>
                                         <form id="changeEmailForm">
                                             <div class="mb-3">
                                                 @csrf
-                                                <label class="small mb-1 for="passwordConfirmation">Mot de passe actuel</label>
+                                                <label class="small mb-1" for="passwordConfirmation">{{__("Current Password")}}</label>
                                                 <input class="form-control" type="password" name="password" id="passwordConfirmation">
                                             </div>
                                             <div class="mb-3">
-                                                <label class="small mb-1" for="emailChange">Ma nouvelle adresse email</label>
+                                                <label class="small mb-1" for="emailChange">{{__("Ma nouvelle adresse mail")}}</label>
                                                 <input class="form-control" type="text" name="email" id="emailChange">
                                             </div>
                                         </form>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fermez</button>
-                                        <button form="changeEmailForm" type="submit" class="btn btn-primary">Envoyez</button>
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">{{__("Close")}}</button>
+                                        <button form="changeEmailForm" type="submit" class="btn btn-primary">{{__("Send")}}</button>
                                     </div>
                                 </div>
                             </div>
@@ -116,31 +116,31 @@
                     </div>
                 </div>
                 <div class="card mb-4">
-                    <div class="card-header">Supprimer mon compte</div>
+                    <div class="card-header">{{__("Supprimer mon compte")}}</div>
                     <div class="card-body">
                         <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#modalDeleteAccount" id="buttonForOpenModal">
-                            Supprimer mon compte
+                            {{__("Supprimer mon compte")}}
                         </button>
                         <div class="modal fade" id="modalDeleteAccount" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalDeleteAccountLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="modalDeleteAccountLabel">Supprimer mon compte</h5>
+                                        <h5 class="modal-title" id="modalDeleteAccountLabel">{{__("Delete Account")}}</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <p>Supprimer votre compte est une action permanenete et irréversible. Si vous êtes sur de vouloir supprimer votre compte, sélectionnez le bouton ci-dessous.</p>
+                                        <p>{{__("Are you sure you want to delete your account? Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.")}}</p>
                                         <form id="formDeleteAccount">
                                             @csrf
                                             <div class="mb-3">
-                                                <label class="small mb-1" for="passwordConfirmationDeleteAccount">Mot de passe actuel</label>
+                                                <label class="small mb-1" for="passwordConfirmationDeleteAccount">{{__("Current Password")}}</label>
                                                 <input class="form-control" type="password" name="password" id="passwordConfirmationDeleteAccount">
                                             </div>
                                         </form>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fermez</button>
-                                        <button form="formDeleteAccount" class="btn btn-primary" type="submit">Je comprends, supprimer mon compte</button>
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">{{__("Close")}}</button>
+                                        <button form="formDeleteAccount" class="btn btn-primary" type="submit">{{__("Je comprends, supprimer mon compte")}}</button>
                                     </div>
                                 </div>
                             </div>
