@@ -34,7 +34,7 @@ class CartController extends Controller
                 'attributes' => array(
                     'form_level' => $request->form_level,
                     'domainType' => $request->domainType,
-                    'domainUrlOrPrefix' => $request->domainType === "dedikam" ? "www." . $request->domainUrlOrPrefix . ".dedikam.com" : $request->domainUrlOrPrefix,
+                    'domainUrlOrPrefix' => $request->domainType === "dedikam" ? "www" . $request->domainUrlOrPrefix . ".dedikam.com" : $request->domainUrlOrPrefix,
                     'form_diskspace' => $request->form_level == 'dédié' ? $request->sizeValueForDedicatedOffer : $request->form_diskspace,
                     'priceMonthly' => $price['M'],
                     'coupon' => false,
@@ -50,7 +50,7 @@ class CartController extends Controller
                 'attributes' => array(
                     'form_level' => $request->form_level,
                     'domainType' => $request->domainType,
-                    'domainUrlOrPrefix' => $request->domainType === "dedikam" ? "www." . $request->domainUrlOrPrefix . ".dedikam.com" : $request->domainUrlOrPrefix,
+                    'domainUrlOrPrefix' => $request->domainType === "dedikam" ? "www" . $request->domainUrlOrPrefix . ".dedikam.com" : $request->domainUrlOrPrefix,
                     'form_diskspace' => $request->form_level == 'dédié' ? $request->sizeValueForDedicatedOffer : $request->form_diskspace,
                     'priceMonthly' => $price['M'],
                     'coupon' => false,
