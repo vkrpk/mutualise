@@ -30,5 +30,11 @@
     "Ville": "City",
     "État/Province": "State",
     "Pays": "Country",
-    "Numéro de téléphone": "Phone number"
+    "Numéro de téléphone": "Phone number",
+    "Changer mon adresse email" : "Change my email address",
+    "Pour effectuer le changement, veuillez cliquer sur le lien présent dans le mail envoyé à la nouvelle adresse.": "In order to confirm email change, please click the link sent to the new email address",
+    "Ma nouvelle adresse mail" : "My new email address",
+    "Supprimer mon compte" : "Delete my account",
+    "Supprimer votre compte est une action permanenete et irréversible. Si vous êtes sur de vouloir supprimer votre compte, sélectionnez le bouton ci-dessous." : "Deleting your account is an irreversible and permanent action. If you are certain you want to delete your account, please click the following button",
+    "Je comprends, supprimer mon compte" : "I understand, delete my account"
 }
