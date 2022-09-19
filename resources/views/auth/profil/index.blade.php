@@ -16,12 +16,20 @@
                     <div class="card-header">{{__('Profile Picture')}}</div>
                     <div class="card-body text-center">
                         <!-- Profile picture image-->
+                        {{-- {{ dd(Auth::user()->avatar) }} --}}
                         <img class="img-account-profile rounded-circle mb-2"
-                            src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                            src="{{ Vite::asset(Auth::user()->avatar) }}" alt="avatar">
                         <!-- Profile picture help block-->
-                        <div class="small font-italic text-muted mb-4">{{__("JPG ou PNG inférieur à 5MB")}}</div>
+                        <div class="small font-italic text-muted mb-4">{{__("JPG/JPEG ou PNG inférieur à 5MB")}}</div>
                         <!-- Profile picture upload button-->
-                        <button class="btn btn-primary" type="button">{{__("Uploader une nouvelle image")}}</button>
+                        <form action="{{ route('profil.store-picture') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <input type="file" name="avatar" id="avatar">
+                            @error('avatar')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                            <p><button class="btn btn-primary mt-4" type="submit">{{__("Uploader une nouvelle image")}}</button></p>
+                        </form>
                     </div>
                 </div>
             </div>
