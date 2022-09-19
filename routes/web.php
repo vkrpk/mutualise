@@ -5,6 +5,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\Auth\ProfilViewController;
 use App\Services\ComparePasswordAndChangeEmailController;
+use Illuminate\Http\Request;
 use TimeHunter\LaravelGoogleReCaptchaV3\Validations\GoogleReCaptchaV3ValidationRule;
 
 /*
@@ -41,6 +42,7 @@ Route::group([
         Route::post('/change-password', 'App\Http\Controllers\Profil\ChangePasswordController@reset')->name('changePassword');
         Route::post('/remove-account', 'App\Http\Controllers\Profil\RemoveAccountController@remove')->name('removeUserAccount');
         Route::post('/index/store', 'App\Http\Controllers\Profil\StoreInfosController@store')->name('storeInfos');
+        Route::post('/index/store-picture', 'App\Http\Controllers\Profil\StoreProfilPictureController@store')->name('profil.store-picture');
         Route::controller(ProfilViewController::class)->group(function () {
             Route::get('/index', 'index')->name('profilIndex');
             Route::get('/billing', 'billing')->name('profilBilling');
@@ -72,12 +74,12 @@ Route::group([
 
     Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::get('cart', [CartController::class, 'cartList'])->name('cart.list');
-        Route::post('cart', [CartController::class, 'addToCart'])->name('cart.store');
         Route::post('update-cart', [CartController::class, 'updateCart'])->name('cart.update');
         Route::post('remove', [CartController::class, 'removeCart'])->name('cart.remove');
         Route::post('clear', [CartController::class, 'clearAllCart'])->name('cart.clear');
         Route::get('access', function () { return view('access.index'); })->name('access.index');
     });
+    Route::post('cart', [CartController::class, 'addToCart'])->name('cart.store');
 
     Route::get('services', function () { return view('services.index'); })->name('services.index');
 
