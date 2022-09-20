@@ -45,7 +45,7 @@
                                 <!-- Form Group (first name)-->
                                 <div class="col-md-6">
                                     <label class="small mb-1" for="label">{{__("Libellé de l'adresse")}}<sup><i class="fa-solid fa-asterisk" style="font-size: 8px;color: red;margin-top: -14px;"></i></sup></label>
-                                    <input class="form-control" id="label" type="text" value="{{ old('label') ? old('label') : $address->label ?? ''  }}"
+                                    <input class="form-control" id="label" type="text" value="{{ old('label') ? old('label') : $address->label ?? '' }}"
                                         placeholder="" name="label">
                                     @error('label')
                                         <span class="text-danger">{{ $message }}</span>
