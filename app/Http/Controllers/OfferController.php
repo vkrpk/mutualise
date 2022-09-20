@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class OfferController extends Controller
 {
-    public function offers(int $id = null)
+    public function offers(string $id = null)
     {
         /**
          * @var Cart

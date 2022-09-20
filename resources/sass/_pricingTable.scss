@@ -84,20 +84,28 @@
 }
 
 .col4 {
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-template-areas:
         "DA"
         "DB"
-        "DC";
+        "DC"
+        "DD"
+        "DE"
+        "DF"
+        "DG"
+        "DH"
+        "DI"
+        "DJ"
+        "DK";
     grid-area: col4;
 }
 
-.col4 div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 33%;
-}
+// .col4 div {
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     height: 33%;
+// }
 
 .pricingHeader,
 .pricingReference,
@@ -165,7 +173,7 @@
     background-color: $secondary !important;
 }
 
-.colContainer.selected:not(.col4) > :not(.check) {
+.colContainer.selected > :not(.check) {
     background-color: $secondary-light !important;
 }
 
@@ -179,7 +187,7 @@
 .col4 label,
 .col1 label {
     cursor: pointer !important;
-    margin-left: 8px;
+    margin-left: 4px;
 }
 
 .Pydio {
@@ -359,4 +367,28 @@
 }
 .DC {
     grid-area: DC;
+}
+.DD {
+    grid-area: DD;
+}
+.DE {
+    grid-area: DE;
+}
+.DF {
+    grid-area: DF;
+}
+.DG {
+    grid-area: DG;
+}
+.DH {
+    grid-area: DH;
+}
+.DI {
+    grid-area: DI;
+}
+.DJ {
+    grid-area: DJ;
+}
+.DK {
+    grid-area: DK;
 }
