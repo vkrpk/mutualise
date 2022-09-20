@@ -20,19 +20,19 @@
         </p>
     </div>
     {{-- TABLEAU COMPARATIF --}}
-    <div class="comparison mb-4">
+    <div class="mb-4 mx-2 mx-sm-0">
         @include('orders.form.pricingTable')
     </div>
     {{-- TABLEAU COMPARATIF --}}
     <div class="row mx-2 mx-sm-0 g-2 m-3">
-        <div class="my-4 range-slider-container text-center position-relative">
+        <div class="mt-4 mb-2 range-slider-container text-center position-relative">
             <p class="p-2 p-sm-4 rounded-3 fs-5 bg-white border text-center">Choisissez votre espace disque en déplaçant le
                 curseur orange vers la droite, tarif affiché en bas de page.</p>
             <p class="mb-0">Espace disque : <span id="slider-output">10Go</span></p>
             <input type="range" class="rs-range flex-grow-1" name="form_diskspace" id="slider" min="10" max="5000"
                 step="10" value="{{ $formDiskspace ?? 10 }}" form="formAddToCart">
-            <div class="position-absolute start-50 translate-middle-x w-100 text-nowrap" style="bottom:-16px; ">
-                <span style="font-size: 11px; opacity: 0.8">Trafic illimité - Bande passante : 500 Mbit/s à 1Gbit/s, au
+            <div class="">
+                <span style="font-size: 11px; opacity: 0.8;">Trafic illimité - Bande passante : 500 Mbit/s à 1Gbit/s, au
                     dessus de 5 000Go, veuillez nous
                     <a class="text-primary" href="https://www.dedikam.com/contact/" target="_blank">contacter</a>.
                 </span>
@@ -42,19 +42,19 @@
             <p class="p-2 p-sm-4 rounded-3 fs-5 bg-white border text-center w-100">Choisissez votre espace disque, tarif affiché en bas de page.</p>
             <div class="d-flex justify-content-evenly w-100" id="inputsRadioForDedicatedOffer">
                 <div>
-                    <input type="radio" name="sizeValueForDedicatedOffer" id="dedicated500" value="500" form="formAddToCart" checked>
+                    <input type="radio" name="sizeValueForDedicatedOffer" id="dedicated500" value="500" form="formAddToCart" checked {{ old('sizeValueForDedicatedOffer') ? 'checked' : ($formDiskspace == 500 ? 'checked' : '') }}>
                     <label for="dedicated500">500 Go</label>
                 </div>
                 <div>
-                    <input type="radio" name="sizeValueForDedicatedOffer" id="dedicated1500" value="1500" form="formAddToCart">
+                    <input type="radio" name="sizeValueForDedicatedOffer" id="dedicated1500" value="1500" form="formAddToCart" {{ old('sizeValueForDedicatedOffer') ? 'checked' : ($formDiskspace == 1500 ? 'checked' : '') }}>
                     <label for="dedicated1500">1,5 To</label>
                 </div>
                 <div>
-                    <input type="radio" name="sizeValueForDedicatedOffer" id="dedicated3000" value="3000" form="formAddToCart">
+                    <input type="radio" name="sizeValueForDedicatedOffer" id="dedicated3000" value="3000" form="formAddToCart" {{ old('sizeValueForDedicatedOffer') ? 'checked' : ($formDiskspace == 3000 ? 'checked' : '') }}>
                     <label for="dedicated3000">3 To</label>
                 </div>
                 <div>
-                    <input type="radio" name="sizeValueForDedicatedOffer" id="dedicated5000" value="5000" form="formAddToCart">
+                    <input type="radio" name="sizeValueForDedicatedOffer" id="dedicated5000" value="5000" form="formAddToCart" {{ old('sizeValueForDedicatedOffer') ? 'checked' : ($formDiskspace == 5000 ? 'checked' : '') }}>
                     <label for="dedicated5000">5 To</label>
                 </div>
             </div>
@@ -67,25 +67,28 @@
             <p class="mb-0 mt-3 fw-bolder">Choix du nom de domaine<sup><i class="fa-solid fa-asterisk" style="font-size: 8px;color: red;margin-top: -14px;"></i></sup></p>
             <div class="d-flex justify-content-center" id="inputsRadioForDomainType">
                 <div class="d-flex me-4">
-                    <input class="me-2" type="radio" name="domainType" id="dedikam" value="dedikam" form="formAddToCart" checked>
+                    <input class="me-2" type="radio" name="domainType" id="dedikam" value="dedikam" form="formAddToCart" checked {{ $domainType == 'dedikam' ? 'checked' : '' }}>
                     <label for="dedikam">*.dedikam.com</label>
                 </div>
                 <div>
-                    <input class="me-1" type="radio" name="domainType" id="private" value="private" form="formAddToCart">
+                    <input class="me-1" type="radio" name="domainType" id="private" value="private" form="formAddToCart" {{ $domainType == 'private' ? 'checked' : '' }}>
                     <label for="private">Privé</label>
                 </div>
             </div>
-            <div class="mt-3" id="boxDomainUrlOrPrefix" style="width: 300px">
-                <label class="small mb-1 fw-bolder" for="domainUrlOrPrefix">Choix du préfixe</label><sup><i class="fa-solid fa-asterisk" style="font-size: 8px;color: red;margin-top: -14px;"></i></sup>
-                <input class="form-control" id="domainUrlOrPrefix" type="text" name="domainUrlOrPrefix" value="{{ $domainUrlOrPrefix }}" form="formAddToCart">
+            <div class="mt-3 d-flex flex-column align-items-center" id="boxDomainUrlOrPrefix">
+                <div><label class="small mb-1 fw-bolder" for="domainUrlOrPrefix">Choix du préfixe</label><sup><i class="fa-solid fa-asterisk" style="font-size: 8px;color: red;margin-top: -14px;"></i></sup></div>
+                <input class="form-control" id="domainUrlOrPrefix" type="text" name="domainUrlOrPrefix" value="{{ old('domainUrlOrPrefix') ? old('domainUrlOrPrefix') : $domainUrlOrPrefix }}" form="formAddToCart" style="width: 300px">
                 <span>Exemple : "votre_choix".dedikam.com</span>
+                @error('domainUrlOrPrefix')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
         </div>
-        <div class="offer_content mt-0">
+        <div class="d-flex justify-content-center">
             <div class="d-table">
                 <span class="offer_legend2 align-self-center">Récapitulatif de votre commande</span>
                 <div class="table-responsive" style="max-width: 50rem;margin-left: auto;margin-right: auto">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered mb-0">
                         <thead>
                             <tr class="text-center bg-light" style="vertical-align:middle">
                                 <th>Formule</th>
@@ -266,6 +269,13 @@ window.onload = function () {
         toggleSlider(document.querySelector(".selected"));
     }
 
+    if(document.querySelector('#domainUrlOrPrefix').value != '') {
+        removeSelectedClassToAllColumns()
+        calculAndDisplayOfferPrice(document.querySelector(`input[name='sizeValueForDedicatedOffer']:checked`).value, 'dédié');
+        addSelectedClassToColumn(document.querySelectorAll("a[offer='dédié']")[1])
+        toggleSlider(document.querySelector(".selected"));
+    }
+
     changeSliderColor();
 
     slider.addEventListener("input", changeSliderColor);
@@ -289,7 +299,7 @@ window.onload = function () {
                 boxDomainUrlOrPrefix.querySelector("span").innerHTML = 'Exemple : "votre_choix".dedikam.com'
                 boxDomainUrlOrPrefix.querySelector("label").innerHTML = "Choix de votre préfixe"
             } else {
-                boxDomainUrlOrPrefix.querySelector("span").innerHTML = "CNAME de type : www.example.com"
+                boxDomainUrlOrPrefix.querySelector("span").innerHTML = "CNAME de type : example-domain.com"
                 boxDomainUrlOrPrefix.querySelector("label").innerHTML = "Nom de votre domaine privé"
             }
         })
