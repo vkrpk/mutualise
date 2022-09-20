@@ -6,7 +6,9 @@ use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rules\Enum;
 use App\Services\CalculAmountController;
 
 class CartController extends Controller
@@ -25,6 +27,58 @@ class CartController extends Controller
     public function addToCart(Request $request)
     {
         $price = (new CalculAmountController())->calculAmount($request->form_level, $request->form_diskspace);
+
+        $request->validate([
+            'form_level' => [
+                'required',
+                Rule::in(['basique', 'standard', 'entreprise', 'dédié']),
+            ],
+            'form_diskspace' => 'required|numeric|min:10|max:5000',
+            'priceMonthly' => 'numeric',
+            'accessName' => 'required'
+        ]);
+
+        if($request->form_level === 'basique') {
+            $request->validate([
+                'buttonsRadioForOffer' => [
+                    'required',
+                    Rule::in(['pydioOfferBasique', 'seafileOfferBasique', 'nextcloudOfferBasique'])
+                ]
+            ]);
+        }
+
+        if($request->form_level === 'dédié') {
+            $request->validate([
+                'sizeValueForDedicatedOffer' => [
+                    'required',
+                    Rule::in([500, 1500, 3000, 5000]),
+                ],
+                'buttonsRadioForOffer' => [
+                    'required',
+                    Rule::in(['pydioOfferDedicated', 'seafileOfferDedicated', 'nextcloudOfferDedicated'])
+                ],
+                'domainType' => [
+                    'required',
+                    Rule::in(['dedikam', 'private'])
+                ],
+                'domainUrlOrPrefix' => 'required'
+            ]);
+
+            if($request->domainType === 'dedikam') {
+                $request->validate([
+                    'domainUrlOrPrefix' => [
+                        'regex:/^((?![-.])[A-Z0-9-.]{1,63}(?<![-.]))+$/i'
+                    ]
+                ]);
+            } elseif ($request->domainType === 'private') {
+                $request->validate([
+                    'domainUrlOrPrefix' => [
+                        'regex:/^((?!-)[A-Za-z0-9-]{1,63}(?<!-)\.)+[A-Za-z]{2,6}$/'
+                    ]
+                ]);
+            }
+        }
+
         if($request->id) {
             \Cart::update($request->id, [
                 'id' => $request->id,
@@ -34,7 +88,7 @@ class CartController extends Controller
                 'attributes' => array(
                     'form_level' => $request->form_level,
                     'domainType' => $request->domainType,
-                    'domainUrlOrPrefix' => $request->domainType === "dedikam" ? "www" . $request->domainUrlOrPrefix . ".dedikam.com" : $request->domainUrlOrPrefix,
+                    'domainUrlOrPrefix' => $request->domainType === "dedikam" ? $request->domainUrlOrPrefix . ".dedikam.com" : $request->domainUrlOrPrefix,
                     'form_diskspace' => $request->form_level == 'dédié' ? $request->sizeValueForDedicatedOffer : $request->form_diskspace,
                     'priceMonthly' => $price['M'],
                     'coupon' => false,
@@ -43,14 +97,14 @@ class CartController extends Controller
             ]);
         } else {
             \Cart::add([
-                'id' => Str::random(20),
+                'id' => uniqid(),
                 'name' => $request->accessName,
                 'price' => $price['Y'],
                 'quantity' => 1,
                 'attributes' => array(
                     'form_level' => $request->form_level,
                     'domainType' => $request->domainType,
-                    'domainUrlOrPrefix' => $request->domainType === "dedikam" ? "www" . $request->domainUrlOrPrefix . ".dedikam.com" : $request->domainUrlOrPrefix,
+                    'domainUrlOrPrefix' => $request->domainType === "dedikam" ? $request->domainUrlOrPrefix . ".dedikam.com" : $request->domainUrlOrPrefix,
                     'form_diskspace' => $request->form_level == 'dédié' ? $request->sizeValueForDedicatedOffer : $request->form_diskspace,
                     'priceMonthly' => $price['M'],
                     'coupon' => false,
