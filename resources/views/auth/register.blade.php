@@ -72,8 +72,8 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label for="toggle" class="col-md-4 col-form-label text-md-end">Activer la double
-                                    authentification ?</label>
+                                <label for="toggle" class="col-md-4 col-form-label text-md-end">{{__("Activer la double
+                                    authentification ?")}}</label>
 
                                 <div class="col-md-6 d-flex align-items-center">
                                     <input type="checkbox" name="is_2Fa_enabled" id="toggle" class="checkbox">
