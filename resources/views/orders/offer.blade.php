@@ -267,6 +267,7 @@ window.onload = function () {
             button.toggleAttribute('disabled')
         })
         slider.toggleAttribute('disabled')
+        document.getElementById("recap_enddate").classList.toggle("d-none");
     }
 
     if((document.querySelector('#domainUrlOrPrefix').value != '') && cartIsFreeTrial == '') {
