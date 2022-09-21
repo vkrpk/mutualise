@@ -26,7 +26,14 @@ class CartController extends Controller
 
     public function addToCart(Request $request)
     {
-        $price = (new CalculAmountController())->calculAmount($request->form_level, $request->form_diskspace);
+        if(!isset($request->form_diskspace)) {
+            $request->request->add(['form_diskspace' => 10]);
+            $price = (new CalculAmountController())->calculAmount($request->form_level, $request->form_diskspace, true);
+        } else {
+            $price = (new CalculAmountController())->calculAmount($request->form_level, $request->form_diskspace);
+        }
+
+
 
         $request->validate([
             'form_level' => [
@@ -35,7 +42,7 @@ class CartController extends Controller
             ],
             'form_diskspace' => 'required|numeric|min:10|max:5000',
             'priceMonthly' => 'numeric',
-            'accessName' => 'required'
+            'accessName' => 'required',
         ]);
 
         if($request->form_level === 'basique') {
@@ -93,6 +100,7 @@ class CartController extends Controller
                     'priceMonthly' => $price['M'],
                     'coupon' => false,
                     'buttonsRadioForOffer' => $request->buttonsRadioForOffer ?? '',
+                    'isFreeTrial' => $request->isFreeTrial,
                 )
             ]);
         } else {
@@ -109,6 +117,7 @@ class CartController extends Controller
                     'priceMonthly' => $price['M'],
                     'coupon' => false,
                     'buttonsRadioForOffer' => $request->buttonsRadioForOffer ?? '',
+                    'isFreeTrial' => $request->isFreeTrial,
                 )
             ]);
         }

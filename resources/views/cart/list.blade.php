@@ -44,7 +44,8 @@
                                             <span>{{ $cartItem->attributes->form_diskspace . ' Go' }}</span>
                                         </div>
                                     </div>
-                                    @if ($cartItem->attributes->domainUrlOrPrefix)
+
+                                    @if ($cartItem->attributes->form_level === "dédié")
                                         <div class="row">
                                             <div class="col ps-1 pe-0 d-flex align-item-center">
                                                 <span class="d-flex align-items-center"><i class="fa-solid fa-circle-arrow-right bg-white text-secondary me-2"></i></span>
@@ -78,9 +79,12 @@
                                         <span class="fw-bolder">Prix : <span>{{ $cartItem->price }} €</span></span>
                                     </div>
                                 </div>
-                                <div class="row border-bottom">
-                                    <div class="text-end p-1"><span class="text-primary fw-bolder">Adhésion obligatoire à l'association : 14.00 €</span></div>
-                                </div>
+                                @if ($cartItem->attributes->isFreeTrial == false) {
+                                    <div class="row border-bottom">
+                                        <div class="text-end p-1"><span class="text-primary fw-bolder">Adhésion obligatoire à l'association : 14.00 €</span></div>
+                                    </div>
+                                }
+                                @endif
                                 @if ($cartItem->attributes->coupon)
                                     <div class="row border-bottom py-2">
                                         <div class="text-center align-self-center col-2">
@@ -100,7 +104,7 @@
                                     </div>
                                 @endif
                                 <div class="row justify-content-end pt-1">
-                                    <div class="col text-end p-1"><span class="fw-bolder">Total : {{ $cartItem->price + 14}} €</span></div>
+                                    <div class="col text-end p-1"><span class="fw-bolder">Total : {{ $cartItem->attributes->isFreeTrial == false ? $cartItem->price + 14 : 0 }} €</span></div>
                                 </div>
                                 <div class="row pt-1">
                                     <div class="col text-end align-self-center p-1">

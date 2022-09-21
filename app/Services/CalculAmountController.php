@@ -15,9 +15,10 @@ class CalculAmountController extends Controller {
         }
     }
 
-    public function calculAmount(string $offer = null, int $size = null)  {
+    public function calculAmount(string $offer = null, int $size = null, bool $isFreeTrial = false)  {
         $offer = (!empty($offer)) ? $offer : $this->request->query('offer', 'standard');
         $size = (!empty($size)) ? $size : $this->request->query('size', 10);
+
         if ($offer == 'basique') {
             $amount['M'] = 37.4;
 
@@ -63,6 +64,11 @@ class CalculAmountController extends Controller {
                 $amount['M'] = $size * 0.02833;
             } elseif ($size > 3000) {
                 $amount['M'] = $size * 0.02666;
+            }
+
+            if($isFreeTrial == true) {
+                $amount['Y'] = 0;
+                $amount['M'] = 0;
             }
 
         } elseif ($offer == 'entreprise') {

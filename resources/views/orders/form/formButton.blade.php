@@ -1,4 +1,4 @@
-<form action="{{ route('cart.store') }}" method="POST" id="formAddToCart" enctype="multipart/form-data">
+<form action="{{ route('cart.store') }}" method="POST" id="formAddToCart" enctype="multipart/form-data" class="d-flex flex-column align-items-center">
     @csrf
     <input type="hidden" id="form_level" name="form_level" value="{{ $level ?? 'standard' }}">
     <input type="hidden" name="id" value="{{ $id }}">

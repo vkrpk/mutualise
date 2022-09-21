@@ -24,6 +24,7 @@ class OfferController extends Controller
             $domainType = $cartItem->attributes->domainType;
             $domainUrlOrPrefix = $cartItem->attributes->domainUrlOrPrefix;
             $option = $cartItem->attributes->buttonsRadioForOffer ?? '';
+            $isFreeTrial = $cartItem->attributes->isFreeTrial ?? '';
         }
         if(Auth::user()){
             $userId = auth()->user()->id;
@@ -40,6 +41,7 @@ class OfferController extends Controller
             'domainType' => $domainType ?? '',
             'domainUrlOrPrefix' => $domainUrlOrPrefix ?? '',
             'id' => $id ?? '',
+            'isFreeTrial' => $isFreeTrial ?? '',
         ]);
     }
 }
