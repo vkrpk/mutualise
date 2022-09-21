@@ -20,7 +20,7 @@
                     }
                 @endphp
                 <section class="row" >
-                    <div class="col-md-12 px-sm-0">
+                    <div class="col-md-12 px-sm-0 mb-4">
                         <p class="h4 py-3 text-center bgSecondaryLight mb-0 borderRadiusTop textSecondaryDarken text-uppercase fw-bolder">{{ $cartItem->name }}</p>
                         <div class="card rounded-0">
                             <div class="alert alert-secondary fw-bolder mb-1 rounded-0" role="alert"><span>Récapitulatif de l'offre</span></div>
@@ -35,6 +35,12 @@
                                             <div class="col-12 col-sm-6 ps-1 pe-0">
                                                 <span class="fst-italic"><i class="fa-solid fa-circle-arrow-right bg-white text-secondary me-2"></i>Option :</span>
                                                 <span>{{ $buttonsRadioForOfferName }}</span>
+                                            </div>
+                                        @endif
+                                        @if ($cartItem->attributes->isFreeTrial == true)
+                                            <div class="col-12 col-sm-6 ps-1 pe-0">
+                                                <span class="fst-italic"><i class="fa-solid fa-circle-arrow-right bg-white text-secondary me-2"></i>Option :</span>
+                                                <span>Offre d'essai</span>
                                             </div>
                                         @endif
                                     </div>
@@ -72,43 +78,25 @@
                             </div>
                         </div>
                         <div class="card rounded-0">
-                            <div class="alert alert-secondary fw-bolder mb-1 rounded-0" role="alert"><span>Proposition 1 : paiement à l'année</span></div>
+                            <div class="alert alert-secondary fw-bolder mb-1 rounded-0" role="alert"><span>{{ $cartItem->attributes->isFreeTrial == true ?"Offre d'essai gratuit" : "Proposition 1 : paiement à l'année"}}</span></div>
                             <div class="card-body">
                                 <div class="row border-bottom justify-content-evenly">
                                     <div class="text-end p-1">
                                         <span class="fw-bolder">Prix : <span>{{ $cartItem->price }} €</span></span>
                                     </div>
                                 </div>
-                                @if ($cartItem->attributes->isFreeTrial == false) {
+                                @if ($cartItem->attributes->isFreeTrial == false)
                                     <div class="row border-bottom">
                                         <div class="text-end p-1"><span class="text-primary fw-bolder">Adhésion obligatoire à l'association : 14.00 €</span></div>
                                     </div>
-                                }
                                 @endif
-                                @if ($cartItem->attributes->coupon)
-                                    <div class="row border-bottom py-2">
-                                        <div class="text-center align-self-center col-2">
-                                            <a href="#"><i class="fa-solid fa-trash-can fs-2 text-danger"></i></a>
-                                        </div>
-                                        <div class="col p-1">
-                                            <div class="row">
-                                                <div class="col"><span class="text-primary fw-bolder">Coupon de déduction</span></div>
-                                            </div>
-                                            <div class="row ">
-                                                <div class="col"><span>xxx--dfgdfs--zz444</span></div>
-                                            </div>
-                                        </div>
-                                            <div class="col text-end p-1">
-                                                <p class="fw-bolder">Réduction : <span>- 20,00 €</span></p>
-                                            </div>
-                                    </div>
-                                @endif
+                                
                                 <div class="row justify-content-end pt-1">
                                     <div class="col text-end p-1"><span class="fw-bolder">Total : {{ $cartItem->attributes->isFreeTrial == false ? $cartItem->price + 14 : 0 }} €</span></div>
                                 </div>
                                 <div class="row pt-1">
                                     <div class="col text-end align-self-center p-1">
-                                        <a class="btn btn-primary" href="#"><i class="fa-solid fa-cart-shopping me-1"></i>Choisir la formule annuelle</a>
+                                        <a class="btn btn-primary" href="#"><i class="fa-solid fa-cart-shopping me-1"></i>{{ $cartItem->attributes->isFreeTrial == true ? "Choisir la formule d'essai" : "Choisir la formule annuelle" }}</a>
                                     </div>
                                 </div>
                             </div>
@@ -125,24 +113,7 @@
                                     <div class="row border-bottom">
                                         <div class="text-end p-1"><span class="text-primary fw-bolder">Adhésion obligatoire à l'association : 14.00 €</span></div>
                                     </div>
-                                    @if ($cartItem->attributes->coupon)
-                                        <div class="row border-bottom py-2">
-                                            <div class="text-center align-self-center col-2">
-                                                <a href="#"><i class="fa-solid fa-trash-can fs-2 text-danger"></i></a>
-                                            </div>
-                                            <div class="col p-1">
-                                                <div class="row">
-                                                    <div class="col"><span class="text-primary fw-bolder">Coupon de déduction</span></div>
-                                                </div>
-                                                <div class="row ">
-                                                    <div class="col"><span>xxx--dfgdfs--zz444</span></div>
-                                                </div>
-                                            </div>
-                                                <div class="col text-end p-1">
-                                                    <p class="fw-bolder">Réduction : <span>- 20,00 €</span></p>
-                                                </div>
-                                        </div>
-                                    @endif
+                                
                                     <div class="row justify-content-end pt-1">
                                         <div class="text-end p-1"><span class="fw-bolder ">Premier mois : {{ $cartItem->attributes->priceMonthly + 14}} €</span></div>
                                         <div class="text-end p-1"><span class="fw-bolder ">Abonnement mensuel : {{ $cartItem->attributes->priceMonthly }} €</span></div>
@@ -155,18 +126,20 @@
                                 </div>
                             </div>
                         @endif
-                        <div class="card borderRadiusBottom mb-4">
-                            <div class="card-body">
-                                <form>
-                                    @csrf
-                                    <div class="mb-3" style="width: 270px">
-                                        <label class="small mb-1" for="inputCoupon">Coupon de réduction</label>
-                                        <input class="form-control" type="text" name="inputCoupon" id="inputCoupon">
-                                    </div>
-                                    <button class="btn btn-secondary" type="submit"><i class="fa-solid fa-ticket text-white me-1"></i>Appliquer à la commande</button>
-                                </form>
+                        @if ($cartItem->attributes->coupon == true)
+                            <div class="card borderRadiusBottom">
+                                <div class="card-body">
+                                    <form>
+                                        @csrf
+                                        <div class="mb-3" style="width: 270px">
+                                            <label class="small mb-1" for="inputCoupon">Coupon de réduction</label>
+                                            <input class="form-control" type="text" name="inputCoupon" id="inputCoupon">
+                                        </div>
+                                        <button class="btn btn-secondary" type="submit"><i class="fa-solid fa-ticket text-white me-1"></i>Appliquer à la commande</button>
+                                    </form>
+                                </div>
                             </div>
-                        </div>
+                        @endif
                     </div>
                 </section>
             @endforeach

@@ -67,21 +67,19 @@
             <p class="mb-0 mt-3 fw-bolder">Choix du nom de domaine<sup><i class="fa-solid fa-asterisk" style="font-size: 8px;color: red;margin-top: -14px;"></i></sup></p>
             <div class="d-flex justify-content-center" id="inputsRadioForDomainType">
                 <div class="d-flex me-4">
-                    <input class="me-2" type="radio" name="domainType" id="dedikam" value="dedikam" form="formAddToCart" checked {{ $domainType == 'dedikam' ? 'checked' : '' }}>
+                    <input class="me-2" type="radio" name="domainType" id="dedikam" value="dedikam" form="formAddToCart" checked {{ old('domainType') ? 'checked' : ($domainType == 'dedikam' ? 'checked' : '') }}>
                     <label for="dedikam">*.dedikam.com</label>
                 </div>
                 <div>
-                    <input class="me-1" type="radio" name="domainType" id="private" value="private" form="formAddToCart" {{ $domainType == 'private' ? 'checked' : '' }}>
+                    <input class="me-1" type="radio" name="domainType" id="private" value="private" form="formAddToCart" {{ old('domainType') ? 'checked' : ($domainType == 'private' ? 'checked' : '') }}>
                     <label for="private">Privé</label>
                 </div>
             </div>
             <div class="mt-3 d-flex flex-column align-items-center" id="boxDomainUrlOrPrefix">
                 <div><label class="small mb-1 fw-bolder" for="domainUrlOrPrefix">Choix du préfixe</label><sup><i class="fa-solid fa-asterisk" style="font-size: 8px;color: red;margin-top: -14px;"></i></sup></div>
                 <input class="form-control" id="domainUrlOrPrefix" type="text" name="domainUrlOrPrefix" value="{{ old('domainUrlOrPrefix') ? old('domainUrlOrPrefix') : $domainUrlOrPrefix }}" form="formAddToCart" style="width: 300px">
-                <span>Exemple : "votre_choix".dedikam.com</span>
-                @error('domainUrlOrPrefix')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
+                <span>Exemple : "votre-choix".dedikam.com</span>
+                <div class="text-danger">{{ $errors->regex->first() }}</div>
             </div>
         </div>
         <div class="d-flex justify-content-center">
@@ -207,7 +205,7 @@ window.onload = function () {
                             buttonChecked = button;
                         }
                     });
-                    recapLevelOption.innerHTML = buttonChecked.value.charAt(0).toUpperCase() + buttonChecked.value.split("Offer")[0].slice(1)
+                    buttonChecked ? recapLevelOption.innerHTML = buttonChecked.value.charAt(0).toUpperCase() + buttonChecked.value.split("Offer")[0].slice(1) : recapLevelOption.innerHTML = "Pydio"
                 } else {
                     recapLevelOption.innerHTML = ''
                 }
@@ -267,6 +265,7 @@ window.onload = function () {
             button.toggleAttribute('disabled')
         })
         slider.toggleAttribute('disabled')
+        document.getElementById("recap_enddate").classList.toggle("d-none");
     }
 
     if((document.querySelector('#domainUrlOrPrefix').value != '') && cartIsFreeTrial == '') {
@@ -277,7 +276,7 @@ window.onload = function () {
     }
 
     if(cartLevelOffer && cartIsFreeTrial == 'on') {
-        console.log(cartIsFreeTrial);
+        inputIsFreeTrial.checked = true;
         blockInputsFreeTrial()
     } else if (cartLevelOffer) {
         removeSelectedClassToAllColumns()
@@ -296,6 +295,7 @@ window.onload = function () {
             case "dédié":
                 addSelectedClassToColumn(document.querySelectorAll("a[offer='dédié']")[1])
                 document.querySelector(`input[value='${cartButtonsRadioForOffer}']`).checked = true;
+                switchTextDomainUrlOrPrefixDisplay();
                 break;
             default:
                 break;
@@ -322,16 +322,18 @@ window.onload = function () {
     });
 
     buttonsRadioForDomainType.forEach(button => {
-        button.addEventListener("input", () => {
-            if(button.value == "dedikam") {
-                boxDomainUrlOrPrefix.querySelector("span").innerHTML = 'Exemple : "votre_choix".dedikam.com'
-                boxDomainUrlOrPrefix.querySelector("label").innerHTML = "Choix de votre préfixe"
-            } else {
-                boxDomainUrlOrPrefix.querySelector("span").innerHTML = "CNAME de type : example-domain.com"
-                boxDomainUrlOrPrefix.querySelector("label").innerHTML = "Nom de votre domaine privé"
-            }
-        })
+        button.addEventListener("input", switchTextDomainUrlOrPrefixDisplay)
     });
+
+    function switchTextDomainUrlOrPrefixDisplay () {
+        if(document.querySelector('input[name="domainType"]:checked').value == "dedikam") {
+            boxDomainUrlOrPrefix.querySelector("span").innerHTML = 'Exemple : "votre-choix".dedikam.com'
+            boxDomainUrlOrPrefix.querySelector("label").innerHTML = "Choix de votre préfixe"
+        } else {
+            boxDomainUrlOrPrefix.querySelector("span").innerHTML = "CNAME de type : example-domain.com"
+            boxDomainUrlOrPrefix.querySelector("label").innerHTML = "Nom de votre domaine privé"
+        }
+    }
 
     cellsWithAttributesOffer.forEach((div) => {
         div.addEventListener("click", function () {
@@ -348,7 +350,10 @@ window.onload = function () {
         })
     });
 
-    inputIsFreeTrial.addEventListener("input", () => blockInputsFreeTrial())
+    @auth
+        inputIsFreeTrial.addEventListener("input", () => blockInputsFreeTrial())        
+    @endauth
+
 
     // Popover bootstrap
     var popoverTriggerList = [].slice.call(
