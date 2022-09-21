@@ -10,6 +10,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\Enum;
 use App\Services\CalculAmountController;
+use Illuminate\Support\Facades\Validator;
 
 class CartController extends Controller
 {
@@ -19,22 +20,23 @@ class CartController extends Controller
         return view('cart.list', compact('cartItems'));
     }
 
-    public static function accessCart(){
+    public static function accessCart()
+    {
         $cartItems = \Cart::getContent();
         return $cartItems;
     }
 
     public function addToCart(Request $request)
     {
-        
-        if(!isset($request->form_diskspace)) {
+
+        if (!isset($request->form_diskspace)) {
             $request->request->add(['form_diskspace' => 10]);
             $price = (new CalculAmountController())->calculAmount($request->form_level, $request->form_diskspace, true);
         } else {
             $price = (new CalculAmountController())->calculAmount($request->form_level, $request->form_diskspace);
         }
 
-        if($request->isFreeTrial == true){
+        if ($request->isFreeTrial == true) {
             $request->validate([
                 'form_diskspace' => 'required|numeric|size:10',
             ]);
@@ -50,7 +52,7 @@ class CartController extends Controller
             'accessName' => 'required',
         ]);
 
-        if($request->form_level === 'basique') {
+        if ($request->form_level === 'basique') {
             $request->validate([
                 'buttonsRadioForOffer' => [
                     'required',
@@ -59,7 +61,7 @@ class CartController extends Controller
             ]);
         }
 
-        if($request->form_level === 'dédié') {
+        if ($request->form_level === 'dédié') {
             $request->validate([
                 'sizeValueForDedicatedOffer' => [
                     'required',
@@ -76,26 +78,30 @@ class CartController extends Controller
                 'domainUrlOrPrefix' => 'required'
             ]);
 
-            if($request->domainType === 'dedikam') {
-                $request->validate([
-                    'domainUrlOrPrefix' => [
-                        'regex:/^((?![-.])[A-Z0-9-.]{1,63}(?<![-.]))+$/i'
+            if ($request->domainType === 'dedikam') {
+                $validator = Validator::make(
+                    [$request->domainUrlOrPrefix], 
+                    ['regex:/^((?![-.])[A-Z0-9-.]{1,63}(?<![-.]))+$/i'], 
+                    $messages = [
+                        'regex' => 'Veuillez entrer un préfixe valide, points et tirets acceptés.',
                     ]
-                ]);
+                )->validateWithBag("regex");
             } elseif ($request->domainType === 'private') {
-                $request->validate([
-                    'domainUrlOrPrefix' => [
-                        'regex:/^((?!-)[A-Za-z0-9-]{1,63}(?<!-)\.)+[A-Za-z]{2,6}$/'
+                $validator = Validator::make(
+                    [$request->domainUrlOrPrefix], 
+                    ['regex:/^((?!-)[A-Za-z0-9-]{1,63}(?<!-)\.)+[A-Za-z]{2,6}$/'], 
+                    $messages = [
+                        'regex' => 'Veuillez entrer un nom de domaine valide, points et tirets acceptés.',
                     ]
-                ]);
+                )->validateWithBag("regex");
             }
         }
 
-        if(str_contains($request->domainUrlOrPrefix, ".dedikam.com")){
+        if (str_contains($request->domainUrlOrPrefix, ".dedikam.com")) {
             $request->domainUrlOrPrefix = str_replace(".dedikam.com", "", $request->domainUrlOrPrefix);
         }
 
-        if($request->id) {
+        if ($request->id) {
             \Cart::update($request->id, [
                 'id' => $request->id,
                 'name' => $request->accessName,
