@@ -18,6 +18,9 @@ use TimeHunter\LaravelGoogleReCaptchaV3\Validations\GoogleReCaptchaV3ValidationR
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});
 
 Route::group([
     'prefix' => LaravelLocalization::setLocale(),
@@ -33,9 +36,6 @@ Route::group([
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->withoutMiddleware('auth');
 
-    Route::group(['prefix' => 'admin'], function () {
-        Voyager::routes();
-    });
 
 
     Route::prefix('profil')->middleware(['auth', 'verified'])->group(function () {

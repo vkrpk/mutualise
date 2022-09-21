@@ -45,7 +45,11 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
 
     public function loginSecurity()
     {
-    return $this->hasOne(LoginSecurity::class);
+        return $this->hasOne(LoginSecurity::class);
     }
 
+    public function isAdmin()
+    {
+        return $this->role_id == 1 ? true : false;
+    }
 }
