@@ -114,9 +114,8 @@
                                     <div class="d-flex flex-column align-items-center justify-content-center">
                                         <div id="price_Y">
                                             <span id="textPricePerYear" class="text-primary fw-bolder">3.6 €</span>
-                                            <span id="recap_amount_free" class="text-primary fw-bolder"
-                                                style="display: none;">gratuit pour 30 jours</span>
-                                            <span id="recap_duration">pour 1 an jusqu'au</span>
+                                            <span id="textRecapDurationFreeTrial" class="fw-bolder d-none">pour 30 jours</span>
+                                            <span id="textRecapDurationYear">pour 1 an jusqu'au</span>
                                             <span id="recap_enddate">01/06/2022</span>
                                         </div>
                                         <div id="boxPricePerMonth" class="d-none">
@@ -153,7 +152,8 @@ window.onload = function () {
     const cartValueOffer = "{{ $formDiskspace }}";
     const cartButtonsRadioForOffer = "{{ $option }}";
     const cartButtonsRadioForDomainType = "{{ $domainType }}";
-    const domainUrlOrPrefix = "{{ $domainUrlOrPrefix }}";
+    const cartIsFreeTrial = "{{ $isFreeTrial }}";
+    const inputIsFreeTrial = document.getElementById("isFreeTrial")
     let timeout = null;
     const boxPricePerMonth = document.getElementById("boxPricePerMonth");
     const recapLevel = document.getElementById("recapLevel");
@@ -165,6 +165,7 @@ window.onload = function () {
     const buttonsRadioForOfferDedicated = [buttonsRadioForOffer[3], buttonsRadioForOffer[4], buttonsRadioForOffer[5]];
     const boxInputsRadioDedicatedOffer = document.getElementById('boxInputsRadioDedicatedOffer')
     const boxDomainUrlOrPrefix = document.getElementById("boxDomainUrlOrPrefix")
+    const textPricePerYear = document.getElementById("textPricePerYear");
 
     function calculAndDisplayOfferPrice(value, offer) {
         return fetch(`/amount?size=${value}&offer=${offer}`)
@@ -172,7 +173,6 @@ window.onload = function () {
                 return response.json();
             })
             .then((response) => {
-                const textPricePerYear = document.getElementById("textPricePerYear");
                 textPricePerYear.innerHTML = response.Y + " €";
                 const textPricePerMonth = document.getElementById("textPricePerMonth");
                 textPricePerMonth.innerHTML = response.M + " €";
@@ -184,6 +184,14 @@ window.onload = function () {
                 recapLevel.innerHTML = offer.charAt(0).toUpperCase() + offer.slice(1);
                 recapDiskspaceGo.innerHTML = value + " Go";
                 recapDiskspaceGio.innerHTML = Math.round(100 * value / 1.074) / 100 + " Gio";
+                if(inputIsFreeTrial.checked) {
+                    textPricePerYear.innerHTML = "Gratuit";
+                    document.getElementById("textRecapDurationYear").classList.contains('d-none') ? '' : document.getElementById("textRecapDurationYear").classList.add('d-none')
+                    document.getElementById("textRecapDurationFreeTrial").classList.contains('d-none') ? document.getElementById("textRecapDurationFreeTrial").classList.remove('d-none') : ''
+                } else {
+                    document.getElementById("textRecapDurationFreeTrial").classList.contains('d-none') ? "" : document.getElementById("textRecapDurationFreeTrial").classList.add('d-none')
+                    document.getElementById("textRecapDurationYear").classList.contains('d-none') ? document.getElementById("textRecapDurationYear").classList.remove('d-none') : ''
+                }
                 if(offer !== 'dédié') {
                     slider.value = value;
                     boxInputsRadioDedicatedOffer.classList.contains("d-none") ? "" : boxInputsRadioDedicatedOffer.classList.add("d-none")
@@ -245,7 +253,33 @@ window.onload = function () {
         }
     }
 
-    if(cartLevelOffer){
+    function blockInputsFreeTrial() {
+        removeSelectedClassToAllColumns();
+        addSelectedClassToColumn(document.querySelectorAll("a[offer='standard']")[1]);
+        toggleSlider(document.querySelectorAll("a[offer='standard']")[1]);
+        changeSliderColor();
+        inputHiddenOfferAddToCartFormValue(document.querySelectorAll("a[offer='standard']")[1])
+        calculAndDisplayOfferPrice(10, document.querySelector(".selected").getAttribute("offer"));
+        cellsWithAttributesOffer.forEach((div) => {
+            div.classList.toggle("disablePointerEvent");
+        })
+        buttonsRadioForOffer.forEach((button) => {
+            button.toggleAttribute('disabled')
+        })
+        slider.toggleAttribute('disabled')
+    }
+
+    if((document.querySelector('#domainUrlOrPrefix').value != '') && cartIsFreeTrial == '') {
+        removeSelectedClassToAllColumns()
+        calculAndDisplayOfferPrice(document.querySelector(`input[name='sizeValueForDedicatedOffer']:checked`).value, 'dédié');
+        addSelectedClassToColumn(document.querySelectorAll("a[offer='dédié']")[1])
+        toggleSlider(document.querySelector(".selected"));
+    }
+
+    if(cartLevelOffer && cartIsFreeTrial == 'on') {
+        console.log(cartIsFreeTrial);
+        blockInputsFreeTrial()
+    } else if (cartLevelOffer) {
         removeSelectedClassToAllColumns()
         calculAndDisplayOfferPrice(cartValueOffer, cartLevelOffer);
         switch (cartLevelOffer) {
@@ -269,12 +303,6 @@ window.onload = function () {
         toggleSlider(document.querySelector(".selected"));
     }
 
-    if(document.querySelector('#domainUrlOrPrefix').value != '') {
-        removeSelectedClassToAllColumns()
-        calculAndDisplayOfferPrice(document.querySelector(`input[name='sizeValueForDedicatedOffer']:checked`).value, 'dédié');
-        addSelectedClassToColumn(document.querySelectorAll("a[offer='dédié']")[1])
-        toggleSlider(document.querySelector(".selected"));
-    }
 
     changeSliderColor();
 
@@ -319,6 +347,8 @@ window.onload = function () {
             }
         })
     });
+
+    inputIsFreeTrial.addEventListener("input", () => blockInputsFreeTrial())
 
     // Popover bootstrap
     var popoverTriggerList = [].slice.call(

@@ -100,12 +100,9 @@
     grid-area: col4;
 }
 
-// .col4 div {
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     height: 33%;
-// }
+.disablePointerEvent {
+    pointer-events: none !important;
+}
 
 .pricingHeader,
 .pricingReference,
