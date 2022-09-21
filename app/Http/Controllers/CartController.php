@@ -26,6 +26,7 @@ class CartController extends Controller
 
     public function addToCart(Request $request)
     {
+        
         if(!isset($request->form_diskspace)) {
             $request->request->add(['form_diskspace' => 10]);
             $price = (new CalculAmountController())->calculAmount($request->form_level, $request->form_diskspace, true);
@@ -33,7 +34,11 @@ class CartController extends Controller
             $price = (new CalculAmountController())->calculAmount($request->form_level, $request->form_diskspace);
         }
 
-
+        if($request->isFreeTrial == true){
+            $request->validate([
+                'form_diskspace' => 'required|numeric|size:10',
+            ]);
+        }
 
         $request->validate([
             'form_level' => [
@@ -102,7 +107,7 @@ class CartController extends Controller
                     'domainUrlOrPrefix' => $request->form_level == "dédié" ? ($request->domainType === "dedikam" ? $request->domainUrlOrPrefix . ".dedikam.com" : $request->domainUrlOrPrefix) : "",
                     'form_diskspace' => $request->form_level == 'dédié' ? $request->sizeValueForDedicatedOffer : $request->form_diskspace,
                     'priceMonthly' => $price['M'],
-                    'coupon' => false,
+                    'coupon' => $request->isFreeTrial == "on" ? false : true,
                     'buttonsRadioForOffer' => $request->buttonsRadioForOffer ?? '',
                     'isFreeTrial' => $request->isFreeTrial,
                 )
@@ -119,7 +124,7 @@ class CartController extends Controller
                     'domainUrlOrPrefix' => $request->form_level == "dédié" ? ($request->domainType === "dedikam" ? $request->domainUrlOrPrefix . ".dedikam.com" : $request->domainUrlOrPrefix) : "",
                     'form_diskspace' => $request->form_level == 'dédié' ? $request->sizeValueForDedicatedOffer : $request->form_diskspace,
                     'priceMonthly' => $price['M'],
-                    'coupon' => false,
+                    'coupon' => $request->isFreeTrial == "on" ? false : true,
                     'buttonsRadioForOffer' => $request->buttonsRadioForOffer ?? '',
                     'isFreeTrial' => $request->isFreeTrial,
                 )
