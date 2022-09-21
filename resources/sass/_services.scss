@@ -1,0 +1,13 @@
+#serviceTable section:nth-last-child(1) {
+    border-right: none !important;
+}
+
+@media (max-width: 576px) {
+    #serviceTable section:nth-child(3n) {
+        border-right: none !important;
+    }
+
+    #serviceTable section:nth-child(n+4){
+        border-top: 1px solid $border-color !important;
+    }
+}
