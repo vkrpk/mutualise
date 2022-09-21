@@ -207,7 +207,7 @@ window.onload = function () {
                             buttonChecked = button;
                         }
                     });
-                    recapLevelOption.innerHTML = buttonChecked.value.charAt(0).toUpperCase() + buttonChecked.value.split("Offer")[0].slice(1)
+                    buttonChecked ? recapLevelOption.innerHTML = buttonChecked.value.charAt(0).toUpperCase() + buttonChecked.value.split("Offer")[0].slice(1) : recapLevelOption.innerHTML = "Pydio"
                 } else {
                     recapLevelOption.innerHTML = ''
                 }
@@ -277,7 +277,7 @@ window.onload = function () {
     }
 
     if(cartLevelOffer && cartIsFreeTrial == 'on') {
-        console.log(cartIsFreeTrial);
+        inputIsFreeTrial.checked = true;
         blockInputsFreeTrial()
     } else if (cartLevelOffer) {
         removeSelectedClassToAllColumns()
@@ -296,6 +296,7 @@ window.onload = function () {
             case "dédié":
                 addSelectedClassToColumn(document.querySelectorAll("a[offer='dédié']")[1])
                 document.querySelector(`input[value='${cartButtonsRadioForOffer}']`).checked = true;
+                switchTextDomainUrlOrPrefixDisplay();
                 break;
             default:
                 break;
@@ -322,16 +323,18 @@ window.onload = function () {
     });
 
     buttonsRadioForDomainType.forEach(button => {
-        button.addEventListener("input", () => {
-            if(button.value == "dedikam") {
-                boxDomainUrlOrPrefix.querySelector("span").innerHTML = 'Exemple : "votre_choix".dedikam.com'
-                boxDomainUrlOrPrefix.querySelector("label").innerHTML = "Choix de votre préfixe"
-            } else {
-                boxDomainUrlOrPrefix.querySelector("span").innerHTML = "CNAME de type : example-domain.com"
-                boxDomainUrlOrPrefix.querySelector("label").innerHTML = "Nom de votre domaine privé"
-            }
-        })
+        button.addEventListener("input", switchTextDomainUrlOrPrefixDisplay)
     });
+
+    function switchTextDomainUrlOrPrefixDisplay () {
+        if(document.querySelector('input[name="domainType"]:checked').value == "dedikam") {
+            boxDomainUrlOrPrefix.querySelector("span").innerHTML = 'Exemple : "votre_choix".dedikam.com'
+            boxDomainUrlOrPrefix.querySelector("label").innerHTML = "Choix de votre préfixe"
+        } else {
+            boxDomainUrlOrPrefix.querySelector("span").innerHTML = "CNAME de type : example-domain.com"
+            boxDomainUrlOrPrefix.querySelector("label").innerHTML = "Nom de votre domaine privé"
+        }
+    }
 
     cellsWithAttributesOffer.forEach((div) => {
         div.addEventListener("click", function () {
@@ -348,7 +351,10 @@ window.onload = function () {
         })
     });
 
-    inputIsFreeTrial.addEventListener("input", () => blockInputsFreeTrial())
+    @auth
+        inputIsFreeTrial.addEventListener("input", () => blockInputsFreeTrial())        
+    @endauth
+
 
     // Popover bootstrap
     var popoverTriggerList = [].slice.call(

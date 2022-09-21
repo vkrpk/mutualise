@@ -86,6 +86,10 @@ class CartController extends Controller
             }
         }
 
+        if(str_contains($request->domainUrlOrPrefix, ".dedikam.com")){
+            $request->domainUrlOrPrefix = str_replace(".dedikam.com", "", $request->domainUrlOrPrefix);
+        }
+
         if($request->id) {
             \Cart::update($request->id, [
                 'id' => $request->id,
@@ -95,7 +99,7 @@ class CartController extends Controller
                 'attributes' => array(
                     'form_level' => $request->form_level,
                     'domainType' => $request->domainType,
-                    'domainUrlOrPrefix' => $request->domainType === "dedikam" ? $request->domainUrlOrPrefix . ".dedikam.com" : $request->domainUrlOrPrefix,
+                    'domainUrlOrPrefix' => $request->form_level == "dédié" ? ($request->domainType === "dedikam" ? $request->domainUrlOrPrefix . ".dedikam.com" : $request->domainUrlOrPrefix) : "",
                     'form_diskspace' => $request->form_level == 'dédié' ? $request->sizeValueForDedicatedOffer : $request->form_diskspace,
                     'priceMonthly' => $price['M'],
                     'coupon' => false,
@@ -112,7 +116,7 @@ class CartController extends Controller
                 'attributes' => array(
                     'form_level' => $request->form_level,
                     'domainType' => $request->domainType,
-                    'domainUrlOrPrefix' => $request->domainType === "dedikam" ? $request->domainUrlOrPrefix . ".dedikam.com" : $request->domainUrlOrPrefix,
+                    'domainUrlOrPrefix' => $request->form_level == "dédié" ? ($request->domainType === "dedikam" ? $request->domainUrlOrPrefix . ".dedikam.com" : $request->domainUrlOrPrefix) : "",
                     'form_diskspace' => $request->form_level == 'dédié' ? $request->sizeValueForDedicatedOffer : $request->form_diskspace,
                     'priceMonthly' => $price['M'],
                     'coupon' => false,

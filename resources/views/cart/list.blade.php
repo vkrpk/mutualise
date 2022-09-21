@@ -79,11 +79,10 @@
                                         <span class="fw-bolder">Prix : <span>{{ $cartItem->price }} €</span></span>
                                     </div>
                                 </div>
-                                @if ($cartItem->attributes->isFreeTrial == false) {
+                                @if ($cartItem->attributes->isFreeTrial == false)
                                     <div class="row border-bottom">
                                         <div class="text-end p-1"><span class="text-primary fw-bolder">Adhésion obligatoire à l'association : 14.00 €</span></div>
                                     </div>
-                                }
                                 @endif
                                 @if ($cartItem->attributes->coupon)
                                     <div class="row border-bottom py-2">
