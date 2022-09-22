@@ -23,7 +23,7 @@ $theme-colors: (
     "danger" : #dc3545,
     "light" : #f8f9fa,
     "dark" : #212529,
-    "success" : $green
+    "success" : $green,
 );
 
 $theme-colors: map-merge($theme-colors, $custom-colors );

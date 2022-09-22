@@ -29,8 +29,13 @@ body {
     flex-grow: 1;
 }
 
-header .nav-link {
+header .nav-link,
+.btn-link {
     color: $primary  !important;
+}
+
+.btn.btn-link {
+    font-size: 0.9rem !important;
 }
 
 .form-check-input:checked {

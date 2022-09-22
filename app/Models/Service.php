@@ -15,10 +15,5 @@ class Service extends Model
     protected $fillable = [
         'is_active',
         'name'
-    ];
-
-    static function getAll(){
-        $services = Service::all()->items();
-        return array_flip($services);
-    }
+    ]; 
 }
