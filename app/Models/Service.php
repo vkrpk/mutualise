@@ -16,4 +16,9 @@ class Service extends Model
         'is_active',
         'name'
     ];
+
+    static function getAll(){
+        $services = Service::all()->items();
+        return array_flip($services);
+    }
 }
