@@ -153,7 +153,6 @@
 @endsection
 
 @push('scripts')
-@parent
 <script type="text/javascript" defer>
 window.onload = function() {
     let formEmailChange = document.getElementById("changeEmailForm")
