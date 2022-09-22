@@ -108,3 +108,7 @@ a {
 .textSecondaryDarken {
     color: $secondary-dark;
 }
+
+.grayedOut{
+    filter: grayscale(.8);
+}

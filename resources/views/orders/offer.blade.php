@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+
 <div class="container-sm overflow-hidden p-0">
     <div class="row mx-2 mx-sm-0 g-2 text-center m-3">
         <div class="alert alert-primary fs-3 fw-bolder" role="alert">
@@ -114,7 +115,7 @@
                                             <span id="textPricePerYear" class="text-primary fw-bolder">3.6 €</span>
                                             <span id="textRecapDurationFreeTrial" class="fw-bolder d-none">pour 30 jours</span>
                                             <span id="textRecapDurationYear">pour 1 an jusqu'au</span>
-                                            <span id="recap_enddate">01/06/2022</span>
+                                            <span id="recap_enddate">{{ date('d-m-Y', strtotime("+1 year")) }}</span>
                                         </div>
                                         <div id="boxPricePerMonth" class="d-none">
                                             <span class="text-secondary fw-bolder">ou</span>
@@ -254,7 +255,8 @@ window.onload = function () {
     function blockInputsFreeTrial() {
         removeSelectedClassToAllColumns();
         addSelectedClassToColumn(document.querySelectorAll("a[offer='standard']")[1]);
-        toggleSlider(document.querySelectorAll("a[offer='standard']")[1]);
+        document.querySelectorAll("a[offer]:not([offer='standard'])").forEach(element => element.classList.toggle('grayedOut'));
+        rangeSliderContainer.classList.toggle('d-none');
         changeSliderColor();
         inputHiddenOfferAddToCartFormValue(document.querySelectorAll("a[offer='standard']")[1])
         calculAndDisplayOfferPrice(10, document.querySelector(".selected").getAttribute("offer"));
