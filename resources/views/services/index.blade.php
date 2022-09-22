@@ -11,10 +11,11 @@
                     <section class="col-4 col-sm d-flex flex-column p-0 border-end">
                         <span class="bg-light py-2">{{ $service->name }}</span>
                         <div class="py-2 d-flex flex-column align-items-center bg-white">
+                            <input type="hidden" name="service[{{$service->name}}]" value="0" form="changeServiceStatusForm">
                             <input type="checkbox" name="service[{{$service->name}}]" id="{{ $service->name }}" class="checkbox"
                                 {{ $service->is_active ? 'checked' : '' }}
                                 @isNotAdmin() disabled @endisNotAdmin
-                                form="changeServiceStatusForm">
+                                form="changeServiceStatusForm" value="1">
                             <label for="{{ $service->name }}" class="label"></label>
                         </div>
                     </section>
@@ -22,7 +23,7 @@
             </div>
         </div>
         @isAdmin()
-            <form action="{{route('serviceUpdate')}}" method="post" id="changeServiceStatusForm" class="d-flex justify-content-center">
+            <form action="{{route('serviceUpdate')}}" method="post" id="changeServiceStatusForm" class="d-flex justify-content-center py-2">
                 @csrf
                 <button class="btn btn-primary" type="submit">Valider les changements</button>
             </form>
