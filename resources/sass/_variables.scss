@@ -3,11 +3,27 @@ $font-family-sans-serif: "Nunito-Regular", sans-serif;
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
 
-$primary: #74ba58;
-$secondary: #fe7e20;
-$info: #141e28;
-$warning: #141e28;
+$custom-colors: (
+    "custom-primary": #003767,
+    "custom-secondary": #007f2e,
+    "custom-success": #C00000,
+    "custom-info": #FF5000,
+    "custom-warning": #414A51,
+    "custom-danger": #E3E3E3,
+    "custom-light": #F0F0F0,
+    "custom-dark": #00B2CE,
+    "gray": #858585,
+);
 
-$secondary-light: lighten($secondary, 20%);
-$secondary-lighter: lighten($secondary, 30%);
-$secondary-dark: darken($secondary, 20%);
+$theme-colors: (
+    "primary": #74ba58,
+    "secondary": #fe7e20,
+    "info": #141e28,
+    "warning": #141e28,
+    "danger" : #dc3545,
+    "light" : #f8f9fa,
+    "dark" : #212529
+);
+
+$theme-colors: map-merge($theme-colors, $custom-colors );
+

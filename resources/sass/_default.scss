@@ -1,7 +1,18 @@
+$primary: #74ba58;
+$secondary: #fe7e20;
+$info: #141e28;
+$warning: #141e28;
+
+$secondary-light: lighten($secondary, 20%);
+$secondary-lighter: lighten($secondary, 30%);
+$secondary-dark: darken($secondary, 20%);
+
+
 * {
     margin: 0;
     padding: 0;
 }
+
 body {
     margin: 0 !important;
     display: flex;
@@ -19,12 +30,12 @@ body {
 }
 
 header .nav-link {
-    color: $primary !important;
+    color: $primary  !important;
 }
 
 .form-check-input:checked {
-    background-color: $secondary-light !important;
-    border-color: $secondary-light !important;
+    background-color: $secondary-light  !important;
+    border-color: $secondary-light  !important;
 }
 
 .btn-outline-danger:hover,
@@ -38,17 +49,18 @@ a {
     color: inherit !important;
     text-decoration: none !important;
 }
+
 :visited {
     color: inherit !important;
 }
 
 .navbar-toggler-icon {
-    border-color: $primary !important;
+    border-color: $primary  !important;
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(116,186,88, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E") !important;
 }
 
 .navbar-toggler {
-    border-color: $primary !important;
+    border-color: $primary  !important;
 }
 
 .navbar-toggler:focus {
