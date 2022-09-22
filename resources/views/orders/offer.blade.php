@@ -95,7 +95,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="text-center" id="recapDiskspace">
+                            <tr class="text-center bg-white" id="recapDiskspace">
                                 <td style="vertical-align:middle">
                                     <div class="d-flex flex-column align-items-center justify-content-center">
                                         <span id="recapLevel" class="fs-3 fw-bolder">Standard</span>
