@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\Auth\ProfilViewController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ServiceController;
 use App\Services\ComparePasswordAndChangeEmailController;
 use Illuminate\Http\Request;
@@ -81,6 +82,8 @@ Route::group([
         Route::get('access', function () { return view('access.index'); })->name('access.index');
     });
     Route::post('cart', [CartController::class, 'addToCart'])->name('cart.store');
+
+    Route::get('order/create', 'App\Http\Controllers\OrderController@create2')->name('order.create');
 
     Route::get('services', function () { return view('services.index'); })->name('services.index');
     Route::post('serviceUpdate', 'App\Http\Controllers\ServiceController@serviceUpdate')->name('serviceUpdate');
