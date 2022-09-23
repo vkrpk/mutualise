@@ -9,7 +9,7 @@
         <div class="card border-secondary">
             <div class="card-body d-flex flex-column align-middle">
                 {{-- INPUT --}}
-                @include('orders.form.boxFreeTrial')
+                @include('offers.form.boxFreeTrial')
                 {{-- INPUT --}}
             </div>
         </div>
@@ -22,7 +22,7 @@
     </div>
     {{-- TABLEAU COMPARATIF --}}
     <div class="mb-4 mx-2 mx-sm-0">
-        @include('orders.form.pricingTable')
+        @include('offers.form.pricingTable')
     </div>
     {{-- TABLEAU COMPARATIF --}}
     <div class="row mx-2 mx-sm-0 g-2 m-3">
@@ -132,7 +132,7 @@
                 </div>
             </div>
         </div>
-        @include('orders.form.formButton')
+        @include('offers.form.formButton')
     </div>
 </div>
 @endsection
