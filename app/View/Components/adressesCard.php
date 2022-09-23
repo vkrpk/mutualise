@@ -12,15 +12,17 @@ class adressesCard extends Component
      * @var string
      */
     public $address;
+    public $form;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($address)
+    public function __construct($address, $form)
     {
         $this->address = $address;
+        $this->form = $form;
     }
 
     /**

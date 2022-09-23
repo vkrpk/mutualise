@@ -10,7 +10,7 @@ $session = \Stripe\Checkout\Session::create([
                 'product_data' => [
                     'name' => $item->name,
                 ],
-                'unit_amount' => $price,
+                'unit_amount' => $price*100,
             ],
             'quantity' => 1,
         ],
@@ -20,6 +20,9 @@ $session = \Stripe\Checkout\Session::create([
     'cancel_url' => 'http://localhost:4242/cancel.html',
 ]);
 
+header("HTTP/1.1 303 See Other");
+header("Location: " . $session->url);
+
 @endphp
 
 @push('scripts')
@@ -27,7 +30,7 @@ $session = \Stripe\Checkout\Session::create([
     <script>
         window.onload = function() {
             const stripe = Stripe("{{ env('STRIPE_PUBLIC_KEY') }}");
-            const btn = document.getElementById('createCheckoutSession');
+            const btn = document.getElementById('buttonFormRecapOrder');
 
             btn.addEventListener('click', function(e) {
                 e.preventDefault();

@@ -1,5 +1,7 @@
 @php
-$cartItem = Cart::getContent()->first();
+
+$buttonsRadioForOfferName = $item->attributes->buttonsRadioForOffer != null ? ucfirst(substr($item->attributes->buttonsRadioForOffer, 0, strpos($item->attributes->buttonsRadioForOffer, 'Offer'))) : '';
+
 @endphp
 
 @extends('layouts.app')
@@ -8,11 +10,18 @@ $cartItem = Cart::getContent()->first();
     <div class="container mt-4">
         <div class="row">
             <div class="col">
-                <x-adresses-card :address="$address" />
+                <div class="card mb-4">
+                    <div class="card-header customCardHeader">
+                        <span>Adresse de facturation</span>
+                    </div>
+                    <div class="card-body">
+                        <x-adresses-card :address="$address" :form="'formRecapOrder'"/>
+                    </div>
+                </div>
             </div>
             <div class="col">
                 <div class="card mb-4">
-                    <div class="card-header customCardHeader fw-bolder">
+                    <div class="card-header customCardHeader">
                         <span>Récapitulatif de l'offre</span>
                     </div>
                     <div class="card-body">
@@ -22,9 +31,9 @@ $cartItem = Cart::getContent()->first();
                                     <span class="fst-italic">
                                         <i class="fa-solid fa-circle-arrow-right bg-white text-secondary me-2"></i>Formule
                                         choisie :</span>
-                                    <span>{{ ucfirst($cartItem->attributes->form_level) }}</span>
+                                    <span>{{ ucfirst($item->attributes->form_level) }}</span>
                                 </div>
-                                @if ($cartItem->attributes->buttonsRadioForOffer)
+                                @if ($item->attributes->buttonsRadioForOffer)
                                     <div class="col-12 col-sm-6 ps-1 pe-0">
                                         <span class="fst-italic"><i
                                                 class="fa-solid fa-circle-arrow-right bg-white text-secondary me-2"></i>Option
@@ -32,7 +41,7 @@ $cartItem = Cart::getContent()->first();
                                         <span>{{ $buttonsRadioForOfferName }}</span>
                                     </div>
                                 @endif
-                                @if ($cartItem->attributes->isFreeTrial == true)
+                                @if ($item->attributes->isFreeTrial == true)
                                     <div class="col-12 col-sm-6 ps-1 pe-0">
                                         <span class="fst-italic"><i
                                                 class="fa-solid fa-circle-arrow-right bg-white text-secondary me-2"></i>Option
@@ -43,21 +52,19 @@ $cartItem = Cart::getContent()->first();
                             </div>
                             <div class="row">
                                 <div class="col ps-1 pe-0">
-                                    <span class="fst-italic"><i
-                                            class="fa-solid fa-circle-arrow-right bg-white text-secondary me-2"></i>Espace
+                                    <span class="fst-italic"><i class="fa-solid fa-circle-arrow-right bg-white text-secondary me-2"></i>Espace
                                         disque :</span>
-                                    <span>{{ $cartItem->attributes->form_diskspace . ' Go' }}</span>
+                                    <span>{{ $item->attributes->form_diskspace . ' Go' }}</span>
                                 </div>
                             </div>
 
-                            @if ($cartItem->attributes->form_level === 'dédié')
+                            @if ($item->attributes->form_level === 'dédié')
                                 <div class="row">
                                     <div class="col ps-1 pe-0 d-flex align-item-center">
-                                        <span class="d-flex align-items-center"><i
-                                                class="fa-solid fa-circle-arrow-right bg-white text-secondary me-2"></i></span>
+                                        <span class="d-flex align-items-center"><i class="fa-solid fa-circle-arrow-right bg-white text-secondary me-2"></i></span>
                                         <div>
                                             <span class="fst-italic">Domaine :</span>
-                                            <span>{{ $cartItem->attributes->domainUrlOrPrefix }}</span>
+                                            <span>{{ $item->attributes->domainUrlOrPrefix }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -66,11 +73,11 @@ $cartItem = Cart::getContent()->first();
                     </div>
                     <div class="card-footer d-flex justify-content-between">
                         <span>Total : </span>
-                        <span>{{ $cartItem->price }} € </span>
+                        <span>{{ $price }} € </span>
                     </div>
                 </div>
-                <div class="card">                    
-                    <div class="card-header py-3 fw-bolder customCardHeader">
+                <div class="card mb-4">
+                    <div class="card-header customCardHeader">
                         <span>Conditions de vente</span>
                     </div>
                     <div class="card-body">
@@ -84,37 +91,42 @@ $cartItem = Cart::getContent()->first();
                         <a href="https://labo-drupal.dedikam.com/content/conditions-de-vente" class="text-primary">Lire la suite</a>
                     </div>
                     <div class="card-footer">
-                        <input class="form-check-input" type="checkbox" id="checboxCGU" name="checboxCGU">
+                        <input class="form-check-input" type="checkbox" id="checboxCGU" name="checboxCGU" form="formRecapOrder">
                         <label class="form-check-label" for="checboxCGU"> J'accepte les conditions ci-dessus </label>
                         @error('checboxCGU')
-                            <span class="text-danger">Vous devez accepter les conditions de vente pour continuer.</span>                            
+                            <span class="text-danger">Vous devez accepter les conditions de vente pour continuer.</span>
                         @enderror
-                    </div>                    
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="card rounded-0">
-                <div class="alert alert-secondary fw-bolder mb-1 rounded-0" role="alert"><span>Commentaires concernant la
-                        commande</span></div>
-                <div id="item-5" class=" item-5">
-                    <div class="accordion-body">
-                        <p class="mb-0">Utilisez cette zone pour des instructions spéciales ou des questions
-                            concernant votre commande.<br></p>
-                        <div class="form-floating">
-                            <textarea class="form-control" id="comment" style="height: 6rem;"></textarea><label class="form-label" for="comment">Commentaires
-                                concernant la
-                                commande</label>
-                        </div>
-                        <button id="btn5" class="btn btn-primary mt-2 btn-lg" type="button">Valider</button>
                     </div>
                 </div>
             </div>
-
         </div>
-        <div class="row"></div>
-        <div class="row">
-
+        <div class="row mb-4">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header customCardHeader">
+                        <span>Commentaires concernant votre commande</span>
+                    </div>
+                    <div class="card-body">
+                        <p>Utilisez cette zone pour des instructions spéciales ou des questions concernant votre commande.
+                        </p>
+                        <div class="form-floating">
+                            <textarea class="form-control" id="comment" style="height: 6rem;" form="formRecapOrder"></textarea>
+                            <label class="form-label" for="comment">Commentaires concernant la commande</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+        <div class="row mb-4">
+            <div class="col">
+                <form action="{{route('stripe')}}" method="POST" id="formRecapOrder" name="formRecapOrder" class="d-flex justify-content-center">
+                    @csrf
+                    <input type="hidden" value="{{$price}}" name="price">
+                    <input type="hidden" value="{{$item->id}}" name="itemId">
+                    <button type="submit" class="btn btn-primary btn-lg" id="buttonFormRecapOrder">Valider la commande</button>
+                </form>
+            </div>
+        </div>
+        {{-- @includeWhen($formula !== 'free', 'orders.stripe') --}}
     </div>
 @endsection
