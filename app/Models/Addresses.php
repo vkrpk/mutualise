@@ -15,13 +15,9 @@ class Addresses extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'user_id',
-        'label',
-        'first_name',
-        'last_name',
-        'organization',
-        'address1',
-        'address2',
+        'identifier',
+        'address',
+        'address_complement',
         'postal_code',
         'city',
         'state',

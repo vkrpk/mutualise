@@ -83,7 +83,8 @@ Route::group([
     });
     Route::post('cart', [CartController::class, 'addToCart'])->name('cart.store');
 
-    Route::get('order/create', 'App\Http\Controllers\OrderController@create2')->name('order.create');
+    Route::post('order/create', 'App\Http\Controllers\OrderController@create')->name('order.create');
+    Route::post('stripe', "\App\Http\Controllers\StripeController@stripe")->name('stripe');
 
     Route::get('services', function () { return view('services.index'); })->name('services.index');
     Route::post('serviceUpdate', 'App\Http\Controllers\ServiceController@serviceUpdate')->name('serviceUpdate');

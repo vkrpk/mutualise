@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Addresses;
 use Illuminate\Http\Request;
 use App\Services\StripeService;
@@ -29,27 +30,23 @@ class OrderController extends Controller
             return back();
         }
 
+        $formula = $request->formula;
         $price = 0;
-        switch ($request->formula) {
+        switch ($formula) {
             case 'yearly':
-                $price = ($item->price + 14) * 100;
+                $price = ($item->price + 14);
                 break;
             case 'monthly':
-                $price = ($item->attributes->priceMonthly + 14) * 100;
+                $price = ($item->attributes->priceMonthly + 14);
                 break;
             case 'free':
                 $price = 0;
                 break;
         }
-        return view("orders.create")->with(['item' => $item, 'price' => $price]);
-    }
 
-    public function create2(Request $request)
-    {
         $user = Auth::user();
-        $address = Addresses::where('user_id', $user->id)->first() ?? '';
-        // dd($address);
-        // $route = Route::currentRouteName();
-        return view("orders.create", compact('user', 'address'));
+        $address = User::find($user->id)->address;
+
+        return view("orders.create", compact('item', 'address', 'formula'))->with('price', (int)$price);
     }
 }

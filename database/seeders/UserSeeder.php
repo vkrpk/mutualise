@@ -25,7 +25,8 @@ class UserSeeder extends Seeder
             'role_id' => 1,
             'nb_free_account' => 0,
             'email_verified_at' => Carbon::now(),
-            'avatar' => 'resources/images/users/avatars/admin.png'
+            'avatar' => 'resources/images/users/avatars/admin.png',
+            'address_id' => 1
         ]);
     }
 }
