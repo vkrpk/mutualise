@@ -10,7 +10,7 @@
     <br>Vous pouvez commander jusqu'à 4 accès gratuits. Un accès gratuit correspond à la formule standard.
     <br>Il vous en reste {{ $nbfreeaccount }} actuellement disponible sur votre compte.</p>
     <div class="form-check align-self-center">
-        <input name="isFreeTrial" id="isFreeTrial" class="form-check-input" type="checkbox" {{ $nbfreeaccount==0 ? 'disabled' : '' }} form="formAddToCart">
+        <input name="isFreeTrial" id="isFreeTrial" class="form-check-input" type="checkbox" {{ $nbfreeaccount==0 ? 'disabled' : '' }} form="formAddToCart" autocomplete="off">
         <label class="form-check-label" for="isFreeTrial">Profiter de l'offre</label>
     </div>
 @endauth

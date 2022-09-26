@@ -32,7 +32,7 @@ class OfferController extends Controller
             $nbfree = 4 - $user->nb_free_account;
         }
 
-        return view('orders.offer', [
+        return view('offers.offer', [
             'nbfreeaccount' => $nbfree ?? '',
             'level' => $level ?? null,
             'formDiskspace' => $formDiskspace ?? null,
