@@ -95,8 +95,6 @@
     "Choisissez votre espace disque, tarif affiché en bas de page." : "Choose your diskspace, price displayed on the bottom of the page.",
     "Choix du nom de domaine" : "Please choose a domain name",
     "Privé" : "Private",
-    "Choix du préfixe" : "Please choose a prefix",
-    "Exemple : 'votre-choix'.dedikam.com" : "Example : 'your-choice'.dedikam.com",
     "Récapitulatif de votre commande" : "Order recap",
     "Formule" : "Plan",
     "Espace disque" : "Diskspace",
@@ -114,5 +112,9 @@
     "Nom de l'accès" : "Access name",
     "Basique" : "Basic",
     "Entreprise" : "Business",
-    "Dédié" : "Dedicated"
+    "Dédié" : "Dedicated",
+    "Choix du préfixe" : "Please choose a prefix",
+    "Exemple : 'votre-choix'.dedikam.com" : "Example : 'your-choice'.dedikam.com",
+    "CNAME de type : example-domain.com" : "CNAME-type : example-domain.com",
+    "Nom de votre domaine privé" : "Name of your private domain"
 }

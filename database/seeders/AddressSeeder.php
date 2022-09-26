@@ -19,7 +19,8 @@ class AddressSeeder extends Seeder
             "identifier" => "Michael Bihary",
             "address" => "Default",
             "postal_code" => "75000",
-            "city" => "Paris"
+            "city" => "Paris",
+            "user_id" => 1
         ]);
     }
 }
