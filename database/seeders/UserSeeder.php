@@ -26,7 +26,6 @@ class UserSeeder extends Seeder
             'nb_free_account' => 0,
             'email_verified_at' => Carbon::now(),
             'avatar' => 'resources/images/users/avatars/admin.png',
-            'address_id' => 1
         ]);
     }
 }

@@ -23,6 +23,7 @@ class Addresses extends Model
         'state',
         'country',
         'phone_number',
+        'user_id'
     ];
 
     /**
@@ -31,5 +32,5 @@ class Addresses extends Model
      * @var array<string, string>
      */
     protected $casts = [
-    ];
+    ];  
 }
