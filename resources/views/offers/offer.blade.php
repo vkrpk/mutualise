@@ -56,8 +56,7 @@
                 </div>
             </div>
             <div>
-                <span style="font-size: 11px; opacity: 0.8">{{__("Trafic illimité - Bande passante : 500 Mbit/s à 1Gbit/s, au
-                    dessus de 5 000Go, veuillez nous")}}
+                <span style="font-size: 11px; opacity: 0.8">{{__("Trafic illimité - Bande passante : 500 Mbit/s à 1Gbit/s, au dessus de 5 000Go, veuillez nous")}}
                     <a class="text-primary" href="https://www.dedikam.com/contact/" target="_blank">{{__("contacter")}}</a>.
                 </span>
             </div>
@@ -176,7 +175,21 @@ window.onload = function () {
                 } else {
                     boxPricePerMonth.classList.contains("d-none") ? "" : boxPricePerMonth.classList.toggle("d-none");
                 }
-                recapLevel.innerHTML = offer.charAt(0).toUpperCase() + offer.slice(1);
+                switch (offer.charAt(0).toUpperCase() + offer.slice(1)) {
+                    case "Basique":
+                        recapLevel.innerHTML = '{{__("Basique")}}'
+                        break;
+                    case "Entreprise":
+                        recapLevel.innerHTML = '{{__("Entreprise")}}'
+                        break;
+                    case "Dédié":
+                        recapLevel.innerHTML = '{{__("Dédié")}}'
+                        break;
+                
+                    default:
+                        recapLevel.innerHTML = "Standard"
+                        break;
+                }
                 recapDiskspaceGo.innerHTML = value + " Go";
                 recapDiskspaceGio.innerHTML = Math.round(100 * value / 1.074) / 100 + " Gio";
                 if(inputIsFreeTrial.checked) {
@@ -325,11 +338,11 @@ window.onload = function () {
 
     function switchTextDomainUrlOrPrefixDisplay () {
         if(document.querySelector('input[name="domainType"]:checked').value == "dedikam") {
-            boxDomainUrlOrPrefix.querySelector("span").innerHTML = 'Exemple : "votre-choix".dedikam.com'
-            boxDomainUrlOrPrefix.querySelector("label").innerHTML = "Choix de votre préfixe"
+            boxDomainUrlOrPrefix.querySelector("span").innerHTML = '{{__("Exemple : 'votre-choix'.dedikam.com")}}'
+            boxDomainUrlOrPrefix.querySelector("label").innerHTML = '{{__("Choix du préfixe")}}'
         } else {
-            boxDomainUrlOrPrefix.querySelector("span").innerHTML = "CNAME de type : example-domain.com"
-            boxDomainUrlOrPrefix.querySelector("label").innerHTML = "Nom de votre domaine privé"
+            boxDomainUrlOrPrefix.querySelector("span").innerHTML = '{{__("CNAME de type : example-domain.com")}}'
+            boxDomainUrlOrPrefix.querySelector("label").innerHTML = '{{__("Nom de votre domaine privé")}}'
         }
     }
 

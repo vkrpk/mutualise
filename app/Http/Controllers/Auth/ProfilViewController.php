@@ -14,7 +14,7 @@ class ProfilViewController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $address = User::find($user->id)->address;
+        $address = Addresses::where("user_id", $user->id)->first();
         $route = Route::currentRouteName();
         return view('auth.profil.index', compact('user', 'route', 'address'));
     }
