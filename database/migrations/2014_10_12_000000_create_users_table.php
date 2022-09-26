@@ -20,8 +20,6 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('avatar')->default('resources/images/users/avatars/default.png');
-            // $table->foreign('id')->references('address_id')->on('addresses')->nullable(true)->cascadeOnDelete();
-            $table->foreignId('address_id')->constrained('addresses');
             $table->rememberToken();
             $table->timestamps();
         });

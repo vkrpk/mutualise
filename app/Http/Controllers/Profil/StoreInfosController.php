@@ -21,12 +21,13 @@ class StoreInfosController extends Controller {
             'city' => ['required', 'string', 'max:100'],
             'state' => ['string', 'max:60', 'nullable'],
             'country' => ['string', 'max:60', 'nullable'],
-            'phone_number' => ['string', 'max:60', 'nullable'],
+            'phone_number' => ['string', 'max:60', 'nullable'],         
         ]);
 
         Addresses::updateOrCreate(
-            ['id' => $user->address->id],
+            ['user_id' => $user->id],
             [
+                // 'user_id' => $user->id,
                 'identifier' => $request->identifier,
                 'address' => $request->address,
                 'address_complement' => $request->address_complement,

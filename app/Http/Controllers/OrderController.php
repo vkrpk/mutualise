@@ -45,7 +45,7 @@ class OrderController extends Controller
         }
 
         $user = Auth::user();
-        $address = User::find($user->id)->address;
+        $address = Addresses::where("user_id", $user->id)->first();
 
         return view("orders.create", compact('item', 'address', 'formula'))->with('price', (int)$price);
     }
