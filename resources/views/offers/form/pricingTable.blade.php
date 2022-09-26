@@ -1,9 +1,9 @@
 <div class="pricingTable">
     <div class="blank"></div>
-    <a class="Basique pricingHeader w-100 col1 text-center" offer="basique">Basique</a>
+    <a class="Basique pricingHeader w-100 col1 text-center" offer="basique">{{__("Basique")}}</a>
     <a class="Standard pricingHeader w-100 col2 text-center" offer="standard">Standard</a>
-    <a class="Entreprise pricingHeader w-100 col3 text-center" offer="entreprise">Entreprise</a>
-    <a class="Dedie pricingHeader w-100 col4 text-center" offer="dédié">Dédié</a>
+    <a class="Entreprise pricingHeader w-100 col3 text-center" offer="entreprise">{{__("Entreprise")}}</a>
+    <a class="Dedie pricingHeader w-100 col4 text-center" offer="dédié">{{__("Dédié")}}</a>
     <div class="Pydio pricingReference">Pydio</div>
     <div class="Seafile pricingReference">Seafile</div>
     <div class="Nextcloud pricingReference">Nextcloud</div>

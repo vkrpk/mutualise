@@ -2,7 +2,7 @@
 <div class="row gx-3 mb-3">
     <!-- Form Group (first name)-->
     <div class="col-md-12">
-        <label class="small mb-1" for="identifier">Nom complet ou nom de l'entreprise<sup><i class="fa-solid fa-asterisk" style="font-size: 8px;color: red;margin-top: -14px;"></i></sup></label>
+        <label class="small mb-1" for="identifier">{{__("Nom complet ou nom de l'entreprise")}}<sup><i class="fa-solid fa-asterisk" style="font-size: 8px;color: red;margin-top: -14px;"></i></sup></label>
         <input {!! $form ? "form=$form" : "" !!} class="form-control" id="first_name" type="text" placeholder="" value="{{ old('identifier') ? old('identifier') : $address->identifier ?? '' }}" name="identifier">
     </div>
     <!-- Form Group (last name)-->
