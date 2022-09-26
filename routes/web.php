@@ -85,11 +85,11 @@ Route::group([
 
     Route::post('order/create', 'App\Http\Controllers\OrderController@create')->name('order.create');
     Route::post('stripe', "\App\Http\Controllers\StripeController@stripe")->name('stripe');
+    Route::post('success', "\App\Http\Controllers\StripeController@success")->name('stripe.success');
 
     Route::get('services', function () { return view('services.index'); })->name('services.index');
     Route::post('serviceUpdate', 'App\Http\Controllers\ServiceController@serviceUpdate')->name('serviceUpdate');
 
     Route::get('profil/security/email-change-verify', 'App\Http\Controllers\Profil\ChangeEmailController@verify')->name('user.email-change-verify');
-    Route::post('profil/security/email-change', 'App\Http\Controllers\Profil\ChangeEmailController@change')->name('user.email-change');
-
+    Route::post('profil/security/email-change', 'App\Http\Controllers\Profil\ChangeEmailController@change')->name('user.email-change');    
 });

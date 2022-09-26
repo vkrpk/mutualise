@@ -9,12 +9,14 @@ use App\Models\Addresses;
 use Darryldecode\Cart\Cart;
 use Illuminate\Http\Request;
 use Stripe\Checkout\Session;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 
 class StripeController extends Controller
 {
     public function stripe(Request $request)
     {
+        // dd($request->all());
         $request->merge(['price' => (int)$request->price]);
 
         $user = User::find(Auth::user()->id);
@@ -31,7 +33,8 @@ class StripeController extends Controller
             'checboxCGU' => ['accepted'],
             'comment' => ['string', 'max:1000', 'nullable'],
             'price' => ['required', 'integer'],
-            'itemId' => ['required', 'string']
+            'itemId' => ['required', 'string'],
+            'formula' => ['required', Rule::in(['monthly', 'yearly', 'free'])],
         ]);
 
         Addresses::updateOrCreate(
@@ -48,28 +51,98 @@ class StripeController extends Controller
             ]
         );
 
-
         \Stripe\Stripe::setApiKey(env('APP_ENV') === 'production' ? env('STRIPE_SECRET_KEY_PROD') : env('STRIPE_SECRET_KEY_DEV'));
-        $item = \Cart::get($request->itemId);
-        $session = \Stripe\Checkout\Session::create([
-            'line_items' => [
-                [
-                    'price_data' => [
-                        'currency' => 'eur',
-                        'product_data' => [
-                            'name' => $item->name,
-                        ],
-                        'unit_amount' => $request->price * 100,
-                    ],
-                    'quantity' => 1,
-                ],
-            ],
-            'mode' => 'payment',
-            'success_url' => 'http://localhost:4242/success.html',
-            'cancel_url' => 'http://localhost:4242/cancel.html',
-        ]);
 
-        dd($session);
+        $stripe = new \Stripe\StripeClient(
+            'sk_test_51LkoMCDcQMHfpUQVejZ0i8QRL7jmdAZRTzXipI1hOZ9HGMYAkWcyBOvvnem3byz9GWIkHVvEbUtkSOoFbCNF5ney00owRByo69'
+        );
+
+        if ($user->stripe_id === null) {
+
+            $customer = $stripe->customers->create([
+                'description' => 'Je suis un client test',
+                'email' => $user->email,
+            ]);
+        } else {
+
+            $customer = $stripe->customer->retrieve([
+                $user->stripe_id, []
+            ]);
+        }
+
+        // dd($customer->id);
+
+        $item = \Cart::get($request->itemId);
+
+        if ($request->formula === 'yearly') {
+
+            $session = \Stripe\Checkout\Session::create([
+                'customer' => $customer->id,
+                'client_reference_id' => $user->id,
+                // 'customer_details' => [
+                //     "email" => "user@exmaple.org"
+                // ],
+                'payment_method_types' => ['card'],
+                'line_items' => [
+                    [
+                        'price_data' => [
+                            'currency' => 'eur',
+                            'product_data' => [
+                                'name' => $item->name,
+                            ],
+                            'unit_amount' => $request->price * 100,
+                        ],
+                        'quantity' => 1,
+                    ],
+                ],
+                'mode' => 'payment',
+                'success_url' => 'http://laravel-9.test',
+                'cancel_url' => 'http://localhost:4242/cancel.html',
+            ]);
+        } elseif ($request->formula === 'monthly') {
+
+            $subscription = Stripe\SubscriptionSchedule::create([
+                'customer' => "",
+                'start_date' => 'now',
+                'end_behaviour' => 'cancel',
+                'phases' => [
+                    [
+                        'items' => [
+                            'price' => ($request->price + 14) * 100,
+                            'quantity' => 1,
+                        ],
+                    ],
+                    'iterations' => 1,
+                ],
+                [
+                    [
+                        'items' => [
+                            'price' => $request->price * 100,
+                            'quantity' => 1,
+                        ],
+                    ],
+                    'iterations' => 11,
+                ],
+            ]);
+        } else {
+            //
+        }
+        // dd($session);
         return redirect($session->url);
+    }
+
+    public function success(Request $request)
+    {
+        $stripe = new \Stripe\StripeClient(
+            'sk_test_51LkoMCDcQMHfpUQVejZ0i8QRL7jmdAZRTzXipI1hOZ9HGMYAkWcyBOvvnem3byz9GWIkHVvEbUtkSOoFbCNF5ney00owRByo69'
+        );
+
+        // $customer = $stripe->customers->retrieve($request['data']['object']['customer']);
+
+        $user = User::where('email', "admin@email.com")->first();
+        $user->stripe_id = "Truc_au_pif";
+        $user->save();
+
+        return ('ok');
     }
 }

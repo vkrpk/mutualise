@@ -123,10 +123,10 @@ $buttonsRadioForOfferName = $item->attributes->buttonsRadioForOffer != null ? uc
                     @csrf
                     <input type="hidden" value="{{$price}}" name="price">
                     <input type="hidden" value="{{$item->id}}" name="itemId">
+                    <input type="hidden" value="{{$formula}}" name="formula">
                     <button type="submit" class="btn btn-primary btn-lg" id="buttonFormRecapOrder">Valider la commande</button>
                 </form>
             </div>
         </div>
-        {{-- @includeWhen($formula !== 'free', 'orders.stripe') --}}
     </div>
 @endsection
