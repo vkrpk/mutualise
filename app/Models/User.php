@@ -21,7 +21,8 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
         'name',
         'email',
         'password',
-        'avatar'
+        'avatar',
+        'address_id'
     ];
 
     /**
@@ -51,5 +52,10 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
     public function isAdmin()
     {
         return $this->role_id == 1 ? true : false;
+    }
+
+    public function address()
+    {
+        return $this->hasOne("App\Models\Addresses", "id");
     }
 }

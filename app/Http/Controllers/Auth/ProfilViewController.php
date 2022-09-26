@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\User;
 use App\Models\Addresses;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -13,10 +14,11 @@ class ProfilViewController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $address = Addresses::where('user_id', $user->id)->first() ?? '';
+        $address = User::find($user->id)->address;
         $route = Route::currentRouteName();
         return view('auth.profil.index', compact('user', 'route', 'address'));
     }
+
     public function billing()
     {
         $route = Route::currentRouteName();
