@@ -27,7 +27,6 @@ class StoreInfosController extends Controller {
         Addresses::updateOrCreate(
             ['user_id' => $user->id],
             [
-                // 'user_id' => $user->id,
                 'identifier' => $request->identifier,
                 'address' => $request->address,
                 'address_complement' => $request->address_complement,
