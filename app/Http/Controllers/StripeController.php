@@ -35,7 +35,7 @@ class StripeController extends Controller
         ]);
 
         Addresses::updateOrCreate(
-            ['id' => $user->address->id],
+            ['user_id' => $user->id],
             [
                 'identifier' => $request->identifier,
                 'address' => $request->address,
@@ -69,6 +69,7 @@ class StripeController extends Controller
             'cancel_url' => 'http://localhost:4242/cancel.html',
         ]);
 
+        dd($session);
         return redirect($session->url);
     }
 }
