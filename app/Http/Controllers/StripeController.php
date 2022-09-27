@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Stripe\Checkout\Session;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 
 class StripeController extends Controller
 {
@@ -68,6 +69,7 @@ class StripeController extends Controller
                 'description' => 'Je suis un client test',
                 'email' => $user->email,
             ]);
+
         } else {
 
             $customer = $this->stripe->customers->retrieve($user->stripe_id);
@@ -75,11 +77,45 @@ class StripeController extends Controller
 
         $item = \Cart::get($request->itemId);
 
-        if ($request->formula === 'yearly') {
+        if ($request->formula === 'monthly') {
 
             $session = \Stripe\Checkout\Session::create([
                 'customer' => $customer->id,
-                'client_reference_id' => $user->id,
+                'payment_method_types' => ['card'],
+                'line_items' => [
+                    [
+                        'price' => $this->stripe->prices->create([
+                            'unit_amount' => $request->price * 100,
+                            'currency' => 'eur',
+                            'recurring' => ['interval' => 'month'],
+                            'product_data' => [
+                                'name' => $item->name,
+                            ],
+                        ]),
+                        'quantity' => 1
+                    ],
+                    [
+                        'price_data' => [
+                            'currency' => 'eur',
+                            'product_data' => [
+                                'name' => "Adhesion association",
+                            ],
+                            'unit_amount' => 1400,
+                        ],
+                        'quantity' => 1,
+                    ],
+                ],
+                'mode' => 'subscription',
+                'success_url' => 'http://laravel-9.test',
+                'cancel_url' => 'http://localhost:4242/cancel.html',
+                
+                
+            ]);
+
+        } elseif ($request->formula === 'yearly') {
+
+            $session = \Stripe\Checkout\Session::create([
+                'customer' => $customer->id,
                 'payment_method_types' => ['card'],
                 'line_items' => [
                     [
@@ -88,42 +124,30 @@ class StripeController extends Controller
                             'product_data' => [
                                 'name' => $item->name,
                             ],
-                            'unit_amount' => $request->price * 100,
+                            'unit_amount' => ($request->price) * 100,
+                        ],
+                        'quantity' => 1,
+                    ],
+                    [
+                        'price_data' => [
+                            'currency' => 'eur',
+                            'product_data' => [
+                                'name' => "Adhesion association",
+                            ],
+                            'unit_amount' => 1400,
                         ],
                         'quantity' => 1,
                     ],
                 ],
                 'mode' => 'payment',
-                'success_url' => 'http://laravel-9.test',
+                'success_url' => 'http://laravel-9.test/order/store?session_id={CHECKOUT_SESSION_ID}',
                 'cancel_url' => 'http://localhost:4242/cancel.html',
             ]);
-        } elseif ($request->formula === 'monthly') {
 
-            $subscription = Stripe\SubscriptionSchedule::create([
-                'customer' => "",
-                'start_date' => 'now',
-                'end_behaviour' => 'cancel',
-                'phases' => [
-                    [
-                        'items' => [
-                            'price' => ($request->price + 14) * 100,
-                            'quantity' => 1,
-                        ],
-                    ],
-                    'iterations' => 1,
-                ],
-                [
-                    [
-                        'items' => [
-                            'price' => $request->price * 100,
-                            'quantity' => 1,
-                        ],
-                    ],
-                    'iterations' => 11,
-                ],
-            ]);
-        } else {
-            //
+        } elseif ($request->formula === 'free') {
+
+            // Créer session gratuite + update BDD
+
         }
 
         return redirect($session->url);
@@ -131,16 +155,10 @@ class StripeController extends Controller
 
     public function success(Request $request)
     {
-        if ($request->type === 'charge.succeded') {
-            try {
-                $customer = $this->stripe->customers->retrieve($request['data']['object']['customer']);
-
-                $user = User::where('email', $customer->email)->first();
-                $user->stripe_id = $customer->id;
-                
-            } catch (\Exception $e) {
-                return $e->getMessage();
-            }
-        }
+        $customer = $this->stripe->customers->retrieve($request['data']['object']['customer']);
+        
+        $user = User::where('email', $customer->email)->first();
+        $user->stripe_id = $customer->id;
+        $user->save();
     }
 }

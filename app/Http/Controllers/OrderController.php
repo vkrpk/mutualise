@@ -34,10 +34,10 @@ class OrderController extends Controller
         $price = 0;
         switch ($formula) {
             case 'yearly':
-                $price = ($item->price + 14);
+                $price = ($item->price);
                 break;
             case 'monthly':
-                $price = ($item->attributes->priceMonthly + 14);
+                $price = ($item->attributes->priceMonthly);
                 break;
             case 'free':
                 $price = 0;
@@ -48,5 +48,18 @@ class OrderController extends Controller
         $address = Addresses::where("user_id", $user->id)->first();
 
         return view("orders.create", compact('item', 'address', 'formula'))->with('price', $price);
+    }
+
+    public function store(Request $request){
+
+        \Stripe\Stripe::setApiKey(env('APP_ENV') === 'production' ? env('STRIPE_SECRET_KEY_PROD') : env('STRIPE_SECRET_KEY_DEV'));
+
+        $session = \Stripe\Checkout\Session::retrieve($request->get('session_id'));
+        $customer = \Stripe\Customer::retrieve($session->customer);
+
+        // dd($customer, $session);
+        \Cart::clear();
+      
+        return redirect()->route('home');
     }
 }
