@@ -14,9 +14,18 @@ use Illuminate\Support\Facades\Auth;
 
 class StripeController extends Controller
 {
+
+    public $stripe;
+
+    public function __construct()
+    {
+        $this->stripe = new \Stripe\StripeClient(
+            env('APP_ENV') === 'production' ? env('STRIPE_SECRET_KEY_PROD') : env('STRIPE_SECRET_KEY_DEV')
+        );
+    }
+
     public function stripe(Request $request)
     {
-        // dd($request->all());
         $request->merge(['price' => (int)$request->price]);
 
         $user = User::find(Auth::user()->id);
@@ -53,24 +62,16 @@ class StripeController extends Controller
 
         \Stripe\Stripe::setApiKey(env('APP_ENV') === 'production' ? env('STRIPE_SECRET_KEY_PROD') : env('STRIPE_SECRET_KEY_DEV'));
 
-        $stripe = new \Stripe\StripeClient(
-            'sk_test_51LkoMCDcQMHfpUQVejZ0i8QRL7jmdAZRTzXipI1hOZ9HGMYAkWcyBOvvnem3byz9GWIkHVvEbUtkSOoFbCNF5ney00owRByo69'
-        );
-
         if ($user->stripe_id === null) {
 
-            $customer = $stripe->customers->create([
+            $customer = $this->stripe->customers->create([
                 'description' => 'Je suis un client test',
                 'email' => $user->email,
             ]);
         } else {
 
-            $customer = $stripe->customer->retrieve([
-                $user->stripe_id, []
-            ]);
+            $customer = $this->stripe->customers->retrieve($user->stripe_id);
         }
-
-        // dd($customer->id);
 
         $item = \Cart::get($request->itemId);
 
@@ -79,9 +80,6 @@ class StripeController extends Controller
             $session = \Stripe\Checkout\Session::create([
                 'customer' => $customer->id,
                 'client_reference_id' => $user->id,
-                // 'customer_details' => [
-                //     "email" => "user@exmaple.org"
-                // ],
                 'payment_method_types' => ['card'],
                 'line_items' => [
                     [
@@ -127,22 +125,22 @@ class StripeController extends Controller
         } else {
             //
         }
-        // dd($session);
+
         return redirect($session->url);
     }
 
     public function success(Request $request)
     {
-        $stripe = new \Stripe\StripeClient(
-            'sk_test_51LkoMCDcQMHfpUQVejZ0i8QRL7jmdAZRTzXipI1hOZ9HGMYAkWcyBOvvnem3byz9GWIkHVvEbUtkSOoFbCNF5ney00owRByo69'
-        );
+        if ($request->type === 'charge.succeded') {
+            try {
+                $customer = $this->stripe->customers->retrieve($request['data']['object']['customer']);
 
-        // $customer = $stripe->customers->retrieve($request['data']['object']['customer']);
-
-        $user = User::where('email', "admin@email.com")->first();
-        $user->stripe_id = "Truc_au_pif";
-        $user->save();
-
-        return ('ok');
+                $user = User::where('email', $customer->email)->first();
+                $user->stripe_id = $customer->id;
+                
+            } catch (\Exception $e) {
+                return $e->getMessage();
+            }
+        }
     }
 }
