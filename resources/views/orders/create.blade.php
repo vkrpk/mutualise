@@ -1,7 +1,7 @@
 @php
-
-$buttonsRadioForOfferName = $item->attributes->buttonsRadioForOffer != null ? ucfirst(substr($item->attributes->buttonsRadioForOffer, 0, strpos($item->attributes->buttonsRadioForOffer, 'Offer'))) : '';
-
+    $address = \App\Models\Addresses::where("user_id", Auth::id())->first();
+    $item = \Cart::get($cartItemId);
+    $buttonsRadioForOfferName = $item->attributes->buttonsRadioForOffer != null ? ucfirst(substr($item->attributes->buttonsRadioForOffer, 0, strpos($item->attributes->buttonsRadioForOffer, 'Offer'))) : '';
 @endphp
 
 @extends('layouts.app')
@@ -73,7 +73,7 @@ $buttonsRadioForOfferName = $item->attributes->buttonsRadioForOffer != null ? uc
                     </div>
                     <div class="card-footer d-flex justify-content-between">
                         <span>Total : </span>
-                        <span>{{ $price }} € </span>
+                        <span>{{ $formula_period === 'yearly' ? $item->price : $item->attributes->priceMonthly }} € </span>
                     </div>
                 </div>
                 <div class="card mb-4">
@@ -110,7 +110,7 @@ $buttonsRadioForOfferName = $item->attributes->buttonsRadioForOffer != null ? uc
                         <p>Utilisez cette zone pour des instructions spéciales ou des questions concernant votre commande.
                         </p>
                         <div class="form-floating">
-                            <textarea class="form-control" id="comment" style="height: 6rem;" form="formRecapOrder"></textarea>
+                            <textarea class="form-control" id="comment" style="height: 6rem;" form="formRecapOrder" name="comment"></textarea>
                             <label class="form-label" for="comment">Commentaires concernant la commande</label>
                         </div>
                     </div>
@@ -121,9 +121,8 @@ $buttonsRadioForOfferName = $item->attributes->buttonsRadioForOffer != null ? uc
             <div class="col">
                 <form action="{{route('stripe')}}" method="POST" id="formRecapOrder" name="formRecapOrder" class="d-flex justify-content-center">
                     @csrf
-                    <input type="hidden" value="{{$price}}" name="price">
-                    <input type="hidden" value="{{$item->id}}" name="itemId">
-                    <input type="hidden" value="{{$formula}}" name="formula">
+                    <input type="hidden" value="{{$cartItemId}}" name="cartItemId">
+                    <input type="hidden" value="{{$formula_period}}" name="formula_period">
                     <button type="submit" class="btn btn-primary btn-lg" id="buttonFormRecapOrder">Valider la commande</button>
                 </form>
             </div>
