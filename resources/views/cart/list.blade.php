@@ -156,7 +156,7 @@
                             </form>
                             <form action="{{ route('order.create') }}" method="POST" id="formOrder">
                                 <input type="hidden" autocomplete='off' id="hiddenCartItemId" name="cartItemId">
-                                <input type="hidden" autocomplete='off' id="hiddenFormula" name="formula">
+                                <input type="hidden" autocomplete='off' id="hiddenFormula" name="formula_period">
                                 @csrf
                             </form>
                         </div>

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('avatar')->default('resources/images/users/avatars/default.png');
             $table->string('stripe_id')->nullable();
+            $table->boolean('is_adherent')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });
