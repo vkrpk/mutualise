@@ -18,8 +18,9 @@ class DatabaseSeeder extends Seeder
             RolesTableSeeder::class,
             UserSeeder::class,
             AddressSeeder::class,
+            CouponSeeder::class,
             ServiceSeeder::class,
-            FormulaSeeder::class
+            FormulaSeeder::class,
         ]);
     }
 }

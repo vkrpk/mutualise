@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Services\StripeService;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -42,5 +44,22 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('endisNotAdmin', function() {
             return "<?php endif; ?>";
         });
+
+        try {
+            $stripe = new \Stripe\StripeClient(
+                env('APP_ENV') === 'production' ? env('STRIPE_SECRET_KEY_PROD') : env('STRIPE_SECRET_KEY_DEV')
+            );
+            
+            if(count($stripe->webhookEndpoints->all()['data']) === 0){
+                $webhook = $this->stripe->webhookEndpoints->create([
+                    'url' => 'http://laravel-9.test/success',
+                    'enabled_events' => [
+                        'charge.succeeded',
+                    ],
+                ]);
+            }
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
     }
 }
