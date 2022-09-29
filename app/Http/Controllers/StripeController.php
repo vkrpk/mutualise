@@ -76,7 +76,7 @@ class StripeController extends Controller
         ]);
 
         if($validator->fails()){
-            return redirect(route('profil.index'), 307)->withErrors($validator);
+            return redirect(route('order.create'), 307)->withErrors($validator)->withInput();
         }
 
         Addresses::updateOrCreate(
