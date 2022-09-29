@@ -1,4 +1,5 @@
 <?php
+
 // require 'vendor/autoload.php';
 
 namespace App\Http\Controllers;
@@ -22,10 +23,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Cookie\SessionCookieJar;
 use Illuminate\Support\Facades\Session as SessionBrowser;
+use Illuminate\Support\Facades\Validator;
 
 class StripeController extends Controller
 {
-
     public $stripe;
 
     public function __construct()
@@ -35,9 +36,10 @@ class StripeController extends Controller
         );
     }
 
-    public function initWebhook(){
+    public function initWebhook()
+    {
         try {
-            if(count($this->stripe->webhookEndpoints->all()['data']) === 0){
+            if (count($this->stripe->webhookEndpoints->all()['data']) === 0) {
                 $webhook = $this->stripe->webhookEndpoints->create([
                     'url' => 'http://laravel-9.test/success',
                     'enabled_events' => [
@@ -58,7 +60,7 @@ class StripeController extends Controller
 
         $user = User::find(Auth::user()->id);
 
-        $request->validate([
+        $validator = Validator::make($request->all(), [  
             'address.identifier' => ['required', 'string', 'max:60'],
             'address.address' => ['required', 'string', 'max:255'],
             'address.address_complement' => ['string', 'max:100', 'nullable'],
@@ -70,7 +72,15 @@ class StripeController extends Controller
             'checboxCGU' => ['accepted'],
             'comment' => ['string', 'max:1000', 'nullable'],
             'cartItemId' => ['required', 'string'],
-            'formula_period' => ['required', Rule::in(['yearly', 'monthly', 'free'])]
+            'formula_period' => ['required', Rule::in(['yearly', 'monthly', 'free'])]   
+        ]);
+
+        if($validator->fails()){
+            return redirect(route('order.create'), 307)->withErrors($validator);
+        }
+
+        $request->validate([
+            
         ]);
 
         Addresses::updateOrCreate(
@@ -90,20 +100,27 @@ class StripeController extends Controller
         \Stripe\Stripe::setApiKey(env('APP_ENV') === 'production' ? env('STRIPE_SECRET_KEY_PROD') : env('STRIPE_SECRET_KEY_DEV'));
 
         if ($user->stripe_id === null) {
-
             $customer = $this->stripe->customers->create([
                 'description' => $user->identifier,
                 'email' => $user->email,
             ]);
         } else {
-
             $customer = $this->stripe->customers->retrieve($user->stripe_id);
         }
 
         $item = \Cart::get($request->cartItemId);
+        $lineItemSubscription = [
+            'price_data' => [
+                'currency' => 'eur',
+                'product_data' => [
+                    'name' => "Adhesion association",
+                ],
+                'unit_amount' => 1400,
+            ],
+            'quantity' => 1,
+        ];
 
         if ($request->formula_period === 'monthly') {
-
             $session = \Stripe\Checkout\Session::create([
                 'customer' => $customer->id,
                 'payment_method_types' => ['card'],
@@ -119,25 +136,21 @@ class StripeController extends Controller
                         ]),
                         'quantity' => 1
                     ],
-                    [
-                        'price_data' => [
-                            'currency' => 'eur',
-                            'product_data' => [
-                                'name' => "Adhesion association",
-                            ],
-                            'unit_amount' => 1400,
-                        ],
-                        'quantity' => 1,
-                    ],
+                    $user->is_adherent ? [] : $lineItemSubscription
                 ],
                 'mode' => 'subscription',
-                'success_url' => route('order.store'),
+                'metadata' => [
+                    'comment' => $request->comment,
+                    'formula_period' => $request->formula_period,
+                    'address' => json_encode($request->address),
+                    'member_access' => $item->attributes->buttonsRadioForOffer,
+                    'diskspace' => $item->attributes->form_diskspace,
+                    'formula' => ucfirst($item->attributes->form_level),
+                ],
+                'success_url' => 'http://laravel-9.test/order/store',
                 'cancel_url' => 'http://localhost:4242/cancel.html',
-
-
             ]);
-        } elseif ($request->formula_period === 'yearly') {          
-
+        } elseif ($request->formula_period === 'yearly') {
             $session = \Stripe\Checkout\Session::create([
                 'customer' => $customer->id,
                 'payment_method_types' => ['card'],
@@ -152,16 +165,7 @@ class StripeController extends Controller
                         ],
                         'quantity' => 1,
                     ],
-                    [
-                        'price_data' => [
-                            'currency' => 'eur',
-                            'product_data' => [
-                                'name' => "Adhesion association",
-                            ],
-                            'unit_amount' => 1400,
-                        ],
-                        'quantity' => 1,
-                    ],
+                    $user->is_adherent ? [] : $lineItemSubscription
                 ],
                 'mode' => 'payment',
                 'metadata' => [
@@ -194,18 +198,13 @@ class StripeController extends Controller
     public function success(Request $request)
     {
         if ($request->type === "charge.succeeded") {
-
             try {
                 \Stripe\Stripe::setApiKey(env('APP_ENV') === 'production' ? env('STRIPE_SECRET_KEY_PROD') : env('STRIPE_SECRET_KEY_DEV'));
 
                 $paymentIntent = $request['data']['object']['payment_intent'];
                 $session = $this->stripe->checkout->sessions->all(['payment_intent' => $paymentIntent])->first();
                 $customer = \Stripe\Customer::retrieve($session->customer);
-
-
                 $user = User::where('email', $customer->email)->first();
-                $user->stripe_id = $customer->id;
-                $user->save();
 
                 $address = json_decode($session->metadata->address);
 
@@ -238,12 +237,14 @@ class StripeController extends Controller
                     'comment' => $session->metadata->comment,
                     'status' => $request['data']['object']['status'],
                 ]);
+                $user->stripe_id = $customer->id;
+                $user->is_adherent = true;
+                $user->save();
             } catch (\Exception $e) {
                 return $e->getMessage();
             }
         } elseif ($request->type === "free") {
             try {
-
                 $address = json_decode($request->address);
 
                 $orderAddress = new OrderAddress();

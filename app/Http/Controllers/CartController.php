@@ -27,12 +27,14 @@ class CartController extends Controller
     }
 
     public function addToCart(Request $request)
-    {
-
-        if (!isset($request->form_diskspace)) {
+    {               
+        if (!isset($request->form_diskspace)) {            
             $request->request->add(['form_diskspace' => 10]);
-            $price = (new CalculAmountController())->calculAmount($request->form_level, $request->form_diskspace, true);
-        } else {
+            $price = (new CalculAmountController())->calculAmount($request->form_level, $request->form_diskspace, true);            
+        } else {          
+            if($request->form_level === 'dédié'){
+                $request->request->set('form_diskspace', $request->sizeValueForDedicatedOffer);              
+            }
             $price = (new CalculAmountController())->calculAmount($request->form_level, $request->form_diskspace);
         }
 

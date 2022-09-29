@@ -4,6 +4,9 @@
     <div class="col-md-12">
         <label class="small mb-1" for="identifier">{{__("Nom complet ou nom de l'entreprise")}}<sup><i class="fa-solid fa-asterisk" style="font-size: 8px;color: red;margin-top: -14px;"></i></sup></label>
         <input {!! $form ? "form=$form" : "" !!} class="form-control" id="first_name" type="text" placeholder="" value="{{ old('identifier') ? old('identifier') : $address->identifier ?? '' }}" name="address[identifier]">
+        @error('address.identifier')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
     </div>
     <!-- Form Group (last name)-->
 </div>
@@ -12,7 +15,7 @@
     <div class="col-md-6">
         <label class="small mb-1" for="address">{{__("Adresse")}}<sup><i class="fa-solid fa-asterisk" style="font-size: 8px;color: red;margin-top: -14px;"></i></sup></label>
         <input {!! $form ? "form=$form" : "" !!} class="form-control" id="address" type="text" placeholder="" value="{{ old('address') ? old('address') : $address->address ?? '' }}" name="address[address]">
-        @error('address')
+        @error('address.address')
             <span class="text-danger">{{ $message }}</span>
         @enderror
     </div>
@@ -27,7 +30,7 @@
     <div class="col-md-6">
         <label class="small mb-1" for="postal_code">{{__("Code postal")}}<sup><i class="fa-solid fa-asterisk" style="font-size: 8px;color: red;margin-top: -14px;"></i></sup></label>
         <input {!! $form ? "form=$form" : "" !!} class="form-control" id="postal_code" type="text" placeholder="" value="{{ old('postal_code') ? old('postal_code') : $address->postal_code ?? '' }}" name="address[postal_code]">
-        @error('postal_code')
+        @error('address.postal_code')
             <span class="text-danger">{{ $message }}</span>
         @enderror
     </div>
@@ -35,7 +38,7 @@
     <div class="col-md-6">
         <label class="small mb-1" for="city">{{__("Ville")}}<sup><i class="fa-solid fa-asterisk" style="font-size: 8px;color: red;margin-top: -14px;"></i></sup></label>
         <input {!! $form ? "form=$form" : "" !!} class="form-control" id="city" type="text" placeholder="" value="{{ old('city') ? old('city') : $address->city ?? '' }}" name="address[city]">
-        @error('city')
+        @error('address.city')
             <span class="text-danger">{{ $message }}</span>
         @enderror
     </div>

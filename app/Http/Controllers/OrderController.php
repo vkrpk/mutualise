@@ -2,21 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Cart;
-use App\Models\User;
-use App\Models\Order;
-use App\Models\Coupon;
-use App\Models\Formula;
-use Carbon\Traits\Date;
-use App\Models\Addresses;
-use App\Models\OrderAddress;
 use Illuminate\Http\Request;
-use App\Models\DedikamAccess;
-use App\Services\StripeService;
 use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Darryldecode\Cart\ItemCollection;
 
 class OrderController extends Controller
 {
@@ -43,10 +30,9 @@ class OrderController extends Controller
         return view("orders.create", compact('cartItemId', 'formula_period'));
     }
 
-    public function store(Request $request)
+    public function store()
     {
         \Cart::clear();
-        // dd(\Cart::getContent());
         return redirect()->route('home');
     }
 }
