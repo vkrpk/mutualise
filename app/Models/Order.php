@@ -30,5 +30,4 @@ class Order extends Model
         'payment_mode',
         'status'
     ];
-
 }

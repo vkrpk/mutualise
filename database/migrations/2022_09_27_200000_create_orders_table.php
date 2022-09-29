@@ -14,23 +14,21 @@ return new class extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {            
-            $table->id(); // id de la session
-            $table->string('payment_intent')->nullable(false);
+            $table->id();
             $table->foreignId('user_id')->constrained("users");
+            $table->string('payment_intent')->nullable(false);
             $table->foreignId('order_address_id')->constrained("order_addresses"); // ! nouvelle teable
             $table->foreignId('formula_id')->constrained("formulas"); // dédié, et cie, autre table
             $table->foreignId('coupon_id')->nullable()->constrained('coupons'); // nouvelle table
             $table->bigInteger('diskspace')->default(10);
             $table->enum('mode', ['payment', 'subscription', 'free'])->nullable(true);
-            $table->enum('member_access', ['Pydio', 'Seafile', 'Nextcloud', 'all'])->nullable(false);
+            $table->enum('member_access', ['Pydio', 'Seafile', 'Nextcloud', 'All'])->nullable(false);
             $table->dateTime('expire')->nullable(true);
             $table->decimal('total_paid')->default(0);
             $table->boolean('includes_adhesion')->default(false);
             $table->text('comment')->nullable(true);
             $table->string('payment_mode')->default('stripe');
-            $table->enum('status', ['cancelled', 'complete', 'pending', 'expired'])->nullable(false)->default('pending');
-            // $table->decimal('coupon_value')->nullable(true);
-            // $table->string('coupon_code', 10)->nullable(true);
+            $table->enum('status', ['cancelled', 'pending', 'expired', 'succeeded'])->nullable(false)->default('pending');
 
             $table->timestamps();
             $table->softDeletes();

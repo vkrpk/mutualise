@@ -8,18 +8,19 @@ use Stripe\Stripe;
 use App\Models\User;
 use App\Models\Order;
 use App\Models\Coupon;
+use GuzzleHttp\Client;
 use App\Models\Formula;
 use App\Models\Addresses;
 use Darryldecode\Cart\Cart;
 use App\Models\OrderAddress;
-use GuzzleHttp\Cookie\CookieJar;
-use GuzzleHttp\Cookie\SessionCookieJar;
 use Illuminate\Http\Request;
 use Stripe\Checkout\Session;
 use Illuminate\Http\Response;
 use Illuminate\Validation\Rule;
+use GuzzleHttp\Cookie\CookieJar;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use GuzzleHttp\Cookie\SessionCookieJar;
 use Illuminate\Support\Facades\Session as SessionBrowser;
 
 class StripeController extends Controller
@@ -34,8 +35,24 @@ class StripeController extends Controller
         );
     }
 
+    public function initWebhook(){
+        try {
+            if(count($this->stripe->webhookEndpoints->all()['data']) === 0){
+                $webhook = $this->stripe->webhookEndpoints->create([
+                    'url' => 'http://laravel-9.test/success',
+                    'enabled_events' => [
+                        'charge.succeeded',
+                    ],
+                ]);
+            }
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
     public function stripe(Request $request)
     {
+        $this->initWebhook();
         $request->merge(['price' => (int)$request->price]);
         $request->merge(['diskspace' => (int)$request->diskspace]);
 
@@ -114,12 +131,12 @@ class StripeController extends Controller
                     ],
                 ],
                 'mode' => 'subscription',
-                'success_url' => 'http://laravel-9.test',
+                'success_url' => route('order.store'),
                 'cancel_url' => 'http://localhost:4242/cancel.html',
 
 
             ]);
-        } elseif ($request->formula_period === 'yearly') {
+        } elseif ($request->formula_period === 'yearly') {          
 
             $session = \Stripe\Checkout\Session::create([
                 'customer' => $customer->id,
@@ -151,66 +168,26 @@ class StripeController extends Controller
                     'comment' => $request->comment,
                     'formula_period' => $request->formula_period,
                     'address' => json_encode($request->address),
-                    'cartItemId' => $item->id
+                    'member_access' => $item->attributes->buttonsRadioForOffer,
+                    'diskspace' => $item->attributes->form_diskspace,
+                    'formula' => ucfirst($item->attributes->form_level),
                 ],
                 'success_url' => 'http://laravel-9.test/order/store',
                 'cancel_url' => 'http://localhost:4242/cancel.html',
             ]);
         } elseif ($request->formula_period === 'free') {
-            // session_start();
-            // $jar = new SessionCookieJar("PHPSESSID", true);
-            // $jar = new CookieJar();
-            // $cookieJar = CookieJar::fromArray($request->cookies->all(), 'laravel-9.test');
-            // $client = new Client();
-            // $response = $client->request('POST', "http://laravel-9.test/success", [
-            //     'json' => [
-            //         'address' => $request->address,
-            //         'type' => "free",
-            //         'user_id' => $user->id,
-            //         'comment' => $request->comment,
-            //         'cartItemId' => $item->id,
-            //         // 'session' => $jar
-            //     ],
-            //     'cookies' => $cookieJar
-            // ]);
-            //
-
-            // login request
-            $cookies = collect($request->cookies->all());
-            // ->keyBy('Name')->map->Value;
-            // dd($cookies->toArray());
-            $response = Http::withCookies($cookies->toArray(), "http://laravel-9.test")->post('http://laravel-9.test/success', [
+            $response = Http::post("http://laravel-9.test/success", [
                 'address' => json_encode($request->address),
                 'type' => "free",
                 'user_id' => $user->id,
                 'comment' => $request->comment,
-                'cartItemId' => $item->id,
+                'member_access' => $item->attributes->buttonsRadioForOffer,
+                'diskspace' => $item->attributes->form_diskspace,
+                'formula' => ucfirst($item->attributes->form_level),
             ]);
 
-            // $response2 = Http::post("http://laravel-9.test/success", [
-            //     'address' => json_encode($request->address),
-            //     'type' => "free",
-            //     'user_id' => $user->id,
-            //     'comment' => $request->comment,
-            //     'cartItemId' => $item->id,
-            //     // 'session' => $jar
-            // ])->c;     
-
-
-            // return redirect()->action(
-            //     'App\Http\Controllers\StripeController@success',
-            //     [
-            //         'address' => json_encode($request->address),
-            //         'type' => "free",
-            //         'user_id' => $user->id,
-            //         'comment' => $request->comment,
-            //         'cartItemId' => $item->id,
-            //     ]
-            // );
-            // dd(SessionBrowser::all());
-            return $response;
+            return redirect()->route('order.store');
         }
-
         return redirect($session->url);
     }
 
@@ -221,96 +198,83 @@ class StripeController extends Controller
             try {
                 \Stripe\Stripe::setApiKey(env('APP_ENV') === 'production' ? env('STRIPE_SECRET_KEY_PROD') : env('STRIPE_SECRET_KEY_DEV'));
 
-                $session = \Stripe\Checkout\Session::retrieve($request->get('session_id'));
+                $paymentIntent = $request['data']['object']['payment_intent'];
+                $session = $this->stripe->checkout->sessions->all(['payment_intent' => $paymentIntent])->first();
                 $customer = \Stripe\Customer::retrieve($session->customer);
+
 
                 $user = User::where('email', $customer->email)->first();
                 $user->stripe_id = $customer->id;
                 $user->save();
 
-                $item = \Cart::get($session->metadata->cartItemId);
-
                 $address = json_decode($session->metadata->address);
 
-                $orderAddress = OrderAddress::create(
-                    [
-                        'identifier' => $address->identifier,
-                        'address' => $address->address,
-                        'address_complement' => $address->address_complement,
-                        'postal_code' => $address->postal_code,
-                        'city' => $address->city,
-                        'state' => $address->state,
-                        'country' => $address->country,
-                        'phone_number' => $address->phone_number,
-                    ]
-                );
+                $orderAddress = new OrderAddress();
+                $orderAddress->identifier = $address->identifier;
+                $orderAddress->address = $address->address;
+                $orderAddress->address_complement = $address->address_complement;
+                $orderAddress->postal_code = $address->postal_code;
+                $orderAddress->city = $address->city;
+                $orderAddress->state = $address->state;
+                $orderAddress->country = $address->country;
+                $orderAddress->phone_number = $address->phone_number;
+                $orderAddress->save();
 
-                $formula = Formula::where('name', ucfirst($item->attributes->form_level))->first();
+                $formula = Formula::where('name', $session->metadata->formula)->first();
                 $coupon = Coupon::where('code', $session->metadata->coupon)->first() ?? null;
 
                 Order::create([
                     'user_id' => $user->id,
+                    'payment_intent' => $paymentIntent,
                     'order_address_id' => $orderAddress->id,
                     'formula_id' => $formula->id,
                     'coupon_id' => isset($coupon) ? $coupon->id : null,
-                    'payment_intent' => $session->payment_intent,
-                    'diskspace' => $item->attributes->form_diskspace,
-                    'mode' => $session->mode, // !
-                    'member_access' => $item->attributes->buttonsRadioForOffer !== null ? ucfirst(substr($item->attributes->buttonsRadioForOffer, 0, strpos($item->attributes->buttonsRadioForOffer, 'Offer'))) : "all",
-                    'expire' => date('Y-m-d H:i:s', $session->expires_at), // !
-                    'total_paid' => ($session->amount_total / 100),
+                    'diskspace' => (int)$session->metadata->diskspace,
+                    'mode' => $session->mode,
+                    'member_access' => $session->metadata->member_access !== "" ? ucfirst(substr($session->metadata->member_access, 0, strpos($session->metadata->member_access, 'Offer'))) : "All",
+                    'expire' => date('Y-m-d H:i:s', time()),
+                    'total_paid' => (float)($session->amount_total / 100),
                     'includes_adhesion' => !$user->is_adherent,
-                    'comment' => $session->metadata->comment, // !
-                    'status' => $session->status // !
+                    'comment' => $session->metadata->comment,
+                    'status' => $request['data']['object']['status'],
                 ]);
             } catch (\Exception $e) {
                 return $e->getMessage();
             }
-        } else {
+        } elseif ($request->type === "free") {
+            try {
 
-            // try {   
-            dd(\Cart::getContent());
+                $address = json_decode($request->address);
 
-            $item = \Cart::get($request->cartItemId);
+                $orderAddress = new OrderAddress();
+                $orderAddress->identifier = $address->identifier;
+                $orderAddress->address = $address->address;
+                $orderAddress->address_complement = $address->address_complement;
+                $orderAddress->postal_code = $address->postal_code;
+                $orderAddress->city = $address->city;
+                $orderAddress->state = $address->state;
+                $orderAddress->country = $address->country;
+                $orderAddress->phone_number = $address->phone_number;
+                $orderAddress->save();
 
-            dd($request->all());
+                $formula = Formula::where('name', 'Standard')->first();
+                $user = User::find($request->user_id);
 
-            $address = json_decode($request->address);
-
-            $orderAddress = OrderAddress::create(
-                [
-                    'identifier' => $address->identifier,
-                    'address' => $address->address,
-                    'address_complement' => $address->address_complement,
-                    'postal_code' => $address->postal_code,
-                    'city' => $address->city,
-                    'state' => $address->state,
-                    'country' => $address->country,
-                    'phone_number' => $address->phone_number,
-                ]
-            );
-
-            $formula = Formula::where('name', 'Standard')->first();
-            $user = User::find($request->user_id);
-
-            Order::create([
-                'user_id' => $user->id,
-                'order_address_id' => $orderAddress->id,
-                'formula_id' => $formula->id,
-                'coupon_id' => null,
-                'payment_intent' => "Free",
-                'diskspace' => $item->attributes->form_diskspace,
-                'mode' => "Free", // !
-                'member_access' => "all",
-                'expire' => (new DateTime("+1 month"))->format("Y-m-d H:i:s"), // !
-                'total_paid' => 0,
-                'includes_adhesion' => !$user->is_adherent,
-                'comment' => $request->comment, // !
-                'status' => 'complete' // !
-            ]);
-            // } catch (\Exception $e) {
-            //     return $e->getMessage();
-            // }
+                Order::create([
+                    'user_id' => $user->id,
+                    'payment_intent' => "Free",
+                    'order_address_id' => $orderAddress->id,
+                    'formula_id' => $formula->id,
+                    'coupon_id' => isset($coupon) ? $coupon->id : null,
+                    'mode' => "free",
+                    'member_access' => "All",
+                    'expire' => (new DateTime("+1 month"))->format("Y-m-d H:i:s"),
+                    'comment' => $request->comment,
+                    'status' => "complete",
+                ]);
+            } catch (\Exception $e) {
+                return $e->getMessage();
+            }
         }
     }
 }
