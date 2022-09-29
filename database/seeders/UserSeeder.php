@@ -18,14 +18,27 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
-            'name' => 'admin',
-            'email' => 'admin@email.com',
-            'password' => Hash::make('admin'),
-            'role_id' => 1,
-            'nb_free_account' => 0,
-            'email_verified_at' => Carbon::now(),
-            'avatar' => 'resources/images/users/avatars/admin.png',
-        ]);
+        $users = [
+            [
+                'name' => 'admin',
+                'email' => 'admin@email.com',
+                'password' => Hash::make('admin'),
+                'role_id' => 1,
+                'nb_free_account' => 0,
+                'email_verified_at' => Carbon::now(),
+                'avatar' => 'resources/images/users/avatars/admin.png',
+            ],
+            [
+                'name' => 'Bob',
+                'email' => 'bobrazowskitrash@gmail.com',
+                'password' => Hash::make('321321321'),
+                'role_id' => 2,
+                'nb_free_account' => 0,
+                'email_verified_at' => Carbon::now(),
+            ]
+            ];
+        foreach ($users as $user) {
+            User::create($user);
+        }
     }
 }

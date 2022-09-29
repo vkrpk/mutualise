@@ -40,7 +40,7 @@
                                             :</span>
                                         <span>{{ $buttonsRadioForOfferName }}</span>
                                     </div>
-                                @endif
+                                @endif                                
                                 @if ($item->attributes->isFreeTrial == true)
                                     <div class="col-12 col-sm-6 ps-1 pe-0">
                                         <span class="fst-italic"><i
@@ -73,7 +73,7 @@
                     </div>
                     <div class="card-footer d-flex justify-content-between">
                         <span>Total : </span>
-                        <span>{{ $formula_period === 'yearly' ? $item->price : $item->attributes->priceMonthly }} € </span>
+                        <span>{{ $formula_period === 'yearly' ? $item->price : $item->attributes->priceMonthly }} € {{ $formula_period === "monthly" ? "par mois" : ($formula_period === "free" ? "pour un mois" : "pour un an") }}</span>
                     </div>
                 </div>
                 <div class="card mb-4">
@@ -92,9 +92,9 @@
                     </div>
                     <div class="card-footer">
                         <input class="form-check-input" type="checkbox" id="checboxCGU" name="checboxCGU" form="formRecapOrder">
-                        <label class="form-check-label" for="checboxCGU"> J'accepte les conditions ci-dessus </label>
+                        <label class="form-check-label" for="checboxCGU"> J'accepte les conditions ci-dessus </label><br>
                         @error('checboxCGU')
-                            <span class="text-danger">Vous devez accepter les conditions de vente pour continuer.</span>
+                            <span class="ms-3 text-danger">Vous devez accepter les conditions de vente pour continuer.</span>
                         @enderror
                     </div>
                 </div>
