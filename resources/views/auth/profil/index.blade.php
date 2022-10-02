@@ -18,7 +18,7 @@
                         <!-- Profile picture image-->
                         {{-- {{ dd(Auth::user()->avatar) }} --}}
                         <img class="img-account-profile rounded-circle mb-2"
-                            src="{{ Vite::asset(Auth::user()->avatar) }}" alt="avatar">
+                            src="{{ asset('avatars_uploads/' . Auth::user()->avatar) }}" alt="avatar">
                         <!-- Profile picture help block-->
                         <div class="small font-italic text-muted mb-4">{{__("JPG/JPEG ou PNG inférieur à 5MB")}}</div>
                         <!-- Profile picture upload button-->
@@ -40,11 +40,11 @@
                     <div class="card-body">
                         <form method="POST" action="{{ route('storeInfos') }}">
                             @csrf
-                            <x-adresses-card :address="$address" :form="''"/>                          
+                            <x-adresses-card :address="$address" :form="''"/>
                             <button class="btn btn-primary" type="submit">{{__("Save")}}</button>
                         </form>
                     </div>
-                </div>                 
+                </div>
             </div>
         </div>
     </div>

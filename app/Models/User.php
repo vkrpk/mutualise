@@ -54,4 +54,6 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
     {
         return $this->role_id == 1 ? true : false;
     }
+
+
 }
