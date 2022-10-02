@@ -16,9 +16,8 @@
                     <div class="card-header">{{__('Profile Picture')}}</div>
                     <div class="card-body text-center">
                         <!-- Profile picture image-->
-                        {{-- {{ dd(Auth::user()->avatar) }} --}}
                         <img class="img-account-profile rounded-circle mb-2"
-                            src="{{ Auth::user()->avatar !== 'build/img/default.png' ? asset('avatars_uploads/' . Auth::user()->avatar) : Vite::asset('resources/images/users/avatars/default.png')) }}" alt="avatar">
+                            src="{{ Auth::user()->avatar !== '' ? asset('avatars_uploads/' . Auth::user()->avatar) : Vite::asset('resources/images/users/avatars/default.png') }}" alt="avatar">
                         <!-- Profile picture help block-->
                         <div class="small font-italic text-muted mb-4">{{__("JPG/JPEG ou PNG inférieur à 5MB")}}</div>
                         <!-- Profile picture upload button-->
