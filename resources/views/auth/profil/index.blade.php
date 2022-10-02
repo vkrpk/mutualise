@@ -18,7 +18,7 @@
                         <!-- Profile picture image-->
                         {{-- {{ dd(Auth::user()->avatar) }} --}}
                         <img class="img-account-profile rounded-circle mb-2"
-                            src="{{ asset('avatars_uploads/' . Auth::user()->avatar) }}" alt="avatar">
+                            src="{{ Auth::user()->avatar !== 'build/img/default.png' ? asset('avatars_uploads/' . Auth::user()->avatar) : asset(Auth::user()->avatar) }}" alt="avatar">
                         <!-- Profile picture help block-->
                         <div class="small font-italic text-muted mb-4">{{__("JPG/JPEG ou PNG inférieur à 5MB")}}</div>
                         <!-- Profile picture upload button-->
