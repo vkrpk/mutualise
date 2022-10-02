@@ -29,8 +29,13 @@ body {
     flex-grow: 1;
 }
 
-header .nav-link {
+header .nav-link,
+.btn-link {
     color: $primary  !important;
+}
+
+.btn.btn-link {
+    font-size: 0.9rem !important;
 }
 
 .form-check-input:checked {
@@ -91,8 +96,16 @@ a {
     box-shadow: 20px 20px 10px 0px rgba(0, 0, 0, 0.5) !important;
 }
 
-.bgSecondaryLight {
+.bgSecondaryLight{
     background-color: #feb986 !important;
+}
+
+.customCardHeader{
+    color: #984c13 !important;
+    background-color: #ffe5d2 !important;
+    border-color: #ffd8bc !important;
+    font-weight: bold;
+    padding: 16px !important;
 }
 
 .borderRadiusTop {
@@ -107,4 +120,8 @@ a {
 
 .textSecondaryDarken {
     color: $secondary-dark;
+}
+
+.grayedOut{
+    filter: grayscale(.8);
 }

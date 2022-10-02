@@ -22,7 +22,8 @@ $theme-colors: (
     "warning": #141e28,
     "danger" : #dc3545,
     "light" : #f8f9fa,
-    "dark" : #212529
+    "dark" : #212529,
+    "success" : $green,
 );
 
 $theme-colors: map-merge($theme-colors, $custom-colors );

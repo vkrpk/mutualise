@@ -23,8 +23,9 @@ class UserSeeder extends Seeder
             'email' => 'admin@email.com',
             'password' => Hash::make('admin'),
             'role_id' => 1,
-            'nb_free_account' => 4,
-            'email_verified_at' => Carbon::now()
+            'nb_free_account' => 0,
+            'email_verified_at' => Carbon::now(),
+            'avatar' => 'resources/images/users/avatars/admin.png',
         ]);
     }
 }

@@ -4,7 +4,6 @@ namespace App\Services;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use function App\View\Components\__construct;
 
 class CalculAmountController extends Controller {
     private $request;

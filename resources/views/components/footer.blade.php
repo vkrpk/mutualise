@@ -5,4 +5,7 @@
         <li class="list-inline-item social pb-0"><a href="https://twitter.com/DediKam"><i class="fa-brands fa-twitter"></i></a></li>
     </ul>
     <p class="copyright text-primary">Dedikam © 2008 - 2021</p>
+    @isAdmin()
+        <div class="admin rounded-2 text-white">Administrateur</div>
+    @endisAdmin
 </footer>

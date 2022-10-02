@@ -1,45 +1,42 @@
 @extends('layouts.app')
 @section('content')
+
 <div class="container-sm overflow-hidden p-0">
     <div class="row mx-2 mx-sm-0 g-2 text-center m-3">
         <div class="alert alert-primary fs-3 fw-bolder" role="alert">
-            <span>Ajouter un accès</span>
+            <span>{{__("Ajouter un accès")}}</span>
         </div>
         <div class="card border-secondary">
             <div class="card-body d-flex flex-column align-middle">
                 {{-- INPUT --}}
-                @include('orders.form.boxFreeTrial')
+                @include('offers.form.boxFreeTrial')
                 {{-- INPUT --}}
             </div>
         </div>
-        <p class="pricing headline text-secondary fs-1" style="font-family: Roboto, sans-serif;">Choisissez votre formule
-        </p>
-        <p class="pricing-sub-headline fs-4">Toutes vos données fragmentées, copiées et réparties sur différents serveurs et
-            Datacenters selon le niveau de disponibilité choisi.
-            <a class="text-primary" href="https://www.dedikam.com/lexique/#niveaux" target="_blank"><br>En savoir plus</a>
+        <p class="pricing headline text-secondary fs-1" style="font-family: Roboto, sans-serif;">{{__("Choisissez votre formule")}}</p>
+        <p class="pricing-sub-headline fs-4">{{__("Toutes vos données fragmentées, copiées et réparties sur différents serveurs et Datacenters selon le niveau de disponibilité choisi.")}}
+            <a class="text-primary" href="https://www.dedikam.com/lexique/#niveaux" target="_blank"><br>{{__("En savoir plus")}}</a>
         </p>
     </div>
     {{-- TABLEAU COMPARATIF --}}
     <div class="mb-4 mx-2 mx-sm-0">
-        @include('orders.form.pricingTable')
+        @include('offers.form.pricingTable')
     </div>
     {{-- TABLEAU COMPARATIF --}}
     <div class="row mx-2 mx-sm-0 g-2 m-3">
         <div class="mt-4 mb-2 range-slider-container text-center position-relative">
-            <p class="p-2 p-sm-4 rounded-3 fs-5 bg-white border text-center">Choisissez votre espace disque en déplaçant le
-                curseur orange vers la droite, tarif affiché en bas de page.</p>
-            <p class="mb-0">Espace disque : <span id="slider-output">10Go</span></p>
+            <p class="p-2 p-sm-4 rounded-3 fs-5 bg-white border text-center">{{__("Choisissez votre espace disque en déplaçant le curseur orange vers la droite, tarif affiché en bas de page.")}}</p>
+            <p class="mb-0">{{__("Espace disque")}} : <span id="slider-output">10Go</span></p>
             <input type="range" class="rs-range flex-grow-1" name="form_diskspace" id="slider" min="10" max="5000"
                 step="10" value="{{ $formDiskspace ?? 10 }}" form="formAddToCart">
             <div class="">
-                <span style="font-size: 11px; opacity: 0.8;">Trafic illimité - Bande passante : 500 Mbit/s à 1Gbit/s, au
-                    dessus de 5 000Go, veuillez nous
-                    <a class="text-primary" href="https://www.dedikam.com/contact/" target="_blank">contacter</a>.
+                <span style="font-size: 11px; opacity: 0.8;">{{__("Trafic illimité - Bande passante : 500 Mbit/s à 1Gbit/s, au dessus de 5 000Go, veuillez nous")}}
+                    <a class="text-primary" href="https://www.dedikam.com/contact/" target="_blank">{{__("contacter")}}</a>.
                 </span>
             </div>
         </div>
         <div class="my-4 range-slider-container text-center position-relative d-flex align-items-center flex-column d-none" id="boxInputsRadioDedicatedOffer">
-            <p class="p-2 p-sm-4 rounded-3 fs-5 bg-white border text-center w-100">Choisissez votre espace disque, tarif affiché en bas de page.</p>
+            <p class="p-2 p-sm-4 rounded-3 fs-5 bg-white border text-center w-100">{{__("Choisissez votre espace disque, tarif affiché en bas de page.")}}</p>
             <div class="d-flex justify-content-evenly w-100" id="inputsRadioForDedicatedOffer">
                 <div>
                     <input type="radio" name="sizeValueForDedicatedOffer" id="dedicated500" value="500" form="formAddToCart" checked {{ old('sizeValueForDedicatedOffer') ? 'checked' : ($formDiskspace == 500 ? 'checked' : '') }}>
@@ -59,12 +56,11 @@
                 </div>
             </div>
             <div>
-                <span style="font-size: 11px; opacity: 0.8">Trafic illimité - Bande passante : 500 Mbit/s à 1Gbit/s, au
-                    dessus de 5 000Go, veuillez nous
-                    <a class="text-primary" href="https://www.dedikam.com/contact/" target="_blank">contacter</a>.
+                <span style="font-size: 11px; opacity: 0.8">{{__("Trafic illimité - Bande passante : 500 Mbit/s à 1Gbit/s, au dessus de 5 000Go, veuillez nous")}}
+                    <a class="text-primary" href="https://www.dedikam.com/contact/" target="_blank">{{__("contacter")}}</a>.
                 </span>
             </div>
-            <p class="mb-0 mt-3 fw-bolder">Choix du nom de domaine<sup><i class="fa-solid fa-asterisk" style="font-size: 8px;color: red;margin-top: -14px;"></i></sup></p>
+            <p class="mb-0 mt-3 fw-bolder">{{__("Choix du nom de domaine")}}<sup><i class="fa-solid fa-asterisk" style="font-size: 8px;color: red;margin-top: -14px;"></i></sup></p>
             <div class="d-flex justify-content-center" id="inputsRadioForDomainType">
                 <div class="d-flex me-4">
                     <input class="me-2" type="radio" name="domainType" id="dedikam" value="dedikam" form="formAddToCart" checked {{ old('domainType') ? 'checked' : ($domainType == 'dedikam' ? 'checked' : '') }}>
@@ -72,25 +68,25 @@
                 </div>
                 <div>
                     <input class="me-1" type="radio" name="domainType" id="private" value="private" form="formAddToCart" {{ old('domainType') ? 'checked' : ($domainType == 'private' ? 'checked' : '') }}>
-                    <label for="private">Privé</label>
+                    <label for="private">{{__("Privé")}}</label>
                 </div>
             </div>
             <div class="mt-3 d-flex flex-column align-items-center" id="boxDomainUrlOrPrefix">
-                <div><label class="small mb-1 fw-bolder" for="domainUrlOrPrefix">Choix du préfixe</label><sup><i class="fa-solid fa-asterisk" style="font-size: 8px;color: red;margin-top: -14px;"></i></sup></div>
+                <div><label class="small mb-1 fw-bolder" for="domainUrlOrPrefix">{{__("Choix du préfixe")}}</label><sup><i class="fa-solid fa-asterisk" style="font-size: 8px;color: red;margin-top: -14px;"></i></sup></div>
                 <input class="form-control" id="domainUrlOrPrefix" type="text" name="domainUrlOrPrefix" value="{{ old('domainUrlOrPrefix') ? old('domainUrlOrPrefix') : $domainUrlOrPrefix }}" form="formAddToCart" style="width: 300px">
-                <span>Exemple : "votre-choix".dedikam.com</span>
+                <span>{{__("Exemple : 'votre-choix'.dedikam.com")}}</span>
                 <div class="text-danger">{{ $errors->regex->first() }}</div>
             </div>
         </div>
         <div class="d-flex justify-content-center">
             <div class="d-table">
-                <span class="offer_legend2 align-self-center">Récapitulatif de votre commande</span>
+                <span class="offer_legend2 align-self-center">{{__("Récapitulatif de votre commande")}}</span>
                 <div class="table-responsive" style="max-width: 50rem;margin-left: auto;margin-right: auto">
                     <table class="table table-bordered mb-0">
                         <thead>
                             <tr class="text-center bg-light" style="vertical-align:middle">
-                                <th>Formule</th>
-                                <th>Espace disque</th>
+                                <th>{{__("Formule")}}</th>
+                                <th>{{__("Espace disque")}}</th>
                                 <th>Total</th>
                             </tr>
                         </thead>
@@ -112,15 +108,15 @@
                                     <div class="d-flex flex-column align-items-center justify-content-center">
                                         <div id="price_Y">
                                             <span id="textPricePerYear" class="text-primary fw-bolder">3.6 €</span>
-                                            <span id="textRecapDurationFreeTrial" class="fw-bolder d-none">pour 30 jours</span>
-                                            <span id="textRecapDurationYear">pour 1 an jusqu'au</span>
-                                            <span id="recap_enddate">01/06/2022</span>
+                                            <span id="textRecapDurationFreeTrial" class="fw-bolder d-none">{{__("pour 30 jours")}}</span>
+                                            <span id="textRecapDurationYear">{{__("pour 1 an jusqu'au")}}</span>
+                                            <span id="recap_enddate">{{ date('d-m-Y', strtotime("+1 year")) }}</span>
                                         </div>
                                         <div id="boxPricePerMonth" class="d-none">
-                                            <span class="text-secondary fw-bolder">ou</span>
+                                            <span class="text-secondary fw-bolder">{{__("ou")}}</span>
                                             <div>
                                                 <span id="textPricePerMonth" class="text-primary fw-bolder"></span>
-                                                <span>par mois</span>
+                                                <span>{{__("per month")}}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -131,7 +127,7 @@
                 </div>
             </div>
         </div>
-        @include('orders.form.formButton')
+        @include('offers.form.formButton')
     </div>
 </div>
 @endsection
@@ -179,7 +175,21 @@ window.onload = function () {
                 } else {
                     boxPricePerMonth.classList.contains("d-none") ? "" : boxPricePerMonth.classList.toggle("d-none");
                 }
-                recapLevel.innerHTML = offer.charAt(0).toUpperCase() + offer.slice(1);
+                switch (offer.charAt(0).toUpperCase() + offer.slice(1)) {
+                    case "Basique":
+                        recapLevel.innerHTML = '{{__("Basique")}}'
+                        break;
+                    case "Entreprise":
+                        recapLevel.innerHTML = '{{__("Entreprise")}}'
+                        break;
+                    case "Dédié":
+                        recapLevel.innerHTML = '{{__("Dédié")}}'
+                        break;
+                
+                    default:
+                        recapLevel.innerHTML = "Standard"
+                        break;
+                }
                 recapDiskspaceGo.innerHTML = value + " Go";
                 recapDiskspaceGio.innerHTML = Math.round(100 * value / 1.074) / 100 + " Gio";
                 if(inputIsFreeTrial.checked) {
@@ -254,7 +264,8 @@ window.onload = function () {
     function blockInputsFreeTrial() {
         removeSelectedClassToAllColumns();
         addSelectedClassToColumn(document.querySelectorAll("a[offer='standard']")[1]);
-        toggleSlider(document.querySelectorAll("a[offer='standard']")[1]);
+        document.querySelectorAll("a[offer]:not([offer='standard'])").forEach(element => element.classList.toggle('grayedOut'));
+        rangeSliderContainer.classList.toggle('d-none');
         changeSliderColor();
         inputHiddenOfferAddToCartFormValue(document.querySelectorAll("a[offer='standard']")[1])
         calculAndDisplayOfferPrice(10, document.querySelector(".selected").getAttribute("offer"));
@@ -327,11 +338,11 @@ window.onload = function () {
 
     function switchTextDomainUrlOrPrefixDisplay () {
         if(document.querySelector('input[name="domainType"]:checked').value == "dedikam") {
-            boxDomainUrlOrPrefix.querySelector("span").innerHTML = 'Exemple : "votre-choix".dedikam.com'
-            boxDomainUrlOrPrefix.querySelector("label").innerHTML = "Choix de votre préfixe"
+            boxDomainUrlOrPrefix.querySelector("span").innerHTML = '{{__("Exemple : 'votre-choix'.dedikam.com")}}'
+            boxDomainUrlOrPrefix.querySelector("label").innerHTML = '{{__("Choix du préfixe")}}'
         } else {
-            boxDomainUrlOrPrefix.querySelector("span").innerHTML = "CNAME de type : example-domain.com"
-            boxDomainUrlOrPrefix.querySelector("label").innerHTML = "Nom de votre domaine privé"
+            boxDomainUrlOrPrefix.querySelector("span").innerHTML = '{{__("CNAME de type : example-domain.com")}}'
+            boxDomainUrlOrPrefix.querySelector("label").innerHTML = '{{__("Nom de votre domaine privé")}}'
         }
     }
 
