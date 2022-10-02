@@ -27,12 +27,14 @@ class CartController extends Controller
     }
 
     public function addToCart(Request $request)
-    {
-
-        if (!isset($request->form_diskspace)) {
+    {               
+        if (!isset($request->form_diskspace)) {            
             $request->request->add(['form_diskspace' => 10]);
-            $price = (new CalculAmountController())->calculAmount($request->form_level, $request->form_diskspace, true);
-        } else {
+            $price = (new CalculAmountController())->calculAmount($request->form_level, $request->form_diskspace, true);            
+        } else {          
+            if($request->form_level === 'dédié'){
+                $request->request->set('form_diskspace', $request->sizeValueForDedicatedOffer);              
+            }
             $price = (new CalculAmountController())->calculAmount($request->form_level, $request->form_diskspace);
         }
 
@@ -105,14 +107,14 @@ class CartController extends Controller
             \Cart::update($request->id, [
                 'id' => $request->id,
                 'name' => $request->accessName,
-                'price' => $price['Y'],
+                'price' => $request->isFreeTrial == "on" ? 0 : $price['Y'],
                 'quantity' => ['relative' => false, "value" => 1],
                 'attributes' => array(
                     'form_level' => $request->form_level,
                     'domainType' => $request->domainType,
                     'domainUrlOrPrefix' => $request->form_level == "dédié" ? ($request->domainType === "dedikam" ? $request->domainUrlOrPrefix . ".dedikam.com" : $request->domainUrlOrPrefix) : "",
                     'form_diskspace' => $request->form_level == 'dédié' ? $request->sizeValueForDedicatedOffer : $request->form_diskspace,
-                    'priceMonthly' => $price['M'],
+                    'priceMonthly' => $request->isFreeTrial == "on" ? 0 : $price['M'],
                     'coupon' => $request->isFreeTrial == "on" ? false : true,
                     'buttonsRadioForOffer' => $request->buttonsRadioForOffer ?? '',
                     'isFreeTrial' => $request->isFreeTrial,
@@ -122,20 +124,21 @@ class CartController extends Controller
             \Cart::add([
                 'id' => uniqid(),
                 'name' => $request->accessName,
-                'price' => $price['Y'],
+                'price' => $request->isFreeTrial == "on" ? 0 : $price['Y'],
                 'quantity' => 1,
                 'attributes' => array(
                     'form_level' => $request->form_level,
                     'domainType' => $request->domainType,
                     'domainUrlOrPrefix' => $request->form_level == "dédié" ? ($request->domainType === "dedikam" ? $request->domainUrlOrPrefix . ".dedikam.com" : $request->domainUrlOrPrefix) : "",
                     'form_diskspace' => $request->form_level == 'dédié' ? $request->sizeValueForDedicatedOffer : $request->form_diskspace,
-                    'priceMonthly' => $price['M'],
+                    'priceMonthly' => $request->isFreeTrial == "on" ? 0 : $price['M'],
                     'coupon' => $request->isFreeTrial == "on" ? false : true,
                     'buttonsRadioForOffer' => $request->buttonsRadioForOffer ?? '',
                     'isFreeTrial' => $request->isFreeTrial,
                 )
             ]);
         }
+        
         session()->flash('success', 'La commande a bien été ajoutée à votre panier !');
 
         return redirect()->route('cart.list');

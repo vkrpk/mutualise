@@ -1,13 +1,14 @@
 <?php
 
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OfferController;
-use App\Http\Controllers\Auth\ProfilViewController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\Auth\ProfilViewController;
 use App\Services\ComparePasswordAndChangeEmailController;
-use Illuminate\Http\Request;
 use TimeHunter\LaravelGoogleReCaptchaV3\Validations\GoogleReCaptchaV3ValidationRule;
 
 /*
@@ -84,12 +85,14 @@ Route::group([
     Route::post('cart', [CartController::class, 'addToCart'])->name('cart.store');
 
     Route::post('order/create', 'App\Http\Controllers\OrderController@create')->name('order.create');
+    Route::get('order/store', 'App\Http\Controllers\OrderController@store')->name('order.store');
+
     Route::post('stripe', "\App\Http\Controllers\StripeController@stripe")->name('stripe');
+    Route::post('success', "\App\Http\Controllers\StripeController@success")->name('stripe.success');
 
     Route::get('services', function () { return view('services.index'); })->name('services.index');
     Route::post('serviceUpdate', 'App\Http\Controllers\ServiceController@serviceUpdate')->name('serviceUpdate');
 
     Route::get('profil/security/email-change-verify', 'App\Http\Controllers\Profil\ChangeEmailController@verify')->name('user.email-change-verify');
-    Route::post('profil/security/email-change', 'App\Http\Controllers\Profil\ChangeEmailController@change')->name('user.email-change');
-
+    Route::post('profil/security/email-change', 'App\Http\Controllers\Profil\ChangeEmailController@change')->name('user.email-change');       
 });

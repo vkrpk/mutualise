@@ -2,20 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Models\Addresses;
 use Illuminate\Http\Request;
-use App\Services\StripeService;
 use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Auth;
-use Darryldecode\Cart\ItemCollection;
 
 class OrderController extends Controller
 {
     public function create(Request $request)
     {
         $request->validate([
-            'formula' => [
+            'formula_period' => [
                 'required',
                 Rule::in(['monthly', 'yearly', 'free']),
             ],
@@ -25,28 +20,19 @@ class OrderController extends Controller
             ]
         ]);
 
-        $item = \Cart::get($request->cartItemId) ?? "";
+        $formula_period = $request->formula_period;
+        $cartItemId = $request->cartItemId;
+        $item = \Cart::get($cartItemId) ?? "";
         if (!$item) {
             return back();
-        }
+        }  
 
-        $formula = $request->formula;
-        $price = 0;
-        switch ($formula) {
-            case 'yearly':
-                $price = ($item->price + 14);
-                break;
-            case 'monthly':
-                $price = ($item->attributes->priceMonthly + 14);
-                break;
-            case 'free':
-                $price = 0;
-                break;
-        }
+        return view("orders.create", compact('cartItemId', 'formula_period'));
+    }
 
-        $user = Auth::user();
-        $address = Addresses::where("user_id", $user->id)->first();
-
-        return view("orders.create", compact('item', 'address', 'formula'))->with('price', $price);
+    public function store()
+    {
+        \Cart::clear();
+        return redirect()->route('home');
     }
 }
