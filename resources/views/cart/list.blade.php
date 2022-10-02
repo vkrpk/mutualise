@@ -96,7 +96,7 @@
                                 </div>
                                 <div class="row pt-1">
                                     <div class="col text-end align-self-center p-1">
-                                        <a class="btn btn-primary" href="#"><i class="fa-solid fa-cart-shopping me-1"></i>{{ $cartItem->attributes->isFreeTrial == true ? "Choisir la formule d'essai" : "Choisir la formule annuelle" }}</a>
+                                        <button id="{{$cartItem->id}}" class="btn btn-primary" name="btnFormula" value="{{ $cartItem->attributes->isFreeTrial ? "free" : "yearly" }}"><i class="fa-solid fa-cart-shopping me-1"></i>{{ $cartItem->attributes->isFreeTrial == true ? "Choisir la formule d'essai" : "Choisir la formule annuelle" }}</button>
                                     </div>
                                 </div>
                             </div>
@@ -120,7 +120,7 @@
                                     </div>
                                     <div class="row pt-1">
                                         <div class="col text-end align-self-center p-1">
-                                            <a class="btn btn-primary" href="#"><i class="fa-solid fa-cart-shopping me-1"></i>Choisir la formule mensuelle</a>
+                                            <button id="{{$cartItem->id}}" class="btn btn-primary" name="btnFormula" value="monthly"><i class="fa-solid fa-cart-shopping me-1"></i>Choisir la formule mensuelle</button>
                                         </div>
                                     </div>
                                 </div>
@@ -142,8 +142,9 @@
                         @endif
                     </div>
                 </section>
-            @endforeach
-            <section class="row justify-content-end" >
+                <input type="hidden" value={{ $cartItem->id }} form='formOrder' autocomplete='off'>
+                @endforeach
+                <section class="row justify-content-end" >
                 <div class="px-sm-0 col-auto">
                     <div class="card mb-4">
                         <div class="card-body">
@@ -153,6 +154,11 @@
                                     <button type=submit class="btn btn-danger">Vider le panier</button>
                                 </div>
                             </form>
+                            <form action="{{ route('order.create') }}" method="POST" id="formOrder">
+                                <input type="hidden" autocomplete='off' id="hiddenCartItemId" name="cartItemId">
+                                <input type="hidden" autocomplete='off' id="hiddenFormula" name="formula">
+                                @csrf
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -160,3 +166,22 @@
         @endif
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        window.onload = function(){
+            const inputHiddenCartItemId = document.getElementById('hiddenCartItemId');
+            const inputHiddenFormula = document.getElementById('hiddenFormula');
+            const buttons = document.querySelectorAll('button[name="btnFormula"]');
+            
+            buttons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    inputHiddenCartItemId.value = button.id;
+                    inputHiddenFormula.value = button.value;
+                    document.getElementById('formOrder').submit();
+                })
+            });
+        }
+    </script>
+@endpush

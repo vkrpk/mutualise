@@ -15,20 +15,16 @@ return new class extends Migration
     {
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->nullable(false);
-            $table->string('label')->nullable(false);
-            $table->string('first_name')->nullable(true);
-            $table->string('last_name')->nullable(true);
-            $table->string('organization')->nullable(true);
-            $table->string('address1')->nullable(false);
-            $table->string('address2')->nullable(true);
+            $table->string('identifier')->nullable(false);
+            $table->string('address')->nullable(false);
+            $table->string('address_complement')->nullable(true);
             $table->string('postal_code')->nullable(false);
             $table->string('city')->nullable(false);
             $table->string('state')->nullable(true);
             $table->string('country')->nullable(true);
             $table->string('phone_number')->nullable(true);
-            $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->foreignId('user_id')->nullable()->constrained("users");
+            $table->timestamps();            
         });
     }
 

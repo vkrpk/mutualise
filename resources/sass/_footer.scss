@@ -57,3 +57,12 @@
     color: #aaa;
     margin-bottom: 0;
 }
+
+.admin {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    background-color: $red;    
+    z-index: 2000;
+    padding: 1rem 2rem;
+}
