@@ -35,8 +35,16 @@ class UserSeeder extends Seeder
                 'role_id' => 2,
                 'nb_free_account' => 0,
                 'email_verified_at' => Carbon::now(),
+            ],
+            [
+                'name' => 'vic',
+                'email' => 'victor.krupka@orange.fr',
+                'password' => Hash::make('password'),
+                'role_id' => 2,
+                'nb_free_account' => 0,
+                'email_verified_at' => Carbon::now(),
             ]
-            ];
+        ];
         foreach ($users as $user) {
             User::create($user);
         }

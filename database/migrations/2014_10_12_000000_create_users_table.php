@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('avatar')->default('resources/images/users/avatars/default.png');
+            $table->string('avatar')->default('build/img/default.png');
             $table->string('stripe_id')->nullable();
             $table->boolean('is_adherent')->default(false);
             $table->rememberToken();
