@@ -147,7 +147,7 @@ window.onload = function () {
     const cartButtonsRadioForOffer = "{{ $option }}";
     const cartButtonsRadioForDomainType = "{{ $domainType }}";
     const cartIsFreeTrial = "{{ $isFreeTrial }}";
-    const inputIsFreeTrial = document.getElementById("isFreeTrial")
+    const inputIsFreeTrial = document.getElementById("isFreeTrial") ?? ''
     let timeout = null;
     const boxPricePerMonth = document.getElementById("boxPricePerMonth");
     const recapLevel = document.getElementById("recapLevel");
@@ -185,7 +185,7 @@ window.onload = function () {
                     case "Dédié":
                         recapLevel.innerHTML = '{{__("Dédié")}}'
                         break;
-                
+
                     default:
                         recapLevel.innerHTML = "Standard"
                         break;
@@ -362,7 +362,7 @@ window.onload = function () {
     });
 
     @auth
-        inputIsFreeTrial.addEventListener("input", () => blockInputsFreeTrial())        
+        inputIsFreeTrial.addEventListener("input", () => blockInputsFreeTrial())
     @endauth
 
 
