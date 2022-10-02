@@ -1,7 +1,7 @@
 @php
-
-$buttonsRadioForOfferName = $item->attributes->buttonsRadioForOffer != null ? ucfirst(substr($item->attributes->buttonsRadioForOffer, 0, strpos($item->attributes->buttonsRadioForOffer, 'Offer'))) : '';
-
+    $address = \App\Models\Addresses::where("user_id", Auth::id())->first();
+    $item = \Cart::get($cartItemId);
+    $buttonsRadioForOfferName = $item->attributes->buttonsRadioForOffer != null ? ucfirst(substr($item->attributes->buttonsRadioForOffer, 0, strpos($item->attributes->buttonsRadioForOffer, 'Offer'))) : '';
 @endphp
 
 @extends('layouts.app')
@@ -40,7 +40,7 @@ $buttonsRadioForOfferName = $item->attributes->buttonsRadioForOffer != null ? uc
                                             :</span>
                                         <span>{{ $buttonsRadioForOfferName }}</span>
                                     </div>
-                                @endif
+                                @endif                                
                                 @if ($item->attributes->isFreeTrial == true)
                                     <div class="col-12 col-sm-6 ps-1 pe-0">
                                         <span class="fst-italic"><i
@@ -73,7 +73,7 @@ $buttonsRadioForOfferName = $item->attributes->buttonsRadioForOffer != null ? uc
                     </div>
                     <div class="card-footer d-flex justify-content-between">
                         <span>Total : </span>
-                        <span>{{ $price }} € </span>
+                        <span>{{ $formula_period === 'yearly' ? $item->price : $item->attributes->priceMonthly }} € {{ $formula_period === "monthly" ? "par mois" : ($formula_period === "free" ? "pour un mois" : "pour un an") }}</span>
                     </div>
                 </div>
                 <div class="card mb-4">
@@ -92,9 +92,9 @@ $buttonsRadioForOfferName = $item->attributes->buttonsRadioForOffer != null ? uc
                     </div>
                     <div class="card-footer">
                         <input class="form-check-input" type="checkbox" id="checboxCGU" name="checboxCGU" form="formRecapOrder">
-                        <label class="form-check-label" for="checboxCGU"> J'accepte les conditions ci-dessus </label>
+                        <label class="form-check-label" for="checboxCGU"> J'accepte les conditions ci-dessus </label><br>
                         @error('checboxCGU')
-                            <span class="text-danger">Vous devez accepter les conditions de vente pour continuer.</span>
+                            <span class="ms-3 text-danger">Vous devez accepter les conditions de vente pour continuer.</span>
                         @enderror
                     </div>
                 </div>
@@ -110,7 +110,7 @@ $buttonsRadioForOfferName = $item->attributes->buttonsRadioForOffer != null ? uc
                         <p>Utilisez cette zone pour des instructions spéciales ou des questions concernant votre commande.
                         </p>
                         <div class="form-floating">
-                            <textarea class="form-control" id="comment" style="height: 6rem;" form="formRecapOrder"></textarea>
+                            <textarea class="form-control" id="comment" style="height: 6rem;" form="formRecapOrder" name="comment"></textarea>
                             <label class="form-label" for="comment">Commentaires concernant la commande</label>
                         </div>
                     </div>
@@ -121,12 +121,11 @@ $buttonsRadioForOfferName = $item->attributes->buttonsRadioForOffer != null ? uc
             <div class="col">
                 <form action="{{route('stripe')}}" method="POST" id="formRecapOrder" name="formRecapOrder" class="d-flex justify-content-center">
                     @csrf
-                    <input type="hidden" value="{{$price}}" name="price">
-                    <input type="hidden" value="{{$item->id}}" name="itemId">
+                    <input type="hidden" value="{{$cartItemId}}" name="cartItemId">
+                    <input type="hidden" value="{{$formula_period}}" name="formula_period">
                     <button type="submit" class="btn btn-primary btn-lg" id="buttonFormRecapOrder">Valider la commande</button>
                 </form>
             </div>
         </div>
-        {{-- @includeWhen($formula !== 'free', 'orders.stripe') --}}
     </div>
 @endsection
