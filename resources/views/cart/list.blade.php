@@ -82,7 +82,7 @@
                             <div class="card-body">
                                 <div class="row border-bottom justify-content-evenly">
                                     <div class="text-end p-1">
-                                        <span class="fw-bolder">Prix : <span>{{ $cartItem->price }} €</span></span>
+                                        <span class="fw-bolder">{{__("Prix")}} : <span>{{ $cartItem->price }} €</span></span>
                                     </div>
                                 </div>
                                 @if ($cartItem->attributes->isFreeTrial == false)

@@ -149,5 +149,6 @@
     "Valider la commande" : "Confirm order",
     "Modifier l'état des services" : "Update services status",
     "État des services" : "Services status",
-    "Valider les changements" : "Confirm changes"
+    "Valider les changements" : "Confirm changes",
+    "Ajouter au panier" : "Add to cart"
 }

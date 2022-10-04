@@ -116,7 +116,7 @@
                                             <span class="text-secondary fw-bolder">{{__("ou")}}</span>
                                             <div>
                                                 <span id="textPricePerMonth" class="text-primary fw-bolder"></span>
-                                                <span>{{__("per month")}}</span>
+                                                <span>{{__("par mois")}}</span>
                                             </div>
                                         </div>
                                     </div>

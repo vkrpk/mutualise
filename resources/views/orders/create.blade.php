@@ -43,7 +43,7 @@
                                     <div class="col-12 col-sm-6 ps-1 pe-0">
                                         <span class="fst-italic"><i
                                                 class="fa-solid fa-circle-arrow-right bg-white text-secondary me-2"></i>Option :</span>
-                                        <span>{{_("Offre d'essai")}}</span>
+                                        <span>{{__("Offre d'essai")}}</span>
                                     </div>
                                 @endif
                             </div>
