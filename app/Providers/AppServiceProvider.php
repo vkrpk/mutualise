@@ -50,15 +50,20 @@ class AppServiceProvider extends ServiceProvider
                 env('APP_ENV') === 'production' ? env('STRIPE_SECRET_KEY_PROD') : env('STRIPE_SECRET_KEY_DEV')
             );
             if(count($stripe->webhookEndpoints->all()['data']) > 0) {
+                $urls = [];
                 foreach ($stripe->webhookEndpoints->all()['data'] as $webhook) {
-                    if($webhook->url !== env('APP_URL') . '/success'){
-                        $stripe->webhookEndpoints->create([
-                            'url' => env('APP_URL') . '/success',
-                            'enabled_events' => [
-                                'charge.succeeded',
-                            ],
-                        ]);
-                    }
+                    // $stripe->webhookEndpoints->delete(
+                    //     $webhook->id
+                    // );
+                    $urls[] = $webhook->url;
+                }
+                if(!in_array(env('APP_URL') . '/success', $urls)){
+                    $stripe->webhookEndpoints->create([
+                        'url' => env('APP_URL') . '/success',
+                        'enabled_events' => [
+                            'charge.succeeded',
+                        ],
+                    ]);
                 }
             } else {
                 $stripe->webhookEndpoints->create([
