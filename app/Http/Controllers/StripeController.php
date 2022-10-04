@@ -5,24 +5,16 @@
 namespace App\Http\Controllers;
 
 use DateTime;
-use Stripe\Stripe;
 use App\Models\User;
 use App\Models\Order;
 use App\Models\Coupon;
-use GuzzleHttp\Client;
 use App\Models\Formula;
 use App\Models\Addresses;
-use Darryldecode\Cart\Cart;
 use App\Models\OrderAddress;
 use Illuminate\Http\Request;
-use Stripe\Checkout\Session;
-use Illuminate\Http\Response;
 use Illuminate\Validation\Rule;
-use GuzzleHttp\Cookie\CookieJar;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
-use GuzzleHttp\Cookie\SessionCookieJar;
-use Illuminate\Support\Facades\Session as SessionBrowser;
 use Illuminate\Support\Facades\Validator;
 
 class StripeController extends Controller
@@ -176,7 +168,8 @@ class StripeController extends Controller
                 'cancel_url' => 'http://localhost:4242/cancel.html',
             ]);
         } elseif ($request->formula_period === 'free') {
-            $response = Http::post("http://laravel-9.test/success", [
+            dd(env("APP_URL"));
+            $response = Http::post(env("APP_URL"), [
                 'address' => json_encode($request->address),
                 'type' => "free",
                 'user_id' => $user->id,
