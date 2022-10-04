@@ -30,7 +30,7 @@
                                 <div class="col-12 col-sm-6 ps-1 pe-0">
                                     <span class="fst-italic">
                                         <i class="fa-solid fa-circle-arrow-right bg-white text-secondary me-2"></i>{{__("Formule choisie")}} :</span>
-                                    <span>{{ ucfirst($item->attributes->form_level) }}</span>
+                                    <span>{{ __(ucfirst($item->attributes->form_level)) }}</span>
                                 </div>
                                 @if ($item->attributes->buttonsRadioForOffer)
                                     <div class="col-12 col-sm-6 ps-1 pe-0">
@@ -59,7 +59,7 @@
                                     <div class="col ps-1 pe-0 d-flex align-item-center">
                                         <span class="d-flex align-items-center"><i class="fa-solid fa-circle-arrow-right bg-white text-secondary me-2"></i></span>
                                         <div>
-                                            <span class="fst-italic">{{_("Domaine")}} :</span>
+                                            <span class="fst-italic">{{__("Domaine")}} :</span>
                                             <span>{{ $item->attributes->domainUrlOrPrefix }}</span>
                                         </div>
                                     </div>
