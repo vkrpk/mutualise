@@ -146,5 +146,8 @@
     "Vous devez accepter les conditions de vente pour continuer." : "You have to agree to the terms and conditions to continue.",
     "Commentaires concernant votre commande" : "Comments about your order",
     "Utilisez cette zone pour des instructions spéciales ou des questions concernant votre commande." : "Feel free to use this area for leaving instructions or questions regarding your order.",
-    "Valider la commande" : "Confirm order"
+    "Valider la commande" : "Confirm order",
+    "Modifier l'état des services" : "Update services status",
+    "État des services" : "Services status",
+    "Valider les changements" : "Confirm changes"
 }
