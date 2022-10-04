@@ -6,12 +6,12 @@
         <div class="row text-center my-4">
             <div class="col-md-12 px-sm-0 ">
                 <div class="alert alert-primary fs-3 fw-bolder mb-0" role="alert">
-                    <span>Panier</span>
+                    <span>{{__("Panier")}}</span>
                 </div>
             </div>
         </div>
         @if (Cart::isEmpty())
-            <p>Votre panier est vide.</p>
+            <p>{{__("Votre panier est vide.")}}</p>
         @else
             @foreach (Cart::getContent() as $cartItem)
                 @php
@@ -23,13 +23,13 @@
                     <div class="col-md-12 px-sm-0 mb-4">
                         <p class="h4 py-3 text-center bgSecondaryLight mb-0 borderRadiusTop textSecondaryDarken text-uppercase fw-bolder">{{ $cartItem->name }}</p>
                         <div class="card rounded-0">
-                            <div class="alert alert-secondary fw-bolder mb-1 rounded-0" role="alert"><span>Récapitulatif de l'offre</span></div>
+                            <div class="alert alert-secondary fw-bolder mb-1 rounded-0" role="alert"><span>{{__("Récapitulatif de l'offre")}}</span></div>
                             <div class="card-body">
                                 <div class="row justify-content-evenly">
                                     <div class="row">
                                         <div class="col-12 col-sm-6 ps-1 pe-0">
-                                            <span class="fst-italic"><i class="fa-solid fa-circle-arrow-right bg-white text-secondary me-2"></i>Formule choisie :</span>
-                                            <span>{{ ucfirst($cartItem->attributes->form_level) }}</span>
+                                            <span class="fst-italic"><i class="fa-solid fa-circle-arrow-right bg-white text-secondary me-2"></i>{{__("Formule choisie")}} :</span>
+                                            <span>{{ __(ucfirst($cartItem->attributes->form_level)) }}</span>
                                         </div>
                                         @if ($cartItem->attributes->buttonsRadioForOffer)
                                             <div class="col-12 col-sm-6 ps-1 pe-0">
@@ -40,13 +40,13 @@
                                         @if ($cartItem->attributes->isFreeTrial == true)
                                             <div class="col-12 col-sm-6 ps-1 pe-0">
                                                 <span class="fst-italic"><i class="fa-solid fa-circle-arrow-right bg-white text-secondary me-2"></i>Option :</span>
-                                                <span>Offre d'essai</span>
+                                                <span>{{__("Offre d'essai")}}</span>
                                             </div>
                                         @endif
                                     </div>
                                     <div class="row">
                                         <div class="col ps-1 pe-0">
-                                            <span class="fst-italic"><i class="fa-solid fa-circle-arrow-right bg-white text-secondary me-2"></i>Espace disque :</span>
+                                            <span class="fst-italic"><i class="fa-solid fa-circle-arrow-right bg-white text-secondary me-2"></i>{{__("Espace disque")}} :</span>
                                             <span>{{ $cartItem->attributes->form_diskspace . ' Go' }}</span>
                                         </div>
                                     </div>
@@ -56,7 +56,7 @@
                                             <div class="col ps-1 pe-0 d-flex align-item-center">
                                                 <span class="d-flex align-items-center"><i class="fa-solid fa-circle-arrow-right bg-white text-secondary me-2"></i></span>
                                                 <div>
-                                                    <span class="fst-italic">Domaine :</span>
+                                                    <span class="fst-italic">{{__("Domaine")}} :</span>
                                                     <span>{{ $cartItem->attributes->domainUrlOrPrefix }}</span>
                                                 </div>
                                             </div>
@@ -65,11 +65,11 @@
 
                                     <div class="row px-1 mt-2">
                                         <div class="d-flex justify-content-end px-0">
-                                            <a href="{{ route('offers', ["id" => $cartItem->id]) }}" class="me-2"><button type="button" class="btn btn-primary">Modifier</button></a>
+                                            <a href="{{ route('offers', ["id" => $cartItem->id]) }}" class="me-2"><button type="button" class="btn btn-primary">{{__("Modifier")}}</button></a>
                                             <form action="{{ route('cart.remove', ["id" => $cartItem->id]) }}" method="POST">
                                                 @csrf
                                                 <div class="text-end">
-                                                    <button type=submit class="btn btn-danger">Supprimer</button>
+                                                    <button type=submit class="btn btn-danger">{{__("Delete")}}</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -78,7 +78,7 @@
                             </div>
                         </div>
                         <div class="card rounded-0">
-                            <div class="alert alert-secondary fw-bolder mb-1 rounded-0" role="alert"><span>{{ $cartItem->attributes->isFreeTrial == true ?"Offre d'essai gratuit" : "Proposition 1 : paiement à l'année"}}</span></div>
+                            <div class="alert alert-secondary fw-bolder mb-1 rounded-0" role="alert"><span>{{ $cartItem->attributes->isFreeTrial == true ? __("Offre d'essai") : __("Proposition 1 : paiement à l'année")}}</span></div>
                             <div class="card-body">
                                 <div class="row border-bottom justify-content-evenly">
                                     <div class="text-end p-1">
@@ -87,7 +87,7 @@
                                 </div>
                                 @if ($cartItem->attributes->isFreeTrial == false)
                                     <div class="row border-bottom">
-                                        <div class="text-end p-1"><span class="text-primary fw-bolder">Adhésion obligatoire à l'association : 14.00 €</span></div>
+                                        <div class="text-end p-1"><span class="text-primary fw-bolder">{{__("Adhésion obligatoire à l'association : 14.00 €")}}</span></div>
                                     </div>
                                 @endif
                                 
@@ -96,31 +96,31 @@
                                 </div>
                                 <div class="row pt-1">
                                     <div class="col text-end align-self-center p-1">
-                                        <button id="{{$cartItem->id}}" class="btn btn-primary" name="btnFormula" value="{{ $cartItem->attributes->isFreeTrial ? "free" : "yearly" }}"><i class="fa-solid fa-cart-shopping me-1"></i>{{ $cartItem->attributes->isFreeTrial == true ? "Choisir la formule d'essai" : "Choisir la formule annuelle" }}</button>
+                                        <button id="{{$cartItem->id}}" class="btn btn-primary" name="btnFormula" value="{{ $cartItem->attributes->isFreeTrial ? "free" : "yearly" }}"><i class="fa-solid fa-cart-shopping me-1"></i>{{ $cartItem->attributes->isFreeTrial == true ? __("Choisir la formule d'essai") : __("Choisir la formule annuelle") }}</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         @if ($cartItem->attributes->form_diskspace >= 170)
                             <div class="card rounded-0">
-                                <div class="alert alert-secondary fw-bolder mb-1 rounded-0" role="alert"><span>Proposition 2 : abonnement mensuel</span></div>
+                                <div class="alert alert-secondary fw-bolder mb-1 rounded-0" role="alert"><span>{{__("Proposition 2 : abonnement mensuel")}}</span></div>
                                 <div class="card-body">
                                     <div class="row border-bottom justify-content-evenly">
                                         <div class="text-end p-1">
-                                            <span class="fw-bolder">Prix : <span>{{ $cartItem->attributes->priceMonthly }} €</span></span>
+                                            <span class="fw-bolder">{{__("Prix")}} : <span>{{ $cartItem->attributes->priceMonthly }} €</span></span>
                                         </div>
                                     </div>
                                     <div class="row border-bottom">
-                                        <div class="text-end p-1"><span class="text-primary fw-bolder">Adhésion obligatoire à l'association : 14.00 €</span></div>
+                                        <div class="text-end p-1"><span class="text-primary fw-bolder">{{__("Adhésion obligatoire à l'association : 14.00 €")}}</span></div>
                                     </div>
                                 
                                     <div class="row justify-content-end pt-1">
-                                        <div class="text-end p-1"><span class="fw-bolder ">Premier mois : {{ $cartItem->attributes->priceMonthly + 14}} €</span></div>
-                                        <div class="text-end p-1"><span class="fw-bolder ">Abonnement mensuel : {{ $cartItem->attributes->priceMonthly }} €</span></div>
+                                        <div class="text-end p-1"><span class="fw-bolder ">{{__("Premier mois")}} : {{ $cartItem->attributes->priceMonthly + 14}} €</span></div>
+                                        <div class="text-end p-1"><span class="fw-bolder ">{{__("Abonnement mensuel")}} : {{ $cartItem->attributes->priceMonthly }} €</span></div>
                                     </div>
                                     <div class="row pt-1">
                                         <div class="col text-end align-self-center p-1">
-                                            <button id="{{$cartItem->id}}" class="btn btn-primary" name="btnFormula" value="monthly"><i class="fa-solid fa-cart-shopping me-1"></i>Choisir la formule mensuelle</button>
+                                            <button id="{{$cartItem->id}}" class="btn btn-primary" name="btnFormula" value="monthly"><i class="fa-solid fa-cart-shopping me-1"></i>{{__("Choisir la formule mensuelle")}}</button>
                                         </div>
                                     </div>
                                 </div>
@@ -132,10 +132,10 @@
                                     <form>
                                         @csrf
                                         <div class="mb-3" style="width: 270px">
-                                            <label class="small mb-1" for="inputCoupon">Coupon de réduction</label>
+                                            <label class="small mb-1" for="inputCoupon">{{__("Coupon de réduction")}}</label>
                                             <input class="form-control" type="text" name="inputCoupon" id="inputCoupon">
                                         </div>
-                                        <button class="btn btn-secondary" type="submit"><i class="fa-solid fa-ticket text-white me-1"></i>Appliquer à la commande</button>
+                                        <button class="btn btn-secondary" type="submit"><i class="fa-solid fa-ticket text-white me-1"></i>{{__("Appliquer à la commande")}}</button>
                                     </form>
                                 </div>
                             </div>
@@ -151,7 +151,7 @@
                             <form action="{{ route('cart.clear') }}" method="POST">
                                 @csrf
                                 <div class="text-end">
-                                    <button type=submit class="btn btn-danger">Vider le panier</button>
+                                    <button type=submit class="btn btn-danger">{{__("Vider le panier")}}</button>
                                 </div>
                             </form>
                             <form action="{{ route('order.create') }}" method="POST" id="formOrder">
