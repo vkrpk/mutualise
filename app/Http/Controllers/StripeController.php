@@ -33,7 +33,7 @@ class StripeController extends Controller
         try {
             if (count($this->stripe->webhookEndpoints->all()['data']) === 0) {
                 $webhook = $this->stripe->webhookEndpoints->create([
-                    'url' => 'http://laravel-9.test/success',
+                    'url' => env('APP_URL') . '/success',
                     'enabled_events' => [
                         'charge.succeeded',
                     ],
@@ -52,7 +52,7 @@ class StripeController extends Controller
 
         $user = User::find(Auth::user()->id);
 
-        $validator = Validator::make($request->all(), [  
+        $validator = Validator::make($request->all(), [
             'address.identifier' => ['required', 'string', 'max:60'],
             'address.address' => ['required', 'string', 'max:255'],
             'address.address_complement' => ['string', 'max:100', 'nullable'],
@@ -64,7 +64,7 @@ class StripeController extends Controller
             'checboxCGU' => ['accepted'],
             'comment' => ['string', 'max:1000', 'nullable'],
             'cartItemId' => ['required', 'string'],
-            'formula_period' => ['required', Rule::in(['yearly', 'monthly', 'free'])]   
+            'formula_period' => ['required', Rule::in(['yearly', 'monthly', 'free'])]
         ]);
 
         if($validator->fails()){
@@ -135,8 +135,8 @@ class StripeController extends Controller
                     'diskspace' => $item->attributes->form_diskspace,
                     'formula' => ucfirst($item->attributes->form_level),
                 ],
-                'success_url' => 'http://laravel-9.test/order/store',
-                'cancel_url' => 'http://localhost:4242/cancel.html',
+                'success_url' => env('APP_URL') . '/order/store',
+                'cancel_url' => env('APP_URL'),
             ]);
         } elseif ($request->formula_period === 'yearly') {
             $session = \Stripe\Checkout\Session::create([
@@ -164,8 +164,8 @@ class StripeController extends Controller
                     'diskspace' => $item->attributes->form_diskspace,
                     'formula' => ucfirst($item->attributes->form_level),
                 ],
-                'success_url' => 'http://laravel-9.test/order/store',
-                'cancel_url' => 'http://localhost:4242/cancel.html',
+                'success_url' => env('APP_URL') . '/order/store',
+                'cancel_url' => env('APP_URL'),
             ]);
         } elseif ($request->formula_period === 'free') {
             dd(env("APP_URL"));
