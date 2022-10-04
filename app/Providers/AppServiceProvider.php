@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        \DebugBar::enable();
+        \Debugbar::enable();
         Paginator::useBootstrap();
 
         Blade::directive('isAdmin', function() {
