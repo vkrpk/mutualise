@@ -168,7 +168,6 @@ class StripeController extends Controller
                 'cancel_url' => env('APP_URL'),
             ]);
         } elseif ($request->formula_period === 'free') {
-            dd(env("APP_URL"));
             $response = Http::post(env("APP_URL"), [
                 'address' => json_encode($request->address),
                 'type' => "free",
