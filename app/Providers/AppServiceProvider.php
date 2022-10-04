@@ -49,6 +49,7 @@ class AppServiceProvider extends ServiceProvider
             $stripe = new \Stripe\StripeClient(
                 env('APP_ENV') === 'production' ? env('STRIPE_SECRET_KEY_PROD') : env('STRIPE_SECRET_KEY_DEV')
             );
+            // dd(count($stripe->webhookEndpoints->all()['data']));
             if(count($stripe->webhookEndpoints->all()['data']) == 0) {
                 $stripe->webhookEndpoints->create([
                     'url' => env('APP_URL') . '/success',
