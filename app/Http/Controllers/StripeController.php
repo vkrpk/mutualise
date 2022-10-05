@@ -13,6 +13,7 @@ use App\Models\Addresses;
 use App\Models\OrderAddress;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
@@ -186,6 +187,7 @@ class StripeController extends Controller
     public function success(Request $request)
     {
         if ($request->type === "charge.succeeded") {
+            DB::beginTransaction();
             try {
                 \Stripe\Stripe::setApiKey(env('APP_ENV') === 'production' ? env('STRIPE_SECRET_KEY_PROD') : env('STRIPE_SECRET_KEY_DEV'));
 
@@ -195,7 +197,6 @@ class StripeController extends Controller
                 $user = User::where('email', $customer->email)->first();
 
                 $address = json_decode($session->metadata->address);
-
                 $orderAddress = new OrderAddress();
                 $orderAddress->identifier = $address->identifier;
                 $orderAddress->address = $address->address;
@@ -228,39 +229,45 @@ class StripeController extends Controller
                 $user->stripe_id = $customer->id;
                 $user->is_adherent = true;
                 $user->save();
+                DB::commit();
             } catch (\Exception $e) {
-                return $e->getMessage();
+                DB::rollback();
+                throw $e;
             }
         } elseif ($request->type === "free") {
             try {
-                $address = json_decode($request->address);
+                DB::transaction(function (Request $request) {
+                    $user = User::find($request->user_id);
+                    $user->nb_free_account = $user->nb_free_account + 1;
+                    $user->save();
+                    $address = json_decode($request->address);
 
-                $orderAddress = new OrderAddress();
-                $orderAddress->identifier = $address->identifier;
-                $orderAddress->address = $address->address;
-                $orderAddress->address_complement = $address->address_complement;
-                $orderAddress->postal_code = $address->postal_code;
-                $orderAddress->city = $address->city;
-                $orderAddress->state = $address->state;
-                $orderAddress->country = $address->country;
-                $orderAddress->phone_number = $address->phone_number;
-                $orderAddress->save();
+                    $orderAddress = new OrderAddress();
+                    $orderAddress->identifier = $address->identifier;
+                    $orderAddress->address = $address->address;
+                    $orderAddress->address_complement = $address->address_complement;
+                    $orderAddress->postal_code = $address->postal_code;
+                    $orderAddress->city = $address->city;
+                    $orderAddress->state = $address->state;
+                    $orderAddress->country = $address->country;
+                    $orderAddress->phone_number = $address->phone_number;
+                    $orderAddress->save();
 
-                $formula = Formula::where('name', 'Standard')->first();
-                $user = User::find($request->user_id);
+                    $formula = Formula::where('name', 'Standard')->first();
 
-                Order::create([
-                    'user_id' => $user->id,
-                    'payment_intent' => "Free",
-                    'order_address_id' => $orderAddress->id,
-                    'formula_id' => $formula->id,
-                    'coupon_id' => isset($coupon) ? $coupon->id : null,
-                    'mode' => "free",
-                    'member_access' => "All",
-                    'expire' => (new DateTime("+1 month"))->format("Y-m-d H:i:s"),
-                    'comment' => $request->comment,
-                    'status' => "succeeded",
-                ]);
+                    Order::create([
+                        'user_id' => $user->id,
+                        'payment_intent' => "Free",
+                        'order_address_id' => $orderAddress->id,
+                        'formula_id' => $formula->id,
+                        'coupon_id' => isset($coupon) ? $coupon->id : null,
+                        'mode' => "free",
+                        'member_access' => "All",
+                        'expire' => (new DateTime("+1 month"))->format("Y-m-d H:i:s"),
+                        'comment' => $request->comment,
+                        'status' => "succeeded",
+                    ]);
+                });
             } catch (\Exception $e) {
                 return $e->getMessage();
             }
