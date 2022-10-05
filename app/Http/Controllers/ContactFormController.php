@@ -17,9 +17,9 @@ class ContactFormController extends Controller
     public function contactForm(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'identifier' => 'required',
-            'email' => 'required|email',
-            'phone' => 'regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+            'identifier' => 'required|max:255',
+            'email' => 'required|email|max:255',
+            'tel' => ['regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10', 'nullable'],
             'object' => 'required|string|max:255',
             'content' => 'required|string',
             'privacy_policy' => 'accepted'
@@ -34,8 +34,8 @@ class ContactFormController extends Controller
             'object' => $request->get('object'),
             'content' => $request->get('content'),
         ), function ($message) use ($request) {
-            $message->from(env('MAIL_FROM_ADDRESS'));
-            $message->to(['guillaume.orvoire@orange.fr', 'victor.krupka@orange.fr', 'bobrazowskitrash@gmail.com'], 'Admin')->subject($request->get('object'));
+            $message->from(env("APP_ENV") === 'local' ? "testSender@email.com" : env('MAIL_FROM_ADDRESS'));
+            $message->to("test@email.com", 'Admin')->subject($request->get('object'));
         });
 
         return back()->with('status', 'Nous avons reçu votre message et nous vous remercions de nous avoir contacté');
