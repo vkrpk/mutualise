@@ -10,20 +10,33 @@
             <div class="card-header customCardHeader"><strong>Formulaire de contact</strong></div>
             <div class="card-body">
                 <form method="post" action="{{ route('contact.send') }}" id="contactForm">
-                    @csrf                    
-                    <div class="form-floating mt-2">
-                        <input type="text" class="form-control" id="identifier" name="identifier" placeholder="identifier" value="{{ old('identifier') ?? $address->identifier ?? '' }}">
-                        <label for="identifier">Nom complet ou nom de l'entreprise<sup><i class="fa-solid fa-asterisk" style="font-size: 8px;color: red;margin-top: -14px;"></i></sup></label>
-                        @error('identifier')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
+                    @csrf    
                     <div class="row">
-                        <div class="col-12 col-sm-6 ">
+                        <div class="col-12 col-md-6">
+                            <div class="form-floating mt-2">
+                                <input type="text" class="form-control" id="object" name="object" placeholder="object" value="{{ old('object') }}">
+                                <label for="object">Objet<sup><i class="fa-solid fa-asterisk" style="font-size: 8px;color: red;margin-top: -14px;"></i></sup></label>
+                                @error('object')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 ">
                             <div class="form-floating mt-2">
                                 <input type="email" class="form-control" id="email" name="email" placeholder="email" value="{{ old('email') ?? Auth::user()->email ?? '' }}">
                                 <label for="email">Email<sup><i class="fa-solid fa-asterisk" style="font-size: 8px;color: red;margin-top: -14px;"></i></sup></label>
                                 @error('email')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>                       
+                    <div class="row">
+                        <div class="col-12 col-sm-6">
+                            <div class="form-floating mt-2">
+                                <input type="text" class="form-control" id="identifier" name="identifier" placeholder="identifier" value="{{ old('identifier') ?? $address->identifier ?? '' }}">
+                                <label for="identifier">Nom complet ou nom de l'entreprise<sup><i class="fa-solid fa-asterisk" style="font-size: 8px;color: red;margin-top: -14px;"></i></sup></label>
+                                @error('identifier')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -38,15 +51,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="form-floating mt-2">
-                        <input type="text" class="form-control" id="object" name="object" placeholder="object" value="{{ old('object') }}">
-                        <label for="object">Objet<sup><i class="fa-solid fa-asterisk" style="font-size: 8px;color: red;margin-top: -14px;"></i></sup></label>
-                        @error('object')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-
                     <div class="form-floating mt-2">
                         <textarea class="form-control" id="content" style="height: 10rem;" name="content" placeholder="content">{{ old('content') }}</textarea>
                         <label class="form-label" for="content">Message<sup><i class="fa-solid fa-asterisk" style="font-size: 8px;color: red;margin-top: -14px;"></i></sup></label>
