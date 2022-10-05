@@ -18,23 +18,23 @@
                     @if (LaravelLocalization::getCurrentLocale() === "fr")
                         <li class="nav-item dropdown">
                             <a class="dropdown-toggle nav-link text-dedikam" aria-expanded="false" data-bs-toggle="dropdown" href="#">
-                                <span><img src="{{ Vite::asset('resources/images/fr.png') }}" alt=""></span>
+                                <span><img class="image-drapeau" src="{{ Vite::asset('resources/images/fr.png') }}" alt="drapeau français"></span>
                                 &nbsp;Français
                             </a>
                             <div class="dropdown-menu"><a class="dropdown-item" href="{{ LaravelLocalization::getLocalizedURL("en", null, [], true) }}">
-                                <span><img src="{{ Vite::asset('resources/images/en.png') }}" alt=""></span>
+                                <span><img class="image-drapeau" src="{{ Vite::asset('resources/images/en.png') }}" alt="drapeau anglais"></span>
                                 &nbsp;English</a>
                             </div>
                         </li>
                     @else
                         <li class="nav-item dropdown">
                             <a class="dropdown-toggle nav-link text-dedikam" aria-expanded="false" data-bs-toggle="dropdown" href="#">
-                                <span><img src="{{ Vite::asset('resources/images/en.png') }}" alt=""></span>
+                                <span><img class="image-drapeau" src="{{ Vite::asset('resources/images/en.png') }}" alt="drapeau anglais"></span>
                                 &nbsp;English
                             </a>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="{{ LaravelLocalization::getLocalizedURL("fr", null, [], true) }}">
-                                    <span><img src="{{ Vite::asset('resources/images/fr.png') }}" alt=""></span>
+                                    <span><img class="image-drapeau" src="{{ Vite::asset('resources/images/fr.png') }}" alt="drapeau français"></span>
                                     &nbsp;Français
                                 </a>
                             </div>
@@ -52,8 +52,13 @@
                         </li>
                     @else
                         <li class="nav-item dropdown">
-                            <a class="dropdown-toggle nav-link" aria-expanded="false"data-bs-toggle="dropdown"
-                                href="#">{{ Auth::user()->name }}</a>
+                            <a class="dropdown-toggle nav-link d-flex align-items-center" aria-expanded="false"data-bs-toggle="dropdown" href="#">
+                                {{ Auth::user()->name }}
+                                <div class="d-inline-flex align-items-center justify-content-center rounded-circle overflow-hidden mx-1" style="max-width: 23px !important; max-height: 23px!important; height: 23px !important;">
+                                    <img class="image-avatar" src="{{ Auth::user()->avatar !== '' ? asset('avatars_uploads/' . Auth::user()->avatar) : Vite::asset('resources/images/users/avatars/default.png') }}" alt="">
+                                </div>
+                            </a>
+
                             <div class="dropdown-menu dropdown-menu-end">
                                 <a class="dropdown-item" href="{{ route('profilIndex') }}">{{__('Mon compte')}}</a>
                                 <a class="dropdown-item" href="{{ route('access.index') }}">{{__('Mes accès')}}</a>

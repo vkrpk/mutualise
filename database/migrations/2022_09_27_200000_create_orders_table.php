@@ -16,7 +16,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained("users");
+            $table->foreignId('user_id')->nullable(true)->constrained("users")->nullOnDelete();
             $table->string('payment_intent')->nullable(false);
             $table->foreignId('order_address_id')->constrained("order_addresses"); // ! nouvelle teable
             $table->foreignId('formula_id')->constrained("formulas"); // dédié, et cie, autre table
