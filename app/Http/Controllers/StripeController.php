@@ -13,6 +13,7 @@ use App\Models\Addresses;
 use App\Models\OrderAddress;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
@@ -33,7 +34,7 @@ class StripeController extends Controller
         try {
             if (count($this->stripe->webhookEndpoints->all()['data']) === 0) {
                 $webhook = $this->stripe->webhookEndpoints->create([
-                    'url' => 'http://laravel-9.test/success',
+                    'url' => env('APP_URL') . '/success',
                     'enabled_events' => [
                         'charge.succeeded',
                     ],
@@ -52,7 +53,7 @@ class StripeController extends Controller
 
         $user = User::find(Auth::user()->id);
 
-        $validator = Validator::make($request->all(), [  
+        $validator = Validator::make($request->all(), [
             'address.identifier' => ['required', 'string', 'max:60'],
             'address.address' => ['required', 'string', 'max:255'],
             'address.address_complement' => ['string', 'max:100', 'nullable'],
@@ -64,7 +65,7 @@ class StripeController extends Controller
             'checboxCGU' => ['accepted'],
             'comment' => ['string', 'max:1000', 'nullable'],
             'cartItemId' => ['required', 'string'],
-            'formula_period' => ['required', Rule::in(['yearly', 'monthly', 'free'])]   
+            'formula_period' => ['required', Rule::in(['yearly', 'monthly', 'free'])]
         ]);
 
         if($validator->fails()){
@@ -135,8 +136,8 @@ class StripeController extends Controller
                     'diskspace' => $item->attributes->form_diskspace,
                     'formula' => ucfirst($item->attributes->form_level),
                 ],
-                'success_url' => 'http://laravel-9.test/order/store',
-                'cancel_url' => 'http://localhost:4242/cancel.html',
+                'success_url' => env('APP_URL') . '/order/store?id=' . $item->id,
+                'cancel_url' => env('APP_URL'),
             ]);
         } elseif ($request->formula_period === 'yearly') {
             $session = \Stripe\Checkout\Session::create([
@@ -164,12 +165,11 @@ class StripeController extends Controller
                     'diskspace' => $item->attributes->form_diskspace,
                     'formula' => ucfirst($item->attributes->form_level),
                 ],
-                'success_url' => 'http://laravel-9.test/order/store',
-                'cancel_url' => 'http://localhost:4242/cancel.html',
+                'success_url' => env('APP_URL') . '/order/store?id=' . $item->id,
+                'cancel_url' => env('APP_URL'),
             ]);
         } elseif ($request->formula_period === 'free') {
-            dd(env("APP_URL"));
-            $response = Http::post(env("APP_URL"), [
+            $response = Http::withOptions(["verify"=>false])->post(env("APP_URL") . "/success", [
                 'address' => json_encode($request->address),
                 'type' => "free",
                 'user_id' => $user->id,
@@ -179,7 +179,7 @@ class StripeController extends Controller
                 'formula' => ucfirst($item->attributes->form_level),
             ]);
 
-            return redirect()->route('order.store');
+            return redirect()->route('order.store', ['id' => $item->id]);
         }
         return redirect($session->url);
     }
@@ -187,6 +187,7 @@ class StripeController extends Controller
     public function success(Request $request)
     {
         if ($request->type === "charge.succeeded") {
+            DB::beginTransaction();
             try {
                 \Stripe\Stripe::setApiKey(env('APP_ENV') === 'production' ? env('STRIPE_SECRET_KEY_PROD') : env('STRIPE_SECRET_KEY_DEV'));
 
@@ -196,7 +197,6 @@ class StripeController extends Controller
                 $user = User::where('email', $customer->email)->first();
 
                 $address = json_decode($session->metadata->address);
-
                 $orderAddress = new OrderAddress();
                 $orderAddress->identifier = $address->identifier;
                 $orderAddress->address = $address->address;
@@ -229,11 +229,17 @@ class StripeController extends Controller
                 $user->stripe_id = $customer->id;
                 $user->is_adherent = true;
                 $user->save();
+                DB::commit();
             } catch (\Exception $e) {
-                return $e->getMessage();
+                DB::rollback();
+                throw $e;
             }
         } elseif ($request->type === "free") {
+            DB::beginTransaction();
             try {
+                $user = User::find($request->user_id);
+                $user->nb_free_account = $user->nb_free_account + 1;
+                $user->save();
                 $address = json_decode($request->address);
 
                 $orderAddress = new OrderAddress();
@@ -248,7 +254,6 @@ class StripeController extends Controller
                 $orderAddress->save();
 
                 $formula = Formula::where('name', 'Standard')->first();
-                $user = User::find($request->user_id);
 
                 Order::create([
                     'user_id' => $user->id,
@@ -260,10 +265,12 @@ class StripeController extends Controller
                     'member_access' => "All",
                     'expire' => (new DateTime("+1 month"))->format("Y-m-d H:i:s"),
                     'comment' => $request->comment,
-                    'status' => "complete",
+                    'status' => "succeeded",
                 ]);
+                DB::commit();
             } catch (\Exception $e) {
-                return $e->getMessage();
+                DB::rollback();
+                throw $e;
             }
         }
     }
