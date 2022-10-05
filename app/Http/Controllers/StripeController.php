@@ -235,41 +235,42 @@ class StripeController extends Controller
                 throw $e;
             }
         } elseif ($request->type === "free") {
+            DB::beginTransaction();
             try {
-                DB::transaction(function (Request $request) {
-                    $user = User::find($request->user_id);
-                    $user->nb_free_account = $user->nb_free_account + 1;
-                    $user->save();
-                    $address = json_decode($request->address);
+                $user = User::find($request->user_id);
+                $user->nb_free_account = $user->nb_free_account + 1;
+                $user->save();
+                $address = json_decode($request->address);
 
-                    $orderAddress = new OrderAddress();
-                    $orderAddress->identifier = $address->identifier;
-                    $orderAddress->address = $address->address;
-                    $orderAddress->address_complement = $address->address_complement;
-                    $orderAddress->postal_code = $address->postal_code;
-                    $orderAddress->city = $address->city;
-                    $orderAddress->state = $address->state;
-                    $orderAddress->country = $address->country;
-                    $orderAddress->phone_number = $address->phone_number;
-                    $orderAddress->save();
+                $orderAddress = new OrderAddress();
+                $orderAddress->identifier = $address->identifier;
+                $orderAddress->address = $address->address;
+                $orderAddress->address_complement = $address->address_complement;
+                $orderAddress->postal_code = $address->postal_code;
+                $orderAddress->city = $address->city;
+                $orderAddress->state = $address->state;
+                $orderAddress->country = $address->country;
+                $orderAddress->phone_number = $address->phone_number;
+                $orderAddress->save();
 
-                    $formula = Formula::where('name', 'Standard')->first();
+                $formula = Formula::where('name', 'Standard')->first();
 
-                    Order::create([
-                        'user_id' => $user->id,
-                        'payment_intent' => "Free",
-                        'order_address_id' => $orderAddress->id,
-                        'formula_id' => $formula->id,
-                        'coupon_id' => isset($coupon) ? $coupon->id : null,
-                        'mode' => "free",
-                        'member_access' => "All",
-                        'expire' => (new DateTime("+1 month"))->format("Y-m-d H:i:s"),
-                        'comment' => $request->comment,
-                        'status' => "succeeded",
-                    ]);
-                });
+                Order::create([
+                    'user_id' => $user->id,
+                    'payment_intent' => "Free",
+                    'order_address_id' => $orderAddress->id,
+                    'formula_id' => $formula->id,
+                    'coupon_id' => isset($coupon) ? $coupon->id : null,
+                    'mode' => "free",
+                    'member_access' => "All",
+                    'expire' => (new DateTime("+1 month"))->format("Y-m-d H:i:s"),
+                    'comment' => $request->comment,
+                    'status' => "succeeded",
+                ]);
+                DB::commit();
             } catch (\Exception $e) {
-                return $e->getMessage();
+                DB::rollback();
+                throw $e;
             }
         }
     }
