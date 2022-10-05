@@ -1,4 +1,12 @@
-.nav-item img {
+.image-drapeau {
     max-height: 0.5rem;
     display: inline-block;
+}
+
+.image-avatar {
+    height: 25px !important;
+    object-fit: cover !important;
+    object-position: 50% 50% !important;
+    width: auto !important;
+    max-width: 25px !important;
 }

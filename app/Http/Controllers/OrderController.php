@@ -25,14 +25,14 @@ class OrderController extends Controller
         $item = \Cart::get($cartItemId) ?? "";
         if (!$item) {
             return back();
-        }  
+        }
 
         return view("orders.create", compact('cartItemId', 'formula_period'));
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        \Cart::clear();
+        \Cart::remove($request->input('id'));
         return redirect()->route('home');
     }
 }

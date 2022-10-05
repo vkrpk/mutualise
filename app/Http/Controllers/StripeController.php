@@ -136,7 +136,7 @@ class StripeController extends Controller
                     'diskspace' => $item->attributes->form_diskspace,
                     'formula' => ucfirst($item->attributes->form_level),
                 ],
-                'success_url' => env('APP_URL') . '/order/store',
+                'success_url' => env('APP_URL') . '/order/store?id=' . $item->id,
                 'cancel_url' => env('APP_URL'),
             ]);
         } elseif ($request->formula_period === 'yearly') {
@@ -165,7 +165,7 @@ class StripeController extends Controller
                     'diskspace' => $item->attributes->form_diskspace,
                     'formula' => ucfirst($item->attributes->form_level),
                 ],
-                'success_url' => env('APP_URL') . '/order/store',
+                'success_url' => env('APP_URL') . '/order/store?id=' . $item->id,
                 'cancel_url' => env('APP_URL'),
             ]);
         } elseif ($request->formula_period === 'free') {
@@ -179,7 +179,7 @@ class StripeController extends Controller
                 'formula' => ucfirst($item->attributes->form_level),
             ]);
 
-            return redirect()->route('order.store');
+            return redirect()->route('order.store', ['id' => $item->id]);
         }
         return redirect($session->url);
     }
