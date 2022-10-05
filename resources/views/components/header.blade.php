@@ -51,8 +51,8 @@
                             <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                         </li>
                     @else
-                        <li class="nav-item dropdown">
-                            <a class="dropdown-toggle nav-link d-flex align-items-center" aria-expanded="false"data-bs-toggle="dropdown" href="#">
+                        <li class="nav-item dropdown d-flex flex-column align-items-end">
+                            <a class="dropdown-toggle nav-link d-inline-flex align-items-center justify-content-center" aria-expanded="false"data-bs-toggle="dropdown" href="#">
                                 {{ Auth::user()->name }}
                                 <div class="d-inline-flex align-items-center justify-content-center rounded-circle overflow-hidden mx-1" style="max-width: 23px !important; max-height: 23px!important; height: 23px !important;">
                                     <img class="image-avatar" src="{{ Auth::user()->avatar !== '' ? asset('avatars_uploads/' . Auth::user()->avatar) : Vite::asset('resources/images/users/avatars/default.png') }}" alt="">
