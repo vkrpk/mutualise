@@ -23,8 +23,8 @@ return new class extends Migration
             $table->string('state')->nullable(true);
             $table->string('country')->nullable(true);
             $table->string('phone_number')->nullable(true);
-            $table->foreignId('user_id')->constrained("users");
-            $table->timestamps();            
+            $table->foreignId('user_id')->constrained("users")->cascadeOnDelete();
+            $table->timestamps();
         });
     }
 
