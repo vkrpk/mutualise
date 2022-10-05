@@ -1,0 +1,1 @@
+stripe listen --events charge.succeeded --forward-to https://laravel-9.test/success

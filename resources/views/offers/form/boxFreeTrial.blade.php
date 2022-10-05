@@ -11,6 +11,9 @@
     <br>{{__("Il vous reste actuellement :nbfreeaccount disponible(s) sur votre compte.", ['nbfreeaccount' => $nbfreeaccount])}}</p>
     <div class="form-check align-self-center">
         <input name="isFreeTrial" id="isFreeTrial" class="form-check-input" type="checkbox" {{ $nbfreeaccount==0 ? 'disabled' : '' }} form="formAddToCart" autocomplete="off">
+        @error('isFreeTrial')
+            <div class="text-danger">{{ $message }}</div>
+        @enderror
         <label class="form-check-label" for="isFreeTrial">{{__("Profiter de l'offre")}}</label>
     </div>
 @endauth

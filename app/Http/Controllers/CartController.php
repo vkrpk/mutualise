@@ -10,6 +10,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\Enum;
 use App\Services\CalculAmountController;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
 class CartController extends Controller
@@ -27,24 +28,25 @@ class CartController extends Controller
     }
 
     public function addToCart(Request $request)
-    {               
-        if (!isset($request->form_diskspace)) {            
+    {
+
+        if (!isset($request->form_diskspace)) {
             $request->request->add(['form_diskspace' => 10]);
-            $price = (new CalculAmountController())->calculAmount($request->form_level, $request->form_diskspace, true);            
-        } else {          
+            $price = (new CalculAmountController())->calculAmount($request->form_level, $request->form_diskspace, true);
+        } else {
             if($request->form_level === 'dédié'){
-                $request->request->set('form_diskspace', $request->sizeValueForDedicatedOffer);              
+                $request->request->set('form_diskspace', $request->sizeValueForDedicatedOffer);
             }
             $price = (new CalculAmountController())->calculAmount($request->form_level, $request->form_diskspace);
         }
-
         if ($request->isFreeTrial == true) {
-            $request->validate([
+            Validator::make($request->all(), [
+                'isFreeTrial' => 'accepted',
                 'form_diskspace' => 'required|numeric|size:10',
-            ]);
+            ])->validate();
         }
 
-        $request->validate([
+        $validatorGlobal = Validator::make($request->all(), [
             'form_level' => [
                 'required',
                 Rule::in(['basique', 'standard', 'entreprise', 'dédié']),
@@ -54,44 +56,47 @@ class CartController extends Controller
             'accessName' => 'required',
         ]);
 
-        if ($request->form_level === 'basique') {
-            $request->validate([
-                'buttonsRadioForOffer' => [
-                    'required',
-                    Rule::in(['pydioOfferBasique', 'seafileOfferBasique', 'nextcloudOfferBasique'])
-                ]
-            ]);
-        }
+        $validatorGlobal
+            ->sometimes('buttonsRadioForOffer',
+                ['required', Rule::in(['pydioOfferBasique', 'seafileOfferBasique', 'nextcloudOfferBasique'])],
+                function ($input) {
+                    return $input->form_level === 'basique' ? true : false;
+                })
+            ->sometimes('sizeValueForDedicatedOffer',
+                ['required', Rule::in([500, 1500, 3000, 5000])],
+                function ($input) {
+                    return $input->form_level === 'dédié' ? true : false;
+                })
+            ->sometimes('buttonsRadioForOffer',
+                ['required', Rule::in(['pydioOfferDedicated', 'seafileOfferDedicated', 'nextcloudOfferDedicated'])],
+                function ($input) {
+                    return $input->form_level === 'dédié' ? true : false;
+                })
+            ->sometimes('domainType',
+                ['required', Rule::in(['dedikam', 'private'])],
+                function ($input) {
+                    return $input->form_level === 'dédié' ? true : false;
+                })
+            ->sometimes('domainUrlOrPrefix',
+                ['required'],
+                function ($input) {
+                    return $input->form_level === 'dédié' ? true : false;
+                })->validate()
+            ;
 
-        if ($request->form_level === 'dédié') {
-            $request->validate([
-                'sizeValueForDedicatedOffer' => [
-                    'required',
-                    Rule::in([500, 1500, 3000, 5000]),
-                ],
-                'buttonsRadioForOffer' => [
-                    'required',
-                    Rule::in(['pydioOfferDedicated', 'seafileOfferDedicated', 'nextcloudOfferDedicated'])
-                ],
-                'domainType' => [
-                    'required',
-                    Rule::in(['dedikam', 'private'])
-                ],
-                'domainUrlOrPrefix' => 'required'
-            ]);
-
+        if($request->form_level === 'dédié'){
             if ($request->domainType === 'dedikam') {
                 $validator = Validator::make(
-                    [$request->domainUrlOrPrefix], 
-                    ['regex:/^((?![-.])[A-Z0-9-.]{1,63}(?<![-.]))+$/i'], 
+                    [$request->domainUrlOrPrefix],
+                    ['regex:/^((?![-.])[A-Z0-9-.]{1,63}(?<![-.]))+$/i'],
                     $messages = [
                         'regex' => 'Veuillez entrer un préfixe valide, points et tirets acceptés.',
                     ]
                 )->validateWithBag("regex");
             } elseif ($request->domainType === 'private') {
                 $validator = Validator::make(
-                    [$request->domainUrlOrPrefix], 
-                    ['regex:/^((?!-)[A-Za-z0-9-]{1,63}(?<!-)\.)+[A-Za-z]{2,6}$/'], 
+                    [$request->domainUrlOrPrefix],
+                    ['regex:/^((?!-)[A-Za-z0-9-]{1,63}(?<!-)\.)+[A-Za-z]{2,6}$/'],
                     $messages = [
                         'regex' => 'Veuillez entrer un nom de domaine valide, points et tirets acceptés.',
                     ]
@@ -138,7 +143,7 @@ class CartController extends Controller
                 )
             ]);
         }
-        
+
         session()->flash('success', 'La commande a bien été ajoutée à votre panier !');
 
         return redirect()->route('cart.list');

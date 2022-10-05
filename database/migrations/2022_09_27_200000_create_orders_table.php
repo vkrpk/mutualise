@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -13,9 +14,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('orders', function (Blueprint $table) {            
+        Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained("users");
+            $table->foreignId('user_id')->nullable(true)->constrained("users")->nullOnDelete();
             $table->string('payment_intent')->nullable(false);
             $table->foreignId('order_address_id')->constrained("order_addresses"); // ! nouvelle teable
             $table->foreignId('formula_id')->constrained("formulas"); // dédié, et cie, autre table

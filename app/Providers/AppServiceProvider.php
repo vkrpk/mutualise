@@ -27,12 +27,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Paginator::useBootstrap();        
+        Paginator::useBootstrap();
 
         Blade::directive('isAdmin', function() {
             return "<?php if(Auth::check() && Auth::user()->isAdmin()): ?>";
         });
-    
+
         Blade::directive('endisAdmin', function() {
             return "<?php endif; ?>";
         });
@@ -40,7 +40,7 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('isNotAdmin', function() {
             return "<?php if((Auth::check() && !Auth::user()->isAdmin()) || !Auth::check()): ?>";
         });
-    
+
         Blade::directive('endisNotAdmin', function() {
             return "<?php endif; ?>";
         });
@@ -49,10 +49,10 @@ class AppServiceProvider extends ServiceProvider
             $stripe = new \Stripe\StripeClient(
                 env('APP_ENV') === 'production' ? env('STRIPE_SECRET_KEY_PROD') : env('STRIPE_SECRET_KEY_DEV')
             );
-            
-            if(count($stripe->webhookEndpoints->all()['data']) === 0){
-                $webhook = $this->stripe->webhookEndpoints->create([
-                    'url' => 'http://laravel-9.test/success',
+            // dd(count($stripe->webhookEndpoints->all()['data']));
+            if(count($stripe->webhookEndpoints->all()['data']) == 0) {
+                $stripe->webhookEndpoints->create([
+                    'url' => env('APP_URL') . '/success',
                     'enabled_events' => [
                         'charge.succeeded',
                     ],

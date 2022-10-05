@@ -28,7 +28,10 @@
             <p class="p-2 p-sm-4 rounded-3 fs-5 bg-white border text-center">{{__("Choisissez votre espace disque en déplaçant le curseur orange vers la droite, tarif affiché en bas de page.")}}</p>
             <p class="mb-0">{{__("Espace disque")}} : <span id="slider-output">10Go</span></p>
             <input type="range" class="rs-range flex-grow-1" name="form_diskspace" id="slider" min="10" max="5000"
-                step="10" value="{{ $formDiskspace ?? 10 }}" form="formAddToCart">
+                step="10" value="{{ old('form_diskspace') ?? ($formDiskspace ?? 10) }}" form="formAddToCart">
+            @error('form_diskspace')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
             <div class="">
                 <span style="font-size: 11px; opacity: 0.8;">{{__("Trafic illimité - Bande passante : 500 Mbit/s à 1Gbit/s, au dessus de 5 000Go, veuillez nous")}}
                     <a class="text-primary" href="https://www.dedikam.com/contact/" target="_blank">{{__("contacter")}}</a>.
@@ -39,19 +42,19 @@
             <p class="p-2 p-sm-4 rounded-3 fs-5 bg-white border text-center w-100">{{__("Choisissez votre espace disque, tarif affiché en bas de page.")}}</p>
             <div class="d-flex justify-content-evenly w-100" id="inputsRadioForDedicatedOffer">
                 <div>
-                    <input type="radio" name="sizeValueForDedicatedOffer" id="dedicated500" value="500" form="formAddToCart" checked {{ old('sizeValueForDedicatedOffer') ? 'checked' : ($formDiskspace == 500 ? 'checked' : '') }}>
+                    <input type="radio" name="sizeValueForDedicatedOffer" id="dedicated500" value="500" form="formAddToCart" checked {{ old('sizeValueForDedicatedOffer') == 500 ? 'checked' : ($formDiskspace == 500 ? 'checked' : '') }}>
                     <label for="dedicated500">500 Go</label>
                 </div>
                 <div>
-                    <input type="radio" name="sizeValueForDedicatedOffer" id="dedicated1500" value="1500" form="formAddToCart" {{ old('sizeValueForDedicatedOffer') ? 'checked' : ($formDiskspace == 1500 ? 'checked' : '') }}>
+                    <input type="radio" name="sizeValueForDedicatedOffer" id="dedicated1500" value="1500" form="formAddToCart" {{ old('sizeValueForDedicatedOffer') == 1500 ? 'checked' : ($formDiskspace == 1500 ? 'checked' : '') }}>
                     <label for="dedicated1500">1,5 To</label>
                 </div>
                 <div>
-                    <input type="radio" name="sizeValueForDedicatedOffer" id="dedicated3000" value="3000" form="formAddToCart" {{ old('sizeValueForDedicatedOffer') ? 'checked' : ($formDiskspace == 3000 ? 'checked' : '') }}>
+                    <input type="radio" name="sizeValueForDedicatedOffer" id="dedicated3000" value="3000" form="formAddToCart" {{ old('sizeValueForDedicatedOffer') == 3000 ? 'checked' : ($formDiskspace == 3000 ? 'checked' : '') }}>
                     <label for="dedicated3000">3 To</label>
                 </div>
                 <div>
-                    <input type="radio" name="sizeValueForDedicatedOffer" id="dedicated5000" value="5000" form="formAddToCart" {{ old('sizeValueForDedicatedOffer') ? 'checked' : ($formDiskspace == 5000 ? 'checked' : '') }}>
+                    <input type="radio" name="sizeValueForDedicatedOffer" id="dedicated5000" value="5000" form="formAddToCart" {{ old('sizeValueForDedicatedOffer') == 5000 ? 'checked' : ($formDiskspace == 5000 ? 'checked' : '') }}>
                     <label for="dedicated5000">5 To</label>
                 </div>
             </div>
@@ -63,19 +66,24 @@
             <p class="mb-0 mt-3 fw-bolder">{{__("Choix du nom de domaine")}}<sup><i class="fa-solid fa-asterisk" style="font-size: 8px;color: red;margin-top: -14px;"></i></sup></p>
             <div class="d-flex justify-content-center" id="inputsRadioForDomainType">
                 <div class="d-flex me-4">
-                    <input class="me-2" type="radio" name="domainType" id="dedikam" value="dedikam" form="formAddToCart" checked {{ old('domainType') ? 'checked' : ($domainType == 'dedikam' ? 'checked' : '') }}>
+                    <input class="me-2" type="radio" name="domainType" id="dedikam" value="dedikam" form="formAddToCart" checked {{ old('domainType') === 'dedikam' ? 'checked' : ($domainType == 'dedikam' ? 'checked' : '') }}>
                     <label for="dedikam">*.dedikam.com</label>
                 </div>
                 <div>
-                    <input class="me-1" type="radio" name="domainType" id="private" value="private" form="formAddToCart" {{ old('domainType') ? 'checked' : ($domainType == 'private' ? 'checked' : '') }}>
+                    <input class="me-1" type="radio" name="domainType" id="private" value="private" form="formAddToCart" {{ old('domainType') === 'private'? 'checked' : ($domainType == 'private' ? 'checked' : '') }}>
                     <label for="private">{{__("Privé")}}</label>
                 </div>
             </div>
             <div class="mt-3 d-flex flex-column align-items-center" id="boxDomainUrlOrPrefix">
-                <div><label class="small mb-1 fw-bolder" for="domainUrlOrPrefix">{{__("Choix du préfixe")}}</label><sup><i class="fa-solid fa-asterisk" style="font-size: 8px;color: red;margin-top: -14px;"></i></sup></div>
+                <div>
+                    <label class="small mb-1 fw-bolder" for="domainUrlOrPrefix">{{__("Choix du préfixe")}}</label><sup><i class="fa-solid fa-asterisk" style="font-size: 8px;color: red;margin-top: -14px;"></i></sup>
+                </div>
                 <input class="form-control" id="domainUrlOrPrefix" type="text" name="domainUrlOrPrefix" value="{{ old('domainUrlOrPrefix') ? old('domainUrlOrPrefix') : $domainUrlOrPrefix }}" form="formAddToCart" style="width: 300px">
                 <span>{{__("Exemple : 'votre-choix'.dedikam.com")}}</span>
                 <div class="text-danger">{{ $errors->regex->first() }}</div>
+                @error('domainUrlOrPrefix')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
         </div>
         <div class="d-flex justify-content-center">
@@ -279,10 +287,17 @@ window.onload = function () {
         document.getElementById("recap_enddate").classList.toggle("d-none");
     }
 
-    if((document.querySelector('#domainUrlOrPrefix').value != '') && cartIsFreeTrial == '') {
+    if((document.querySelector('#form_level').value === 'dédié') && cartIsFreeTrial == '') {
         removeSelectedClassToAllColumns()
         calculAndDisplayOfferPrice(document.querySelector(`input[name='sizeValueForDedicatedOffer']:checked`).value, 'dédié');
         addSelectedClassToColumn(document.querySelectorAll("a[offer='dédié']")[1])
+        toggleSlider(document.querySelector(".selected"));
+    }
+
+    if((document.querySelector('#form_level').value !== 'dédié') && cartIsFreeTrial == '') {
+        removeSelectedClassToAllColumns()
+        calculAndDisplayOfferPrice(slider.value, document.querySelector('#form_level').value);
+        addSelectedClassToColumn(document.querySelectorAll(`a[offer="${document.querySelector('#form_level').value}"]`)[1])
         toggleSlider(document.querySelector(".selected"));
     }
 

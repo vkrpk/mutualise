@@ -16,10 +16,10 @@
                     <div class="card-header">{{__('Profile Picture')}}</div>
                     <div class="card-body text-center">
                         <!-- Profile picture image-->
-                        <img class="img-account-profile rounded-circle mb-2"
+                        <img class="img-account-profile rounded-circle" style="width: 160px !important; object-fit: cover !important; object-position: 50% 50% !important; aspect-ratio: 1 / 1;"
                             src="{{ Auth::user()->avatar !== '' ? asset('avatars_uploads/' . Auth::user()->avatar) : Vite::asset('resources/images/users/avatars/default.png') }}" alt="avatar">
                         <!-- Profile picture help block-->
-                        <div class="small font-italic text-muted mb-4">{{__("JPG/JPEG ou PNG inférieur à 5MB")}}</div>
+                        <div class="small font-italic text-muted mb-4 mt-2">{{ Auth::user()->avatar === '' ? __("JPG/JPEG ou PNG inférieur à 5MB") : ''}}</div>
                         <!-- Profile picture upload button-->
                         <form action="{{ route('profil.store-picture') }}" method="POST" enctype="multipart/form-data">
                             @csrf
