@@ -168,7 +168,7 @@ class StripeController extends Controller
                 'cancel_url' => env('APP_URL'),
             ]);
         } elseif ($request->formula_period === 'free') {
-            $response = Http::post(env("APP_URL"), [
+            $response = Http::withOptions(["verify"=>false])->post(env("APP_URL") . "/success", [
                 'address' => json_encode($request->address),
                 'type' => "free",
                 'user_id' => $user->id,
@@ -259,7 +259,7 @@ class StripeController extends Controller
                     'member_access' => "All",
                     'expire' => (new DateTime("+1 month"))->format("Y-m-d H:i:s"),
                     'comment' => $request->comment,
-                    'status' => "complete",
+                    'status' => "succeeded",
                 ]);
             } catch (\Exception $e) {
                 return $e->getMessage();
