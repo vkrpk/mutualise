@@ -95,8 +95,12 @@ Route::group([
     Route::post('serviceUpdate', 'App\Http\Controllers\ServiceController@serviceUpdate')->name('serviceUpdate');
 
     Route::get('profil/security/email-change-verify', 'App\Http\Controllers\Profil\ChangeEmailController@verify')->name('user.email-change-verify');
-    Route::post('profil/security/email-change', 'App\Http\Controllers\Profil\ChangeEmailController@change')->name('user.email-change');   
-    
+    Route::post('profil/security/email-change', 'App\Http\Controllers\Profil\ChangeEmailController@change')->name('user.email-change');
+
     Route::get('/contact', [ContactFormController::class, 'createForm']);
     Route::post('/contact', [ContactFormController::class, 'contactForm'])->name('contact.send');
+
+    Route::prefix('member-access')->middleware(['auth', 'verified'])->group(function () {
+        Route::post('/create', 'App\Http\Controllers\MemberAccessController@create')->name('member_access.create');
+    });
 });
