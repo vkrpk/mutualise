@@ -33,6 +33,6 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         \Cart::remove($request->input('id'));
-        return redirect()->route('home');
+        return redirect()->route('access.index');
     }
 }
