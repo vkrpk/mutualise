@@ -26,7 +26,14 @@ class UserSeeder extends Seeder
                 'role_id' => 1,
                 'nb_free_account' => 0,
                 'email_verified_at' => Carbon::now(),
-                'avatar' => 'resources/images/users/avatars/admin.png',
+            ],
+            [
+                'name' => 'Ikam',
+                'email' => 'ikam@dedikam.com',
+                'password' => Hash::make('biharry2022*'),
+                'role_id' => 1,
+                'nb_free_account' => 0,
+                'email_verified_at' => Carbon::now(),
             ],
             [
                 'name' => 'Bob',
