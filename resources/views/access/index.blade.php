@@ -11,7 +11,7 @@
         </div>
     </div>
 
-    @foreach (App\Models\MemberAccess::all() as $memberAccess)
+    {{-- @foreach (App\Models\MemberAccess::all() as $memberAccess)
         {{ $memberAccess->getAccessName() }}
         {{ $memberAccess->getFormula()->name }}
 
@@ -20,5 +20,5 @@
             <br>
         @endforeach
         {{ $memberAccess->getUser()->email }}
-    @endforeach
+    @endforeach --}}
 @endsection
