@@ -10,6 +10,8 @@ use App\Models\Order;
 use App\Models\Coupon;
 use App\Models\Formula;
 use App\Models\Addresses;
+use Illuminate\Support\Str;
+use App\Models\MemberAccess;
 use App\Models\OrderAddress;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -17,6 +19,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\MemberAccess\NextCloudController;
 
 class StripeController extends Controller
 {
@@ -133,6 +136,7 @@ class StripeController extends Controller
                     'formula_period' => $request->formula_period,
                     'address' => json_encode($request->address),
                     'member_access' => $item->attributes->buttonsRadioForOffer,
+                    'access_name' => $item->name,
                     'diskspace' => $item->attributes->form_diskspace,
                     'formula' => ucfirst($item->attributes->form_level),
                 ],
@@ -162,6 +166,7 @@ class StripeController extends Controller
                     'formula_period' => $request->formula_period,
                     'address' => json_encode($request->address),
                     'member_access' => $item->attributes->buttonsRadioForOffer,
+                    'access_name' => $item->name,
                     'diskspace' => $item->attributes->form_diskspace,
                     'formula' => ucfirst($item->attributes->form_level),
                 ],
@@ -175,6 +180,7 @@ class StripeController extends Controller
                 'user_id' => $user->id,
                 'comment' => $request->comment,
                 'member_access' => $item->attributes->buttonsRadioForOffer,
+                'access_name' => $item->name,
                 'diskspace' => $item->attributes->form_diskspace,
                 'formula' => ucfirst($item->attributes->form_level),
             ]);
@@ -220,6 +226,7 @@ class StripeController extends Controller
                     'diskspace' => (int)$session->metadata->diskspace,
                     'mode' => $session->mode,
                     'member_access' => $session->metadata->member_access !== "" ? ucfirst(substr($session->metadata->member_access, 0, strpos($session->metadata->member_access, 'Offer'))) : "All",
+                    'access_name' => $session->metadata->access_name,
                     'expire' => date('Y-m-d H:i:s', time()),
                     'total_paid' => (float)($session->amount_total / 100),
                     'includes_adhesion' => !$user->is_adherent,
@@ -255,7 +262,7 @@ class StripeController extends Controller
 
                 $formula = Formula::where('name', 'Standard')->first();
 
-                Order::create([
+                $order = Order::create([
                     'user_id' => $user->id,
                     'payment_intent' => "Free",
                     'order_address_id' => $orderAddress->id,
@@ -263,10 +270,16 @@ class StripeController extends Controller
                     'coupon_id' => isset($coupon) ? $coupon->id : null,
                     'mode' => "free",
                     'member_access' => "All",
+                    'access_name' => $request->access_name,
                     'expire' => (new DateTime("+1 month"))->format("Y-m-d H:i:s"),
                     'comment' => $request->comment,
                     'status' => "succeeded",
                 ]);
+                $order = $order->fresh();
+                $password = Str::random();
+                $memberAccess = MemberAccess::createFromOrder($order, $password);
+                $memberAccess = $memberAccess->fresh();
+                \App::call('App\Http\Controllers\MemberAccess\NextCloudController@create', ['memberAccess' => $memberAccess, 'passwordNotHash' => $password]);
                 DB::commit();
             } catch (\Exception $e) {
                 DB::rollback();

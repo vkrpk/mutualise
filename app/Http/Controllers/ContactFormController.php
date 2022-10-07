@@ -35,7 +35,7 @@ class ContactFormController extends Controller
             'content' => $request->get('content'),
         ), function ($message) use ($request) {
             $message->from(env("APP_ENV") === 'local' ? "testSender@email.com" : env('MAIL_FROM_ADDRESS'));
-            $message->to([env('MAIL_FROM_ADDRESS'), 'bobrazowskitrash@gmail.com'], 'admin')->subject($request->get('object'));
+            $message->to(env('MAIL_FROM_ADDRESS'), 'admin')->subject($request->get('object'));
         });
 
         return back()->with('status', 'Nous avons reçu votre message et nous vous remercions de nous avoir contacté');

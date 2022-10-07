@@ -18,6 +18,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->nullable(true)->constrained("users")->nullOnDelete();
             $table->string('payment_intent')->nullable(false);
+            $table->string('access_name')->nullable(false);
             $table->foreignId('order_address_id')->constrained("order_addresses"); // ! nouvelle teable
             $table->foreignId('formula_id')->constrained("formulas"); // dédié, et cie, autre table
             $table->foreignId('coupon_id')->nullable()->constrained('coupons'); // nouvelle table
