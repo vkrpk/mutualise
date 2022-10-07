@@ -277,9 +277,10 @@ class StripeController extends Controller
                 ]);
                 $order = $order->fresh();
                 $password = Str::random();
-                $memberAccess = MemberAccess::createFromOrder($order, $password);
+                $dedikamAccessName = uniqid("dedikam");
+                $memberAccess = MemberAccess::createFromOrder($order, $password, $dedikamAccessName);
                 $memberAccess = $memberAccess->fresh();
-                \App::call('App\Http\Controllers\MemberAccess\NextCloudController@create', ['memberAccess' => $memberAccess, 'passwordNotHash' => $password]);
+                \App::call('App\Http\Controllers\MemberAccess\NextCloudController@create', ['memberAccess' => $memberAccess, 'passwordNotHash' => $password, 'dedikamAccessName' => $dedikamAccessName]);
                 DB::commit();
             } catch (\Exception $e) {
                 DB::rollback();

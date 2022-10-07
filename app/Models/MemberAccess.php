@@ -24,12 +24,13 @@ class MemberAccess extends Model
         'diskspace'
     ];
 
-    public static function createFromOrder(Order $order, string $password)
+    public static function createFromOrder(Order $order, string $password, string $dedikamAccessName)
     {
         return MemberAccess::create([
             'order_id' => $order['id'],
             'password' => $password,
-            'name' => self::getNextMemberAccessName(),
+            // 'name' => self::getNextMemberAccessName(),
+            'name' => $dedikamAccessName,
             'member_access' => $order->member_access,
             'diskspace' => $order->diskspace
         ]);
