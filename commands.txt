@@ -3,3 +3,8 @@ stripe listen --events charge.succeeded --forward-to https://laravel-9.test/succ
 php artisan storage:link
 
 php artisan migrate:fresh --seed
+
+git add -A
+git commit -m "commit"
+git push heroku master
+heroku run php artisan migrate:fresh --seed
