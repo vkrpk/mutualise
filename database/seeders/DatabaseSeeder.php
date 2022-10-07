@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             CouponSeeder::class,
             ServiceSeeder::class,
             FormulaSeeder::class,
+            VoyagerDatabaseSeeder::class
         ]);
     }
 }
