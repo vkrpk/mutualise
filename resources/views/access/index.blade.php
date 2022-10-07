@@ -10,4 +10,15 @@
             <a href="{{ route('offers') }}"><button class="btn btn-secondary btn-lg"><i class="fa-solid fa-cloud-arrow-up me-2"></i>{{__("Ajouter un accès")}}</button></a>
         </div>
     </div>
+
+    @foreach (App\Models\MemberAccess::all() as $memberAccess)
+        {{ $memberAccess->getAccessName() }}
+        {{ $memberAccess->getFormula()->name }}
+
+        @foreach (json_decode($memberAccess->getFormula()->options)  as $option)
+            {{$option}}
+            <br>
+        @endforeach
+        {{ $memberAccess->getUser()->email }}
+    @endforeach
 @endsection

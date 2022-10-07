@@ -23,6 +23,7 @@ class Order extends Model
         'diskspace',
         'mode',
         'member_access',
+        'access_name',
         'expire',
         'total_paid',
         'includes_adhesion',

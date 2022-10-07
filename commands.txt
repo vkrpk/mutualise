@@ -1,3 +1,5 @@
 stripe listen --events charge.succeeded --forward-to https://laravel-9.test/success
 
 php artisan storage:link
+
+php artisan migrate:fresh --seed
