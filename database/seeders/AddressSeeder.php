@@ -22,5 +22,12 @@ class AddressSeeder extends Seeder
             "city" => "Paris",
             "user_id" => 1
         ]);
+        Addresses::create([
+            "identifier" => "Victor k",
+            "address" => "Default",
+            "postal_code" => "75000",
+            "city" => "Paris",
+            "user_id" => 4
+        ]);
     }
 }

@@ -121,7 +121,7 @@
                 <div class="opacityBackgroundMoreOpace rounded-4 border border-secondary text-white text-center py-5 px-lg-5 px-2">
                     <p class="h2 mb-4">{{__("Déjà 14 années d'expérience dans la sauvegarde en ligne")}}</p>
                     <p class="h5 mb-4 px-lg-5 px-0">{{__("Identifiez vos besoins en matière de sauvegarde ou de partage de données et si besoin, contactez-nous par mail ou par téléphone pour vous assister et vous proposer la solution la plus adaptée à vos attentes.")}}</p>
-                    <a href="#"><button class="btn btn-secondary btn-lg">{{__("Demande d'informations")}}</button></a>
+                    <a href="{{ route('contact.index') }}"><button class="btn btn-secondary btn-lg">{{__("Demande d'informations")}}</button></a>
                 </div>
             </div>
         </section>
