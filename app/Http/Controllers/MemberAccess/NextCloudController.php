@@ -18,7 +18,8 @@ class NextCloudController
 
     public function create(MemberAccess $memberAccess, string $passwordNotHash) {
         $datas = [
-            'userid' => $memberAccess->name,
+            // 'userid' => $memberAccess->name,
+            'userid' => uniqid("dedikam"),
             'password' => $passwordNotHash,
             'email' => $memberAccess->getUser()->email,
             'quota' => 1073741824 * $memberAccess->diskspace,
