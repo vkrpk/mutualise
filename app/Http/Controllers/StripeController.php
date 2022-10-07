@@ -169,7 +169,7 @@ class StripeController extends Controller
                 'cancel_url' => env('APP_URL'),
             ]);
         } elseif ($request->formula_period === 'free') {
-            $response = Http::withOptions(["verify"=>true])->post(env("APP_URL") . "/success", [
+            $response = Http::withOptions([ "verify"=> env('APP_ENV') === 'local' ? false : true ])->post(env("APP_URL") . "/success", [
                 'address' => json_encode($request->address),
                 'type' => "free",
                 'user_id' => $user->id,
@@ -230,7 +230,6 @@ class StripeController extends Controller
                 $user->is_adherent = true;
                 $user->save();
                 DB::commit();
-
             } catch (\Exception $e) {
                 DB::rollback();
                 throw $e;
