@@ -15,19 +15,24 @@ class AddressSeeder extends Seeder
      */
     public function run()
     {
-        Addresses::create([
-            "identifier" => "Michael Bihary",
-            "address" => "Default",
-            "postal_code" => "75000",
-            "city" => "Paris",
-            "user_id" => 1
-        ]);
-        Addresses::create([
-            "identifier" => "Victor k",
-            "address" => "Default",
-            "postal_code" => "75000",
-            "city" => "Paris",
-            "user_id" => 4
-        ]);
+        $adresses = [
+            [
+                "identifier" => "Michael Bihary",
+                "address" => "Default",
+                "postal_code" => "75000",
+                "city" => "Paris",
+                "user_id" => 1
+            ],
+            [
+                "identifier" => "Victor K",
+                "address" => "Default",
+                "postal_code" => "75000",
+                "city" => "Paris",
+                "user_id" => 4
+            ]
+        ];
+        foreach ($adresses as $adresse) {
+            Addresses::create($adresse);
+        }
     }
 }
