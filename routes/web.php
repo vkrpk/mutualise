@@ -26,10 +26,6 @@ Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
 
-Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
-});
-
 Route::group([
     'prefix' => LaravelLocalization::setLocale(),
     'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
