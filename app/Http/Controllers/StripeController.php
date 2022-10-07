@@ -230,6 +230,7 @@ class StripeController extends Controller
                 $user->is_adherent = true;
                 $user->save();
                 DB::commit();
+
             } catch (\Exception $e) {
                 DB::rollback();
                 throw $e;
