@@ -32,7 +32,7 @@ class SeafileController
     public static function updateUser(MemberAccess $memberAccess)
     {
         $jsonDatas =
-            '{"quota_total":"' . $memberAccess->diskspace .
+            '{"quota_total":"' . $memberAccess->diskspace * 8000 .
             '"}';
         $url = env('SEAFILE_BASEURL_API') . "api/v2.1/admin/users/" . $memberAccess->getUser()->email . "/";
         array_push(self::$headers, "Authorization: Token " . self::getAuthToken());

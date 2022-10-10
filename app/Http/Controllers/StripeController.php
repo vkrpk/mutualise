@@ -19,7 +19,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
-use App\Http\Controllers\MemberAccess\NextCloudController;
 
 class StripeController extends Controller
 {
@@ -286,7 +285,7 @@ class StripeController extends Controller
                 foreach ($users['data'] as $user) {
                     if($user['email'] === $memberAccess->getUser()->email){
                         $GLOBALS['update'] = true;
-                        \App::call('App\Http\Controllers\MemberAccess\SeafileController@updateUser', ['email' => $memberAccess->getUser()->email, 'quotaTotal' => $memberAccess->diskspace]);
+                        \App::call('App\Http\Controllers\MemberAccess\SeafileController@updateUser', ['memberAccess' => $memberAccess]);
                     }
                 }
                 if($GLOBALS['update'] !== true) {
