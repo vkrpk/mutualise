@@ -43,9 +43,7 @@ class MemberAccess extends Model
     }
 
     public function getAccessName() {
-        // dd($this);
         $order = $this->belongsTo(Order::class, 'order_id')->first();
-        // dd($order);
         return $order->access_name;
     }
 
