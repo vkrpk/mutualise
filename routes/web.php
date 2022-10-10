@@ -9,6 +9,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\Auth\ProfilViewController;
 use App\Http\Controllers\ContactFormController;
+use App\Http\Controllers\MemberAccess\MemberAccessController;
 use App\Services\ComparePasswordAndChangeEmailController;
 use TimeHunter\LaravelGoogleReCaptchaV3\Validations\GoogleReCaptchaV3ValidationRule;
 
@@ -81,7 +82,6 @@ Route::group([
         Route::post('update-cart', [CartController::class, 'updateCart'])->name('cart.update');
         Route::post('remove', [CartController::class, 'removeCart'])->name('cart.remove');
         Route::post('clear', [CartController::class, 'clearAllCart'])->name('cart.clear');
-        Route::get('access', function () { return view('access.index'); })->name('access.index');
     });
     Route::post('cart', [CartController::class, 'addToCart'])->name('cart.store');
 
@@ -100,7 +100,8 @@ Route::group([
     Route::get('/contact', [ContactFormController::class, 'createForm'])->name('contact.index');
     Route::post('/contact', [ContactFormController::class, 'contactForm'])->name('contact.send');
 
-    Route::prefix('member-access')->middleware(['auth', 'verified'])->group(function () {
-        Route::post('/create', 'App\Http\Controllers\MemberAccessController@create')->name('member_access.create');
+    Route::group(['prefix' => 'member-access'])->middleware(['auth', 'verified'])->group(function () {
+        Route::get('/index', [MemberAccessController::class, 'index'])->name('access.index');
+        Route::post('/create', 'App\Http\Controllers\CurlController@create')->name('member_access.create');
     });
 });
