@@ -215,7 +215,6 @@ class StripeController extends Controller
 
                 $formula = Formula::where('name', $session->metadata->formula)->first();
                 $coupon = Coupon::where('code', $session->metadata->coupon)->first() ?? null;
-
                 $order = Order::create([
                     'user_id' => $user->id,
                     'payment_intent' => $paymentIntent,
@@ -287,7 +286,7 @@ class StripeController extends Controller
     }
 
     private function createAccesses(Order $order) {
-        $passwordNotHash = Str::random();
+        $passwordNotHash = $order->member_access === 'Nextcloud' ? '' : Str::random();
         $dedikamAccessName = uniqid("dedikam"); // Pour éviter les conflits en mode dev
         $memberAccess = MemberAccess::createFromOrder($order, $passwordNotHash, $dedikamAccessName);
         $memberAccess = $memberAccess->fresh();
@@ -308,8 +307,8 @@ class StripeController extends Controller
         }
     }
 
-    private function createAccessForNextcloud(MemberAccess $memberAccess, string $passwordNotHash) {
-        \App::call('App\Http\Controllers\MemberAccess\NextCloudController@create', ['memberAccess' => $memberAccess, 'passwordNotHash' => $passwordNotHash, 'dedikamAccessName' => $memberAccess->name]);
+    private function createAccessForNextcloud(MemberAccess $memberAccess) {
+        \App::call('App\Http\Controllers\MemberAccess\NextCloudController@create', ['memberAccess' => $memberAccess, 'dedikamAccessName' => $memberAccess->name]);
     }
 
     private function createAccessForSeafile(MemberAccess $memberAccess, string $passwordNotHash) {
@@ -322,9 +321,6 @@ class StripeController extends Controller
             }
         }
         if($GLOBALS['update'] !== true) {
-            if(count($listUsersSeafile['data']) >= 3){
-                \App::call('App\Http\Controllers\MemberAccess\SeafileController@deleteUser', ['email' => $listUsersSeafile['data'][2]['email']]);
-            }
             \App::call('App\Http\Controllers\MemberAccess\SeafileController@create', ['memberAccess' => $memberAccess, 'passwordNotHash' => $passwordNotHash, 'dedikamAccessName' => $memberAccess->name]);
         }
     }
