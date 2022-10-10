@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\MemberAccess;
 
 use App\Models\MemberAccess;
-use App\Services\MemberAccessController;
+use App\Services\CurlController;
 
 class NextCloudController
 {
@@ -25,8 +25,9 @@ class NextCloudController
             'quota' => 1073741824 * $memberAccess->diskspace,
         ];
         $url = env('NEXTCLOUD_BASEURL_API') . 'users';
-        $api = new MemberAccessController($url, $this->headers, env('NEXTCLOUD_USERPWD'));
-        $xml = $api->callAPIPost(http_build_query($datas));
+        $ch = (new CurlController($url, $this->headers));
+        $ch->getChForNextcloud(env('NEXTCLOUD_USERPWD'));
+        $xml = $ch->callAPIPost(http_build_query($datas));
         $arr = self::xmlToArray($xml);
         return $arr['meta']['status'] === 'ok' ? true : false;
     }

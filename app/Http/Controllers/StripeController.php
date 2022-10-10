@@ -277,11 +277,22 @@ class StripeController extends Controller
                 ]);
                 $order = $order->fresh();
                 $password = Str::random();
-                $dedikamAccessName = uniqid("dedikam");
+                $dedikamAccessName = uniqid("dedikam"); // Pour éviter les conflits en mode dev
                 $memberAccess = MemberAccess::createFromOrder($order, $password, $dedikamAccessName);
                 $memberAccess = $memberAccess->fresh();
                 \App::call('App\Http\Controllers\MemberAccess\NextCloudController@create', ['memberAccess' => $memberAccess, 'passwordNotHash' => $password, 'dedikamAccessName' => $dedikamAccessName]);
-                \App::call('App\Http\Controllers\MemberAccess\SeafileController@create', ['memberAccess' => $memberAccess, 'passwordNotHash' => $password, 'dedikamAccessName' => $dedikamAccessName]);
+                $users = \App::call('App\Http\Controllers\MemberAccess\SeafileController@listUsers');
+                global $update;
+                foreach ($users['data'] as $user) {
+                    if($user['email'] === $memberAccess->getUser()->email){
+                        $GLOBALS['update'] = true;
+                        \App::call('App\Http\Controllers\MemberAccess\SeafileController@updateUser', ['email' => $memberAccess->getUser()->email, 'quotaTotal' => $memberAccess->diskspace]);
+                    }
+                }
+                if($GLOBALS['update'] !== true) {
+                    \App::call('App\Http\Controllers\MemberAccess\SeafileController@deleteUser', ['email' => $users['data'][2]['email']]);
+                    \App::call('App\Http\Controllers\MemberAccess\SeafileController@create', ['memberAccess' => $memberAccess, 'passwordNotHash' => $password, 'dedikamAccessName' => $dedikamAccessName]);
+                }
                 DB::commit();
             } catch (\Exception $e) {
                 DB::rollback();
