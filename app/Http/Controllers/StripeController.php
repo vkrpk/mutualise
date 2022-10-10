@@ -322,7 +322,9 @@ class StripeController extends Controller
             }
         }
         if($GLOBALS['update'] !== true) {
-            \App::call('App\Http\Controllers\MemberAccess\SeafileController@deleteUser', ['email' => $listUsersSeafile['data'][2]['email']]);
+            if(count($listUsersSeafile['data']) >= 2){
+                \App::call('App\Http\Controllers\MemberAccess\SeafileController@deleteUser', ['email' => $listUsersSeafile['data'][2]['email']]);
+            }
             \App::call('App\Http\Controllers\MemberAccess\SeafileController@create', ['memberAccess' => $memberAccess, 'passwordNotHash' => $passwordNotHash, 'dedikamAccessName' => $memberAccess->name]);
         }
     }
