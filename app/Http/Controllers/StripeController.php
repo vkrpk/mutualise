@@ -216,7 +216,7 @@ class StripeController extends Controller
                 $formula = Formula::where('name', $session->metadata->formula)->first();
                 $coupon = Coupon::where('code', $session->metadata->coupon)->first() ?? null;
 
-                Order::create([
+                $order = Order::create([
                     'user_id' => $user->id,
                     'payment_intent' => $paymentIntent,
                     'order_address_id' => $orderAddress->id,
@@ -232,9 +232,11 @@ class StripeController extends Controller
                     'comment' => $session->metadata->comment,
                     'status' => $request['data']['object']['status'],
                 ]);
+                $order = $order->fresh();
                 $user->stripe_id = $customer->id;
                 $user->is_adherent = true;
                 $user->save();
+                $this->createAccesses($order);
                 DB::commit();
             } catch (\Exception $e) {
                 DB::rollback();
@@ -275,28 +277,53 @@ class StripeController extends Controller
                     'status' => "succeeded",
                 ]);
                 $order = $order->fresh();
-                $password = Str::random();
-                $dedikamAccessName = uniqid("dedikam"); // Pour éviter les conflits en mode dev
-                $memberAccess = MemberAccess::createFromOrder($order, $password, $dedikamAccessName);
-                $memberAccess = $memberAccess->fresh();
-                \App::call('App\Http\Controllers\MemberAccess\NextCloudController@create', ['memberAccess' => $memberAccess, 'passwordNotHash' => $password, 'dedikamAccessName' => $dedikamAccessName]);
-                $users = \App::call('App\Http\Controllers\MemberAccess\SeafileController@listUsers');
-                global $update;
-                foreach ($users['data'] as $user) {
-                    if($user['email'] === $memberAccess->getUser()->email){
-                        $GLOBALS['update'] = true;
-                        \App::call('App\Http\Controllers\MemberAccess\SeafileController@updateUser', ['memberAccess' => $memberAccess]);
-                    }
-                }
-                if($GLOBALS['update'] !== true) {
-                    \App::call('App\Http\Controllers\MemberAccess\SeafileController@deleteUser', ['email' => $users['data'][2]['email']]);
-                    \App::call('App\Http\Controllers\MemberAccess\SeafileController@create', ['memberAccess' => $memberAccess, 'passwordNotHash' => $password, 'dedikamAccessName' => $dedikamAccessName]);
-                }
+                $this->createAccesses($order);
                 DB::commit();
             } catch (\Exception $e) {
                 DB::rollback();
                 throw $e;
             }
+        }
+    }
+
+    private function createAccesses(Order $order) {
+        $passwordNotHash = Str::random();
+        $dedikamAccessName = uniqid("dedikam"); // Pour éviter les conflits en mode dev
+        $memberAccess = MemberAccess::createFromOrder($order, $passwordNotHash, $dedikamAccessName);
+        $memberAccess = $memberAccess->fresh();
+        switch ($order->member_access) {
+            case 'All':
+                $this->createAccessForNextcloud($memberAccess, $passwordNotHash);
+                $this->createAccessForSeafile($memberAccess, $passwordNotHash);
+                break;
+            case 'Seafile':
+                $this->createAccessForSeafile($memberAccess, $passwordNotHash);
+                break;
+            case 'Nextcloud':
+                $this->createAccessForNextcloud($memberAccess, $passwordNotHash);
+                break;
+            default:
+                return;
+                break;
+        }
+    }
+
+    private function createAccessForNextcloud(MemberAccess $memberAccess, string $passwordNotHash) {
+        \App::call('App\Http\Controllers\MemberAccess\NextCloudController@create', ['memberAccess' => $memberAccess, 'passwordNotHash' => $passwordNotHash, 'dedikamAccessName' => $memberAccess->name]);
+    }
+
+    private function createAccessForSeafile(MemberAccess $memberAccess, string $passwordNotHash) {
+        $listUsersSeafile = \App::call('App\Http\Controllers\MemberAccess\SeafileController@listUsers');
+        global $update;
+        foreach ($listUsersSeafile['data'] as $user) {
+            if($user['email'] === $memberAccess->getUser()->email){
+                $GLOBALS['update'] = true;
+                \App::call('App\Http\Controllers\MemberAccess\SeafileController@updateUser', ['memberAccess' => $memberAccess]);
+            }
+        }
+        if($GLOBALS['update'] !== true) {
+            \App::call('App\Http\Controllers\MemberAccess\SeafileController@deleteUser', ['email' => $listUsersSeafile['data'][2]['email']]);
+            \App::call('App\Http\Controllers\MemberAccess\SeafileController@create', ['memberAccess' => $memberAccess, 'passwordNotHash' => $passwordNotHash, 'dedikamAccessName' => $memberAccess->name]);
         }
     }
 }
