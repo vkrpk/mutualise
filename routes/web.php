@@ -100,7 +100,7 @@ Route::group([
     Route::get('/contact', [ContactFormController::class, 'createForm'])->name('contact.index');
     Route::post('/contact', [ContactFormController::class, 'contactForm'])->name('contact.send');
 
-    Route::group(['prefix' => 'member-access'])->middleware(['auth', 'verified'])->group(function () {
+    Route::group(['prefix' => 'member-access', 'middleware' => ['auth', 'verified']], function () {
         Route::get('/index', [MemberAccessController::class, 'index'])->name('access.index');
         Route::post('/create', 'App\Http\Controllers\CurlController@create')->name('member_access.create');
     });
