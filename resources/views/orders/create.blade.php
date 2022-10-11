@@ -64,7 +64,7 @@
                         </div>
                     </div>
                     <div class="card-footer d-flex justify-content-between">
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati animi odit, tempore dolorum labore eligendi, debitis sint excepturi reiciendis cum, error vel quas minima? Facere, labore similique? Fugiat, rerum veritatis.</p>
+                        <span>Veuillez renseigner la ou les addresses mails qui seront utilisées pour se connecter à Seafile et Nextcloud.</span>
                     </div>
                 </div>
 

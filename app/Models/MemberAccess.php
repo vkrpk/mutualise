@@ -64,4 +64,13 @@ class MemberAccess extends Model
         $user_id = $order->user_id;
         return User::find($user_id);
     }
+
+    public static function accessesOfOneUser(int $userId) {
+        $orders = Order::where('user_id', $userId)->get();
+        $memberAccesses = [];
+        foreach ($orders as $order) {
+            $memberAccesses[] = MemberAccess::where('order_id', $order->id)->get();
+        }
+        return $memberAccesses;
+    }
 }
