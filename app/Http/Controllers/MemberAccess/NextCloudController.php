@@ -40,10 +40,28 @@ class NextCloudController
         return $arr['data'] == [] ? false : $arr['data'];
     }
 
+    public function listUsers() {
+        $url = env('NEXTCLOUD_BASEURL_API') . 'users';
+        $ch = (new CurlController($url, $this->headers));
+        $ch->getChForNextcloud(env('NEXTCLOUD_USERPWD'));
+        $xml = $ch->callAPIGet();
+        $arr = self::xmlToArray($xml);
+        return $arr['data']['users']['element'] == [] ? false : $arr['data']['users']['element'];
+    }
+
     public static function xmlToArray($xml) {
         $xml = simplexml_load_string($xml, "SimpleXMLElement", LIBXML_NOCDATA);
         $json = json_encode($xml);
         $arr = json_decode($json, TRUE);
         return $arr;
+    }
+
+    public function deleteUser(string $email) {
+        $url = env('NEXTCLOUD_BASEURL_API') . 'users/' . $email;
+        $curl = (new CurlController($url, $this->headers));
+        $ch = $curl->getChForNextcloud(env('NEXTCLOUD_USERPWD'));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
+        return $curl->callAPIGet();
     }
 }
