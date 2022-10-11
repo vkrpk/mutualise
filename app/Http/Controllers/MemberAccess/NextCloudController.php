@@ -18,10 +18,9 @@ class NextCloudController
 
     public function create(MemberAccess $memberAccess, string $dedikamAccessName) {
         $datas = [
-            // 'userid' => $memberAccess->name,
-            'userid' => $dedikamAccessName,
+            'userid' => $memberAccess->email,
             'password' => '',
-            'email' => $memberAccess->getUser()->email,
+            'email' => $memberAccess->email,
             'quota' => 1073741824 * $memberAccess->diskspace,
         ];
         $url = env('NEXTCLOUD_BASEURL_API') . 'users';
@@ -30,6 +29,15 @@ class NextCloudController
         $xml = $ch->callAPIPost(http_build_query($datas));
         $arr = self::xmlToArray($xml);
         return $arr['meta']['status'] === 'ok' ? true : false;
+    }
+
+    public function getUser(string $email) {
+        $url = env('NEXTCLOUD_BASEURL_API') . 'users/' . $email;
+        $ch = (new CurlController($url, $this->headers));
+        $ch->getChForNextcloud(env('NEXTCLOUD_USERPWD'));
+        $xml = $ch->callAPIGet();
+        $arr = self::xmlToArray($xml);
+        return $arr['data'] == [] ? false : $arr['data'];
     }
 
     public static function xmlToArray($xml) {

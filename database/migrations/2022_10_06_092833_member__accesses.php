@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('order_id')->constrained("orders");
             $table->string('password', 255)->nullable(true);
-            $table->enum('member_access', ['Pydio', 'Seafile', 'Nextcloud', 'All'])->nullable(false);
-            // $table->string('name', 16)->nullable(false);
+            $table->enum('member_access', ['Seafile', 'Nextcloud'])->nullable(false);
+            $table->string('email')->nullable(false);
             $table->string('name')->nullable(false);
             $table->integer('diskspace')->nullable(false);
             $table->timestamps();

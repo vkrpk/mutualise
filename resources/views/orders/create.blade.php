@@ -18,6 +18,56 @@
                         <x-adresses-card :address="$address" :form="'formRecapOrder'"/>
                     </div>
                 </div>
+                <div class="card mb-4">
+                    <div class="card-header customCardHeader">
+                        <span>Adresse email</span>
+                    </div>
+                    {{-- {{ dd($item) }} --}}
+                    <div class="card-body">
+                        <div class="row">
+                            @if ($item->attributes->isFreeTrial == true || $item->attributes->form_level === 'standard' || $item->attributes->form_level === 'entreprise' )
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="emailSeafile">Seafile<sup><i class="fa-solid fa-asterisk" style="font-size: 8px;color: red;margin-top: -14px;"></i></sup></label>
+                                        <input form="formRecapOrder" class="form-control" id="emailSeafile" type="text" value="{{ old('emailSeafile') ? old('emailSeafile') : Auth::user()->email }}" name="emailSeafile">
+                                        @error('emailSeafile')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="emailNextcloud">Nextcloud<sup><i class="fa-solid fa-asterisk" style="font-size: 8px;color: red;margin-top: -14px;"></i></sup></label>
+                                        <input form="formRecapOrder" class="form-control" id="emailNextcloud" type="text" value="{{ old('emailNextcloud') ? old('emailNextcloud') : Auth::user()->email }}" name="emailNextcloud">
+                                        @error('emailNextcloud')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                        @error('uniqEmail')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                            @endif
+                            @if ($item->attributes->buttonsRadioForOffer === 'nextcloudOfferBasique' || $item->attributes->buttonsRadioForOffer === 'nextcloudOfferDedicated')
+                                <div class="col-12">
+                                    <label class="small mb-1" for="emailNextcloud">Nextcloud<sup><i class="fa-solid fa-asterisk" style="font-size: 8px;color: red;margin-top: -14px;"></i></sup></label>
+                                    <input form="formRecapOrder" class="form-control" id="emailNextcloud" type="text" value="{{ old('emailNextcloud') ? old('emailNextcloud') : Auth::user()->email }}" name="emailNextcloud">
+                                    @error('emailNextcloud')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            @elseif ($item->attributes->buttonsRadioForOffer === 'seafileOfferBasique' || $item->attributes->buttonsRadioForOffer === 'seafileOfferDedicated')
+                                <div class="col-12">
+                                    <label class="small mb-1" for="emailSeafile">Seafile<sup><i class="fa-solid fa-asterisk" style="font-size: 8px;color: red;margin-top: -14px;"></i></sup></label>
+                                    <input form="formRecapOrder" class="form-control" id="emailSeafile" type="text" value="{{ old('emailSeafile') ? old('emailSeafile') : Auth::user()->email }}" name="emailSeafile">
+                                    @error('emailSeafile')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between">
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati animi odit, tempore dolorum labore eligendi, debitis sint excepturi reiciendis cum, error vel quas minima? Facere, labore similique? Fugiat, rerum veritatis.</p>
+                    </div>
+                </div>
+
             </div>
             <div class="col-12 col-lg-6">
                 <div class="card mb-4">

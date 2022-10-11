@@ -19,7 +19,7 @@ class SeafileController
     public function create(MemberAccess $memberAccess, string $passwordNotHash, string $dedikamAccessName) {
         $jsonDatas =
             '{"name":"' . $dedikamAccessName .
-            '","email": "' . $memberAccess->getUser()->email .
+            '","email": "' . $memberAccess->email .
             '","password": "' . $passwordNotHash .
             '","quota_total":"' . $memberAccess->diskspace * 8000 .
             '"}';
