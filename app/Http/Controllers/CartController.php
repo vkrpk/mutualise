@@ -58,7 +58,7 @@ class CartController extends Controller
 
         $validatorGlobal
             ->sometimes('buttonsRadioForOffer',
-                ['required', Rule::in(['pydioOfferBasique', 'seafileOfferBasique', 'nextcloudOfferBasique'])],
+                ['required', Rule::in(['seafileOfferBasique', 'nextcloudOfferBasique'])],
                 function ($input) {
                     return $input->form_level === 'basique' ? true : false;
                 })
@@ -68,7 +68,7 @@ class CartController extends Controller
                     return $input->form_level === 'dédié' ? true : false;
                 })
             ->sometimes('buttonsRadioForOffer',
-                ['required', Rule::in(['pydioOfferDedicated', 'seafileOfferDedicated', 'nextcloudOfferDedicated'])],
+                ['required', Rule::in(['seafileOfferDedicated', 'nextcloudOfferDedicated'])],
                 function ($input) {
                     return $input->form_level === 'dédié' ? true : false;
                 })

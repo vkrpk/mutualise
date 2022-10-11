@@ -21,15 +21,16 @@ class MemberAccess extends Model
         'password',
         'member_access',
         'name',
+        'email',
         'diskspace'
     ];
 
-    public static function createFromOrder(Order $order, string $password, string $dedikamAccessName)
+    public static function createFromOrder(Order $order, string $password, string $dedikamAccessName, string $email)
     {
         return MemberAccess::create([
             'order_id' => $order['id'],
             'password' => $password,
-            // 'name' => self::getNextMemberAccessName(),
+            'email' => $email,
             'name' => $dedikamAccessName,
             'member_access' => $order->member_access,
             'diskspace' => $order->diskspace

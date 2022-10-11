@@ -4,9 +4,9 @@
     <a class="Standard pricingHeader w-100 col2 text-center" offer="standard">Standard</a>
     <a class="Entreprise pricingHeader w-100 col3 text-center" offer="entreprise">{{__("Entreprise")}}</a>
     <a class="Dedie pricingHeader w-100 col4 text-center" offer="dédié">{{__("Dédié")}}</a>
-    <div class="Pydio pricingReference">Pydio</div>
     <div class="Seafile pricingReference">Seafile</div>
     <div class="Nextcloud pricingReference">Nextcloud</div>
+    <div class="Pydio pricingReference">Pydio</div>
     <div class="ssh pricingReference">SSH</div>
     <div class="RSYNC pricingReference">RSYNC</div>
     <div class="SFTP pricingReference">SFTP</div>
@@ -16,10 +16,6 @@
     <div class="Webdav pricingReference">Webdav</div>
     <div class="SI pricingReference">SI</div>
     <a tabindex="0" offer="basique" class="colContainer col1 popover-dismiss d-block w-100" role="button" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-title="Répartition des données" data-bs-content="1 serveur" data-bs-placement="right">
-        <div class="AA check">
-            <input type="radio" name="buttonsRadioForOffer" id="pydioOfferBasique" value="pydioOfferBasique" form="formAddToCart" {{ old('buttonsRadioForOffer') == 'pydioOfferBasique' ? 'checked' : '' }}>
-            <label for="pydioOfferBasique" class="d-none d-sm-inline">Pydio</label>
-        </div>
         <div class="AB check">
             <input type="radio" name="buttonsRadioForOffer" id="seafileOfferBasique" value="seafileOfferBasique" form="formAddToCart" {{ old('buttonsRadioForOffer') == 'seafileOfferBasique' ? 'checked' : '' }}>
             <label for="seafileOfferBasique" class="d-none d-sm-inline">Seafile</label>
@@ -27,6 +23,10 @@
         <div class="AC check">
             <input type="radio" name="buttonsRadioForOffer" id="nextcloudOfferBasique" value="nextcloudOfferBasique" form="formAddToCart" {{ old('buttonsRadioForOffer') == 'nextcloudOfferBasique' ? 'checked' : '' }}>
             <label for="nextcloudOfferBasique" class="d-none d-sm-inline">Nextcloud</label>
+        </div>
+        <div class="AA check">
+            <input disabled type="radio" name="buttonsRadioForOffer" id="pydioOfferBasique" value="pydioOfferBasique" form="formAddToCart" {{ old('buttonsRadioForOffer') == 'pydioOfferBasique' ? 'checked' : '' }}>
+            <label for="pydioOfferBasique" class="d-none d-sm-inline">Pydio</label>
         </div>
         @error('buttonsRadioForOffer')
             <div class="text-danger">{{ $message }}</div>
@@ -67,10 +67,6 @@
         <div class="CK check"><i class="fa-solid fa-check"></i></div>
     </a>
     <a tabindex="3" offer="dédié" class="colContainer col4 popover-dismiss d-block w-100" role="button" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-title="Répartition des données" data-bs-content="3 serveurs et 2 datacenters" data-bs-placement="left">
-      <div class="DA check">
-          <input type="radio" name="buttonsRadioForOffer" id="pydioOfferDedicated" value="pydioOfferDedicated" form="formAddToCart" {{ old('buttonsRadioForOffer') == 'pydioOfferDedicated' ? 'checked' : '' }}>
-          <label for="pydioOfferDedicated" class="d-none d-sm-inline">Pydio</label>
-      </div>
       <div class="DB check">
           <input type="radio" name="buttonsRadioForOffer" id="seafileOfferDedicated" value="seafileOfferDedicated" form="formAddToCart" {{ old('buttonsRadioForOffer') == 'seafileOfferDedicated' ? 'checked' : '' }}>
           <label for="seafileOfferDedicated" class="d-none d-sm-inline">Seafile</label>
@@ -79,6 +75,10 @@
           <input type="radio" name="buttonsRadioForOffer" id="nextcloudOfferDedicated" value="nextcloudOfferDedicated" form="formAddToCart" {{ old('buttonsRadioForOffer') == 'nextcloudOfferDedicated' ? 'checked' : '' }}>
           <label for="nextcloudOfferDedicated" class="d-none d-sm-inline">Nextcloud</label>
       </div>
+      <div class="DA check">
+        <input disabled type="radio" name="buttonsRadioForOffer" id="pydioOfferDedicated" value="pydioOfferDedicated" form="formAddToCart" {{ old('buttonsRadioForOffer') == 'pydioOfferDedicated' ? 'checked' : '' }}>
+        <label for="pydioOfferDedicated" class="d-none d-sm-inline">Pydio</label>
+    </div>
       <div class="DD"><i class="fa-solid fa-xmark"></i></div>
       <div class="DE"><i class="fa-solid fa-xmark"></i></div>
       <div class="DF"><i class="fa-solid fa-xmark"></i></div>
