@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contact;
+use App\Models\MemberAccess;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 // use Illuminate\Support\Facades\Mail;

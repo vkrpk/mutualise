@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('email')->nullable(false);
             $table->string('name')->nullable(false);
             $table->integer('diskspace')->nullable(false);
+            $table->string('domain')->nullable(true);
             $table->timestamps();
         });
     }

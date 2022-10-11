@@ -171,7 +171,8 @@ class StripeController extends Controller
                     'diskspace' => $item->attributes->form_diskspace,
                     'formula' => ucfirst($item->attributes->form_level),
                     'emailSeafile' => $request->emailSeafile,
-                    'emailNextcloud' => $request->emailNextcloud
+                    'emailNextcloud' => $request->emailNextcloud,
+                    'domain' => $item->attributes->domainUrlOrPrefix
                 ],
                 'success_url' => env('APP_URL') . '/order/store?id=' . $item->id,
                 'cancel_url' => env('APP_URL'),
@@ -203,7 +204,8 @@ class StripeController extends Controller
                     'diskspace' => $item->attributes->form_diskspace,
                     'formula' => ucfirst($item->attributes->form_level),
                     'emailSeafile' => $request->emailSeafile,
-                    'emailNextcloud' => $request->emailNextcloud
+                    'emailNextcloud' => $request->emailNextcloud,
+                    'domain' => $item->attributes->domainUrlOrPrefix
                 ],
                 'success_url' => env('APP_URL') . '/order/store?id=' . $item->id,
                 'cancel_url' => env('APP_URL'),
@@ -278,10 +280,10 @@ class StripeController extends Controller
                         $this->createAccessForSeafile($order, $session->metadata->emailSeafile);
                         break;
                     case 'Seafile':
-                        $this->createAccessForSeafile($order, $session->metadata->emailSeafile);
+                        $this->createAccessForSeafile($order, $session->metadata->emailSeafile, $session->metadata->domain);
                         break;
                     case 'Nextcloud':
-                        $this->createAccessForNextcloud($order, $session->metadata->emailNextcloud);
+                        $this->createAccessForNextcloud($order, $session->metadata->emailNextcloud, $session->metadata->domain);
                         break;
                     default:
                         break;
@@ -336,17 +338,18 @@ class StripeController extends Controller
         }
     }
 
-    private function createAccessForNextcloud(Order $order, string $email) {
+    private function createAccessForNextcloud(Order $order, string $email, ?string $domain = '') {
         $dedikamAccessName = uniqid("dedikam"); // Pour éviter les conflits en mode dev
-        $memberAccess = MemberAccess::createFromOrder($order, '', $dedikamAccessName, $email);
+        $memberAccess = MemberAccess::createFromOrder($order, '', $dedikamAccessName, $email, true, $domain);
         $memberAccess = $memberAccess->fresh();
         \App::call('App\Http\Controllers\MemberAccess\NextCloudController@create', ['memberAccess' => $memberAccess, 'dedikamAccessName' => $memberAccess->name]);
+        $this->sendEmailNotificationToAdmin($memberAccess);
     }
 
-    private function createAccessForSeafile(Order $order, string $email) {
+    private function createAccessForSeafile(Order $order, string $email, ?string $domain = '') {
         $dedikamAccessName = uniqid("dedikam"); // Pour éviter les conflits en mode dev
         $passwordNotHash = Str::random();
-        $memberAccess = MemberAccess::createFromOrder($order, $passwordNotHash, $dedikamAccessName, $email);
+        $memberAccess = MemberAccess::createFromOrder($order, $passwordNotHash, $dedikamAccessName, $email, false, $domain);
         $memberAccess = $memberAccess->fresh();
         $listUsersSeafile = \App::call('App\Http\Controllers\MemberAccess\SeafileController@listUsers');
         global $update;
@@ -357,10 +360,18 @@ class StripeController extends Controller
             }
         }
         if($GLOBALS['update'] !== true) {
-            if(count($listUsersSeafile['data']) >= 3) {
-                \App::call('App\Http\Controllers\MemberAccess\SeafileController@deleteUser', ['email' => $listUsersSeafile['data'][2]['email']]);
-            }
+            // if(count($listUsersSeafile['data']) >= 3) {
+            //     \App::call('App\Http\Controllers\MemberAccess\SeafileController@deleteUser', ['email' => $listUsersSeafile['data'][2]['email']]);
+            // }
             \App::call('App\Http\Controllers\MemberAccess\SeafileController@create', ['memberAccess' => $memberAccess, 'passwordNotHash' => $passwordNotHash, 'dedikamAccessName' => $memberAccess->name]);
+            $this->sendEmailNotificationToAdmin($memberAccess);
         }
+    }
+
+    public function sendEmailNotificationToAdmin(MemberAccess $memberAccess) {
+        \Mail::send('mail.notificationToSupportWhenAccessIsCreate', $memberAccess->toArray(), function ($message) {
+            $message->from(env('MAIL_FROM_ADDRESS'));
+            $message->to(env('MAIL_FROM_ADDRESS'), 'admin')->subject('Création de compte');
+        });
     }
 }
