@@ -83,7 +83,7 @@ class StripeController extends Controller
                 '',
                 'max:255',
                 function ($attribute, $value, $fail) {
-                    $nextcloudUser = \App::call('App\Http\Controllers\MemberAccess\NextcloudController@getUser', ['email' => RequestFacade::input('emailNextcloud')]);
+                    $nextcloudUser = \App::call('App\Http\Controllers\MemberAccess\NextCloudController@getUser', ['email' => RequestFacade::input('emailNextcloud')]);
                     if ($nextcloudUser !== false && $value === $nextcloudUser["email"]) {
                         $fail('Cet email est déjà attribué');
                     }
