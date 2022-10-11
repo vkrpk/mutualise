@@ -22,18 +22,20 @@ class MemberAccess extends Model
         'member_access',
         'name',
         'email',
-        'diskspace'
+        'diskspace',
+        'domain',
     ];
 
-    public static function createFromOrder(Order $order, string $password, string $dedikamAccessName, string $email)
+    public static function createFromOrder(Order $order, string $password, string $dedikamAccessName, string $email, ?bool $isNextcloud = null, ?string $domain = '')
     {
         return MemberAccess::create([
             'order_id' => $order['id'],
             'password' => $password,
             'email' => $email,
             'name' => $dedikamAccessName,
-            'member_access' => $order->member_access,
-            'diskspace' => $order->diskspace
+            'member_access' => $isNextcloud !== null ? ($isNextcloud ? 'Nextcloud' : 'Seafile') : $order->member_access,
+            'diskspace' => $order->diskspace,
+            'domain' => $domain,
         ]);
     }
 
