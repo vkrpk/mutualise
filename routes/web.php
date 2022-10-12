@@ -104,4 +104,8 @@ Route::group([
         Route::get('/index', [MemberAccessController::class, 'index'])->name('access.index');
         Route::post('/create', 'App\Http\Controllers\CurlController@create')->name('member_access.create');
     });
+
+    Route::group(['prefix' => 'orders', 'middleware' => ['auth', 'verified']], function () {
+        Route::get('/index', [OrderController::class, 'index'])->name('order.index');
+    });
 });
