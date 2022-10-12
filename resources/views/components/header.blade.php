@@ -62,6 +62,7 @@
                             <div class="dropdown-menu dropdown-menu-end">
                                 <a class="dropdown-item" href="{{ route('profilIndex') }}">{{__('Mon compte')}}</a>
                                 <a class="dropdown-item" href="{{ route('access.index') }}">{{__('Mes accès')}}</a>
+                                <a class="dropdown-item" href="{{ route('order.index') }}">{{__('Mes commandes')}}</a>
                                 {{-- <a class="dropdown-item" href="#">{{__('Ouvrir un ticket')}}</a> --}}
                                 @if (Auth::user()->role_id === 1)
                                     <div class="dropdown-divider"></div>

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
 class OrderController extends Controller
@@ -34,5 +36,11 @@ class OrderController extends Controller
     {
         \Cart::remove($request->input('id'));
         return view('orders.success');
+    }
+
+    public function index() {
+        $orders = Order::where('user_id', Auth::user()->id)->get();
+        // dd($orders);
+        return view('orders.index');
     }
 }
