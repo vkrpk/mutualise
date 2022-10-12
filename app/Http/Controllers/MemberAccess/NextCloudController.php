@@ -64,4 +64,13 @@ class NextCloudController
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
         return $curl->callAPIGet();
     }
+
+    public function deleteAllUsers() {
+        $allUsers = $this->listUsers();
+        foreach ($allUsers as $user) {
+            if($user !==  'admin@dedikam.com'){
+                $this->deleteUser($user);
+            }
+        }
+    }
 }

@@ -66,11 +66,16 @@ class MemberAccess extends Model
     }
 
     public static function accessesOfOneUser(int $userId) {
-        $orders = Order::where('user_id', $userId)->get();
+        $orders = Order::where('user_id', $userId)->orderBy('created_at', 'desc')->get();
         $memberAccesses = [];
         foreach ($orders as $order) {
             $memberAccesses[] = MemberAccess::where('order_id', $order->id)->get();
         }
         return $memberAccesses;
+    }
+
+    public function getAbonnement() {
+        $order = $this->belongsTo(Order::class, 'order_id')->first();
+        return $order->mode;
     }
 }
