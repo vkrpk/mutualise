@@ -108,4 +108,7 @@ Route::group([
     Route::group(['prefix' => 'orders', 'middleware' => ['auth', 'verified']], function () {
         Route::get('/index', [OrderController::class, 'index'])->name('order.index');
     });
+    Route::post('orders/download-facture', 'App\Http\Controllers\OrderController@downloadPDF')->name('order.download-facture');
+    Route::post('orders/path-facture', 'App\Http\Controllers\OrderController@getPathForPDF')->name('order.path-facture');
+    // Route::post('orders/send-email', 'App\Http\Controllers\StripeController@sendEmailToUserAfterToOrder')->name('sendEmailToUserAfterToOrder');
 });

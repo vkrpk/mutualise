@@ -10,6 +10,7 @@
     "require": {
         "php": "^8.0.2",
         "bacon/bacon-qr-code": "^2.0",
+        "barryvdh/laravel-dompdf": "^2.0",
         "darryldecode/cart": "^4.2",
         "guzzlehttp/guzzle": "^7.5",
         "laravel/framework": "^9.25.2",

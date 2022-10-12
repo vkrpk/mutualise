@@ -20,6 +20,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Request as RequestFacade;
+use GuzzleHttp\Client as GuzzleClient;
+use GuzzleHttp\Psr7\Uri;
+use Illuminate\Support\Facades\URL;
 
 class StripeController extends Controller
 {
@@ -288,6 +291,9 @@ class StripeController extends Controller
                         break;
                 }
                 DB::commit();
+                if(isset($order) === true) {
+                    $this->sendEmailToUserAfterToOrder($order);
+                }
             } catch (\Exception $e) {
                 DB::rollback();
                 throw $e;
@@ -313,24 +319,29 @@ class StripeController extends Controller
 
                 $formula = Formula::where('name', 'Standard')->first();
 
-                $order = Order::create([
-                    'user_id' => $user->id,
-                    'payment_intent' => "Free",
-                    'order_address_id' => $orderAddress->id,
-                    'formula_id' => $formula->id,
-                    'coupon_id' => isset($coupon) ? $coupon->id : null,
-                    'mode' => "free",
-                    'member_access' => "All",
-                    'access_name' => $request->access_name,
-                    'expire' => (new DateTime("+1 month"))->format("Y-m-d H:i:s"),
-                    'comment' => $request->comment,
-                    'status' => "succeeded",
-                ]);
+                $order = new Order();
+
+                $order->user_id = $user->id;
+                $order->payment_intent = "Free";
+                $order->order_address_id = $orderAddress->id;
+                $order->formula_id = $formula->id;
+                $order->coupon_id = isset($coupon) ? $coupon->id : null;
+                $order->mode = "free";
+                $order->member_access = "All";
+                $order->access_name = $request->access_name;
+                $order->expire = (new DateTime("+1 month"))->format("Y-m-d H:i:s");
+                $order->comment = $request->comment;
+                $order->status = "succeeded";
+
+                $order->save();
                 $order = $order->fresh();
-                $this->createAccessForNextcloud($order, $request->emailNextcloud);
-                $this->createAccessForSeafile($order, $request->emailSeafile);
-                // Http::withOptions([ "verify"=> env('APP_ENV') === 'local' ? false : true ])->get(route('access.index'));
+                $newOrder = Order::find($order->id);
+                $this->createAccessForNextcloud($newOrder, $request->emailNextcloud);
+                $this->createAccessForSeafile($newOrder, $request->emailSeafile);
                 DB::commit();
+                if(isset($newOrder) === true) {
+                    $this->sendEmailToUserAfterToOrder($newOrder);
+                }
             } catch (\Exception $e) {
                 DB::rollback();
                 throw $e;
@@ -372,6 +383,34 @@ class StripeController extends Controller
         \Mail::send('mail.notificationToSupportWhenAccessIsCreate', $memberAccess->toArray(), function ($message) {
             $message->from(env('MAIL_FROM_ADDRESS'));
             $message->to(env('MAIL_FROM_ADDRESS'), 'admin')->subject('Création de compte');
+        });
+    }
+
+    public function sendEmailToUserAfterToOrder(Order $order) {
+        $user = User::find($order->user_id);
+        $headers = [
+            'Accept' => 'application/json',
+            'Content-Type' => 'application/json'
+        ];
+
+        $client = new GuzzleClient([
+            'verify' => env('APP_ENV') === 'local' ? false : true,
+            'headers' => $headers
+        ]);
+        $url = env('APP_URL') . '/orders/path-facture';
+        $r = $client->request('POST', $url, [
+            'form_params' => [
+                'orderId' => $order->id,
+                'userId' => $user->id
+            ]
+        ]);
+
+        $response = $r->getBody()->getContents();
+
+        \Mail::send('mail.order-create', $order->toArray(), function ($message) use ($response, $user) {
+            $message->attach(asset('pdf/' . $response . '.pdf'));
+            $message->from(env('MAIL_FROM_ADDRESS'));
+            $message->to($user->email, $user->name)->subject('Récapitulatif de votre commande');
         });
     }
 }

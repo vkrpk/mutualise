@@ -13,6 +13,9 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         "stripe.success",
-        "success"
+        "success",
+        "orders/download-facture",
+        'orders/path-facture',
+        'orders/send-email'
     ];
 }
