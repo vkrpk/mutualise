@@ -22,7 +22,6 @@
                     <div class="card-header customCardHeader">
                         <span>Adresse email</span>
                     </div>
-                    {{-- {{ dd($item) }} --}}
                     <div class="card-body">
                         <div class="row">
                             @if ($item->attributes->isFreeTrial == true || $item->attributes->form_level === 'standard' || $item->attributes->form_level === 'entreprise' )

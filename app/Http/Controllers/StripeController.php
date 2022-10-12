@@ -329,6 +329,7 @@ class StripeController extends Controller
                 $order = $order->fresh();
                 $this->createAccessForNextcloud($order, $request->emailNextcloud);
                 $this->createAccessForSeafile($order, $request->emailSeafile);
+                // Http::withOptions([ "verify"=> env('APP_ENV') === 'local' ? false : true ])->get(route('access.index'));
                 DB::commit();
             } catch (\Exception $e) {
                 DB::rollback();
