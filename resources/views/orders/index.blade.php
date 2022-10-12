@@ -11,7 +11,7 @@
     </div>
     @foreach (App\Models\Order::where('user_id', Auth::user()->id)->get() as $order)
         @php
-            $orderAddress =  App\Models\OrderAddress::find($order->id);
+            $orderAddress = App\Models\OrderAddress::find($order->id);
         @endphp
         <div class="row">
             <div class="col">
@@ -59,7 +59,12 @@
                         </div>
                     </div>
                     <div class="card-footer d-flex justify-content-between">
-                        <a href="#"><button class="btn btn-primary">Imprimer la facture</button></a>
+                        <form action="{{ route('order.download-facture') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="orderId" value="{{ $order->id }}">
+                            <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
+                            <a target="_blank"><button type="submit" class="btn btn-primary">Imprimer la facture</button></a>
+                        </form>
                     </div>
                 </div>
             </div>
