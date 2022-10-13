@@ -63,7 +63,7 @@
                         </div>
                     </div>
                     <div class="card-footer d-flex justify-content-between">
-                        <span>{{_("Veuillez renseigner la ou les addresses mails qui seront utilisées pour se connecter à Seafile et Nextcloud")}}.</span>
+                        <span>{{__("Veuillez renseigner la ou les addresses mails qui seront utilisées pour se connecter à Seafile et Nextcloud")}}.</span>
                     </div>
                 </div>
 
