@@ -24,7 +24,7 @@
                                     <p class="mb-0">Email: {{ $memberAccess->getUser()->email }}</p>
                                     <p class="mb-0">{{__("Formule")}}: {{ __($memberAccess->getFormula()->name) }}</p>
                                     <p class="mb-0">{{__("Espace disque")}}: {{ $memberAccess->diskspace }} Go</p>
-                                    <p class="mb-0">{{__("Abonnement")}}: {{ $memberAccess->getAbonnement() }}</p>
+                                    <p class="mb-0">{{__("Type d'abonnement")}}: {{ $memberAccess->getAbonnement() }}</p>
                                     @if ($memberAccess->domain !== '')
                                         <p class="mb-0">{{__("Domaine")}}: {{ $memberAccess->domain }}</p>
                                     @endif
