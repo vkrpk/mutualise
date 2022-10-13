@@ -164,5 +164,6 @@
     "Montant total de cette commande" : "Total amount for this order",
     "Contenu de la commande" : "Order content",
     "Niveau" : "Level",
-    "Commande" : "Order"
+    "Commande" : "Order",
+    "Adresse email associée" : "Associated email address",
 }

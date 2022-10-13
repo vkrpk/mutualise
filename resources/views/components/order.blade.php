@@ -66,8 +66,8 @@
             <div style="display: flex; flex-direction: column">
                 <div class="d-flex flex-column mb-2">
                     <p class="w-100 text-white fs-5 ps-2 rounded-2" style="background: #006699">{{__("Information d'achat")}}</p>
-                    <p><span class="bold">{{__("Adresse de courriel"):}}</span> {{ $user->email }}</p>
-                    <p><span class="bold bold">{{__("Adresse de facturation"):}}</span> {{ $orderAddress->identifier }} {{ $orderAddress->address }} {{ $orderAddress->address_complement }} {{ $orderAddress->postal_code }} {{ $orderAddress->city }} {{ $orderAddress->state }} {{ $orderAddress->country }}</p>
+                    <p><span class="bold">{{__("E-Mail Address")}}:</span> {{ $user->email }}</p>
+                    <p><span class="bold bold">{{__("Adresse de facturation")}}:</span> {{ $orderAddress->identifier }} {{ $orderAddress->address }} {{ $orderAddress->address_complement }} {{ $orderAddress->postal_code }} {{ $orderAddress->city }} {{ $orderAddress->state }} {{ $orderAddress->country }}</p>
                     @if ($orderAddress->phone_number !== null)
                         <p><span class="bold">{{__("Numéro de téléphone")}}:</span> {{ $orderAddress->phone_number }}</p>
                     @endif
@@ -90,7 +90,7 @@
                     @foreach (App\Models\MemberAccess::where('order_id', $order->id)->get() as $memberAccess)
                         <div class="d-flex flex-column mb-1">
                             <p><span class="bold">Application:</span> {{ $memberAccess->member_access }}</p>
-                            <p><span class="bold">Email:</span> {{ $memberAccess->email }}</p>
+                            <p><span class="bold">{{__("Adresse email associée")}}:</span> {{ $memberAccess->email }}</p>
                             @if ($memberAccess->domain !== '')
                                 <p><span class="bold">{{__("Domaine")}}:</span> {{ $memberAccess->domain }}</p>
                             @endif
