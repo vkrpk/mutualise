@@ -133,6 +133,7 @@
     "Prix": "Price",
     "Premier mois": "First month",
     "Abonnement mensuel": "Monthly subscription",
+    "Abonnement": "Subscription type",
     "Coupon de réduction": "Discount coupon",
     "Appliquer à la commande": "Apply to the order",
     "Vider le panier": "Clear cart",
@@ -150,5 +151,6 @@
     "Modifier l'état des services" : "Update services status",
     "État des services" : "Services status",
     "Valider les changements" : "Confirm changes",
-    "Ajouter au panier" : "Add to cart"
+    "Ajouter au panier" : "Add to cart",
+    "Accéder" : "Access"
 }
