@@ -1,3 +1,7 @@
+@php
+    $user = App\Models\User::find(Auth::user()->id);
+@endphp
+
 @extends('layouts.app')
 
 @section('content')
@@ -85,15 +89,18 @@
                                         <span class="fw-bolder">{{__("Prix")}} : <span>{{ $cartItem->price }} €</span></span>
                                     </div>
                                 </div>
-                                @if ($cartItem->attributes->isFreeTrial == false)
+                                @if ($user->is_adherent == false ? ($cartItem->attributes->isFreeTrial == false ? : null) : null)
                                     <div class="row border-bottom">
                                         <div class="text-end p-1"><span class="text-primary fw-bolder">{{__("Adhésion obligatoire à l'association : 14.00 €")}}</span></div>
                                     </div>
+                                    <div class="row justify-content-end pt-1">
+                                        <div class="col text-end p-1"><span class="fw-bolder">Total : {{ $cartItem->attributes->isFreeTrial == false ? $cartItem->price + 14 : 0 }} €</span></div>
+                                    </div>
+                                @else
+                                    <div class="row justify-content-end pt-1">
+                                        <div class="col text-end p-1"><span class="fw-bolder">Total : {{ $cartItem->price }} €</span></div>
+                                    </div>
                                 @endif
-                                
-                                <div class="row justify-content-end pt-1">
-                                    <div class="col text-end p-1"><span class="fw-bolder">Total : {{ $cartItem->attributes->isFreeTrial == false ? $cartItem->price + 14 : 0 }} €</span></div>
-                                </div>
                                 <div class="row pt-1">
                                     <div class="col text-end align-self-center p-1">
                                         <button id="{{$cartItem->id}}" class="btn btn-primary" name="btnFormula" value="{{ $cartItem->attributes->isFreeTrial ? "free" : "yearly" }}"><i class="fa-solid fa-cart-shopping me-1"></i>{{ $cartItem->attributes->isFreeTrial == true ? __("Choisir la formule d'essai") : __("Choisir la formule annuelle") }}</button>
@@ -110,14 +117,19 @@
                                             <span class="fw-bolder">{{__("Prix")}} : <span>{{ $cartItem->attributes->priceMonthly }} €</span></span>
                                         </div>
                                     </div>
-                                    <div class="row border-bottom">
-                                        <div class="text-end p-1"><span class="text-primary fw-bolder">{{__("Adhésion obligatoire à l'association : 14.00 €")}}</span></div>
-                                    </div>
-                                
-                                    <div class="row justify-content-end pt-1">
-                                        <div class="text-end p-1"><span class="fw-bolder ">{{__("Premier mois")}} : {{ $cartItem->attributes->priceMonthly + 14}} €</span></div>
-                                        <div class="text-end p-1"><span class="fw-bolder ">{{__("Abonnement mensuel")}} : {{ $cartItem->attributes->priceMonthly }} €</span></div>
-                                    </div>
+                                    @if ($user->is_adherent == false)                                        
+                                        <div class="row border-bottom">
+                                            <div class="text-end p-1"><span class="text-primary fw-bolder">{{__("Adhésion obligatoire à l'association : 14.00 €")}}</span></div>
+                                        </div>  
+                                        <div class="row justify-content-end pt-1">
+                                            <div class="text-end p-1"><span class="fw-bolder ">{{__("Premier mois")}} : {{ $cartItem->attributes->priceMonthly + 14}} €</span></div>
+                                            <div class="text-end p-1"><span class="fw-bolder ">{{__("Abonnement mensuel")}} : {{ $cartItem->attributes->priceMonthly }} €</span></div>
+                                        </div>
+                                    @else
+                                        <div class="row justify-content-end pt-1">
+                                            <div class="text-end p-1"><span class="fw-bolder ">{{__("Abonnement mensuel")}} : {{ $cartItem->attributes->priceMonthly }} €</span></div>
+                                        </div>
+                                    @endif                                
                                     <div class="row pt-1">
                                         <div class="col text-end align-self-center p-1">
                                             <button id="{{$cartItem->id}}" class="btn btn-primary" name="btnFormula" value="monthly"><i class="fa-solid fa-cart-shopping me-1"></i>{{__("Choisir la formule mensuelle")}}</button>
