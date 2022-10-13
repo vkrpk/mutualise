@@ -31,4 +31,8 @@ class Order extends Model
         'payment_mode',
         'status'
     ];
+
+    public static function getAllCreateadAtDesc() {
+        return Order::orderBy('created_at', 'desc')->get();
+    }
 }

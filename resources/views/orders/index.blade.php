@@ -3,13 +3,10 @@
 <div class="container-sm overflow-hidden p-0">
     <div class="row mx-2 mx-sm-0 g-2 text-center m-3">
         <div class="alert alert-primary fs-3 fw-bolder" role="alert">
-            <span>{{__("Mes accès")}}</span>
+            <span>Mes commandes</span>
         </div>
     </div>
-    <div class="row mx-2 mx-sm-0 g-2 m-3">
-        <a href="{{ route('offers') }}" class="mt-0"><button class="btn btn-secondary btn-lg"><i class="fa-solid fa-cloud-arrow-up me-2"></i>{{__("Ajouter un accès")}}</button></a>
-    </div>
-    @foreach (App\Models\Order::where('user_id', Auth::user()->id)->get() as $order)
+    @foreach (App\Models\Order::getAllCreateadAtDesc() as $order)
         @php
             $orderAddress = App\Models\OrderAddress::find($order->id);
         @endphp
@@ -63,7 +60,7 @@
                             @csrf
                             <input type="hidden" name="orderId" value="{{ $order->id }}">
                             <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
-                            <a target="_blank"><button type="submit" class="btn btn-primary">Imprimer la facture</button></a>
+                            <a target="_blank"><button type="submit" class="btn btn-primary">Télécharger le PDF</button></a>
                         </form>
                     </div>
                 </div>
