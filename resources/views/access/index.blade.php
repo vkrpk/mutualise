@@ -22,11 +22,11 @@
                                 <div class="col">
                                     <p class="mb-0">Application: {{ $memberAccess->member_access }}</p>
                                     <p class="mb-0">Email: {{ $memberAccess->getUser()->email }}</p>
-                                    <p class="mb-0">Formule: {{ $memberAccess->getFormula()->name }}</p>
-                                    <p class="mb-0">Espace disque: {{ $memberAccess->diskspace }} Go</p>
-                                    <p class="mb-0">Abonnement: {{ $memberAccess->getAbonnement() }}</p>
+                                    <p class="mb-0">{{__("Formule")}}: {{ __($memberAccess->getFormula()->name) }}</p>
+                                    <p class="mb-0">{{__("Espace disque")}}: {{ $memberAccess->diskspace }} Go</p>
+                                    <p class="mb-0">{{__("Type d'abonnement")}}: {{ $memberAccess->getAbonnement() }}</p>
                                     @if ($memberAccess->domain !== '')
-                                        <p class="mb-0">Domaine: {{ $memberAccess->domain }}</p>
+                                        <p class="mb-0">{{__("Domaine")}}: {{ $memberAccess->domain }}</p>
                                     @endif
                                     @php
                                         if($memberAccess->member_access === 'Nextcloud') {
@@ -44,7 +44,7 @@
                             </div>
                         </div>
                         <div class="card-footer d-flex justify-content-between">
-                            <a href="{{ $memberAccess->domain !== '' ? 'https://' . $memberAccess->domain : $applicationDomain }}"><button class="btn btn-primary">Accéder</button></a>
+                            <a href="{{ $memberAccess->domain !== '' ? 'https://' . $memberAccess->domain : $applicationDomain }}"><button class="btn btn-primary">{{__("Accéder")}}</button></a>
                         </div>
                     </div>
                 </div>
