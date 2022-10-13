@@ -13,7 +13,7 @@
             <div class="col-md-6">
                 <!-- Change password card-->
                 <div class="card mb-4">
-                    <div class="card-header">{{__("Update Password")}}</div>
+                    <div class="card-header customCardHeader">{{__("Update Password")}}</div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('changePassword') }}">
                             @csrf
@@ -46,8 +46,9 @@
                     </div>
                 </div>
                 <div class="card mb-4">
-                    <div class="card-header">{{__("Changer mon adresse email")}}</div>
+                    <div class="card-header customCardHeader">{{__("Changer mon adresse email")}}</div>
                     <div class="card-body">
+                        <p>Adresse email actuelle: {{ Auth::user()->email }}</p>
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="buttonForOpenModal">
                             {{__("Changer mon adresse email")}}
                         </button>
@@ -91,7 +92,7 @@
                     </div>
                 </div>
                 <div class="card mb-4">
-                    <div class="card-header">{{__("Supprimer mon compte")}}</div>
+                    <div class="card-header customCardHeader">{{__("Supprimer mon compte")}}</div>
                     <div class="card-body">
                         <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#modalDeleteAccount" id="buttonForOpenModal">
                             {{__("Supprimer mon compte")}}

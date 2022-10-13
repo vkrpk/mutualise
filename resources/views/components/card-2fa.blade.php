@@ -1,5 +1,5 @@
 <div class="card">
-    <div class="card-header"><strong>{{ __('Double authentification') }}</strong></div>
+    <div class="card-header customCardHeader"><strong>{{ __('Double authentification') }}</strong></div>
     <div class="card-body">
         <p>{{ __("La double authentification (2FA) renforce la sécurité d'accès en faisant appel à deux méthodes (qu'on appelle aussi facteurs) pour vérifier votre identité. La double authentification protège du phishing, de l'ingénierie sociale et des attaques par force brute contre les mots de passe, et sécurise votre connexion contre des attaquants exploitant des identifiants faibles ou volés.") }}
         </p>

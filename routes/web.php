@@ -9,6 +9,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\Auth\ProfilViewController;
 use App\Http\Controllers\ContactFormController;
+use App\Http\Controllers\FooterController;
 use App\Http\Controllers\MemberAccess\MemberAccessController;
 use App\Services\ComparePasswordAndChangeEmailController;
 use TimeHunter\LaravelGoogleReCaptchaV3\Validations\GoogleReCaptchaV3ValidationRule;
@@ -100,6 +101,9 @@ Route::group([
     Route::get('/contact', [ContactFormController::class, 'createForm'])->name('contact.index');
     Route::post('/contact', [ContactFormController::class, 'contactForm'])->name('contact.send');
 
+    Route::get('cguv', [FooterController::class, 'cguv'])->name('footer.cguv');
+    Route::get('politique-confidentialite', [FooterController::class, 'politiqueConfidentialite'])->name('footer.politique-confidentialite');
+
     Route::group(['prefix' => 'member-access', 'middleware' => ['auth', 'verified']], function () {
         Route::get('/index', [MemberAccessController::class, 'index'])->name('access.index');
         Route::post('/create', 'App\Http\Controllers\CurlController@create')->name('member_access.create');
@@ -110,5 +114,4 @@ Route::group([
     });
     Route::post('orders/download-facture', 'App\Http\Controllers\OrderController@downloadPDF')->name('order.download-facture');
     Route::post('orders/path-facture', 'App\Http\Controllers\OrderController@getPathForPDF')->name('order.path-facture');
-    // Route::post('orders/send-email', 'App\Http\Controllers\StripeController@sendEmailToUserAfterToOrder')->name('sendEmailToUserAfterToOrder');
 });

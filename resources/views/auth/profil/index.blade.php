@@ -13,7 +13,7 @@
             <div class="col-xl-4">
                 <!-- Profile picture card-->
                 <div class="card mb-4 mb-xl-0">
-                    <div class="card-header">{{__('Profile Picture')}}</div>
+                    <div class="card-header customCardHeader">{{__('Profile Picture')}}</div>
                     <div class="card-body text-center">
                         <!-- Profile picture image-->
                         <img class="img-account-profile rounded-circle" style="width: 160px !important; object-fit: cover !important; object-position: 50% 50% !important; aspect-ratio: 1 / 1;"
@@ -35,7 +35,7 @@
             <div class="col-xl-8">
                 <!-- Account details card-->
                 <div class="card mb-4">
-                    <div class="card-header">{{__("Détails du compte")}}</div>
+                    <div class="card-header customCardHeader">{{__("Détails du compte")}}</div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('storeInfos') }}">
                             @csrf
