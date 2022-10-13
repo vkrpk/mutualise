@@ -155,7 +155,7 @@
     "Accéder" : "Access",
     "CGUV" : "GSTC",
     "Résumé de la commande" : "Order recap",
-    "Politique de confidentialité" : "Privay Policy",
+    "Politique de confidentialité" : "Privacy policy",
     "Information d'achat" : "Sale informations",
     "Adresse de courriel:" : "Email address",
     "Mode de paiement" : "Payment mode",
@@ -172,5 +172,12 @@
     "Votre commande a bien été effectuée" : "Your order has been completed",
     "Vous allez être redirigé automatiquement" : "You are going to be automatically redirected",
     "Si ce n'est pas le cas, veuillez cliquer" : "If not, please click",
-    "ici" : "here"
+    "ici" : "here",
+    "Formulaire de contact" : "Contact form",
+    "Objet" : "Subject",
+    "Email" : "Email",
+    "Téléphone" : "Phone number",
+    "Message" : "Message",
+    "En soumettant ce formulaire, j'accepte que les informations saisies soient utilisées selon les finalités décrites dans la " :  "By submitting this form, I accept that the submitted informations will be used for the purposes described in the ",
+    "Envoyer" : "Send"
 }
