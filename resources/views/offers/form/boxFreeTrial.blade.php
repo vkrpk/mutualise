@@ -1,5 +1,5 @@
 @guest
-    <h4 class="card-title align-self-center">{{__("Offre d'essai : 10 Go gratuits en vous")}} <a href="{{ route('login') }}"> {{__("connectant.")}}</a></h4>
+    <h4 class="card-title align-self-center">{{__("Offre d'essai : 10 Go gratuits en vous")}} <a class="text-decoration-underline" href="{{ route('login') }}"> {{__("connectant")}}</a>.</h4>
     <p class="card-text align-self-center">{{__("Testez les fonctionnalités Dedikam gratuitement pendant 30 jours.")}}
         <br>{{__("Vous pouvez commander jusqu'à 4 accès gratuits.")}}</p>
 @endguest

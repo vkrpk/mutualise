@@ -34,7 +34,7 @@
             @enderror
             <div class="">
                 <span style="font-size: 11px; opacity: 0.8;">{{__("Trafic illimité - Bande passante : 500 Mbit/s à 1Gbit/s, au dessus de 5 000Go, veuillez nous")}}
-                    <a class="text-primary" href="https://www.dedikam.com/contact/" target="_blank">{{__("contacter")}}</a>.
+                    <a class="text-primary" href="{{ route('contact.index') }}">{{__("contacter")}}</a>.
                 </span>
             </div>
         </div>
