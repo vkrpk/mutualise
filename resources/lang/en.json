@@ -156,7 +156,7 @@
     "CGUV" : "GSTC",
     "Résumé de la commande" : "Order recap",
     "Politique de confidentialité" : "Privay Policy",
-    "Information d'achat" : "Sales info",
+    "Information d'achat" : "Sale informations",
     "Adresse de courriel:" : "Email address",
     "Mode de paiement" : "Payment mode",
     "Sous-total des produits" : "Items subtotal",
@@ -166,5 +166,11 @@
     "Niveau" : "Level",
     "Commande" : "Order",
     "Mes commandes" : "My orders",
-    "Adresse email associée" : "Associated email address"
+    "Adresse email associée" : "Associated email address",
+    "Veuillez renseigner la ou les addresses mails qui seront utilisées pour se connecter à Seafile et Nextcloud" : "Please enter the e-mail address(es) that will be used to connect to Seafile and/or Nextcloud",
+    "Télécharger le PDF" : "Download PDF",
+    "Votre commande a bien été effectuée" : "Your order has been completed",
+    "Vous allez être redirigé automatiquement" : "You are going to be automatically redirected",
+    "Si ce n'est pas le cas, veuillez cliquer" : "If not, please click",
+    "ici" : "here"
 }
