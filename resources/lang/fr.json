@@ -617,5 +617,8 @@
     "You may not leave a team that you created.": "Vous ne pouvez pas quitter une équipe que vous avez créée.",
     "Your email address is not verified.": "Votre adresse email n'a pas été vérifiée.",
     "Zambia": "Zambie",
-    "Zimbabwe": "Zimbabwe"
+    "Zimbabwe": "Zimbabwe",
+    "subscription" : "mensuel",
+    "free" : "gratuit",
+    "payment" : "annuel"
 }
