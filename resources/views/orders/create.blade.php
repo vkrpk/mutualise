@@ -20,7 +20,7 @@
                 </div>
                 <div class="card mb-4">
                     <div class="card-header customCardHeader">
-                        <span>Adresse email</span>
+                        <span>{{__("E-Mail Address")}}</span>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -63,7 +63,7 @@
                         </div>
                     </div>
                     <div class="card-footer d-flex justify-content-between">
-                        <span>Veuillez renseigner la ou les addresses mails qui seront utilisées pour se connecter à Seafile et Nextcloud.</span>
+                        <span>{{__("Veuillez renseigner la ou les addresses mails qui seront utilisées pour se connecter à Seafile et Nextcloud")}}.</span>
                     </div>
                 </div>
 
