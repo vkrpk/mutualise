@@ -21,6 +21,7 @@
         "nesbot/carbon": "^2.61",
         "nyholm/psr7": "^1.5",
         "pragmarx/google2fa-laravel": "^2.0",
+        "srmklive/paypal": "~1.0",
         "stripe/stripe-php": "^9.6",
         "symfony/psr-http-message-bridge": "^2.1",
         "tcg/voyager": "^1.5",

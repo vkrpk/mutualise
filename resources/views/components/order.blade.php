@@ -1,6 +1,6 @@
 @php
     $order = App\Models\Order::find($orderId);
-    $orderAddress = App\Models\OrderAddress::find($order->id);
+    $orderAddress = App\Models\OrderAddress::find($order->order_address_id);
     $user = App\Models\User::find($order->user_id);
 @endphp
 <style>
@@ -76,7 +76,7 @@
                     <p class="w-100 text-white fs-5 ps-2 rounded-2" style="background: #006699">Résumé de la commande</p>
                     <p><span class="bold">Date:</span> {{ \Carbon\Carbon::parse($order->created_at)->format('d/m/Y à H:i:s') }}</p>
                     <p><span class="bold">Type d'abonnement:</span> {{ $order->mode }}</p>
-                    <p><span class="bold">Mode de paiement:</span> {{ $order->payment_mode }} (carte bleue)</p>
+                    <p><span class="bold">Mode de paiement:</span> {{ $order->payment_mode == 'paypal' ? $order->payment_mode : ($order->payment_mode == 'stripe' ? 'carte bancaire' : 'Aucun') }}</p>
                     <p><span class="bold">Sous-total des produits:</span> {{ $order->includes_adhesion ? ($order->total_paid - 14) : $order->total_paid }}€</p>
                     <p><span class="bold">Montant total de cette commande:</span> {{ $order->total_paid }}€</p>
                 </div>

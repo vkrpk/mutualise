@@ -18,6 +18,7 @@ class CartController extends Controller
     public function cartList()
     {
         $cartItems = \Cart::getContent();
+        // dd($cartItems);
         return view('cart.list', compact('cartItems'));
     }
 
@@ -29,7 +30,6 @@ class CartController extends Controller
 
     public function addToCart(Request $request)
     {
-
         if (!isset($request->form_diskspace)) {
             $request->request->add(['form_diskspace' => 10]);
             $price = (new CalculAmountController())->calculAmount($request->form_level, $request->form_diskspace, true);

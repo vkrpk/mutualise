@@ -29,7 +29,7 @@ return new class extends Migration
             $table->decimal('total_paid')->default(0);
             $table->boolean('includes_adhesion')->default(false);
             $table->text('comment')->nullable(true);
-            $table->string('payment_mode')->default('stripe');
+            $table->enum('payment_mode', ['stripe', 'paypal', 'free'])->nullable(false);
             $table->enum('status', ['cancelled', 'pending', 'expired', 'succeeded'])->nullable(false)->default('pending');
 
             $table->timestamps();

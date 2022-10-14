@@ -14,6 +14,7 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         "stripe.success",
         "success",
+        "payment/free/success",
         "orders/download-facture",
         'orders/path-facture',
         'orders/send-email'

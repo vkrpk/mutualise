@@ -8,3 +8,9 @@ git add -A
 git commit -m "commit"
 git push heroku master
 heroku run php artisan migrate:fresh --seed
+
+php artisan cache:clear
+php artisan route:cache
+php artisan config:cache
+php artisan view:clear
+rm -rf bootstrap/cache/*
