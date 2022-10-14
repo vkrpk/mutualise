@@ -90,7 +90,6 @@ Route::group([
     Route::get('order/store', 'App\Http\Controllers\OrderController@store')->name('order.store');
 
     Route::post('stripe', "\App\Http\Controllers\StripeController@stripe")->name('stripe');
-    Route::post('success', "\App\Http\Controllers\StripeController@success")->name('stripe.success');
 
     Route::get('services', function () { return view('services.index'); })->name('services.index');
     Route::post('serviceUpdate', 'App\Http\Controllers\ServiceController@serviceUpdate')->name('serviceUpdate');
@@ -114,4 +113,15 @@ Route::group([
     });
     Route::post('orders/download-facture', 'App\Http\Controllers\OrderController@downloadPDF')->name('order.download-facture');
     Route::post('orders/path-facture', 'App\Http\Controllers\OrderController@getPathForPDF')->name('order.path-facture');
+
+    Route::post('success', "App\Http\Controllers\StripeController@success")->name('stripe.success');
+
+    // Route::get('paypal/handle-payment', 'App\Http\Controllers\PayPalPaymentController@handlePayment')->name('make.payment');
+    Route::get('paypal/cancel-payment', 'App\Http\Controllers\PayPalPaymentController@paymentCancel')->name('cancel.payment');
+    Route::get('paypal/payment-success', 'App\Http\Controllers\PayPalPaymentController@paymentSuccess')->name('success.payment');
+    Route::get('paypal/create-order', 'App\Http\Controllers\PayPalPaymentController@createOrder')->name('success.create-order');
+
+    Route::post('make-payment', 'App\Http\Controllers\PaymentController@handlePayment')->name('make.payment');
+
+    Route::post('payment/free/success', "\App\Http\Controllers\FreePaymentController@success")->name('payment.free.success');
 });

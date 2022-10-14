@@ -143,7 +143,34 @@
                         @enderror
                     </div>
                 </div>
-            </div>
+                @if ($item->attributes->isFreeTrial !== "on")
+                    <div class="card mb-4">
+                        <div class="card-header customCardHeader">
+                            <span>Méthode de paiement</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" id="paypal" name="methodPayment" form="formRecapOrder" value="paypal">
+                                        <label class="form-check-label" for="paypal">Paypal<sup><i class="fa-solid fa-asterisk" style="font-size: 8px;color: red;margin-top: -14px;"></i></sup></label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" id="stripe" name="methodPayment" form="formRecapOrder" value="stripe">
+                                        <label class="form-check-label" for="stripe">Stripe<sup><i class="fa-solid fa-asterisk" style="font-size: 8px;color: red;margin-top: -14px;"></i></sup></label>
+                                    </div>
+                                    @error('methodPayment')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                            <div class="card-footer d-flex justify-content-between">
+                                <span>Veuillez renseigner la méthode de paiement qui devra être utilisé.</span>
+                            </div>
+                        </div>
+                    </div>
+                @endif
         </div>
         <div class="row mb-4">
             <div class="col">
@@ -164,7 +191,7 @@
         </div>
         <div class="row mb-4">
             <div class="col">
-                <form action="{{route('stripe')}}" method="POST" id="formRecapOrder" name="formRecapOrder" class="d-flex justify-content-center">
+                <form action="{{ route('make.payment')}}" method="POST" id="formRecapOrder" name="formRecapOrder" class="d-flex justify-content-center">
                     @csrf
                     <input type="hidden" value="{{$cartItemId}}" name="cartItemId">
                     <input type="hidden" value="{{$formula_period}}" name="formula_period">

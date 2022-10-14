@@ -1,129 +1,30 @@
 <?php
 
-// require 'vendor/autoload.php';
-
 namespace App\Http\Controllers;
 
-use DateTime;
 use App\Models\User;
 use App\Models\Order;
 use App\Models\Coupon;
 use App\Models\Formula;
-use App\Models\Addresses;
-use Illuminate\Support\Str;
-use App\Models\MemberAccess;
 use App\Models\OrderAddress;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Request as RequestFacade;
-use GuzzleHttp\Client as GuzzleClient;
-use GuzzleHttp\Psr7\Uri;
-use Illuminate\Support\Facades\URL;
 
 class StripeController extends Controller
 {
     public $stripe;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->stripe = new \Stripe\StripeClient(
             env('APP_ENV') === 'production' ? env('STRIPE_SECRET_KEY_PROD') : env('STRIPE_SECRET_KEY_DEV')
         );
     }
 
-    public function initWebhook()
-    {
-        try {
-            if (count($this->stripe->webhookEndpoints->all()['data']) === 0) {
-                $webhook = $this->stripe->webhookEndpoints->create([
-                    'url' => env('APP_URL') . '/success',
-                    'enabled_events' => [
-                        'charge.succeeded',
-                    ],
-                ]);
-            }
-        } catch (\Exception $e) {
-            return $e->getMessage();
-        }
-    }
-
-    public function stripe(Request $request)
-    {
+    public function stripe(Request $request) {
         $this->initWebhook();
-        $request->merge(['price' => (int)$request->price]);
-        $request->merge(['diskspace' => (int)$request->diskspace]);
-
         $user = User::find(Auth::user()->id);
-
-        $validator = Validator::make($request->all(), [
-            'address.identifier' => ['required', 'string', 'max:60'],
-            'address.address' => ['required', 'string', 'max:255'],
-            'address.address_complement' => ['string', 'max:100', 'nullable'],
-            'address.postal_code' => ['required', 'string', 'max:10'],
-            'address.city' => ['required', 'string', 'max:100'],
-            'address.state' => ['string', 'max:60', 'nullable'],
-            'address.country' => ['string', 'max:60', 'nullable'],
-            'address.phone_number' => ['string', 'max:60', 'nullable'],
-            'checboxCGU' => ['accepted'],
-            'comment' => ['string', 'max:1000', 'nullable'],
-            'cartItemId' => ['required', 'string'],
-            'formula_period' => ['required', Rule::in(['yearly', 'monthly', 'free'])],
-            'emailSeafile' => [
-                '',
-                'max:255',
-                function ($attribute, $value, $fail) {
-                    $seafileUser = \App::call('App\Http\Controllers\MemberAccess\SeafileController@getUser', ['email' => RequestFacade::input('emailSeafile')]);
-                    if (isset($seafileUser['email']) && $value === $seafileUser["email"]) {
-                        $fail('Cet email est déjà attribué');
-                    }
-                },
-            ],
-            'emailNextcloud' => [
-                '',
-                'max:255',
-                function ($attribute, $value, $fail) {
-                    $nextcloudUser = \App::call('App\Http\Controllers\MemberAccess\NextCloudController@getUser', ['email' => RequestFacade::input('emailNextcloud')]);
-                    if ($nextcloudUser !== false && $value === $nextcloudUser["email"]) {
-                        $fail('Cet email est déjà attribué');
-                    }
-                },
-            ],
-        ])->sometimes('emailSeafile', ['required', 'email'], function($input) {
-                return \Cart::get($input->cartItemId)->attributes->buttonsRadioForOffer === 'seafileOfferBasique' ||
-                \Cart::get($input->cartItemId)->attributes->buttonsRadioForOffer === 'seafileOfferDedicated' ||
-                \Cart::get($input->cartItemId)->attributes->isFreeTrial === true;
-            })
-        ->sometimes('emailNextcloud', ['required', 'email'], function($input) {
-                return \Cart::get($input->cartItemId)->attributes->buttonsRadioForOffer === 'nextcloudOfferBasique' ||
-                \Cart::get($input->cartItemId)->attributes->buttonsRadioForOffer === 'nextcloudOfferDedicated' ||
-                \Cart::get($input->cartItemId)->attributes->isFreeTrial === true;
-            }
-        );
-
-        if($validator->fails()){
-            return redirect(route('order.create'), 307)->withErrors($validator)->withInput();
-        }
-
-        Addresses::updateOrCreate(
-            ['user_id' => $user->id],
-            [
-                'identifier' => $request->address['identifier'],
-                'address' => $request->address['address'],
-                'address_complement' => $request->address['address_complement'],
-                'postal_code' => $request->address['postal_code'],
-                'city' => $request->address['city'],
-                'state' => $request->address['state'],
-                'country' => $request->address['country'],
-                'phone_number' => $request->address['phone_number']
-            ]
-        );
-
         \Stripe\Stripe::setApiKey(env('APP_ENV') === 'production' ? env('STRIPE_SECRET_KEY_PROD') : env('STRIPE_SECRET_KEY_DEV'));
-
         if ($user->stripe_id === null) {
             $customer = $this->stripe->customers->create([
                 'description' => $user->identifier,
@@ -132,7 +33,6 @@ class StripeController extends Controller
         } else {
             $customer = $this->stripe->customers->retrieve($user->stripe_id);
         }
-
         $item = \Cart::get($request->cartItemId);
         $lineItemSubscription = [
             'price_data' => [
@@ -144,7 +44,6 @@ class StripeController extends Controller
             ],
             'quantity' => 1,
         ];
-
         if ($request->formula_period === 'monthly') {
             $session = \Stripe\Checkout\Session::create([
                 'customer' => $customer->id,
@@ -212,26 +111,11 @@ class StripeController extends Controller
                 'success_url' => env('APP_URL') . '/order/store?id=' . $item->id,
                 'cancel_url' => env('APP_URL'),
             ]);
-        } elseif ($request->formula_period === 'free') {
-            $response = Http::withOptions([ "verify"=> env('APP_ENV') === 'local' ? false : true ])->post(env("APP_URL") . "/success", [
-                'address' => json_encode($request->address),
-                'type' => "free",
-                'user_id' => $user->id,
-                'comment' => $request->comment,
-                'member_access' => $item->attributes->buttonsRadioForOffer,
-                'access_name' => $item->name,
-                'diskspace' => $item->attributes->form_diskspace,
-                'formula' => ucfirst($item->attributes->form_level),
-                'emailSeafile' => $request->emailSeafile,
-                'emailNextcloud' => $request->emailNextcloud,
-            ]);
-            return redirect()->route('order.store', ['id' => $item->id]);
         }
         return redirect($session->url);
     }
 
-    public function success(Request $request)
-    {
+    public function success(Request $request) {
         if ($request->type === "charge.succeeded") {
             DB::beginTransaction();
             try {
@@ -259,6 +143,7 @@ class StripeController extends Controller
                 $order = Order::create([
                     'user_id' => $user->id,
                     'payment_intent' => $paymentIntent,
+                    'payment_mode' => 'stripe',
                     'order_address_id' => $orderAddress->id,
                     'formula_id' => $formula->id,
                     'coupon_id' => isset($coupon) ? $coupon->id : null,
@@ -276,71 +161,24 @@ class StripeController extends Controller
                 $user->stripe_id = $customer->id;
                 $user->is_adherent = true;
                 $user->save();
+                $orderController = new OrderController;
                 switch ($order->member_access) {
                     case 'All':
-                        $this->createAccessForNextcloud($order, $session->metadata->emailNextcloud);
-                        $this->createAccessForSeafile($order, $session->metadata->emailSeafile);
+                        $orderController->createAccessForNextcloud($order, $session->metadata->emailNextcloud);
+                        $orderController->createAccessForSeafile($order, $session->metadata->emailSeafile);
                         break;
                     case 'Seafile':
-                        $this->createAccessForSeafile($order, $session->metadata->emailSeafile, $session->metadata->domain);
+                        $orderController->createAccessForSeafile($order, $session->metadata->emailSeafile, $session->metadata->domain);
                         break;
                     case 'Nextcloud':
-                        $this->createAccessForNextcloud($order, $session->metadata->emailNextcloud, $session->metadata->domain);
+                        $orderController->createAccessForNextcloud($order, $session->metadata->emailNextcloud, $session->metadata->domain);
                         break;
                     default:
                         break;
                 }
                 DB::commit();
                 if(isset($order) === true) {
-                    $this->sendEmailToUserAfterToOrder($order);
-                }
-            } catch (\Exception $e) {
-                DB::rollback();
-                throw $e;
-            }
-        } elseif ($request->type === "free") {
-            DB::beginTransaction();
-            try {
-                $user = User::find($request->user_id);
-                $user->nb_free_account = $user->nb_free_account + 1;
-                $user->save();
-                $address = json_decode($request->address);
-
-                $orderAddress = new OrderAddress();
-                $orderAddress->identifier = $address->identifier;
-                $orderAddress->address = $address->address;
-                $orderAddress->address_complement = $address->address_complement;
-                $orderAddress->postal_code = $address->postal_code;
-                $orderAddress->city = $address->city;
-                $orderAddress->state = $address->state;
-                $orderAddress->country = $address->country;
-                $orderAddress->phone_number = $address->phone_number;
-                $orderAddress->save();
-
-                $formula = Formula::where('name', 'Standard')->first();
-
-                $order = new Order();
-
-                $order->user_id = $user->id;
-                $order->payment_intent = "Free";
-                $order->order_address_id = $orderAddress->id;
-                $order->formula_id = $formula->id;
-                $order->coupon_id = isset($coupon) ? $coupon->id : null;
-                $order->mode = "free";
-                $order->member_access = "All";
-                $order->access_name = $request->access_name;
-                $order->expire = (new DateTime("+1 month"))->format("Y-m-d H:i:s");
-                $order->comment = $request->comment;
-                $order->status = "succeeded";
-
-                $order->save();
-                $order = $order->fresh();
-                $newOrder = Order::find($order->id);
-                $this->createAccessForNextcloud($newOrder, $request->emailNextcloud);
-                $this->createAccessForSeafile($newOrder, $request->emailSeafile);
-                DB::commit();
-                if(isset($newOrder) === true) {
-                    $this->sendEmailToUserAfterToOrder($newOrder);
+                    $orderController->sendEmailToUserAfterToOrder($order);
                 }
             } catch (\Exception $e) {
                 DB::rollback();
@@ -349,68 +187,18 @@ class StripeController extends Controller
         }
     }
 
-    private function createAccessForNextcloud(Order $order, string $email, ?string $domain = '') {
-        $dedikamAccessName = uniqid("dedikam"); // Pour éviter les conflits en mode dev
-        $memberAccess = MemberAccess::createFromOrder($order, '', $dedikamAccessName, $email, true, $domain);
-        $memberAccess = $memberAccess->fresh();
-        \App::call('App\Http\Controllers\MemberAccess\NextCloudController@create', ['memberAccess' => $memberAccess, 'dedikamAccessName' => $memberAccess->name]);
-        $this->sendEmailNotificationToAdmin($memberAccess);
-    }
-
-    private function createAccessForSeafile(Order $order, string $email, ?string $domain = '') {
-        $dedikamAccessName = uniqid("dedikam"); // Pour éviter les conflits en mode dev
-        $passwordNotHash = Str::random();
-        $memberAccess = MemberAccess::createFromOrder($order, $passwordNotHash, $dedikamAccessName, $email, false, $domain);
-        $memberAccess = $memberAccess->fresh();
-        $listUsersSeafile = \App::call('App\Http\Controllers\MemberAccess\SeafileController@listUsers');
-        global $update;
-        foreach ($listUsersSeafile['data'] as $user) {
-            if($user['email'] === $memberAccess->email){
-                $GLOBALS['update'] = true;
-                \App::call('App\Http\Controllers\MemberAccess\SeafileController@updateUser', ['memberAccess' => $memberAccess]);
+    public function initWebhook() {
+        try {
+            if (count($this->stripe->webhookEndpoints->all()['data']) === 0) {
+                $webhook = $this->stripe->webhookEndpoints->create([
+                    'url' => env('APP_URL') . '/success',
+                    'enabled_events' => [
+                        'charge.succeeded',
+                    ],
+                ]);
             }
+        } catch (\Exception $e) {
+            return $e->getMessage();
         }
-        if($GLOBALS['update'] !== true) {
-            // if(count($listUsersSeafile['data']) >= 3) {
-            //     \App::call('App\Http\Controllers\MemberAccess\SeafileController@deleteUser', ['email' => $listUsersSeafile['data'][2]['email']]);
-            // }
-            \App::call('App\Http\Controllers\MemberAccess\SeafileController@create', ['memberAccess' => $memberAccess, 'passwordNotHash' => $passwordNotHash, 'dedikamAccessName' => $memberAccess->name]);
-            $this->sendEmailNotificationToAdmin($memberAccess);
-        }
-    }
-
-    public function sendEmailNotificationToAdmin(MemberAccess $memberAccess) {
-        \Mail::send('mail.notificationToSupportWhenAccessIsCreate', $memberAccess->toArray(), function ($message) {
-            $message->from(env('MAIL_FROM_ADDRESS'));
-            $message->to(env('MAIL_FROM_ADDRESS'), 'admin')->subject('Création de compte');
-        });
-    }
-
-    public function sendEmailToUserAfterToOrder(Order $order) {
-        $user = User::find($order->user_id);
-        $headers = [
-            'Accept' => 'application/json',
-            'Content-Type' => 'application/json'
-        ];
-
-        $client = new GuzzleClient([
-            'verify' => env('APP_ENV') === 'local' ? false : true,
-            'headers' => $headers
-        ]);
-        $url = env('APP_URL') . '/orders/path-facture';
-        $r = $client->request('POST', $url, [
-            'form_params' => [
-                'orderId' => $order->id,
-                'userId' => $user->id
-            ]
-        ]);
-
-        $response = $r->getBody()->getContents();
-
-        \Mail::send('mail.order-create', $order->toArray(), function ($message) use ($response, $user) {
-            $message->attach(asset('pdf/' . $response . '.pdf'));
-            $message->from(env('MAIL_FROM_ADDRESS'));
-            $message->to($user->email, $user->name)->subject('Récapitulatif de votre commande');
-        });
     }
 }
