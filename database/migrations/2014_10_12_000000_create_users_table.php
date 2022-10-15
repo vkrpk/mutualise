@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('avatar')->nullable(true);
             $table->string('stripe_id')->nullable();
+            $table->string('paypal_id')->nullable();
             $table->boolean('is_adherent')->default(false);
             $table->smallInteger('nb_free_account')->nullable(false)->default(0);
             $table->rememberToken();
