@@ -152,11 +152,11 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" id="paypal" name="methodPayment" form="formRecapOrder" value="paypal">
+                                        <input {{ old('methodPayment') ? (old('methodPayment') == 'paypal' ? 'checked' : '') : ''}} class="form-check-input" type="radio" id="paypal" name="methodPayment" form="formRecapOrder" value="paypal">
                                         <label class="form-check-label" for="paypal">Paypal (account sandbox required)<sup><i class="fa-solid fa-asterisk" style="font-size: 8px;color: red;margin-top: -14px;"></i></sup></label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" id="stripe" name="methodPayment" form="formRecapOrder" value="stripe">
+                                        <input {{ old('methodPayment') ? (old('methodPayment') == 'stripe' ? 'checked' : '') : ''}} class="form-check-input" type="radio" id="stripe" name="methodPayment" form="formRecapOrder" value="stripe">
                                         <label class="form-check-label" for="stripe">Stripe test mode (CB)<sup><i class="fa-solid fa-asterisk" style="font-size: 8px;color: red;margin-top: -14px;"></i></sup></label>
                                     </div>
                                     @error('methodPayment')

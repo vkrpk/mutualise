@@ -31,7 +31,7 @@
                                     <span class="w-100 text-white fs-5 ps-2 rounded-2" style="background: #006699">{{__("Résumé de la commande")}}</span>
                                     <span><span class="fw-bolder">Date:</span> {{ \Carbon\Carbon::parse($order->created_at)->format('d/m/Y à H:i:s') }}</span>
                                     <span><span class="fw-bolder">{{__("Type d'abonnement")}}:</span> {{ $order->mode }}</span>
-                                    <span><span class="fw-bolder">{{__("Mode de paiement")}}:</span> {{ $order->payment_mode }} {{__("(carte bleue)")}}</span>
+                                    <span><span class="fw-bolder">{{__("Mode de paiement")}}:</span>{{ $order->payment_mode == 'paypal' ? $order->payment_mode : ($order->payment_mode == 'stripe' ? 'carte bancaire' : 'Aucun') }}</span>
                                     <span><span class="fw-bolder">{{__("Sous-total des produits")}}:</span> {{ $order->includes_adhesion ? ($order->total_paid - 14) : $order->total_paid }}€</span>
                                     <span><span class="fw-bolder">{{__("Montant total de cette commande")}}:</span> {{ $order->total_paid }}€</span>
                                 </div>

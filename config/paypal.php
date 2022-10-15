@@ -26,5 +26,5 @@ return [
     'billing_type'   => 'MerchantInitiatedBilling',
     'notify_url'     => '', // Change this accordingly for your application.
     'locale'         => '', // force gateway language  i.e. it_IT, es_ES, en_US ... (for express checkout only)
-    'validate_ssl'   => false, // Validate SSL when creating api client.
+    'validate_ssl'   => env('APP_ENV') == 'local' ? false : true, // Validate SSL when creating api client.
 ];

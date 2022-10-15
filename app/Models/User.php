@@ -23,6 +23,7 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
         'password',
         'avatar',
         'stripe_id',
+        'paypal_id',
         'is_adherent',
         'nb_free_account'
     ];

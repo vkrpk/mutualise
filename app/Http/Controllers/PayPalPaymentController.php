@@ -154,7 +154,7 @@ class PayPalPaymentController extends Controller
                 'status' => 'succeeded',
             ]);
             $order = $order->fresh();
-            $user->stripe_id = $PayerID;
+            $user->paypal_id = $PayerID;
             $user->is_adherent = true;
             $user->save();
             $orderController = new OrderController;
