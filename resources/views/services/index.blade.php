@@ -23,7 +23,6 @@
                 @endforeach
             </div>
         </div>
-        <a href="{{ route('make.payment') }}" class="btn btn-primary mt-3">Paypal</a>
         @isAdmin()
             <form action="{{route('serviceUpdate')}}" method="post" id="changeServiceStatusForm" class="d-flex justify-content-center py-2">
                 @csrf
