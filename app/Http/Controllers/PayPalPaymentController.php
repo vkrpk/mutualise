@@ -32,13 +32,13 @@ class PayPalPaymentController extends Controller
         $paypalModule = new ExpressCheckout;
         if($request->formula_period === 'yearly') {
             $metadatas['mode'] = 'payment';
-            $data['items'] = [
+            $data['items'][] =
                 [
                     'name' => $cartItem->name,
                     'price' => $cartItem->price,
                     'qty' => 1
                 ]
-            ];
+            ;
             $data['invoice_id'] = random_int(1, 1000000);
             $data['invoice_description'] = "Order #{$data['invoice_id']} Bill";
             $data['return_url'] = route('success.payment');
@@ -164,10 +164,10 @@ class PayPalPaymentController extends Controller
                     $orderController->createAccessForSeafile($order, $request['emailSeafile']);
                     break;
                 case 'Seafile':
-                    $orderController->createAccessForSeafile($order, $request['emailSeafile'], $request['domain']);
+                    $orderController->createAccessForSeafile($order, $request['emailSeafile'], isset($request['domain']) != false ? $request['domain'] : '');
                     break;
                 case 'Nextcloud':
-                    $orderController->createAccessForNextcloud($order, $request['emailNextcloud'], $request['domain']);
+                    $orderController->createAccessForNextcloud($order, $request['emailNextcloud'], isset($request['domain']) != false ? $request['domain'] : '');
                     break;
                 default:
                     break;
