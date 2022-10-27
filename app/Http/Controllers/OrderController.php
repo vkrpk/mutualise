@@ -55,7 +55,7 @@ class OrderController extends Controller
             'orderId' => $order->id
         ];
         $pdf = \PDF::loadView('components.order', $data);
-        $pdfName = 'dedikam-facture-' . uniqid() . '-' . $orderId;
+        $pdfName = 'dedikam-facture-' . uniqid() . '-' . $orderId . '.pdf';
         return [
             'pdfName' => $pdfName,
             'pdf' => $pdf
@@ -69,7 +69,7 @@ class OrderController extends Controller
 
     public function getPathForPDF(Request $request) {
         $pdf = $this->getPDF($request->orderId, $request->userId);
-        $pdf['pdf']->save(public_path('pdf') . '/' . $pdf['pdfName'] . '.pdf');
+        $pdf['pdf']->save(public_path('pdf') . '/' . $pdf['pdfName']);
         return $pdf['pdfName'];
     }
 
@@ -132,7 +132,7 @@ class OrderController extends Controller
         $response = $r->getBody()->getContents();
 
         \Mail::send('mail.order-create', $order->toArray(), function ($message) use ($response, $user) {
-            $message->attach(asset('pdf/' . $response . '.pdf'));
+            $message->attach(asset('pdf/' . $response));
             $message->from(env('MAIL_FROM_ADDRESS'));
             $message->to($user->email, $user->name)->subject('Récapitulatif de votre commande');
         });
