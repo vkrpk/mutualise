@@ -116,7 +116,6 @@ Route::group([
 
     Route::post('success', "App\Http\Controllers\StripeController@success")->name('stripe.success');
 
-    // Route::get('paypal/handle-payment', 'App\Http\Controllers\PayPalPaymentController@handlePayment')->name('make.payment');
     Route::get('paypal/cancel-payment', 'App\Http\Controllers\PayPalPaymentController@paymentCancel')->name('cancel.payment');
     Route::get('paypal/payment-success', 'App\Http\Controllers\PayPalPaymentController@paymentSuccess')->name('success.payment');
     Route::get('paypal/create-order', 'App\Http\Controllers\PayPalPaymentController@createOrder')->name('success.create-order');

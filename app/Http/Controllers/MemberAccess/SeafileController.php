@@ -21,7 +21,7 @@ class SeafileController
             '{"name":"' . $dedikamAccessName .
             '","email": "' . $memberAccess->email .
             '","password": "' . $passwordNotHash .
-            '","quota_total":"' . $memberAccess->diskspace * 8000 .
+            '","quota_total":"' . $memberAccess->diskspace * 1000 .
             '"}';
         $url = env('SEAFILE_BASEURL_API') . "api/v2.1/admin/users/";
         array_push(self::$headers, "Authorization: Token " . self::getAuthToken());
@@ -32,7 +32,7 @@ class SeafileController
     public static function updateUser(MemberAccess $memberAccess)
     {
         $jsonDatas =
-            '{"quota_total":"' . $memberAccess->diskspace * 8000 .
+            '{"quota_total":"' . $memberAccess->diskspace * 1000 .
             '"}';
         $url = env('SEAFILE_BASEURL_API') . "api/v2.1/admin/users/" . $memberAccess->getUser()->email . "/";
         array_push(self::$headers, "Authorization: Token " . self::getAuthToken());

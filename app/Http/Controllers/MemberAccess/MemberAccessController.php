@@ -13,7 +13,7 @@ class MemberAccessController extends Controller
     public function index() {
         $userId = Auth::user()->id;
         $newOrder = Order::find(2);
-
+        // \App::call('App\Http\Controllers\MemberAccess\NextCloudController@deleteAllUsers');
         $user = User::find(4);
         // dd($user->id);
         // $pdf = \App::call('App\Http\Controllers\OrderController@getPDF', ['orderId' => 6, 'userId' => 4]);
