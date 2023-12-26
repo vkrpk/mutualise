@@ -122,6 +122,8 @@ class OrderController extends Controller
             'headers' => $headers
         ]);
         $url = env('APP_URL') . '/orders/path-facture';
+        dd(filter_var($url, FILTER_VALIDATE_URL));
+// Vérifiez si l'URL semble correcte
         $r = $client->request('POST', $url, [
             'form_params' => [
                 'orderId' => $order->id,
