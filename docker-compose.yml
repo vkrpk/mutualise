@@ -1,52 +1,55 @@
 version: '3.8'
 
 services:
+    traefik:
+        image: traefik:v2.4
+        command:
+            - "--providers.docker=true"
+            - "--entrypoints.web.address=:80"
+            - "--providers.docker.exposedbydefault=false"
+        ports:
+            - "80:80"
+        volumes:
+            - "/var/run/docker.sock:/var/run/docker.sock"
+    app:
+        container_name: dedikam
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.app.rule=Host(`dedikam.test`)"
+        depends_on:
+            - traefik
+            - database
+        env_file:
+            - .env.production
+        build:
+            dockerfile: Dockerfile
+            context: .
+#        volumes:
+#            - .:/var/www/html
+    database:
+        image: postgres
+        container_name: postgres
+        restart: always
+        volumes:
+            - postgresql:/var/lib/postgresql/data
+        ports:
+            - "5432:5432"
+        environment:
+            POSTGRES_DB: dedikam
+            POSTGRES_USER: root
+            POSTGRES_PASSWORD: password
+    pgadmin:
+        image: dpage/pgadmin4
+        container_name: pgAdmin
+        restart: always
+        ports:
+            - "5050:80"
+            - "5051:443"
+        depends_on:
+            - database
+        environment:
+            PGADMIN_DEFAULT_EMAIL: mr.vanced2@gmail.com
+            PGADMIN_DEFAULT_PASSWORD: password
 
-  # Web Server Service
-  nginx:
-    image: nginx:alpine
-    container_name: nginx
-    ports:
-      - "8082:80"
-    volumes:
-      - .:/var/www
-      - ./nginx/conf.d/:/etc/nginx/conf.d/
-    depends_on:
-      - app
-      - db
-
-  db:
-    image: postgres
-    container_name: postgres
-    restart: always
-    volumes:
-      - ./postgresql/data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
-    environment:
-      POSTGRES_DB: dedikam
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: password
-
-  app:
-    container_name: dedikam
-    build:
-      context: ./php
-      dockerfile: Dockerfile
-    volumes:
-      - .:/var/www
-    ports:
-      - "9000:9000"
-    working_dir: /var/www
-
-  pgadmin:
-    image: dpage/pgadmin4
-    container_name: pgAdmin
-    restart: always
-    ports:
-      - "5050:80"
-    depends_on:
-      - db
-    environment:
-      PGADMIN_DEFAULT_EMAIL: mr.vanced2@gmail.com
-      PGADMIN_DEFAULT_PASSWORD: password
+volumes:
+    postgresql:
