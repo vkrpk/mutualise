@@ -1,34 +1,34 @@
-#name: publish
-#
-#on:
-#  push:
-#    branches:
-#      - main
-#
-#env:
-#  # Use docker.io for Docker Hub if empty
-#  REGISTRY: ghcr.io
-#  APP_IMAGE_NAME: ${{ github.actor }}/blog-php_app:latest
-#  DB_IMAGE_NAME: ${{ github.actor }}/blog-php_database:latest
-#
-#jobs:
-#  publish:
-#    name: publish image
-#    runs-on: ubuntu-latest
-#
-#    steps:
-#      - uses: actions/checkout@v3
-#      - name: Login
-#        run: |
-#          echo ${{ secrets.PAT }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-#      - name: Build and Publish App
-#        run: |
-#          docker-compose build app
-#          docker tag blog-php_app:latest ${{ env.REGISTRY }}/${{ env.APP_IMAGE_NAME }}
-#          docker push ${{ env.REGISTRY }}/${{ env.APP_IMAGE_NAME }}
-#      - name: Build and Publish Database (if needed)
-#        if: github.ref == 'refs/heads/main'
-#        run: |
-#          docker-compose build database
-#          docker tag blog-php_database:latest ${{ env.REGISTRY }}/${{ env.DB_IMAGE_NAME }}
-#          docker push ${{ env.REGISTRY }}/${{ env.DB_IMAGE_NAME }}
+name: publish
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  # Use docker.io for Docker Hub if empty
+  REGISTRY: ghcr.io
+  APP_IMAGE_NAME: ${{ github.actor }}/dedikam:latest
+  DB_IMAGE_NAME: ${{ github.actor }}/dedikam_database:latest
+
+jobs:
+  publish:
+    name: publish image
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Login
+        run: |
+          echo ${{ secrets.PAT }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+      - name: Build and Publish App
+        run: |
+          docker-compose build app
+          docker tag dedikam:latest ${{ env.REGISTRY }}/${{ env.APP_IMAGE_NAME }}
+          docker push ${{ env.REGISTRY }}/${{ env.APP_IMAGE_NAME }}
+      - name: Build and Publish Database (if needed)
+        if: github.ref == 'refs/heads/main'
+        run: |
+          docker-compose build database
+          docker tag dedikam_database:latest ${{ env.REGISTRY }}/${{ env.DB_IMAGE_NAME }}
+          docker push ${{ env.REGISTRY }}/${{ env.DB_IMAGE_NAME }}
