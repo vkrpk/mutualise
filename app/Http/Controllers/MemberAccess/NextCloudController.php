@@ -19,7 +19,7 @@ class NextCloudController
     public function create(MemberAccess $memberAccess, string $dedikamAccessName) {
         $datas = [
             'userid' => $memberAccess->email,
-            'password' => '',
+            'password' => 'passwordpassword',
             'email' => $memberAccess->email,
             'quota' => 1073741824 * $memberAccess->diskspace,
         ];

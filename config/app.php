@@ -16,6 +16,19 @@ return [
     */
 
     'name' => env('APP_NAME', 'Dedikam'),
+    'SEAFILE_EMAIL' => env('SEAFILE_EMAIL'),
+    'SEAFILE_PWD' => env('SEAFILE_PWD'),
+    'NEXTCLOUD_BASEURL_API' => env('NEXTCLOUD_BASEURL_API'),
+    'NEXTCLOUD_USERPWD' => env('NEXTCLOUD_USERPWD'),
+
+    'MAIL_MAILER' => env('MAIL_MAILER', 'smtp'),
+    'MAIL_HOST' => env('MAIL_HOST', 'victork.fr'),
+    'MAIL_PORT' => env('MAIL_PORT', '25'),
+    'MAIL_USERNAME' => env('MAIL_USERNAME', ''),
+    'MAIL_PASSWORD' => env('MAIL_PASSWORD', ''),
+    'MAIL_ENCRYPTION' => env('MAIL_ENCRYPTION', ''),
+    'MAIL_FROM_ADDRESS' => env('MAIL_FROM_ADDRESS', 'Dedikam'),
+
 
     /*
     |--------------------------------------------------------------------------
@@ -28,7 +41,7 @@ return [
     |
     */
 
-    'env' => env('APP_ENV', 'example'),
+    'env' => env('APP_ENV', 'local'),
 
     /*
     |--------------------------------------------------------------------------
@@ -41,7 +54,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => (bool) env('APP_DEBUG', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -54,7 +67,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'dedikam.test'),
+    'url' => env('APP_URL', 'http://app.localhost'),
 
     'asset_url' => env('ASSET_URL'),
 

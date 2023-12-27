@@ -25,7 +25,8 @@
         "stripe/stripe-php": "^9.6",
         "symfony/psr-http-message-bridge": "^2.1",
         "tcg/voyager": "^1.5",
-        "timehunter/laravel-google-recaptcha-v3": "~2.5"
+        "timehunter/laravel-google-recaptcha-v3": "~2.5",
+        "ext-curl": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.7",
