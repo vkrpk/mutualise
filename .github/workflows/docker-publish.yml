@@ -24,7 +24,7 @@ jobs:
       - name: Build and Publish App
         run: |
           docker-compose build app
-          docker tag dedikam:latest ${{ env.REGISTRY }}/${{ env.APP_IMAGE_NAME }}
+          docker tag dedikam ${{ env.REGISTRY }}/${{ env.APP_IMAGE_NAME }}
           docker push ${{ env.REGISTRY }}/${{ env.APP_IMAGE_NAME }}
       - name: Build and Publish Database (if needed)
         if: github.ref == 'refs/heads/main'
