@@ -26,6 +26,8 @@ COPY . /var/www/html
 # Set the working directory
 WORKDIR /var/www/html
 
+RUN echo "APP_KEY=" > .env
+
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
@@ -42,6 +44,10 @@ RUN apt-get install -y nodejs npm
 RUN npm install
 
 RUN npm run build
+
+RUN php artisan key:generate
+RUN php artisan cache:clear
+RUN php artisan config:clear
 
 # Nettoyage
 RUN apt-get clean && \
