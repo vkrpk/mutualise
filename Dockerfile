@@ -26,7 +26,7 @@ COPY . /var/www/html
 # Set the working directory
 WORKDIR /var/www/html
 
- Install composer
+# Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Install project dependencies
