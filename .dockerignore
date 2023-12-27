@@ -39,7 +39,7 @@ public/storage
 bootstrap/cache/*
 storage/logs/*
 storage/framework/*
-!storage/framework/sessions/.dockerkeep
+!storage/framework/sessions
 !storage/framework/views
 !storage/framework/cache/data
 
