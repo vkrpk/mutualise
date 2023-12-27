@@ -45,9 +45,9 @@ class UserSeeder extends Seeder
             ],
             [
                 'name' => 'vic',
-                'email' => 'victor.krupka@orange.fr',
+                'email' => 'user@victork.fr',
                 'password' => Hash::make('password'),
-                'role_id' => 1,
+                'role_id' => 2,
                 'nb_free_account' => 0,
                 'email_verified_at' => Carbon::now(),
             ]

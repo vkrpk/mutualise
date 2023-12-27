@@ -2,30 +2,30 @@ version: '3.8'
 
 services:
     traefik:
-        image: traefik:v2.4
-        command:
-            - "--providers.docker=true"
-            - "--entrypoints.web.address=:80"
-            - "--providers.docker.exposedbydefault=false"
+        image: traefik:v2.9
+        command: --api.insecure=true --providers.docker
         ports:
             - "80:80"
+            - "8080:8080"
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.middlewares.redirect-to-http.redirectscheme.scheme=http"
         volumes:
             - "/var/run/docker.sock:/var/run/docker.sock"
     app:
         container_name: dedikam
         labels:
-            - "traefik.enable=true"
-            - "traefik.http.routers.app.rule=Host(`dedikam.test`)"
+            - "traefik.http.routers.app.rule=Host(`app.localhost`)"
         depends_on:
             - traefik
             - database
-        env_file:
-            - .env.production
+#        env_file:
+#            - .env.production
         build:
             dockerfile: Dockerfile
             context: .
-#        volumes:
-#            - .:/var/www/html
+        volumes:
+            - .:/var/www/html
     database:
         image: postgres
         container_name: postgres
