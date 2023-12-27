@@ -13,7 +13,7 @@ yarn-error.log
 /vendor
 /storage/*.key
 .env.example
-# .env.production
+.env.production
 .phpunit.result.cache
 
 # Various IDEs and editors
