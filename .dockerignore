@@ -12,7 +12,6 @@ yarn-error.log
 # Laravel
 /vendor
 /storage/*.key
-.env
 .env.example
 .phpunit.result.cache
 
