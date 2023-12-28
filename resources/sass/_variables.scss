@@ -16,14 +16,16 @@ $custom-colors: (
 );
 
 $theme-colors: (
-    "primary": #74ba58,
-    "secondary": #fe7e20,
-    "info": #141e28,
+    "primary": #1B1B1E,
+    "secondary": #0E79B2,
+    "info": #FBFEF9,
     "warning": #141e28,
     "danger" : #dc3545,
     "light" : #f8f9fa,
     "dark" : #212529,
     "success" : $green,
+    "tertiary" : #fa8334,
+    "tertiaryBis" : #17b890,
 );
 
 $theme-colors: map-merge($theme-colors, $custom-colors );

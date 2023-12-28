@@ -24,8 +24,8 @@ services:
         build:
             dockerfile: Dockerfile
             context: .
-#        volumes:
-#            - .:/var/www/html
+        volumes:
+            - .:/var/www/html
     database:
         image: postgres
         container_name: postgres
