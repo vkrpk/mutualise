@@ -78,27 +78,27 @@
                             <div class="row">
                                 <div class="col-12 col-sm-6 ps-1 pe-0">
                                     <span class="fst-italic">
-                                        <i class="fa-solid fa-circle-arrow-right bg-white text-secondary me-2"></i>{{__("Formule choisie")}} :</span>
+                                        <i class="fa-solid fa-circle-arrow-right bg-white text-tertiary me-2"></i>{{__("Formule choisie")}} :</span>
                                     <span>{{ __(ucfirst($item->attributes->form_level)) }}</span>
                                 </div>
                                 @if ($item->attributes->buttonsRadioForOffer)
                                     <div class="col-12 col-sm-6 ps-1 pe-0">
                                         <span class="fst-italic"><i
-                                                class="fa-solid fa-circle-arrow-right bg-white text-secondary me-2"></i>Option :</span>
+                                                class="fa-solid fa-circle-arrow-right bg-white text-tertiary me-2"></i>Option :</span>
                                         <span>{{ $buttonsRadioForOfferName }}</span>
                                     </div>
                                 @endif
                                 @if ($item->attributes->isFreeTrial == true)
                                     <div class="col-12 col-sm-6 ps-1 pe-0">
                                         <span class="fst-italic"><i
-                                                class="fa-solid fa-circle-arrow-right bg-white text-secondary me-2"></i>Option :</span>
+                                                class="fa-solid fa-circle-arrow-right bg-white text-tertiary me-2"></i>Option :</span>
                                         <span>{{__("Offre d'essai")}}</span>
                                     </div>
                                 @endif
                             </div>
                             <div class="row">
                                 <div class="col ps-1 pe-0">
-                                    <span class="fst-italic"><i class="fa-solid fa-circle-arrow-right bg-white text-secondary me-2"></i>{{__("Espace disque")}} :</span>
+                                    <span class="fst-italic"><i class="fa-solid fa-circle-arrow-right bg-white text-tertiary me-2"></i>{{__("Espace disque")}} :</span>
                                     <span>{{ $item->attributes->form_diskspace . ' Go' }}</span>
                                 </div>
                             </div>
@@ -106,7 +106,7 @@
                             @if ($item->attributes->form_level === 'dédié')
                                 <div class="row">
                                     <div class="col ps-1 pe-0 d-flex align-item-center">
-                                        <span class="d-flex align-items-center"><i class="fa-solid fa-circle-arrow-right bg-white text-secondary me-2"></i></span>
+                                        <span class="d-flex align-items-center"><i class="fa-solid fa-circle-arrow-right bg-white text-tertiary me-2"></i></span>
                                         <div>
                                             <span class="fst-italic">{{__("Domaine")}} :</span>
                                             <span>{{ $item->attributes->domainUrlOrPrefix }}</span>
@@ -126,14 +126,13 @@
                         <span>{{__("Conditions de vente")}}</span>
                     </div>
                     <div class="card-body">
-                        <span class="d-block fw-bolder">{{__("Identité de l'association : Dedikam")}}</span>
+                        <span class="d-block fw-bolder">{{__("Identité de l'association : Mutualise")}}</span>
                         <span class="d-block"><strong>Raison sociale :</strong> Association régie par la loi du 1er juillet 1901 et le décret du 16 août 1901. TVA non applicable art-293B du CGI.</span>
-                        <span class="d-block"><strong>{{__("Support technique")}} :</strong><a class="btn-link" href="mailto:support@dedikam.com"> support@dedikam.com</a></span>
-                        <span class="d-block">Identifiant SIREN : 503341976</span>
-                        <span class="d-block">CNIL : 1426354</span>
-                        <span class="d-block">Code APE : 9499Z</span>
-                        <span class="d-block">Identification WALDEC : W763003888</span>
-                        <a href="https://labo-drupal.dedikam.com/content/conditions-de-vente" class="text-primary">{{__("En savoir plus")}}</a>
+                        <span class="d-block"><strong>{{__("Support technique")}} :</strong><a class="btn-link" href="mailto:support@victork.fr"> support@victork.fr</a></span>
+{{--                        <span class="d-block">Identifiant SIREN : 503341976</span>--}}
+{{--                        <span class="d-block">CNIL : 1426354</span>--}}
+{{--                        <span class="d-block">Code APE : 9499Z</span>--}}
+{{--                        <span class="d-block">Identification WALDEC : W763003888</span>--}}
                     </div>
                     <div class="card-footer">
                         <input class="form-check-input" type="checkbox" id="checboxCGU" name="checboxCGU" form="formRecapOrder">
@@ -195,7 +194,7 @@
                     @csrf
                     <input type="hidden" value="{{$cartItemId}}" name="cartItemId">
                     <input type="hidden" value="{{$formula_period}}" name="formula_period">
-                    <button type="submit" class="btn btn-primary btn-lg" id="buttonFormRecapOrder">{{__("Valider la commande")}}</button>
+                    <button type="submit" class="btn btn-secondary btn-lg" id="buttonFormRecapOrder">{{__("Valider la commande")}}</button>
                 </form>
             </div>
         </div>

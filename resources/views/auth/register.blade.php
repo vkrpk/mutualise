@@ -85,7 +85,7 @@
                             <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     {!! GoogleReCaptchaV3::renderField('register_id', 'register') !!}
-                                    <button type="submit" class="btn btn-primary mt-3" id="captcha-button">
+                                    <button type="submit" class="btn btn-tertiaryBis mt-3 text-white" id="captcha-button">
                                         {{ __('Register') }}
                                     </button>
                                 </div>

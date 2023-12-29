@@ -41,7 +41,7 @@
                                 <input class="form-control" id="confirmNewPasswordInput" type="password"
                                     placeholder="{{__("Confirm Password")}}" name="new_password_confirmation">
                             </div>
-                            <button class="btn btn-primary" type="submit">{{__("Save")}}</button>
+                            <button class="btn btn-secondary" type="submit">{{__("Save")}}</button>
                         </form>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
                     <div class="card-header customCardHeader">{{__("Changer mon adresse email")}}</div>
                     <div class="card-body">
                         <p>Adresse email actuelle: {{ Auth::user()->email }}</p>
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="buttonForOpenModal">
+                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="buttonForOpenModal">
                             {{__("Changer mon adresse email")}}
                         </button>
                         <!-- Modal -->
@@ -77,7 +77,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">{{__("Close")}}</button>
-                                        <button form="changeEmailForm" type="submit" class="btn btn-primary">{{__("Send")}}</button>
+                                        <button form="changeEmailForm" type="submit" class="btn btn-secondary">{{__("Send")}}</button>
                                     </div>
                                 </div>
                             </div>
@@ -116,7 +116,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">{{__("Close")}}</button>
-                                        <button form="formDeleteAccount" class="btn btn-primary" type="submit">{{__("Je comprends, supprimer mon compte")}}</button>
+                                        <button form="formDeleteAccount" class="btn btn-secondary" type="submit">{{__("Je comprends, supprimer mon compte")}}</button>
                                     </div>
                                 </div>
                             </div>

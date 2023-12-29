@@ -14,7 +14,7 @@
                         </div>
                     @endif
                     <p>{{__("A confirmation email has been sent to you to this email address :")}}<u>{{ Auth::user()->email }}</u>.</p>
-                    <p>{{__("Be sure you are still logged to Dedikam in your browser while you open this email")}}</p>
+                    <p>{{__("Be sure you are still logged to Mutualise in your browser while you open this email")}}</p>
                     {{ __('Before proceeding, please check your email for a verification link.') }}
                     {{ __('If you did not receive the email') }},
                     <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">

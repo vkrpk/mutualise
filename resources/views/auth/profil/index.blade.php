@@ -27,7 +27,7 @@
                             @error('avatar')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
-                            <p><button class="btn btn-primary mt-4" type="submit">{{__("Uploader une nouvelle image")}}</button></p>
+                            <p><button class="btn btn-secondary mt-4" type="submit">{{__("Uploader une nouvelle image")}}</button></p>
                         </form>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
                         <form method="POST" action="{{ route('storeInfos') }}">
                             @csrf
                             <x-adresses-card :address="$address" :form="''"/>
-                            <button class="btn btn-primary" type="submit">{{__("Save")}}</button>
+                            <button class="btn btn-secondary" type="submit">{{__("Save")}}</button>
                         </form>
                     </div>
                 </div>

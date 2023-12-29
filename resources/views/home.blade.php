@@ -2,26 +2,28 @@
 
 @section('content')
     <div class="container-fluid px-0 gx-0">
-        <section class="d-flex flex-column align-items-center" style="position: relative;background: url('{{ Vite::asset("resources/images/qui-sommes-nous-bg.png") }}') center / cover no-repeat">
-            <div class="row text-tertiary text-center gy-5 py-5 px-2 px-md-0 container">
+        <section class="d-flex flex-column align-items-center" style="position: relative;background: url('{{ Vite::asset("resources/images/bx.jpg") }}') center / cover no-repeat">
+            <div class="row text-primary text-center gy-5 py-5 px-2 px-md-0 container">
                 <p class="h1 fw-bolder px-sm-5 px-0">{{Str::upper(__("Sauvegarde et partage de données en ligne"))}}</p>
-                <p class="h3 px-sm-5 px-0">{{Str::upper(__("Plateforme collaborative - espace de travail numérique"))}}</p>
-                <div class="row-cols d-flex align-items-center flex-column flex-sm-row py-sm-5" style="background: url('{{ Vite::asset("resources/images/Date-Center.jpg") }}') center / cover no-repeat; ">
+                <p class="h3 px-sm-5 px-0 text-primary">{{Str::upper(__("Plateforme collaborative - espace de travail numérique"))}}</p>
+                <p id="sectionServicesMutualises" class="text-primary text-uppercase fw-bolder h4"><u>{{__("Qui sommes-nous ?")}}</u></p>
+
+                <p class="text-primary h3">{{__("Mutualisé est une association, indépendante sans publicité, totalement transparente et non lucrative. Nous offrons divers outils collaboratifs pour tout type d’utilisateurs, du particulier au professionnel")}}</p>
+
+                <div class="row-cols d-flex align-items-center flex-column flex-sm-row py-sm-5" style="background: url('{{ Vite::asset("resources/images/Data-Center.jpg") }}') center / cover no-repeat; ">
                     <div class="col py-3 py-sm-0">
-                        <p class="h5">{{__("Services mutualisés")}}</p>
+                        <p class="h3 text-white">{{__("Services mutualisés")}}</p>
                         <a href="#sectionServicesMutualises">
                             <button class="btn btn-secondary text-uppercase fw-bolder">{{__("Découvrir")}}</button>
                         </a>
                     </div>
                     <div class="col py-3 py-sm-0">
-                        <p class="h5">{{__("Services dédiés")}}</p>
+                        <p class="h3 text-white">{{__("Services dédiés")}}</p>
                         <a href="#sectionServicesDedies">
                             <button class="btn btn-secondary text-uppercase fw-bolder">{{__("Découvrir")}}</button>
                         </a>
                     </div>
                 </div>
-                <p id="sectionServicesMutualises" class="text-white text-uppercase fw-bolder h4"><u>{{__("Qui sommes-nous ?")}}</u></p>
-                <p class="h4">{{__("DediKam est une association, indépendante sans publicité, totalement transparente et non lucrative. Nous offrons divers outils collaboratifs pour tout type d’utilisateurs, du particulier au professionnel")}}</p>
             </div>
         </section>
         <section class="d-flex flex-column align-items-center py-5" style="background-image: linear-gradient(180deg, #fa8334 0%, #17b890 100%);--bs-primary: #74ba58;--bs-primary-rgb: 116,186,88;--bs-secondary: #fe7e20;--bs-secondary-rgb: 254,126,32;">
@@ -137,7 +139,7 @@
             button.addEventListener("click", () => {
                 switch (button) {
                     case boxForTheButtonsInOutilsWeb[1]:
-                        textForTheButtonsInOutilsWeb.innerHTML = "{{__("L’accès SSH vous permet d’accéder à une console SSH reliée directement à votre compte Dedikam à travers une connexion entièrement chiffrée et sécurisée. L’authentification à cette console peut se faire via un couple login/mot de passe ou via un couple clé privée/clé publique.")}}"
+                        textForTheButtonsInOutilsWeb.innerHTML = "{{__("L’accès SSH vous permet d’accéder à une console SSH reliée directement à votre compte Mutualisé à travers une connexion entièrement chiffrée et sécurisée. L’authentification à cette console peut se faire via un couple login/mot de passe ou via un couple clé privée/clé publique.")}}"
                         break;
                     case boxForTheButtonsInOutilsWeb[2]:
                         textForTheButtonsInOutilsWeb.innerHTML = "{{__("Le disque ISCSI fonctionne et se comporte de la même manière qu’un disque local : le but de l’ISCSI est d’avoir un ou plusieurs disques durs sur son ordinateur ou son serveur et d’avoir l’illusion qu’ils sont physiquement connectés sur la carte-mère. En réalité ce sont des disques virtuels hébergés dans une infrastructure redondante, sécurisée et performante. Cela permet de pallier différentes pannes matérielles que peuvent subir une machine ou un disque dur.")}}"

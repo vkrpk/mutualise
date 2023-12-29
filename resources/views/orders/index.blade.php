@@ -60,7 +60,7 @@
                             @csrf
                             <input type="hidden" name="orderId" value="{{ $order->id }}">
                             <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
-                            <a target="_blank"><button type="submit" class="btn btn-primary">{{__("Télécharger le PDF")}}</button></a>
+                            <a target="_blank"><button type="submit" class="btn btn-secondary">{{__("Télécharger le PDF")}}</button></a>
                         </form>
                     </div>
                 </div>

@@ -68,7 +68,7 @@ class NextCloudController
     public function deleteAllUsers() {
         $allUsers = $this->listUsers();
         foreach ($allUsers as $user) {
-            if($user !==  'admin@dedikam.com'){
+            if($user !==  'nextcloud@victork.fr'){
                 $this->deleteUser($user);
             }
         }

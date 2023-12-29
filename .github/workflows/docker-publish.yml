@@ -8,8 +8,8 @@ on:
 env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
-  APP_IMAGE_NAME: ${{ github.actor }}/dedikam_app:latest
-  DB_IMAGE_NAME: ${{ github.actor }}/dedikam_database:latest
+  APP_IMAGE_NAME: ${{ github.actor }}/mutualise_app:latest
+  DB_IMAGE_NAME: ${{ github.actor }}/mutualise_database:latest
 
 jobs:
   publish:
@@ -24,5 +24,5 @@ jobs:
       - name: Build and Publish App
         run: |
           docker-compose build app
-          docker tag dedikam_app ${{ env.REGISTRY }}/${{ env.APP_IMAGE_NAME }}
+          docker tag mutualise_app ${{ env.REGISTRY }}/${{ env.APP_IMAGE_NAME }}
           docker push ${{ env.REGISTRY }}/${{ env.APP_IMAGE_NAME }}

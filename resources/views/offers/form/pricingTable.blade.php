@@ -4,17 +4,17 @@
     <a class="Standard pricingHeader w-100 col2 text-center" offer="standard">Standard</a>
     <a class="Entreprise pricingHeader w-100 col3 text-center" offer="entreprise">{{__("Entreprise")}}</a>
     <a class="Dedie pricingHeader w-100 col4 text-center" offer="dédié">{{__("Dédié")}}</a>
-    <div class="Seafile pricingReference">Seafile</div>
-    <div class="Nextcloud pricingReference">Nextcloud</div>
-    <div class="Pydio pricingReference">Pydio</div>
-    <div class="ssh pricingReference">SSH</div>
-    <div class="RSYNC pricingReference">RSYNC</div>
-    <div class="SFTP pricingReference">SFTP</div>
-    <div class="FTPSFTP pricingReference">FTP/SFTP</div>
-    <div class="ISCSI pricingReference">ISCSI</div>
-    <div class="CIFS pricingReference">CIFS</div>
-    <div class="Webdav pricingReference">Webdav</div>
-    <div class="SI pricingReference">SI</div>
+    <div class="Seafile pricingReference bg-light">Seafile</div>
+    <div class="Nextcloud pricingReference bg-light">Nextcloud</div>
+    <div class="Pydio pricingReference bg-light">Pydio</div>
+    <div class="ssh pricingReference bg-light">SSH</div>
+    <div class="RSYNC pricingReference bg-light">RSYNC</div>
+    <div class="SFTP pricingReference bg-light">SFTP</div>
+    <div class="FTPSFTP pricingReference bg-light">FTP/SFTP</div>
+    <div class="ISCSI pricingReference bg-light">ISCSI</div>
+    <div class="CIFS pricingReference bg-light">CIFS</div>
+    <div class="Webdav pricingReference bg-light">Webdav</div>
+    <div class="SI pricingReference bg-light">SI</div>
     <a tabindex="0" offer="basique" class="colContainer col1 popover-dismiss d-block w-100" role="button" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-title="Répartition des données" data-bs-content="1 serveur" data-bs-placement="right">
         <div class="AB check">
             <input type="radio" name="buttonsRadioForOffer" id="seafileOfferBasique" value="seafileOfferBasique" form="formAddToCart" {{ old('buttonsRadioForOffer') == 'seafileOfferBasique' ? 'checked' : '' }}>

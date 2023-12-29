@@ -3,7 +3,7 @@
 
     <div class="container-sm overflow-hidden p-0 ">
         <div class="row mx-2 mx-sm-0 g-2 text-center m-3 d-flex flex-column align-items-center">
-            <div class="alert alert-primary @isAdmin() alert-secondary @endisAdmin fs-3 fw-bolder mb-3" role="alert">
+            <div class="alert alert-tertiary @isAdmin() alert-tertiary @endisAdmin fs-3 fw-bolder mb-3" role="alert">
                 @isAdmin() <span class="text-uppercase"> {{__("Modifier l'état des services")}}</span>@endisAdmin
                 @isNotAdmin<span class="text-uppercase"> {{__("État des services")}}</span>@endisNotAdmin
             </div>
@@ -26,7 +26,7 @@
         @isAdmin()
             <form action="{{route('serviceUpdate')}}" method="post" id="changeServiceStatusForm" class="d-flex justify-content-center py-2">
                 @csrf
-                <a target="_blank"><button target="_blank" class="btn btn-primary" type="submit">{{__("Valider les changements")}}</button></a>
+                <a target="_blank"><button target="_blank" class="btn btn-secondary" type="submit">{{__("Valider les changements")}}</button></a>
             </form>
         @endisAdmin
     </div>

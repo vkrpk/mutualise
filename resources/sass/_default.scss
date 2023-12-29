@@ -1,5 +1,5 @@
 $primary: #0E79B2;
-$secondary: #fe7e20;
+$secondary: #fa8334;
 $info: #141e28;
 $warning: #141e28;
 
@@ -22,7 +22,7 @@ body {
     font-size: 0.9rem;
     font-weight: 400;
     line-height: 1.6;
-    background-color: lighten(#c9fbff, 9%) !important;
+    background-color: #cfd8d7;
 }
 
 .content {
@@ -97,7 +97,8 @@ a {
 }
 
 .bgSecondaryLight{
-    background-color: #feb986 !important;
+    background-color: $secondary-light !important;
+    color: white !important;
 }
 
 .customCardHeader{

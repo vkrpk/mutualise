@@ -9,5 +9,5 @@
                 <span class="text-danger">{{ $message }}</span>
             @enderror
         </div>
-        <button class="btn fs-5 btn-primary" type="submit"><i class="fa-solid fa-cart-shopping me-2"></i>{{ __( $id ? "Update" : "Ajouter au panier") }}</button>
+        <button class="btn fs-5 btn-secondary" type="submit"><i class="fa-solid fa-cart-shopping me-2"></i>{{ __( $id ? "Update" : "Ajouter au panier") }}</button>
 </form>
