@@ -55,7 +55,7 @@ class OrderController extends Controller
             'orderId' => $order->id
         ];
         $pdf = \PDF::loadView('components.order', $data);
-        $pdfName = 'dedikam-facture-' . uniqid() . '-' . $orderId . '.pdf';
+        $pdfName = 'mutualise-facture-' . uniqid() . '-' . $orderId . '.pdf';
         return [
             'pdfName' => $pdfName,
             'pdf' => $pdf

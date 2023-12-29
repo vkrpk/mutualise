@@ -8,7 +8,7 @@
     </div>
     <div class="row mx-2 mx-sm-0">
         <h4>1- {{__("Nature des données collectées")}}</h4>
-        <p><strong>{{__("Dans le cadre de l’utilisation des services, DediKam est susceptible de collecter les catégories de données suivantes concernant ses Utilisateurs")}} :</strong><br>
+        <p><strong>{{__("Dans le cadre de l’utilisation des services, Mutualisé est susceptible de collecter les catégories de données suivantes concernant ses Utilisateurs")}} :</strong><br>
             {{__("Données d’état-civil, d’identité, et d’identification")}}.<br>
             {{__("Données de connexion (adresses IP, journaux d’événements)")}}
         </p>
@@ -51,13 +51,13 @@
             <strong>{{__("Durée de conservation des cookies")}} :</strong><br>
             {{__("Conformément aux recommandations de la CNIL, la durée maximale de conservation des cookies est de 13 mois au maximum après leur premier dépôt dans le terminal de l’Utilisateur, tout comme la durée de la validité du consentement de l’Utilisateur à l’utilisation de ces cookies. La durée de vie des cookies n’est pas prolongée à chaque visite. Le consentement de l’Utilisateur devra donc être renouvelé à l’issue de ce délai")}}.<br>
             <strong>{{__("Finalité cookies")}}:</strong> <br>
-            {{__("Les cookies peuvent être utilisés pour des fins statistiques notamment pour optimiser les services rendus à l’utilisateur, à partir du traitement des informations concernant la fréquence d’accès, la personnalisation des pages ainsi que les opérations réalisées et les informations consultées. Vous êtes informé que DediKam est susceptible de déposer des cookies sur votre terminal. Le cookie enregistre des informations relatives à la navigation sur le service (les pages que vous avez consultées, la date et l’heure de la consultation…) que nous pourrons lire lors de vos visites ultérieures")}}.<br>
+            {{__("Les cookies peuvent être utilisés pour des fins statistiques notamment pour optimiser les services rendus à l’utilisateur, à partir du traitement des informations concernant la fréquence d’accès, la personnalisation des pages ainsi que les opérations réalisées et les informations consultées. Vous êtes informé que Mutualisé est susceptible de déposer des cookies sur votre terminal. Le cookie enregistre des informations relatives à la navigation sur le service (les pages que vous avez consultées, la date et l’heure de la consultation…) que nous pourrons lire lors de vos visites ultérieures")}}.<br>
             <strong>{{__("Droit de l’Utilisateur de refuser les cookies, la désactivation entraînant un fonctionnement dégradé du service")}}:</strong> <br>
-            {{__("Vous reconnaissez avoir été informé que DediKam peut avoir recours à des cookies, et l’y autorisez")}}.<br>
+            {{__("Vous reconnaissez avoir été informé que Mutualisé peut avoir recours à des cookies, et l’y autorisez")}}.<br>
             {{__("Si vous ne souhaitez pas que des cookies soient utilisés sur votre terminal, la plupart des navigateurs vous permettent de désactiver les cookies en passant par les options de réglage")}}.<br>
             {{__("Toutefois, vous êtes informé que certains services sont susceptibles de ne plus fonctionner correctement")}}.<br>
             {{__("Association possible des cookies avec des données personnelles pour permettre le fonctionnement du service")}}.<br>
-            {{__("DediKam peut être amenée à recueillir des informations de navigation via l’utilisation de cookies")}}.
+            {{__("Mutualisé peut être amenée à recueillir des informations de navigation via l’utilisation de cookies")}}.
         </p>
         <h4>9 - {{__("Conservation des données techniques")}}</h4>
         <p>
@@ -72,18 +72,18 @@
             {{__("Nous conservons les données personnelles pour la durée strictement nécessaire à la réalisation des finalités décrites dans les présentes Politiques de confidentialité")}}.<br>
             {{__("Au-delà de cette durée, elles seront anonymisées et conservées à des fins exclusivement statistiques et ne donneront lieu à aucune exploitation, de quelque nature que ce soit")}}.<br>
             <strong>{{__("Suppression des données après suppression du compte")}} :</strong><br>
-            {{__("Des moyens de purge de données sont mis en place afin d’en prévoir la suppression effective dès lors que la durée de conservation ou d’archivage nécessaire à l’accomplissement des finalités déterminées ou imposées est atteinte. Conformément à la loi n°78-17 du 6 janvier 1978 relative à l’informatique, aux fichiers et aux libertés, vous disposez par ailleurs d’un droit de suppression sur vos données que vous pouvez exercer à tout moment en prenant contact avec DediKam")}}.<br>
+            {{__("Des moyens de purge de données sont mis en place afin d’en prévoir la suppression effective dès lors que la durée de conservation ou d’archivage nécessaire à l’accomplissement des finalités déterminées ou imposées est atteinte. Conformément à la loi n°78-17 du 6 janvier 1978 relative à l’informatique, aux fichiers et aux libertés, vous disposez par ailleurs d’un droit de suppression sur vos données que vous pouvez exercer à tout moment en prenant contact avec Mutualisé")}}.<br>
             <strong>{{__("Suppression des données après 3 ans d’inactivité")}} :</strong><br>
             {{__("Pour des raisons de sécurité, si vous ne vous êtes pas authentifié sur le Site pendant une période de trois ans, vous recevrez un e-mail vous invitant à vous connecter dans les plus brefs délais, sans quoi vos données seront supprimées de nos bases de données")}}.
         </p>
         <h4>11- {{__("Suppression du compte")}}</h4>
         <p>
             <strong>{{__("Suppression du compte à la demande")}} :</strong><br>
-            {{__("L’Utilisateur a la possibilité de supprimer son Compte à tout moment, par simple demande à DediKam OU par le menu de suppression de Compte présent dans les paramètres du Compte le cas échéant")}}.<br>
+            {{__("L’Utilisateur a la possibilité de supprimer son Compte à tout moment, par simple demande à Mutualisé OU par le menu de suppression de Compte présent dans les paramètres du Compte le cas échéant")}}.<br>
             <strong>{{__("Suppression du compte en cas de violation de la Politique de Confidentialité")}} :</strong><br>
-            {{__("En cas de violation d’une ou de plusieurs dispositions de la Politique de Confidentialité ou de tout autre document incorporé aux présentes par référence, DediKam se réserve le droit de mettre fin ou restreindre sans aucun avertissement préalable et à sa seule discrétion, votre usage et accès aux services, à votre compte et à tous les services")}}.
+            {{__("En cas de violation d’une ou de plusieurs dispositions de la Politique de Confidentialité ou de tout autre document incorporé aux présentes par référence, Mutualisé se réserve le droit de mettre fin ou restreindre sans aucun avertissement préalable et à sa seule discrétion, votre usage et accès aux services, à votre compte et à tous les services")}}.
         </p>
-        <h4>12- {{__("Indications en cas de faille de sécurité décelée par DediKam")}}</h4>
+        <h4>12- {{__("Indications en cas de faille de sécurité décelée par Mutualisé")}}</h4>
         <p>
             <strong>{{__("Information de l’Utilisateur en cas de faille de sécurité")}} :</strong><br>
             {{__("Nous nous engageons à mettre en oeuvre toutes les mesures techniques et organisationnelles appropriées afin de garantir un niveau de sécurité adapté au regard des risques d’accès accidentels, non autorisés ou illégaux, de divulgation, d’altération, de perte ou encore de destruction des données personnelles vous concernant")}}.<br>
@@ -97,7 +97,7 @@
         <h4>13- {{__("Transfert des données personnelles à l'étranger")}}</h4>
         <p>
             <strong>{{__("Pas de transfert en dehors de l’Union européenne")}} :</strong><br>
-            {{__("DediKam s’engage à ne pas transférer les données personnelles de ses Utilisateurs en dehors de l’Union européenne")}}.
+            {{__("Mutualisé s’engage à ne pas transférer les données personnelles de ses Utilisateurs en dehors de l’Union européenne")}}.
         </p>
         <h4>14- {{__("Modification de la politique de confidentialité")}}</h4>
         <p>
@@ -115,12 +115,12 @@
         <h4>16- {{__("Portabilité des données")}}</h4>
         <p>
             <strong>{{__("Portabilité des données")}} :</strong><br>
-            {{__("DediKam s’engage à vous offrir la possibilité de vous faire restituer l’ensemble des données vous concernant sur simple demande. L’Utilisateur se voit ainsi garantir une meilleure maîtrise de ses données, et garde la possibilité de les réutiliser. Ces données devront être fournies dans un format ouvert et aisément réutilisable")}}.
+            {{__("Mutualisé s’engage à vous offrir la possibilité de vous faire restituer l’ensemble des données vous concernant sur simple demande. L’Utilisateur se voit ainsi garantir une meilleure maîtrise de ses données, et garde la possibilité de les réutiliser. Ces données devront être fournies dans un format ouvert et aisément réutilisable")}}.
         </p>
     </div>
 @endsection
 
-        
-        
+
+
 
 

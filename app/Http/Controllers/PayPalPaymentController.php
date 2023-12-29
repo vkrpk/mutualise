@@ -23,7 +23,7 @@ class PayPalPaymentController extends Controller
             $data['items'][] = [
                 'name' => 'Adhésion association',
                 'price' => 14,
-                'desc'  => 'Adhésion à l\'associtation Dedikam',
+                'desc'  => 'Adhésion à l\'associtation Mutualisé',
                 'qty' => 1
             ];
         }

@@ -73,7 +73,7 @@ class CartController extends Controller
                     return $input->form_level === 'dédié' ? true : false;
                 })
             ->sometimes('domainType',
-                ['required', Rule::in(['dedikam', 'private'])],
+                ['required', Rule::in(['victork', 'private'])],
                 function ($input) {
                     return $input->form_level === 'dédié' ? true : false;
                 })
@@ -85,7 +85,7 @@ class CartController extends Controller
             ;
 
         if($request->form_level === 'dédié'){
-            if ($request->domainType === 'dedikam') {
+            if ($request->domainType === 'victork') {
                 $validator = Validator::make(
                     [$request->domainUrlOrPrefix],
                     ['regex:/^((?![-.])[A-Z0-9-.]{1,63}(?<![-.]))+$/i'],
@@ -104,8 +104,8 @@ class CartController extends Controller
             }
         }
 
-        if (str_contains($request->domainUrlOrPrefix, ".dedikam.com")) {
-            $request->domainUrlOrPrefix = str_replace(".dedikam.com", "", $request->domainUrlOrPrefix);
+        if (str_contains($request->domainUrlOrPrefix, ".victork.fr")) {
+            $request->domainUrlOrPrefix = str_replace(".victork.fr", "", $request->domainUrlOrPrefix);
         }
 
         if ($request->id) {
@@ -117,7 +117,7 @@ class CartController extends Controller
                 'attributes' => array(
                     'form_level' => $request->form_level,
                     'domainType' => $request->domainType,
-                    'domainUrlOrPrefix' => $request->form_level == "dédié" ? ($request->domainType === "dedikam" ? $request->domainUrlOrPrefix . ".dedikam.com" : $request->domainUrlOrPrefix) : "",
+                    'domainUrlOrPrefix' => $request->form_level == "dédié" ? ($request->domainType === "victork" ? $request->domainUrlOrPrefix . ".victork.fr" : $request->domainUrlOrPrefix) : "",
                     'form_diskspace' => $request->form_level == 'dédié' ? $request->sizeValueForDedicatedOffer : $request->form_diskspace,
                     'priceMonthly' => $request->isFreeTrial == "on" ? 0 : $price['M'],
                     'coupon' => $request->isFreeTrial == "on" ? false : true,
@@ -134,7 +134,7 @@ class CartController extends Controller
                 'attributes' => array(
                     'form_level' => $request->form_level,
                     'domainType' => $request->domainType,
-                    'domainUrlOrPrefix' => $request->form_level == "dédié" ? ($request->domainType === "dedikam" ? $request->domainUrlOrPrefix . ".dedikam.com" : $request->domainUrlOrPrefix) : "",
+                    'domainUrlOrPrefix' => $request->form_level == "dédié" ? ($request->domainType === "victork" ? $request->domainUrlOrPrefix . ".victork.fr" : $request->domainUrlOrPrefix) : "",
                     'form_diskspace' => $request->form_level == 'dédié' ? $request->sizeValueForDedicatedOffer : $request->form_diskspace,
                     'priceMonthly' => $request->isFreeTrial == "on" ? 0 : $price['M'],
                     'coupon' => $request->isFreeTrial == "on" ? false : true,

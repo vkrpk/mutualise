@@ -17,18 +17,11 @@ class AddressSeeder extends Seeder
     {
         $adresses = [
             [
-                "identifier" => "Michael Bihary",
-                "address" => "Default",
-                "postal_code" => "75000",
-                "city" => "Paris",
-                "user_id" => 1
-            ],
-            [
                 "identifier" => "Victor K",
                 "address" => "Default",
                 "postal_code" => "75000",
                 "city" => "Paris",
-                "user_id" => 4
+                "user_id" => 1
             ]
         ];
         foreach ($adresses as $adresse) {

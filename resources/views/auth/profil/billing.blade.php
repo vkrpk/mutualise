@@ -111,7 +111,7 @@
     <div class="card card-header-actions mb-4">
         <div class="card-header">
             Payment Methods
-            <button class="btn btn-sm btn-primary" type="button">Add Payment Method</button>
+            <button class="btn btn-sm btn-secondary" type="button">Add Payment Method</button>
         </div>
         <div class="card-body px-0">
             <!-- Payment method 1-->

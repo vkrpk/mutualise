@@ -60,10 +60,10 @@
 
                             <div class="row mb-0">
                                 <div class="col-md-8 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
+                                    <button type="submit" class="btn btn-tertiaryBis text-white">
                                         {{ __('Login') }}
                                     </button>
-                                    <a href="{{ route('register') }}" class="btn btn-secondary">{{ __('Register') }} </a>
+                                    <a href="{{ route('register') }}" class="btn btn-secondary text-white">{{ __('Register') }} </a>
 
                                     @if (Route::has('password.request'))
                                         <a class="btn btn-link text-secondary" href="{{ route('password.request') }}">

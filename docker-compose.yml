@@ -13,7 +13,7 @@ services:
         volumes:
             - "/var/run/docker.sock:/var/run/docker.sock"
     app:
-        container_name: dedikam
+        container_name: mutualise
         labels:
             - "traefik.http.routers.app.rule=Host(`app.localhost`)"
         depends_on:
@@ -35,7 +35,7 @@ services:
         ports:
             - "5432:5432"
         environment:
-            POSTGRES_DB: dedikam
+            POSTGRES_DB: mutualise
             POSTGRES_USER: root
             POSTGRES_PASSWORD: password
     pgadmin:

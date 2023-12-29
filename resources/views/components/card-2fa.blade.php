@@ -8,7 +8,7 @@
             <form class="form-horizontal" method="POST" action="{{ route('generate2faSecret') }}">
                 @csrf
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-secondary">
                         {{ __('Générer la clé secrète pour activer la 2FA') }}
                     </button>
                 </div>
@@ -35,7 +35,7 @@
                         </span>
                     @endif
                 </div>
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-secondary">
                     {{ __('Activer la 2FA') }}
                 </button>
             </form>

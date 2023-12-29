@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Dedikam'),
+    'name' => env('APP_NAME', 'Mutualise'),
     'SEAFILE_EMAIL' => env('SEAFILE_EMAIL'),
     'SEAFILE_PWD' => env('SEAFILE_PWD'),
     'NEXTCLOUD_BASEURL_API' => env('NEXTCLOUD_BASEURL_API'),
@@ -27,7 +27,7 @@ return [
     'MAIL_USERNAME' => env('MAIL_USERNAME', ''),
     'MAIL_PASSWORD' => env('MAIL_PASSWORD', ''),
     'MAIL_ENCRYPTION' => env('MAIL_ENCRYPTION', ''),
-    'MAIL_FROM_ADDRESS' => env('MAIL_FROM_ADDRESS', 'Dedikam'),
+    'MAIL_FROM_ADDRESS' => env('MAIL_FROM_ADDRESS', 'Mutualisé'),
 
 
     /*

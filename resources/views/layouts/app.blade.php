@@ -35,7 +35,7 @@
             {{ session('error') }}
         </div>
     @endif
-    <div>
+    <div class="pb-4">
         @yield('content')
     </div>
     <x-footer />

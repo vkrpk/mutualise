@@ -3,7 +3,7 @@
 
 <div class="container-sm overflow-hidden p-0">
     <div class="row mx-2 mx-sm-0 g-2 text-center m-3">
-        <div class="alert alert-primary fs-3 fw-bolder" role="alert">
+        <div class="alert alert-tertiary fs-3 fw-bolder" role="alert">
             <span>{{__("Ajouter un accès")}}</span>
         </div>
         <div class="card border-secondary">
@@ -13,9 +13,8 @@
                 {{-- INPUT --}}
             </div>
         </div>
-        <p class="pricing headline text-secondary fs-1" style="font-family: Roboto, sans-serif;">{{__("Choisissez votre formule")}}</p>
+        <p class="pricing headline text-primary fs-1" style="font-family: Roboto, sans-serif;">{{__("Choisissez votre formule")}}</p>
         <p class="pricing-sub-headline fs-4">{{__("Toutes vos données fragmentées, copiées et réparties sur différents serveurs et Datacenters selon le niveau de disponibilité choisi.")}}
-            <a class="text-primary" href="https://www.dedikam.com/lexique/#niveaux" target="_blank"><br>{{__("En savoir plus")}}</a>
         </p>
     </div>
     {{-- TABLEAU COMPARATIF --}}
@@ -28,7 +27,8 @@
             <p class="p-2 p-sm-4 rounded-3 fs-5 bg-white border text-center">{{__("Choisissez votre espace disque en déplaçant le curseur orange vers la droite, tarif affiché en bas de page.")}}</p>
             <p class="mb-0">{{__("Espace disque")}} : <span id="slider-output">10Go</span></p>
             <input type="range" class="rs-range flex-grow-1" name="form_diskspace" id="slider" min="10" max="5000"
-                step="10" value="{{ old('form_diskspace') ?? ($formDiskspace ?? 10) }}" form="formAddToCart">
+                step="10" value="{{ old('form_diskspace') ?? ($formDiskspace ?? 10) }}" form="formAddToCart"
+            >
             @error('form_diskspace')
                 <div class="text-danger">{{ $message }}</div>
             @enderror
@@ -60,14 +60,14 @@
             </div>
             <div>
                 <span style="font-size: 11px; opacity: 0.8">{{__("Trafic illimité - Bande passante : 500 Mbit/s à 1Gbit/s, au dessus de 5 000Go, veuillez nous")}}
-                    <a class="text-primary" href="https://www.dedikam.com/contact/" target="_blank">{{__("contacter")}}</a>.
+                    <a class="text-primary" href="mailto:support@victork.fr" target="_blank">{{__("contacter")}}</a>.
                 </span>
             </div>
             <p class="mb-0 mt-3 fw-bolder">{{__("Choix du nom de domaine")}}<sup><i class="fa-solid fa-asterisk" style="font-size: 8px;color: red;margin-top: -14px;"></i></sup></p>
             <div class="d-flex justify-content-center" id="inputsRadioForDomainType">
                 <div class="d-flex me-4">
-                    <input class="me-2" type="radio" name="domainType" id="dedikam" value="dedikam" form="formAddToCart" checked {{ old('domainType') === 'dedikam' ? 'checked' : ($domainType == 'dedikam' ? 'checked' : '') }}>
-                    <label for="dedikam">*.dedikam.com</label>
+                    <input class="me-2" type="radio" name="domainType" id="dedikam" value="dedikam" form="formAddToCart" checked {{ old('domainType') === 'victork' ? 'checked' : ($domainType == 'victork' ? 'checked' : '') }}>
+                    <label for="dedikam">*.victork.fr</label>
                 </div>
                 <div>
                     <input class="me-1" type="radio" name="domainType" id="private" value="private" form="formAddToCart" {{ old('domainType') === 'private'? 'checked' : ($domainType == 'private' ? 'checked' : '') }}>
@@ -79,7 +79,7 @@
                     <label class="small mb-1 fw-bolder" for="domainUrlOrPrefix">{{__("Choix du préfixe")}}</label><sup><i class="fa-solid fa-asterisk" style="font-size: 8px;color: red;margin-top: -14px;"></i></sup>
                 </div>
                 <input class="form-control" id="domainUrlOrPrefix" type="text" name="domainUrlOrPrefix" value="{{ old('domainUrlOrPrefix') ? old('domainUrlOrPrefix') : $domainUrlOrPrefix }}" form="formAddToCart" style="width: 300px">
-                <span>{{__("Exemple : 'votre-choix'.dedikam.com")}}</span>
+                <span>{{__("Exemple : 'votre-choix'.victork.fr")}}</span>
                 <div class="text-danger">{{ $errors->regex->first() }}</div>
                 @error('domainUrlOrPrefix')
                     <div class="text-danger">{{ $message }}</div>
@@ -121,7 +121,7 @@
                                             <span id="recap_enddate">{{ date('d-m-Y', strtotime("+1 year")) }}</span>
                                         </div>
                                         <div id="boxPricePerMonth" class="d-none">
-                                            <span class="text-secondary fw-bolder">{{__("ou")}}</span>
+                                            <span class="text-tertiary fw-bolder">{{__("ou")}}</span>
                                             <div>
                                                 <span id="textPricePerMonth" class="text-primary fw-bolder"></span>
                                                 <span>{{__("par mois")}}</span>
@@ -352,8 +352,8 @@ window.onload = function () {
     });
 
     function switchTextDomainUrlOrPrefixDisplay () {
-        if(document.querySelector('input[name="domainType"]:checked').value == "dedikam") {
-            boxDomainUrlOrPrefix.querySelector("span").innerHTML = '{{__("Exemple : 'votre-choix'.dedikam.com")}}'
+        if(document.querySelector('input[name="domainType"]:checked').value == "victork") {
+            boxDomainUrlOrPrefix.querySelector("span").innerHTML = '{{__("Exemple : 'votre-choix'.victork.fr")}}'
             boxDomainUrlOrPrefix.querySelector("label").innerHTML = '{{__("Choix du préfixe")}}'
         } else {
             boxDomainUrlOrPrefix.querySelector("span").innerHTML = '{{__("CNAME de type : example-domain.com")}}'

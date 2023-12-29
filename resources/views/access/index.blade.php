@@ -2,7 +2,7 @@
 @section('content')
 <div class="container-sm overflow-hidden p-0">
     <div class="row mx-2 mx-sm-0 g-2 text-center m-3">
-        <div class="alert alert-primary fs-3 fw-bolder" role="alert">
+        <div class="alert alert-tertiary fs-3 fw-bolder" role="alert">
             <span>{{__("Mes accès")}}</span>
         </div>
     </div>
@@ -30,9 +30,9 @@
                                     @endif
                                     @php
                                         if($memberAccess->member_access === 'Nextcloud') {
-                                            $applicationDomain = 'https://labo-nextcloud.dedikam.com/index.php/login';
+                                            $applicationDomain = 'https://nextcloud.victork.fr/index.php/login?clear=1';
                                         } elseif ($memberAccess->member_access === 'Seafile') {
-                                            $applicationDomain = 'https://seafile.dedikam.com/accounts/login/?next=/sys/users/';
+                                            $applicationDomain = 'https://seafile.victork.fr';
                                         }
                                     @endphp
                                 </div>
@@ -44,7 +44,7 @@
                             </div>
                         </div>
                         <div class="card-footer d-flex justify-content-between">
-                            <a href="{{ $memberAccess->domain !== '' ? 'https://' . $memberAccess->domain : $applicationDomain }}"><button class="btn btn-primary">{{__("Accéder")}}</button></a>
+                            <a href="{{ $memberAccess->domain !== '' ? 'https://' . $memberAccess->domain : $applicationDomain }}"><button class="btn btn-secondary">{{__("Accéder")}}</button></a>
                         </div>
                     </div>
                 </div>

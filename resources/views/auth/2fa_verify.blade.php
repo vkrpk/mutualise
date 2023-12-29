@@ -24,7 +24,7 @@
                                 <label for="one_time_password" class="control-label">One Time Password</label>
                                 <input id="one_time_password" name="one_time_password" class="form-control col-md-4"  type="text" required/>
                             </div>
-                            <button class="btn btn-primary" type="submit">Authenticate</button>
+                            <button class="btn btn-secondary" type="submit">Authenticate</button>
                             <a href="{{ request()->headers->get('referer') }}"><button type="button" class="btn btn-secondary">Revenir en arrière</button></a>
                         </form>
                     </div>

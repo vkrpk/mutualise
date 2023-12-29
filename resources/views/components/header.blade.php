@@ -40,7 +40,6 @@
                             </div>
                         </li>
                     @endif
-                    <li class="nav-item"><a class="nav-link" href="https://www.dedikam.com">← {{__('Retour')}}</a></li>
 
                     @guest
                         <li class="nav-item">

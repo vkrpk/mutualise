@@ -10,7 +10,7 @@
             <div class="card-header customCardHeader"><strong>{{__("Formulaire de contact")}}</strong></div>
             <div class="card-body">
                 <form method="post" action="{{ route('contact.send') }}" id="contactForm">
-                    @csrf    
+                    @csrf
                     <div class="row">
                         <div class="col-12 col-md-6">
                             <div class="form-floating mt-2">
@@ -30,7 +30,7 @@
                                 @enderror
                             </div>
                         </div>
-                    </div>                       
+                    </div>
                     <div class="row">
                         <div class="col-12 col-sm-6">
                             <div class="form-floating mt-2">
@@ -69,7 +69,7 @@
             </div>
         </div>
         <div class="d-flex justify-content-center mt-3">
-            <button type="submit" class="btn btn-primary btn-lg" form="contactForm"><i class="fa-solid fa-envelope me-2"></i>{{__("Envoyer")}}</button>
+            <button type="submit" class="btn btn-secondary btn-lg" form="contactForm"><i class="fa-solid fa-envelope me-2"></i>{{__("Envoyer")}}</button>
         </div>
     </div>
 @endsection
