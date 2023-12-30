@@ -18,7 +18,8 @@ class FreePaymentController extends Controller
         $user = User::find(Auth::user()->id);
         $item = \Cart::get($request->cartItemId);
         $response = Http::withOptions([
-            "verify"=> env('APP_ENV') === 'local' ? false : true
+            "verify"=> env('APP_ENV') === 'local' ? false : true,
+            "timeout" => 0,
         ])->post(env("APP_URL") . "/payment/free/success", [
             'address' => json_encode($request->address),
             'type' => "free",

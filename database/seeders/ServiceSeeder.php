@@ -23,7 +23,7 @@ class ServiceSeeder extends Seeder
             ],
             [
                 'name' => "Pydio",
-                'is_active' => true,
+                'is_active' => false,
             ],
             [
                 'name' => "SSH",
