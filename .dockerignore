@@ -12,8 +12,8 @@ yarn-error.log
 # Laravel
 /vendor
 /storage/*.key
-# .env
-# .env.production
+.env
+.env.production
 .phpunit.result.cache
 
 # Various IDEs and editors
