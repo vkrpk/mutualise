@@ -45,10 +45,10 @@
                             <p>{{__("Nextcloud est un logiciel libre offrant une plateforme de partage de documents avancés qui vous offre un contrôle total sur vos paramètres de partage de fichiers. Il se présente comme une alternative à Google docs.")}}</p>
                         </div>
                         <div class="px-2">
-                            <figure>
-                                <img src="{{ Vite::asset('resources/images/PydioLogo250.png') }}" alt="Pydio logo" style="max-width: 141px; height: auto">
+                            <figure class="mb-0">
+                                <img src="{{ Vite::asset('resources/images/seafile-logo.jpeg') }}" alt="Pydio logo" style="max-width: 141px; height: auto">
                             </figure>
-                            <p>{{__("Pydio est un logiciel libre offrant une plateforme de services de stockage et de partage de fichiers. Il se présente également comme une alternative à Dropbox.")}}</p>
+                            <p>{{__("Seafile est un logiciel libre offrant une plateforme de services de stockage et de partage de fichiers. Il se présente également comme une alternative à Dropbox.")}}</p>
                         </div>
                     </div>
                     <div class="shadowBox col px-0 col-md-6 bg-white border-transparent rounded-4 overflow-hidden outilsWebEtCollaboratifs">
@@ -81,7 +81,7 @@
                 <div class="row text-center justify-content-center">
                     <p class="h4 fw-bolder">{{__("Nos services dédiés")}}</p>
                     <div class="mb-2 bg-primary" style="height: 5px; width: 130px;"></div>
-                    <p class="h5 mb-5">{{__("Nous vous proposons une solution dédiée (NextCloud, Pydio ou Seafile) sur des serveurs de type VPS")}}</p>
+                    <p class="h5 mb-5">{{__("Nous vous proposons une solution dédiée (NextCloud ou Seafile) sur des serveurs de type VPS")}}</p>
                 </div>
                 <div class="shadowBox rounded-4 text-center py-3 px-5 border border-primary mb-5" style="background-color: #E2E8E9;">
                     <p>{{__("A la différence du service mutualisé, le service dédié vous apporte un gain de performance significative puisque vous êtes seul sur le serveur.")}}</p>
