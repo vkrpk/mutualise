@@ -2,7 +2,7 @@
     <nav class="navbar navbar-expand-lg bg-info">
         <div class="container">
             <a class="navbar-brand me-0" href="{{ route('home') }}">
-                <img src="{{ Vite::asset('resources/images/logo.png') }}" alt="logo">
+                <img src="{{ Vite::asset('resources/images/banniere.png') }}" alt="logo" style="width: 230px; height: 50px">
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"

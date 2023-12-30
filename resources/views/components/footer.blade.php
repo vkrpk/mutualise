@@ -1,4 +1,4 @@
-<footer class="footer-basic mt-auto py-1 bg-info fixed-bottom position-relative border-top">
+<footer class="footer-basic mt-auto py-1 bg-info fixed-bottom position-relative ">
     <ul class="list-inline text-secondary">
         <li class="list-inline-item"><a href="{{ route('contact.index') }}">Contact</a></li>
         <li class="list-inline-item"><a href="{{ route('footer.cguv') }}">{{__("CGUV")}}</a></li>
