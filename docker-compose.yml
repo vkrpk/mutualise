@@ -48,7 +48,7 @@ services:
         depends_on:
             - database
         environment:
-            PGADMIN_DEFAULT_EMAIL: mr.vanced2@gmail.com
+            PGADMIN_DEFAULT_EMAIL: user@victork.fr
             PGADMIN_DEFAULT_PASSWORD: password
 
 volumes:
