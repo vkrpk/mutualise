@@ -21,7 +21,7 @@ class NextCloudController
             'userid' => $memberAccess->email,
             'password' => 'passwordpassword',
             'email' => $memberAccess->email,
-            'quota' => 1073741824 * $memberAccess->diskspace,
+            'quota' => 0
         ];
         $url = env('NEXTCLOUD_BASEURL_API') . 'users';
         $ch = (new CurlController($url, $this->headers));

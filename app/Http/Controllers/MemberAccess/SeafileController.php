@@ -17,11 +17,12 @@ class SeafileController
     }
 
     public function create(MemberAccess $memberAccess, string $passwordNotHash, string $dedikamAccessName) {
+        // '","quota_total":"' . $memberAccess->diskspace * 1000 .
         $jsonDatas =
             '{"name":"' . $dedikamAccessName .
             '","email": "' . $memberAccess->email .
             '","password": "' . $passwordNotHash .
-            '","quota_total":"' . $memberAccess->diskspace * 1000 .
+            '","quota_total":"' . 0 .
             '"}';
         $url = env('SEAFILE_BASEURL_API') . "api/v2.1/admin/users/";
         array_push(self::$headers, "Authorization: Token " . self::getAuthToken());

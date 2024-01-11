@@ -18,11 +18,14 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        if (app()->environment() === 'production') {
+            return;
+        }
         $users = [
             [
                 'name' => 'vic',
-                'email' => 'mutualise@victork.fr',
-                'password' => Hash::make('Password54@'),
+                'email' => 'user@victork.fr',
+                'password' => Hash::make('password'),
                 'role_id' => 1,
                 'nb_free_account' => 0,
                 'email_verified_at' => Carbon::now(),
