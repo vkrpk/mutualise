@@ -56,7 +56,6 @@ storage/framework/*
 *.png
 *.jpeg
 *.bmp
-*.pdf
 *.xlsx
 *.xls
 *.doc
