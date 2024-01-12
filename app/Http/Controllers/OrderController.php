@@ -69,6 +69,7 @@ class OrderController extends Controller
 
     public function getPathForPDF(Request $request) {
         $pdf = $this->getPDF($request->orderId, $request->userId);
+        dd(public_path('pdf'));
         $pdf['pdf']->save(public_path('pdf') . '/' . $pdf['pdfName']);
         return $pdf['pdfName'];
     }

@@ -34,6 +34,7 @@ RUN composer install
 
 # Set permissions
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+RUN chmod -R 777 /var/www/html/public/pdf
 
 # Installation de Node.js et npm
 RUN apt-get install -y nodejs npm
