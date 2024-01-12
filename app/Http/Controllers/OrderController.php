@@ -118,7 +118,8 @@ class OrderController extends Controller
         ];
 
         $client = new GuzzleClient([
-            'verify' => env('APP_ENV') === 'local' ? false : true,
+            //'verify' => env('APP_ENV') === 'local' ? false : true,
+            'verify' => false,
             'headers' => $headers
         ]);
         $url = env('APP_URL') . '/orders/path-facture';
