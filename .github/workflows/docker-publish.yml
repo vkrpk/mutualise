@@ -18,19 +18,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-
-      - name: Install Docker Compose
-        run: |
-          DOCKER_CONFIG=${DOCKER_CONFIG:-$HOME/.docker}
-          mkdir -p $DOCKER_CONFIG/cli-plugins
-          curl -SL https://github.com/docker/compose/releases/download/v2.24.5/docker-compose-linux-x86_64 -o $DOCKER_CONFIG/cli-plugins/docker-compose
-          chmod +x $DOCKER_CONFIG/cli-plugins/docker-compose
-
       - name: Login
         run: |
           echo ${{ secrets.PAT }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
       - name: Build and Publish App
         run: |
-          docker-compose build app
+          docker compose build app
           docker tag mutualise_app ${{ env.REGISTRY }}/${{ env.APP_IMAGE_NAME }}
           docker push ${{ env.REGISTRY }}/${{ env.APP_IMAGE_NAME }}
