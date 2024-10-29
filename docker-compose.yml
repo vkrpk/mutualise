@@ -26,6 +26,7 @@ services:
             context: .
         volumes:
             - .:/var/www/html
+        image: mutualise-app
     database:
         image: postgres
         container_name: postgres
